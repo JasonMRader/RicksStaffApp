@@ -19,14 +19,14 @@ namespace RicksStaffApp
         Panel pnlNewRating = new Panel();
         FlowLayoutPanel flpAdditionAction = new FlowLayoutPanel();
         Label lblNewRating = new Label();
-             
-            
-                      
-         
-               
 
-        
-        
+
+
+
+
+
+
+
 
         private void frmSettings_Load(object sender, EventArgs e)
         {

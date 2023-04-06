@@ -20,18 +20,13 @@ namespace RicksStaffApp
         }
         private void frmOverview_Load(object sender, EventArgs e)
         {
-            DateTimeOffset dateOnly = new DateTimeOffset(2023, 3, 29, 0, 0, 0, TimeSpan.Zero);
-            long unixTime = dateOnly.ToUnixTimeSeconds();
+            //DateTimeOffset dateOnly = new DateTimeOffset(2023, 3, 29, 0, 0, 0, TimeSpan.Zero);
+            //long unixTime = dateOnly.ToUnixTimeSeconds();
             employeeList.Clear();
             employeeList = SqliteDataAccess.LoadEmployees();
-            unixTime = 1659081600;
-            dateOnly = DateTimeOffset.FromUnixTimeSeconds(unixTime).Date;
-            //StringBuilder sb = new StringBuilder();
-            //foreach (Employee employee in employeeList)
-            //{
-            //    sb.Append(employee.FullName + ", ");
-            //}
-            MessageBox.Show(dateOnly.ToString());
+            //unixTime = 1659081600;
+            //dateOnly = DateTimeOffset.FromUnixTimeSeconds(unixTime).Date;
+            
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay);
         }
 
