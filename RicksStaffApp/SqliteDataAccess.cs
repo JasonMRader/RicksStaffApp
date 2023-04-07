@@ -97,7 +97,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Open();
+                //cnn.Open();
 
                 using (var transaction = cnn.BeginTransaction())
                 {
@@ -120,7 +120,6 @@ namespace RicksStaffApp
             }
         }
 
-
         public static List<Position> LoadPositions()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -137,7 +136,6 @@ namespace RicksStaffApp
                 cnn.Execute("insert into Positions (Name) values (@Name)", position);
             }
         }
-
 
         private static string LoadConnectionString (string id = "Default")
         {
@@ -197,6 +195,31 @@ namespace RicksStaffApp
                 }
             }
         }
+        //public static void SaveEmployee(Employee employee)
+        //{
+        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+        //        cnn.Open();
+
+        //        using (var transaction = cnn.BeginTransaction())
+        //        {
+        //            // Insert the employee into the Employee table
+        //            cnn.Execute("insert into Employee (FirstName, LastName) values (@FirstName, @LastName)", employee);
+
+        //            // Get the ID of the newly inserted employee
+        //            int employeeId = cnn.Query<int>("select last_insert_rowid()", new DynamicParameters()).Single();
+
+        //            // Insert the employee's positions into the EmployeePosition table
+        //            foreach (Position position in employee.Positions)
+        //            {
+        //                cnn.Execute("insert into EmployeePositions (EmployeeId, PositionId) values (@EmployeeId, @PositionId)",
+        //                    new { EmployeeId = employeeId, PositionId = position.ID });
+        //            }
+
+        //            transaction.Commit();
+        //        }
+        //    }
+        //}
         public static void SaveActivity(Activity activity)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -206,17 +229,20 @@ namespace RicksStaffApp
                 using (var transaction = cnn.BeginTransaction())
                 {
                     // Insert the activity into the Activity table
-                    cnn.Execute("insert into Activity (Title, Date) values (@Title, @Date)", activity);
+                    cnn.Execute("insert into Activity (Name, BaseRatingImpact) values (@Name, @BaseRatingImpact)", activity);
 
                     // Get the ID of the newly inserted activity
                     int activityId = cnn.Query<int>("select last_insert_rowid()", new DynamicParameters()).Single();
-
-                    // Insert the activity's modifiers into the ActivityModifier table
-                    foreach (ActivityModifier modifier in activity.ActivityModifiers)
+                    if (activity.ActivityModifiers != null && activity.ActivityModifiers.Count > 0)
                     {
-                        cnn.Execute("insert into ActivityModifier (ActivityId, ModifierId) values (@ActivityId, @ModifierId)",
-                            new { ActivityId = activityId, ModifierId = modifier.ID });
+                        foreach (ActivityModifier modifier in activity.ActivityModifiers)
+                        {
+                            cnn.Execute("insert into ActivityModifier (ActivityId, ModifierId) values (@ActivityId, @ModifierId)",
+                                new { ActivityId = activityId, ModifierId = modifier.ID });
+                        }
                     }
+                    
+
 
                     transaction.Commit();
                 }
@@ -232,13 +258,14 @@ namespace RicksStaffApp
             }
         }
 
+       
         public static List<Activity> LoadActivities()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var activityDictionary = new Dictionary<int, Activity>();
                 cnn.Query<Activity, ActivityModifier, Activity>(
-                    "select a.ID, a.Title, a.Date, am.ID, am.Name " +
+                    "select a.ID, a.Name, a.BaseRatingImpact, am.ID, am.Name " +
                     "from Activity a " +
                     "left join ActivityModifier am on a.ID = am.ActivityID",
                     (activity, modifier) =>
@@ -250,7 +277,9 @@ namespace RicksStaffApp
                             activityDictionary.Add(act.ID, act);
                         }
                         if (modifier != null)
+                        {
                             act.ActivityModifiers.Add(modifier);
+                        }
                         return act;
                     },
                     splitOn: "ID");
@@ -263,7 +292,8 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into ActivityModifier (Name) values (@Name)", modifier);
+                cnn.Execute("insert into ActivityModifier (ActivityId, Name, RatingAdjustment) values (@ActivityId, @Name, @RatingAdjustment)",
+                    new { ActivityId = modifier.ActivityID, Name = modifier.Name, RatingAdjustment = modifier.RatingAdjustment });
             }
         }
 

@@ -9,19 +9,35 @@
         }
         public int ID { get; set; }
         public Employee Employee { get; set; }
+        public Shift Shift { get; set; }
         public Position Position { get; set; }
-        public float ShiftRating { get; set; }
-        public List<Incident> Incidents { get; set; }
-        public void UpdateShiftRating()
+        private float _shiftRating;
+        public float ShiftRating 
         {
-            float totalRatingChange = 0; // initialize total rating change to 0
-
-            foreach (Incident incident in Incidents)
+            get { return _shiftRating; }
+            set 
             {
-                totalRatingChange += incident.IncidentRatingChange; // add rating change for incident to total rating change
-            }
+                float totalRatingChange = 0; // initialize total rating change to 0
 
-            ShiftRating = ShiftRating + totalRatingChange; // add total rating change to shift rating
+                foreach (Incident incident in Incidents)
+                {
+                    totalRatingChange += incident.IncidentRatingChange; // add rating change for incident to total rating change
+                }
+
+                _shiftRating = totalRatingChange; // add total rating change to shift rating
+            } 
         }
+        public List<Incident> Incidents { get; set; }
+        //public void UpdateShiftRating()
+        //{
+        //    float totalRatingChange = 0; // initialize total rating change to 0
+
+        //    foreach (Incident incident in Incidents)
+        //    {
+        //        totalRatingChange += incident.IncidentRatingChange; // add rating change for incident to total rating change
+        //    }
+
+        //    ShiftRating = ShiftRating + totalRatingChange; // add total rating change to shift rating
+        //}
     }
 }

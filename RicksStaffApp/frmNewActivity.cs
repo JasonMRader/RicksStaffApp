@@ -99,22 +99,22 @@ namespace RicksStaffApp
 
                 if (rating < 0)
                 {
-                    pnlNewActivityName.BackColor = Activity.BadColor;
-                    pnlNewActivityRating.BackColor = Activity.BadColor;
+                    pnlNewActivityName.BackColor = UIHelper.BadColor;
+                    pnlNewActivityRating.BackColor = UIHelper.BadColor;
                     lblNewActivityBaseRating.Text = txtNewActivityBase.Text;
                     picUpDown.Image = Properties.Resources.Down_Arrow;
                 }
                 if (rating > 0)
                 {
-                    pnlNewActivityName.BackColor = Activity.GoodColor;
-                    pnlNewActivityRating.BackColor = Activity.GoodColor;
+                    pnlNewActivityName.BackColor = UIHelper.GoodColor;
+                    pnlNewActivityRating.BackColor = UIHelper.GoodColor;
                     lblNewActivityBaseRating.Text = "+" + txtNewActivityBase.Text;
                     picUpDown.Image = Properties.Resources.Up_Arrow1;
                 }
                 if (rating == 0)
                 {
-                    pnlNewActivityName.BackColor = Activity.NeutralColor;
-                    pnlNewActivityRating.BackColor = Activity.NeutralColor;
+                    pnlNewActivityName.BackColor = UIHelper.NeutralColor;
+                    pnlNewActivityRating.BackColor = UIHelper.NeutralColor;
                     lblNewActivityBaseRating.Text = txtNewActivityBase.Text;
                     picUpDown.Image = null;
                 }
