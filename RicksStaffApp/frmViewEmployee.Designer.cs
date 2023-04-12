@@ -33,7 +33,7 @@
             button3 = new Button();
             button2 = new Button();
             panel16 = new Panel();
-            panel22 = new Panel();
+            pnlEmployeeShifts = new Panel();
             panel17 = new Panel();
             label24 = new Label();
             label25 = new Label();
@@ -51,7 +51,6 @@
             label33 = new Label();
             label34 = new Label();
             dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
             panel9 = new Panel();
             panel10 = new Panel();
             label13 = new Label();
@@ -72,6 +71,7 @@
             panel15 = new Panel();
             cboFirstEmployeeTime = new ComboBox();
             pictureBox2 = new PictureBox();
+            dateTimePicker1 = new DateTimePicker();
             panel3 = new Panel();
             panel5 = new Panel();
             label7 = new Label();
@@ -146,6 +146,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(880, 550);
             panel1.TabIndex = 1;
+            panel1.Paint += panel1_Paint;
             // 
             // button3
             // 
@@ -175,7 +176,7 @@
             // 
             // panel16
             // 
-            panel16.Controls.Add(panel22);
+            panel16.Controls.Add(pnlEmployeeShifts);
             panel16.Controls.Add(panel17);
             panel16.Controls.Add(panel18);
             panel16.Location = new Point(458, 149);
@@ -183,13 +184,13 @@
             panel16.Size = new Size(405, 387);
             panel16.TabIndex = 4;
             // 
-            // panel22
+            // pnlEmployeeShifts
             // 
-            panel22.BackColor = Color.FromArgb(37, 42, 64);
-            panel22.Location = new Point(3, 169);
-            panel22.Name = "panel22";
-            panel22.Size = new Size(182, 201);
-            panel22.TabIndex = 5;
+            pnlEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeShifts.Location = new Point(3, 169);
+            pnlEmployeeShifts.Name = "pnlEmployeeShifts";
+            pnlEmployeeShifts.Size = new Size(182, 201);
+            pnlEmployeeShifts.TabIndex = 5;
             // 
             // panel17
             // 
@@ -378,14 +379,6 @@
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(86, 23);
             dateTimePicker2.TabIndex = 4;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(633, 97);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(86, 23);
-            dateTimePicker1.TabIndex = 4;
             // 
             // panel9
             // 
@@ -609,6 +602,14 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(633, 97);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(86, 23);
+            dateTimePicker1.TabIndex = 4;
             // 
             // panel3
             // 
@@ -949,7 +950,7 @@
         private Label label11;
         private Label label10;
         private Panel panel16;
-        private Panel panel22;
+        private Panel pnlEmployeeShifts;
         private Panel panel17;
         private Label label24;
         private Label label25;

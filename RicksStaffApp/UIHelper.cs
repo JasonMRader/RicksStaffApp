@@ -87,11 +87,19 @@
                         // Update UI
                         CreateShiftPanels(shiftList, flowEmployeeDisplay);
                     }
-                    };
+                };
                     btnDelete.Size = new Size(27, 27);
                     shiftPanel.Parent.Controls.Add(btnDelete);
 
                     flowEmployeeDisplay.Controls.Add(activityPanelContainer);
+                    foreach(EmployeeShift es in shift.EmployeeShifts)
+                    {
+                        Label lbl = new Label();
+                        lbl.Size = new Size(50, 25);
+                        lbl.Text = es.Employee.FullName;
+                        activityPanelContainer.Controls.Add(lbl);
+                    }
+               
                 
             }
         }

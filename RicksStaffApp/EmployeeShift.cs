@@ -16,6 +16,7 @@ namespace RicksStaffApp
         public Employee Employee { get; set; }
         public Shift Shift { get; set; }
         public Position Position { get; set; }
+        public int PositionID { get; set; }
         private float _shiftRating;
         public string EmployeeName { get {return this.Employee.FullName; } }
         public float ShiftRating 

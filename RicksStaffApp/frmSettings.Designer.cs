@@ -84,12 +84,15 @@
             txtTestInput = new TextBox();
             dtpTestOutput = new DateTimePicker();
             btnTest = new Button();
+            nudPositionID = new NumericUpDown();
+            label13 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
             panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudPositionID).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -604,10 +607,12 @@
             // panel6
             // 
             panel6.BackColor = Color.FromArgb(37, 42, 64);
+            panel6.Controls.Add(nudPositionID);
             panel6.Controls.Add(btnLoadEmployeeShifts);
             panel6.Controls.Add(txtEmployeeShiftIncidents);
             panel6.Controls.Add(label6);
             panel6.Controls.Add(txtEmployeeShiftEmployeeRating);
+            panel6.Controls.Add(label13);
             panel6.Controls.Add(label21);
             panel6.Controls.Add(txtEmployeeShift_ShiftID);
             panel6.Controls.Add(btnAddEmployeeShift);
@@ -664,6 +669,24 @@
             btnTest.UseVisualStyleBackColor = true;
             btnTest.Click += btnTest_Click;
             // 
+            // nudPositionID
+            // 
+            nudPositionID.Location = new Point(68, 276);
+            nudPositionID.Name = "nudPositionID";
+            nudPositionID.Size = new Size(40, 23);
+            nudPositionID.TabIndex = 7;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.ForeColor = Color.White;
+            label13.Location = new Point(12, 278);
+            label13.Name = "label13";
+            label13.Size = new Size(37, 15);
+            label13.TabIndex = 4;
+            label13.Text = "PosID";
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -697,6 +720,7 @@
             panel5.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudPositionID).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -759,5 +783,7 @@
         private TextBox txtIncident_EmployeeID;
         private DateTimePicker dtpIncidentDate;
         private Label label11;
+        private NumericUpDown nudPositionID;
+        private Label label13;
     }
 }

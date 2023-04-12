@@ -53,6 +53,10 @@ namespace RicksStaffApp
         {
             lblEmployeeName.Text = ThisEmployee.FullName;
             cboFirstEmployeeTime.DrawMode = DrawMode.OwnerDrawFixed;
+            foreach(EmployeeShift es in ThisEmployee.EmployeeShifts)
+            {
+                MessageBox.Show(es.PositionID.ToString());
+            }
 
 
 
@@ -65,6 +69,11 @@ namespace RicksStaffApp
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

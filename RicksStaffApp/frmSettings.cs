@@ -119,7 +119,7 @@ namespace RicksStaffApp
         private void btnAddEmployeeShift_Click(object sender, EventArgs e)
         {
             EmployeeShift empShift = new EmployeeShift();
-
+            empShift.PositionID = Decimal.ToInt32(nudPositionID.Value); 
             empShift.Shift.ID = Int32.Parse(txtEmployeeShift_ShiftID.Text);
             empShift.Employee.ID = Int32.Parse(txtEmployeeIDShiftEmployeeName.Text);
 

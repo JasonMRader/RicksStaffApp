@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace RicksStaffApp
 {
@@ -71,7 +72,7 @@ namespace RicksStaffApp
             {
                 var employeeDictionary = new Dictionary<int, Employee>();
                 cnn.Query<Employee, Position, Employee>(
-                    "select e.ID, e.FirstName, e.LastName, p.ID, p.Name " +
+                    "select e.ID, e.FirstName, e.LastName, p.ID as PositionID, p.Name " +
                     "from Employee e " +
                     "left join EmployeePositions ep on e.ID = ep.EmployeeID " +
                     "left join Positions p on ep.PositionID = p.ID",
@@ -81,13 +82,40 @@ namespace RicksStaffApp
                         {
                             emp = employee;
                             emp.Positions = new List<Position>();
+                            emp.EmployeeShifts = new List<EmployeeShift>();
                             employeeDictionary.Add(emp.ID, emp);
                         }
                         if (position != null)
                             emp.Positions.Add(position);
                         return emp;
                     },
-                    splitOn: "ID");
+                    splitOn: "PositionID");
+
+                var employees = employeeDictionary.Values.ToList();
+
+                foreach (var employee in employees)
+                {
+                    string employeeShiftsQuery = 
+                        @"SELECT es.ID, es.EmployeeID, es.ShiftID, es.PositionID,
+                        s.ID as ShiftID, s.DateString, s.IsAm,
+                        p.ID as PositionID, p.Name
+                        FROM EmployeeShift es
+                        JOIN Shift s ON es.ShiftID = s.ID
+                        JOIN Positions p ON es.PositionID = p.ID
+                        WHERE es.EmployeeID = @EmployeeID";
+                    var employeeShifts = cnn.Query<EmployeeShift, Shift, Position, EmployeeShift>(employeeShiftsQuery,
+                        (employeeShift, shift, position) =>
+                        {
+                            employeeShift.Shift = shift;
+                            employeeShift.Position = position;
+                            return employeeShift;
+                        },
+                        new { EmployeeID = employee.ID },
+                        splitOn: "ShiftID,PositionID")
+                        .AsList();
+
+                    employee.EmployeeShifts = employeeShifts;
+                }
 
                 return employeeDictionary.Values.ToList();
             }
@@ -345,9 +373,31 @@ namespace RicksStaffApp
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 string query = "SELECT * FROM Shift";
-                var result = cnn.Query<Shift>(query);
-                
-                return result.ToList();
+                var shifts = cnn.Query<Shift>(query).AsList();
+
+                string employeeShiftQuery = @"
+                    SELECT es.*, e.*, p.*
+                    FROM EmployeeShift es
+                    INNER JOIN Employee e ON es.EmployeeID = e.ID
+                    INNER JOIN Positions p ON es.PositionID = p.ID
+                    WHERE es.ShiftID = @ShiftID";
+
+                foreach (var shift in shifts)
+                {
+                    var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, EmployeeShift>(employeeShiftQuery,
+                        (employeeShift, employee, position) =>
+                        {
+                            employeeShift.Employee = employee;
+                            employeeShift.Position = position;
+                            return employeeShift;
+                        },
+                        new { ShiftID = shift.ID },
+                        splitOn: "ID,ID").AsList();
+
+                    shift.EmployeeShifts = employeeShifts;
+                }
+
+                return shifts;
             }
         }
 
@@ -379,8 +429,8 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, ShiftRating) values (@EmployeeID, @ShiftID, @ShiftRating)", 
-                    new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, ShiftRating = employeeShift.ShiftRating });
+                cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, ShiftRating, PositionID) values (@EmployeeID, @ShiftID, @ShiftRating, @PositionID)", 
+                    new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, ShiftRating = employeeShift.ShiftRating, employeeShift.PositionID});
                     //new { EmployeeId = employeeShift.Employee.ID, PositionId = employeeShift.Position.ID, ShiftRating = employeeShift.ShiftRating });
                 employeeShift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
             }
