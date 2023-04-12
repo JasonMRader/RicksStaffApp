@@ -5,6 +5,96 @@
         public static Color GoodColor = Color.FromArgb(192, 223, 161);
         public static Color BadColor = Color.FromArgb(226, 163, 199);
         public static Color NeutralColor = Color.FromArgb(184, 184, 243);
+        public static void CreateShiftPanels(List<Shift> shiftList, FlowLayoutPanel flowEmployeeDisplay)
+        {
+            // Clear existing panels
+            flowEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Shift shift in shiftList)
+            {
+                FlowLayoutPanel activityPanelContainer = new FlowLayoutPanel();
+                //activityPanelContainer.Size = new Size(430, 30);
+                activityPanelContainer.AutoSize = true;
+                activityPanelContainer.MinimumSize = new Size(470, 30);
+                activityPanelContainer.MaximumSize = new Size(470, 200);
+                activityPanelContainer.BackColor = MyColors.LightHighlight;
+                activityPanelContainer.Margin = new Padding(0, 0, 0, 5);
+
+
+                FlowLayoutPanel shiftPanel = new FlowLayoutPanel();
+                shiftPanel.FlowDirection = FlowDirection.LeftToRight;
+                shiftPanel.WrapContents = false;
+                shiftPanel.AutoSize = true;
+                shiftPanel.MaximumSize = new Size(200, 0);
+                shiftPanel.MinimumSize = new Size(200, 0);
+                shiftPanel.BackColor = MyColors.LightHighlight;
+                shiftPanel.Margin = new Padding(1, 1, 1, 1);
+
+                //// Create label for employee name
+                Label lblName = new Label();
+                lblName.Text = shift.Date.ToString("MM/dd/yyyy");
+                lblName.AutoSize = false;
+                lblName.Size = new Size(125, 30);
+                lblName.TextAlign = ContentAlignment.MiddleCenter;
+                shiftPanel.Controls.Add(lblName);
+
+                
+
+                
+
+                
+
+
+                activityPanelContainer.Controls.Add(shiftPanel);
+                
+                //foreach (Position pos in emp.Positions)
+                //{
+                //    Panel pnlPos = new Panel();
+                //    pnlPos.Size = new Size(60, 30);
+                //    pnlPos.BackColor = MyColors.PositionColor;
+                //    Label lblPos = new Label();
+                //    lblPos.Text = pos.Name;
+                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
+                //    lblPos.AutoSize = false;
+                //    lblPos.Size = new Size(60, 30);
+                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
+                //    pnlPos.Controls.Add(lblPos);
+                //    empPanel.Controls.Add(pnlPos);
+                //}
+                System.Windows.Forms.Button btnDelete = new System.Windows.Forms.Button();
+                btnDelete.Text = "X";
+                btnDelete.Margin = new Padding(0, 0, 0, 0);
+                btnDelete.Location = new Point(410, 0);
+                btnDelete.ForeColor = Color.Black;
+                btnDelete.Font = new Font(btnDelete.Font.FontFamily, 10);
+                btnDelete.TextAlign = ContentAlignment.MiddleCenter;
+                btnDelete.FlatStyle = FlatStyle.Flat;
+                btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                btnDelete.FlatAppearance.BorderSize = 0;
+                btnDelete.Click += (sender, e) =>
+                {
+                    // Prompt user to confirm deletion
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete this shift?", "Delete Shift", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        // Delete employee from database
+                        SqliteDataAccess.DeleteShift(shift.ID);
+
+                        // Remove employee from list
+                        shiftList.Remove(shift);
+
+                        // Update UI
+                        CreateShiftPanels(shiftList, flowEmployeeDisplay);
+                    }
+                    };
+                    btnDelete.Size = new Size(27, 27);
+                    shiftPanel.Parent.Controls.Add(btnDelete);
+
+                    flowEmployeeDisplay.Controls.Add(activityPanelContainer);
+                
+            }
+        }
         public static void CreateActivityPanels(List<Activity> activityList, FlowLayoutPanel flowEmployeeDisplay)
         {
             // Clear existing panels

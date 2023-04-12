@@ -39,15 +39,12 @@
             label6 = new Label();
             txtActivityName = new TextBox();
             txtActivityRating = new TextBox();
-            txtIncidentDate = new TextBox();
             txtIncidentNote = new TextBox();
             txtIncident_ActivityID = new TextBox();
             txtActivityMod_ActivityID = new TextBox();
             txtActivityModName = new TextBox();
             txtActivityModRatingAdjustment = new TextBox();
-            txtShiftDate = new TextBox();
-            txtShiftEmployeeList = new TextBox();
-            txtEmployeeShiftEmployeeName = new TextBox();
+            txtEmployeeIDShiftEmployeeName = new TextBox();
             txtEmployeeShift_ShiftID = new TextBox();
             txtEmployeeShiftEmployeeRating = new TextBox();
             label7 = new Label();
@@ -59,7 +56,6 @@
             label16 = new Label();
             label17 = new Label();
             label19 = new Label();
-            label20 = new Label();
             label21 = new Label();
             label23 = new Label();
             label24 = new Label();
@@ -69,17 +65,25 @@
             btnLoadActivities = new Button();
             panel2 = new Panel();
             panel3 = new Panel();
+            txtIncident_EmployeeID = new TextBox();
+            dtpIncidentDate = new DateTimePicker();
             btnLoadIncidents = new Button();
             btnAddIncident = new Button();
+            label11 = new Label();
             panel4 = new Panel();
             btnLoadActivitiyMods = new Button();
             btnAddActivityMod = new Button();
             panel5 = new Panel();
+            dtpShiftDate = new DateTimePicker();
+            cbIsAmShift = new CheckBox();
             btnLoadShifts = new Button();
             btnAddShift = new Button();
             panel6 = new Panel();
             btnLoadEmployeeShifts = new Button();
             btnAddEmployeeShift = new Button();
+            txtTestInput = new TextBox();
+            dtpTestOutput = new DateTimePicker();
+            btnTest = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -201,13 +205,6 @@
             txtActivityRating.Size = new Size(100, 23);
             txtActivityRating.TabIndex = 5;
             // 
-            // txtIncidentDate
-            // 
-            txtIncidentDate.Location = new Point(10, 106);
-            txtIncidentDate.Name = "txtIncidentDate";
-            txtIncidentDate.Size = new Size(100, 23);
-            txtIncidentDate.TabIndex = 5;
-            // 
             // txtIncidentNote
             // 
             txtIncidentNote.Location = new Point(10, 151);
@@ -243,26 +240,12 @@
             txtActivityModRatingAdjustment.Size = new Size(100, 23);
             txtActivityModRatingAdjustment.TabIndex = 5;
             // 
-            // txtShiftDate
+            // txtEmployeeIDShiftEmployeeName
             // 
-            txtShiftDate.Location = new Point(13, 106);
-            txtShiftDate.Name = "txtShiftDate";
-            txtShiftDate.Size = new Size(100, 23);
-            txtShiftDate.TabIndex = 5;
-            // 
-            // txtShiftEmployeeList
-            // 
-            txtShiftEmployeeList.Location = new Point(13, 151);
-            txtShiftEmployeeList.Name = "txtShiftEmployeeList";
-            txtShiftEmployeeList.Size = new Size(100, 23);
-            txtShiftEmployeeList.TabIndex = 5;
-            // 
-            // txtEmployeeShiftEmployeeName
-            // 
-            txtEmployeeShiftEmployeeName.Location = new Point(8, 104);
-            txtEmployeeShiftEmployeeName.Name = "txtEmployeeShiftEmployeeName";
-            txtEmployeeShiftEmployeeName.Size = new Size(100, 23);
-            txtEmployeeShiftEmployeeName.TabIndex = 5;
+            txtEmployeeIDShiftEmployeeName.Location = new Point(8, 104);
+            txtEmployeeIDShiftEmployeeName.Name = "txtEmployeeIDShiftEmployeeName";
+            txtEmployeeIDShiftEmployeeName.Size = new Size(100, 23);
+            txtEmployeeIDShiftEmployeeName.TabIndex = 5;
             // 
             // txtEmployeeShift_ShiftID
             // 
@@ -377,17 +360,6 @@
             label19.TabIndex = 4;
             label19.Text = "Date";
             // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label20.ForeColor = Color.White;
-            label20.Location = new Point(13, 134);
-            label20.Name = "label20";
-            label20.Size = new Size(93, 15);
-            label20.TabIndex = 4;
-            label20.Text = "Employees (List)";
-            // 
             // label21
             // 
             label21.AutoSize = true;
@@ -395,9 +367,9 @@
             label21.ForeColor = Color.White;
             label21.Location = new Point(8, 82);
             label21.Name = "label21";
-            label21.Size = new Size(53, 15);
+            label21.Size = new Size(70, 15);
             label21.TabIndex = 4;
-            label21.Text = "Employe";
+            label21.Text = "EmployeeID";
             // 
             // label23
             // 
@@ -477,19 +449,36 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(37, 42, 64);
+            panel3.Controls.Add(txtIncident_EmployeeID);
+            panel3.Controls.Add(dtpIncidentDate);
             panel3.Controls.Add(btnLoadIncidents);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label9);
             panel3.Controls.Add(btnAddIncident);
             panel3.Controls.Add(label10);
             panel3.Controls.Add(txtIncident_ActivityID);
+            panel3.Controls.Add(label11);
             panel3.Controls.Add(label12);
-            panel3.Controls.Add(txtIncidentDate);
             panel3.Controls.Add(txtIncidentNote);
             panel3.Location = new Point(657, 108);
             panel3.Name = "panel3";
             panel3.Size = new Size(145, 400);
             panel3.TabIndex = 8;
+            // 
+            // txtIncident_EmployeeID
+            // 
+            txtIncident_EmployeeID.Location = new Point(10, 247);
+            txtIncident_EmployeeID.Name = "txtIncident_EmployeeID";
+            txtIncident_EmployeeID.Size = new Size(100, 23);
+            txtIncident_EmployeeID.TabIndex = 8;
+            // 
+            // dtpIncidentDate
+            // 
+            dtpIncidentDate.Format = DateTimePickerFormat.Short;
+            dtpIncidentDate.Location = new Point(10, 101);
+            dtpIncidentDate.Name = "dtpIncidentDate";
+            dtpIncidentDate.Size = new Size(100, 23);
+            dtpIncidentDate.TabIndex = 7;
             // 
             // btnLoadIncidents
             // 
@@ -510,6 +499,17 @@
             btnAddIncident.Text = "Add";
             btnAddIncident.UseVisualStyleBackColor = true;
             btnAddIncident.Click += btnAddIncident_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.ForeColor = Color.White;
+            label11.Location = new Point(10, 229);
+            label11.Name = "label11";
+            label11.Size = new Size(73, 15);
+            label11.TabIndex = 4;
+            label11.Text = "Employee ID";
             // 
             // panel4
             // 
@@ -550,17 +550,36 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(37, 42, 64);
+            panel5.Controls.Add(dtpShiftDate);
+            panel5.Controls.Add(cbIsAmShift);
             panel5.Controls.Add(btnLoadShifts);
             panel5.Controls.Add(label5);
             panel5.Controls.Add(label19);
-            panel5.Controls.Add(label20);
             panel5.Controls.Add(btnAddShift);
-            panel5.Controls.Add(txtShiftEmployeeList);
-            panel5.Controls.Add(txtShiftDate);
             panel5.Location = new Point(967, 108);
             panel5.Name = "panel5";
             panel5.Size = new Size(145, 400);
             panel5.TabIndex = 9;
+            // 
+            // dtpShiftDate
+            // 
+            dtpShiftDate.Format = DateTimePickerFormat.Short;
+            dtpShiftDate.Location = new Point(8, 108);
+            dtpShiftDate.Name = "dtpShiftDate";
+            dtpShiftDate.Size = new Size(98, 23);
+            dtpShiftDate.TabIndex = 8;
+            // 
+            // cbIsAmShift
+            // 
+            cbIsAmShift.AutoSize = true;
+            cbIsAmShift.FlatStyle = FlatStyle.Flat;
+            cbIsAmShift.ForeColor = Color.White;
+            cbIsAmShift.Location = new Point(13, 156);
+            cbIsAmShift.Name = "cbIsAmShift";
+            cbIsAmShift.Size = new Size(74, 19);
+            cbIsAmShift.TabIndex = 7;
+            cbIsAmShift.Text = "AM Shift?";
+            cbIsAmShift.UseVisualStyleBackColor = true;
             // 
             // btnLoadShifts
             // 
@@ -570,6 +589,7 @@
             btnLoadShifts.TabIndex = 6;
             btnLoadShifts.Text = "Load";
             btnLoadShifts.UseVisualStyleBackColor = true;
+            btnLoadShifts.Click += btnLoadShifts_Click;
             // 
             // btnAddShift
             // 
@@ -579,6 +599,7 @@
             btnAddShift.TabIndex = 6;
             btnAddShift.Text = "Add";
             btnAddShift.UseVisualStyleBackColor = true;
+            btnAddShift.Click += btnAddShift_Click;
             // 
             // panel6
             // 
@@ -590,7 +611,7 @@
             panel6.Controls.Add(label21);
             panel6.Controls.Add(txtEmployeeShift_ShiftID);
             panel6.Controls.Add(btnAddEmployeeShift);
-            panel6.Controls.Add(txtEmployeeShiftEmployeeName);
+            panel6.Controls.Add(txtEmployeeIDShiftEmployeeName);
             panel6.Controls.Add(label23);
             panel6.Controls.Add(label24);
             panel6.Controls.Add(label25);
@@ -616,6 +637,32 @@
             btnAddEmployeeShift.TabIndex = 6;
             btnAddEmployeeShift.Text = "Add";
             btnAddEmployeeShift.UseVisualStyleBackColor = true;
+            btnAddEmployeeShift.Click += btnAddEmployeeShift_Click;
+            // 
+            // txtTestInput
+            // 
+            txtTestInput.Location = new Point(633, 580);
+            txtTestInput.Name = "txtTestInput";
+            txtTestInput.Size = new Size(100, 23);
+            txtTestInput.TabIndex = 10;
+            // 
+            // dtpTestOutput
+            // 
+            dtpTestOutput.Format = DateTimePickerFormat.Short;
+            dtpTestOutput.Location = new Point(783, 580);
+            dtpTestOutput.Name = "dtpTestOutput";
+            dtpTestOutput.Size = new Size(147, 23);
+            dtpTestOutput.TabIndex = 11;
+            // 
+            // btnTest
+            // 
+            btnTest.Location = new Point(692, 637);
+            btnTest.Name = "btnTest";
+            btnTest.Size = new Size(75, 23);
+            btnTest.TabIndex = 12;
+            btnTest.Text = "Test";
+            btnTest.UseVisualStyleBackColor = true;
+            btnTest.Click += btnTest_Click;
             // 
             // frmSettings
             // 
@@ -623,6 +670,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1290, 755);
+            Controls.Add(btnTest);
+            Controls.Add(dtpTestOutput);
+            Controls.Add(txtTestInput);
             Controls.Add(panel1);
             Controls.Add(btnNewAction);
             Controls.Add(label1);
@@ -664,15 +714,12 @@
         private Label label6;
         private TextBox txtActivityName;
         private TextBox txtActivityRating;
-        private TextBox txtIncidentDate;
         private TextBox txtIncidentNote;
         private TextBox txtIncident_ActivityID;
         private TextBox txtActivityMod_ActivityID;
         private TextBox txtActivityModName;
         private TextBox txtActivityModRatingAdjustment;
-        private TextBox txtShiftDate;
-        private TextBox txtShiftEmployeeList;
-        private TextBox txtEmployeeShiftEmployeeName;
+        private TextBox txtEmployeeIDShiftEmployeeName;
         private TextBox txtEmployeeShift_ShiftID;
         private TextBox txtEmployeeShiftEmployeeRating;
         private Label label7;
@@ -684,7 +731,6 @@
         private Label label16;
         private Label label17;
         private Label label19;
-        private Label label20;
         private Label label21;
         private Label label23;
         private Label label24;
@@ -705,5 +751,13 @@
         private Button btnAddShift;
         private Button btnLoadEmployeeShifts;
         private Button btnAddEmployeeShift;
+        private CheckBox cbIsAmShift;
+        private DateTimePicker dtpShiftDate;
+        private TextBox txtTestInput;
+        private DateTimePicker dtpTestOutput;
+        private Button btnTest;
+        private TextBox txtIncident_EmployeeID;
+        private DateTimePicker dtpIncidentDate;
+        private Label label11;
     }
 }

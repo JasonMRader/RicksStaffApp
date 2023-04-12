@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace RicksStaffApp
 
         //TODO: do i need to close these connections?
 
-        public static void SaveEmployee(Employee employee)
+        public static void AddEmployee(Employee employee)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -129,7 +130,7 @@ namespace RicksStaffApp
             }
         }
 
-        public static void SavePosition(Position position)
+        public static void AddPosition(Position position)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -141,11 +142,12 @@ namespace RicksStaffApp
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
-        public static void SaveIncident(Incident incident)
+        public static void AddIncident(Incident incident)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Incidents (Title, Description, Date) values (@Title, @Description, @Date)", incident);
+                cnn.Execute("insert into Incident (ActivityID, Note, DateString, EmployeeShiftID) values (@ActivityID, @Note, @DateString, @EmployeeShiftID)", incident);
+                incident.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
             }
         }
         //public static List<Incident> LoadIncidents()
@@ -220,7 +222,7 @@ namespace RicksStaffApp
         //        }
         //    }
         //}
-        public static void SaveActivity(Activity activity)
+        public static void AddActivity(Activity activity)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -257,8 +259,7 @@ namespace RicksStaffApp
                 cnn.Execute("DELETE FROM ActivityModifier WHERE ActivityID = @ActivityId", new { ActivityId = activityId });
             }
         }
-
-       
+               
         public static List<Activity> LoadActivities()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -288,7 +289,7 @@ namespace RicksStaffApp
             }
         }
 
-        public static void SaveActivityModifier(ActivityModifier modifier)
+        public static void AddActivityModifier(ActivityModifier modifier)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -322,10 +323,130 @@ namespace RicksStaffApp
                 return output.ToList();
             }
         }
+        public static void AddShift(Shift shift)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                //string convertedString = shift.Date.ToString("MM/dd/yyyy");
+                
+                cnn.Execute("insert into Shift (DateString, IsAm) values (@DateString, @IsAm)", new {shift.DateString, shift.IsAm });
+                shift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
+            }
 
+            //foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
+            //{
+            //    employeeShift.Shift = shift; // Associate the shift with the employee shift
+            //    SaveEmployeeShift(employeeShift);
+            //}
+        }
 
+        public static List<Shift> LoadShifts()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = "SELECT * FROM Shift";
+                var result = cnn.Query<Shift>(query);
+                
+                return result.ToList();
+            }
+        }
 
+        public static void UpdateShift(Shift shift)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update Shift set Date = @Date, IsAM = @IsAM where ShiftID = @ShiftID", shift);
+            }
 
+            // Delete all existing employee shifts for this shift and add the new ones
+            DeleteEmployeeShift(shift.ID);
+            foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
+            {
+                employeeShift.Shift = shift; // Associate the shift with the employee shift
+                AddEmployeeShift(employeeShift);
+            }
+        }
+
+        public static void DeleteShift(int shiftID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE from Shift WHERE ID = @ShiftID", new { ShiftId = shiftID});
+                //cnn.Execute("delete from Shift where ShiftID = @ShiftID", shift);
+            }
+        }
+        public static void AddEmployeeShift(EmployeeShift employeeShift)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, ShiftRating) values (@EmployeeID, @ShiftID, @ShiftRating)", 
+                    new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, ShiftRating = employeeShift.ShiftRating });
+                    //new { EmployeeId = employeeShift.Employee.ID, PositionId = employeeShift.Position.ID, ShiftRating = employeeShift.ShiftRating });
+                employeeShift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
+            }
+        }
+        public static void UpdateEmployeeShift(EmployeeShift shift)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update EmployeeShift set EmployeeId = @EmployeeId, PositionId = @PositionId, ShiftRating = @ShiftRating where ID = @ID",
+                    new { EmployeeId = shift.Employee.ID, ShiftRating = shift.ShiftRating, ID = shift.ID });
+                //PositionId = shift.Position.ID, 
+            }
+        }
+        public static void DeleteEmployeeShift(int shiftId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from EmployeeShift where ID = @ID", new { ID = shiftId });
+            }
+        }
+        //public static List<EmployeeShift> LoadEmployeeShifts()
+        //{
+        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+        //        var shiftDictionary = new Dictionary<int, EmployeeShift>();
+        //        var query = cnn.Query<EmployeeShift, Employee, Shift, EmployeeShift>(
+        //            "select es.ID, es.EmployeeId, e.Name, es.ShiftRating, s.ID, s.Date, s.AmShift " +
+        //            "from EmployeeShift es " +
+        //            "inner join Employee e on es.EmployeeId = e.ID " +
+        //            "inner join Position p on es.PositionId = p.ID",
+        //            (shift, employee, position) =>
+        //            {
+        //                if (!shiftDictionary.TryGetValue(shift.ID, out var es))
+        //                {
+        //                    es = shift;
+        //                    es.Employee = employee;
+        //                    es.Position = position;
+        //                    es.Incidents = new List<Incident>();
+        //                    shiftDictionary.Add(es.ID, es);
+        //                }
+        //                return es;
+        //            },
+        //            splitOn: "EmployeeId,PositionId");
+
+        //        var shifts = shiftDictionary.Values.ToList();
+        //        var incidentDictionary = new Dictionary<int, Incident>();
+        //        cnn.Query<Incident, EmployeeShift, Incident>(
+        //            "select i.ID, i.Description, i.RatingChange, i.Date, i.EmployeeShiftId " +
+        //            "from Incident i " +
+        //            "inner join EmployeeShift es on i.EmployeeShiftId = es.ID",
+        //            (incident, shift) =>
+        //            {
+        //                if (!incidentDictionary.TryGetValue(incident.ID, out var i))
+        //                {
+        //                    i = incident;
+        //                    i.EmployeeShift = shift;
+        //                    incidentDictionary.Add(i.ID, i);
+        //                }
+        //                shift.Incidents.Add(i);
+        //                return i;
+        //            },
+        //            splitOn: "EmployeeShiftId");
+
+        //        return shifts;
+        //    }
+        //}
     }
 
 }

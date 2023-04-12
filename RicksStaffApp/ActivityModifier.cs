@@ -7,5 +7,6 @@
         public int ActivityID { get; set; }
         public string Name { get; set; }
         public int RatingAdjustment { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -158,7 +158,7 @@ namespace RicksStaffApp
                 employee.Positions.Add(position);
             }
 
-            SqliteDataAccess.SaveEmployee(employee);
+            SqliteDataAccess.AddEmployee(employee);
             LoadEmployeeList();
 
         }

@@ -20,6 +20,7 @@ namespace RicksStaffApp
         FlowLayoutPanel flpAdditionAction = new FlowLayoutPanel();
         Label lblNewRating = new Label();
         List<Activity> activityList = new List<Activity>();
+        List<Shift> shiftList = new List<Shift>();
 
 
 
@@ -48,7 +49,7 @@ namespace RicksStaffApp
             activity.BaseRatingImpact = Int32.Parse(txtActivityRating.Text);
 
 
-            SqliteDataAccess.SaveActivity(activity);
+            SqliteDataAccess.AddActivity(activity);
 
         }
 
@@ -62,6 +63,14 @@ namespace RicksStaffApp
 
         private void btnAddIncident_Click(object sender, EventArgs e)
         {
+            Incident incident = new Incident();
+            incident.ActivityID = Int32.Parse(txtIncident_ActivityID.Text);
+            incident.DateString = dtpIncidentDate.Text;
+            incident.Note = txtIncidentNote.Text;
+            incident.EmployeeShiftID = Int32.Parse(txtIncident_EmployeeID.Text);
+
+            SqliteDataAccess.AddIncident(incident);
+
 
         }
 
@@ -77,7 +86,45 @@ namespace RicksStaffApp
             modifier.ActivityID = Int32.Parse(txtActivityMod_ActivityID.Text);
             modifier.RatingAdjustment = Int32.Parse(txtActivityModRatingAdjustment.Text);
 
-            SqliteDataAccess.SaveActivityModifier(modifier);
+            SqliteDataAccess.AddActivityModifier(modifier);
+        }
+
+        private void btnAddShift_Click(object sender, EventArgs e)
+        {
+            Shift s = new Shift();
+            s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
+            if (cbIsAmShift.Checked)
+            {
+                s.IsAm = true;
+            }
+            else
+            {
+                s.IsAm = false;
+            }
+            SqliteDataAccess.AddShift(s);
+        }
+
+        private void btnLoadShifts_Click(object sender, EventArgs e)
+        {
+            shiftList.Clear();
+            shiftList = SqliteDataAccess.LoadShifts();
+            UIHelper.CreateShiftPanels(shiftList, flowSettingDisplay);
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            dtpTestOutput.Value = DateTime.Parse(txtTestInput.Text);
+        }
+
+        private void btnAddEmployeeShift_Click(object sender, EventArgs e)
+        {
+            EmployeeShift empShift = new EmployeeShift();
+
+            empShift.Shift.ID = Int32.Parse(txtEmployeeShift_ShiftID.Text);
+            empShift.Employee.ID = Int32.Parse(txtEmployeeIDShiftEmployeeName.Text);
+
+
+            SqliteDataAccess.AddEmployeeShift(empShift);
         }
     }
 }

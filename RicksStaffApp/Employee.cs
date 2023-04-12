@@ -50,19 +50,7 @@ namespace RicksStaffApp
             }
         }
 
-        public string PositionsString()
-        {
-            StringBuilder sb = new StringBuilder();
-            if (Positions.Count > 0)
-            {
-                for (int i = 0; i < Positions.Count; i++)
-                {
-                    sb.Append(Positions[i].Name);
-                    if (i < Positions.Count - 1) sb.Append(',');
-                }
-            }
-            return sb.ToString();
-        }
+        
         public void UpdateOverallRating()
         {
             float totalRating = 6; // initialize total rating to default value
