@@ -30,6 +30,16 @@ namespace RicksStaffApp
 
         public List<EmployeeShift> EmployeeShifts { get; set; }
         public List<Incident> Incidents { get; set; }
+        public bool MatchesFirstName(string name)
+        {
+            return string.Equals(FirstName, name, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public override string ToString()
+        {
+            return FullName;
+        }
+        //TODO fix the create shift without activity problem
         public void AddIncidentsFromShifts()
         {
             foreach (EmployeeShift shift in EmployeeShifts)
@@ -39,7 +49,7 @@ namespace RicksStaffApp
                     Incident newIncident = new Incident()
                     {
                         Name = incident.Name,
-                        IncidentRatingChange = incident.IncidentRatingChange,
+                        //IncidentRatingChange = incident.IncidentRatingChange,
                         BaseRatingImpact = incident.BaseRatingImpact,
                         ActivityModifiers = incident.ActivityModifiers,
                         Date = incident.Date,

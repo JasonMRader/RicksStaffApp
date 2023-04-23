@@ -32,7 +32,11 @@ namespace RicksStaffApp
         //}
 
         //TODO: do i need to close these connections?
-
+        private static string LoadConnectionString(string id = "Default")
+        {
+            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+        }
+        //Employee Methods
         public static void AddEmployee(Employee employee)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -148,7 +152,7 @@ namespace RicksStaffApp
                 }
             }
         }
-
+        //Position Methods
         public static List<Position> LoadPositions()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -166,10 +170,7 @@ namespace RicksStaffApp
             }
         }
 
-        private static string LoadConnectionString (string id = "Default")
-        {
-            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
-        }
+        //Incident Methods
         public static void AddIncident(Incident incident)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -225,31 +226,7 @@ namespace RicksStaffApp
                 }
             }
         }
-        //public static void SaveEmployee(Employee employee)
-        //{
-        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-        //    {
-        //        cnn.Open();
-
-        //        using (var transaction = cnn.BeginTransaction())
-        //        {
-        //            // Insert the employee into the Employee table
-        //            cnn.Execute("insert into Employee (FirstName, LastName) values (@FirstName, @LastName)", employee);
-
-        //            // Get the ID of the newly inserted employee
-        //            int employeeId = cnn.Query<int>("select last_insert_rowid()", new DynamicParameters()).Single();
-
-        //            // Insert the employee's positions into the EmployeePosition table
-        //            foreach (Position position in employee.Positions)
-        //            {
-        //                cnn.Execute("insert into EmployeePositions (EmployeeId, PositionId) values (@EmployeeId, @PositionId)",
-        //                    new { EmployeeId = employeeId, PositionId = position.ID });
-        //            }
-
-        //            transaction.Commit();
-        //        }
-        //    }
-        //}
+        //Activity Methods
         public static void AddActivity(Activity activity)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -316,7 +293,7 @@ namespace RicksStaffApp
                 return activityDictionary.Values.ToList();
             }
         }
-
+        //Activity Mod Methods
         public static void AddActivityModifier(ActivityModifier modifier)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -351,6 +328,7 @@ namespace RicksStaffApp
                 return output.ToList();
             }
         }
+        //Shift Methods
         public static void AddShift(Shift shift)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -368,6 +346,110 @@ namespace RicksStaffApp
             //}
         }
 
+        //public static List<Shift> LoadShifts()
+        //{
+        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+        //        string query = "SELECT * FROM Shift";
+        //        var shifts = cnn.Query<Shift>(query).AsList();
+
+        //        string employeeShiftQuery = @"
+        //    SELECT es.*, e.*, p.*, i.*, a.*, am.*
+        //    FROM EmployeeShift es
+        //    INNER JOIN Employee e ON es.EmployeeID = e.ID
+        //    INNER JOIN Positions p ON es.PositionID = p.ID
+        //    LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID
+        //    LEFT JOIN Activity a ON i.ID = a.ID
+        //    LEFT JOIN ActivityModifier am ON a.ID = am.ActivityID
+        //    WHERE es.ShiftID = @ShiftID";
+
+        //        foreach (var shift in shifts)
+        //        {
+        //            var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+        //            var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, ActivityModifier, EmployeeShift>(employeeShiftQuery,
+        //                (employeeShift, employee, position, incident, activityModifier) =>
+        //                {
+        //                    if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+        //                    {
+        //                        currentEmployeeShift = employeeShift;
+        //                        currentEmployeeShift.Employee = employee;
+        //                        currentEmployeeShift.Position = position;
+        //                        currentEmployeeShift.Incidents = new List<Incident>();
+        //                        employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+        //                    }
+
+        //                    if (incident != null && incident.ID != default)
+        //                    {
+        //                        incident.ActivityModifiers = incident.ActivityModifiers ?? new List<ActivityModifier>();
+        //                        if (activityModifier != null && activityModifier.ID != default)
+        //                        {
+        //                            incident.ActivityModifiers.Add(activityModifier);
+        //                        }
+
+        //                        if (!currentEmployeeShift.Incidents.Exists(x => x.ID == incident.ID))
+        //                        {
+        //                            currentEmployeeShift.Incidents.Add(incident);
+        //                        }
+        //                    }
+
+        //                    return currentEmployeeShift;
+        //                },
+        //                new { ShiftID = shift.ID },
+        //                splitOn: "ID,ID,ID,ID").Distinct().AsList();
+
+        //            shift.EmployeeShifts = employeeShifts;
+        //        }
+        //        return shifts;
+        //    }
+        //}
+
+        //    foreach (var shift in shifts)
+        //        {
+        //            var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+        //            var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, Activity, ActivityModifier, EmployeeShift>(employeeShiftQuery,
+        //                (employeeShift, employee, position, incident, activity, activityModifier) =>
+        //                {
+        //                    if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+        //                    {
+        //                        currentEmployeeShift = employeeShift;
+        //                        currentEmployeeShift.Employee = employee;
+        //                        currentEmployeeShift.Position = position;
+        //                        currentEmployeeShift.Incidents = new List<Incident>();
+        //                        employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+        //                    }
+
+        //                    if (incident != null && incident.ID != default)
+        //                    {
+        //                        if (activity != null && activity.ID != default)
+        //                        {
+        //                            incident.Name = activity.Name;
+        //                            incident.AdjustedRatingChange = activity.AdjustedRatingChange;
+        //                            incident.BaseRatingImpact = activity.BaseRatingImpact;
+        //                            incident.ActivityModifiers = incident.ActivityModifiers ?? new List<ActivityModifier>();
+
+        //                            if (activityModifier != null)
+        //                            {
+        //                                incident.ActivityModifiers.Add(activityModifier);
+        //                            }
+        //                        }
+        //                        currentEmployeeShift.Incidents.Add(incident);
+        //                    }
+
+        //                    return currentEmployeeShift;
+        //                },
+        //                new { ShiftID = shift.ID },
+        //                splitOn: "ID,ID,ID,ID,ActivityID,ID").Distinct().AsList();
+
+        //            shift.EmployeeShifts = employeeShifts;
+        //        }
+
+        //        return shifts;
+        //    }
+        //}
+
+
         public static List<Shift> LoadShifts()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -376,27 +458,59 @@ namespace RicksStaffApp
                 var shifts = cnn.Query<Shift>(query).AsList();
 
                 string employeeShiftQuery = @"
-                    SELECT es.*, e.*, p.*
+                    SELECT es.*, e.*, p.*, i.*
                     FROM EmployeeShift es
                     INNER JOIN Employee e ON es.EmployeeID = e.ID
                     INNER JOIN Positions p ON es.PositionID = p.ID
+                    LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.ShiftID = @ShiftID";
 
+                //foreach (var shift in shifts)
+                //{
+                //    var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, EmployeeShift>(employeeShiftQuery,
+                //        (employeeShift, employee, position) =>
+                //        {
+                //            employeeShift.Employee = employee;
+                //            employeeShift.Position = position;
+                //            return employeeShift;
+                //        },
+                //        new { ShiftID = shift.ID },
+                //        splitOn: "ID,ID").AsList();
+
+                //    shift.EmployeeShifts = employeeShifts;
+                //}
                 foreach (var shift in shifts)
                 {
-                    var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, EmployeeShift>(employeeShiftQuery,
-                        (employeeShift, employee, position) =>
+                    var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+                    var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, EmployeeShift>(employeeShiftQuery,
+                        (employeeShift, employee, position, incident) =>
                         {
-                            employeeShift.Employee = employee;
-                            employeeShift.Position = position;
-                            return employeeShift;
+                            // Check if the employee shift is already added to the dictionary
+                            if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+                            {
+                                currentEmployeeShift = employeeShift;
+                                currentEmployeeShift.Employee = employee;
+                                currentEmployeeShift.Position = position;
+                                currentEmployeeShift.Incidents = new List<Incident>();
+                                employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+                            }
+
+                            // Add the incident to the employee shift if it exists
+                            if (incident != null && incident.ID != default)
+                            {
+                                currentEmployeeShift.Incidents.Add(incident);
+                            }
+
+                            return currentEmployeeShift;
                         },
                         new { ShiftID = shift.ID },
-                        splitOn: "ID,ID").AsList();
+                        splitOn: "ID,ID,ID").Distinct().AsList();
 
                     shift.EmployeeShifts = employeeShifts;
                 }
-
+                List<Activity> activities = LoadActivities();
+                Incident.AssignActivitiesToIncidents(shifts, activities);
                 return shifts;
             }
         }
@@ -425,6 +539,7 @@ namespace RicksStaffApp
                 //cnn.Execute("delete from Shift where ShiftID = @ShiftID", shift);
             }
         }
+        //EmployeeShift Methods
         public static void AddEmployeeShift(EmployeeShift employeeShift)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -451,52 +566,98 @@ namespace RicksStaffApp
                 cnn.Execute("delete from EmployeeShift where ID = @ID", new { ID = shiftId });
             }
         }
-        //public static List<EmployeeShift> LoadEmployeeShifts()
+        //public static void LoadEmployeeShifts()
         //{
         //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
         //    {
         //        var shiftDictionary = new Dictionary<int, EmployeeShift>();
         //        var query = cnn.Query<EmployeeShift, Employee, Shift, EmployeeShift>(
-        //            "select es.ID, es.EmployeeId, e.Name, es.ShiftRating, s.ID, s.Date, s.AmShift " +
-        //            "from EmployeeShift es " +
-        //            "inner join Employee e on es.EmployeeId = e.ID " +
-        //            "inner join Position p on es.PositionId = p.ID",
-        //            (shift, employee, position) =>
-        //            {
-        //                if (!shiftDictionary.TryGetValue(shift.ID, out var es))
-        //                {
-        //                    es = shift;
-        //                    es.Employee = employee;
-        //                    es.Position = position;
-        //                    es.Incidents = new List<Incident>();
-        //                    shiftDictionary.Add(es.ID, es);
-        //                }
-        //                return es;
-        //            },
-        //            splitOn: "EmployeeId,PositionId");
-
+        //                            "select es.ID, es.EmployeeId, e.Name, es.ShiftRating, s.ID, s.Date, s.AmShift " +
+        //                            "from EmployeeShift es " +
+        //                            "inner join Employee e on es.EmployeeId = e.ID " +
+        //                            "inner join Shift s on es.ShiftId = s.ID",
+        //                                          (employeeShift, employee, shift) =>
+        //                                          {
+        //                                              if (!shiftDictionary.TryGetValue(shift.ID, out var es))
+        //                                              {
+        //                                                  es = employeeShift;
+        //                                                  es.Employee = employee;
+        //                                                  es.Shift = shift;
+        //                                                  es.Incidents = new List<Incident>();
+        //                                                  shiftDictionary.Add(es.ID, es);
+        //                                              }
+        //                                              return es;
+        //                                          },
+        //                                                         splitOn: "EmployeeId,ShiftId");
         //        var shifts = shiftDictionary.Values.ToList();
         //        var incidentDictionary = new Dictionary<int, Incident>();
         //        cnn.Query<Incident, EmployeeShift, Incident>(
-        //            "select i.ID, i.Description, i.RatingChange, i.Date, i.EmployeeShiftId " +
-        //            "from Incident i " +
-        //            "inner join EmployeeShift es on i.EmployeeShiftId = es.ID",
-        //            (incident, shift) =>
-        //            {
-        //                if (!incidentDictionary.TryGetValue(incident.ID, out var i))
-        //                {
-        //                    i = incident;
-        //                    i.EmployeeShift = shift;
-        //                    incidentDictionary.Add(i.ID, i);
-        //                }
-        //                shift.Incidents.Add(i);
-        //                return i;
-        //            },
-        //            splitOn: "EmployeeShiftId");
-
-        //        return shifts;
+        //                            "select i.ID, i.Description, i.RatingChange, i.Date, i.EmployeeShiftId " +
+        //                            "from Incident i " +
+        //                            "inner join EmployeeShift es on i.EmployeeShiftId = es.ID",
+        //                                          (incident, employeeShift) =>
+        //                                          {
+        //                                              if (!incidentDictionary.TryGetValue(incident.ID, out var i))
+        //                                              {
+        //                                                  i = incident;
+        //                                                  i.EmployeeShift = employeeShift;
+        //                                                  incidentDictionary.Add(i.ID, i);
+        //                                              }
+        //                                              shift.Incidents.Add(i);
+        //                                              return i;
+        //                                          },
+        //                                                         splitOn: "EmployeeShiftId");
+        //        //return shifts;
         //    }
+            //public static List<EmployeeShift> LoadEmployeeShifts()
+            //{
+            //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            //    {
+            //        var shiftDictionary = new Dictionary<int, EmployeeShift>();
+            //        var query = cnn.Query<EmployeeShift, Employee, Shift, EmployeeShift>(
+            //            "select es.ID, es.EmployeeId, e.Name, es.ShiftRating, s.ID, s.Date, s.AmShift " +
+            //            "from EmployeeShift es " +
+            //            "inner join Employee e on es.EmployeeId = e.ID " +
+            //            "inner join Position p on es.PositionId = p.ID",
+            //            (shift, employee, position) =>
+            //            {
+            //                if (!shiftDictionary.TryGetValue(shift.ID, out var es))
+            //                {
+            //                    es = shift;
+            //                    es.Employee = employee;
+            //                    es.Position = position;
+            //                    es.Incidents = new List<Incident>();
+            //                    shiftDictionary.Add(es.ID, es);
+            //                }
+            //                return es;
+            //            },
+            //            splitOn: "EmployeeId,PositionId");
+
+            //        var shifts = shiftDictionary.Values.ToList();
+            //        var incidentDictionary = new Dictionary<int, Incident>();
+            //        cnn.Query<Incident, EmployeeShift, Incident>(
+            //            "select i.ID, i.Description, i.RatingChange, i.Date, i.EmployeeShiftId " +
+            //            "from Incident i " +
+            //            "inner join EmployeeShift es on i.EmployeeShiftId = es.ID",
+            //            (incident, shift) =>
+            //            {
+            //                if (!incidentDictionary.TryGetValue(incident.ID, out var i))
+            //                {
+            //                    i = incident;
+            //                    i.EmployeeShift = shift;
+            //                    incidentDictionary.Add(i.ID, i);
+            //                }
+            //                shift.Incidents.Add(i);
+            //                return i;
+            //            },
+            //            splitOn: "EmployeeShiftId");
+
+            //        return shifts;
+            //    }
+            //}
         //}
+    //write a method to load the employee shifts
+    
     }
 
 }

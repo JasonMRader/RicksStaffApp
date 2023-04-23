@@ -13,6 +13,8 @@ namespace RicksStaffApp
     public partial class frmServerShift : Form
     {
         public string EmployeeNameLabel = null;
+        List<Activity> ActivityList = new List<Activity>();
+        public EmployeeShift EmployeeShiftToEdit = new EmployeeShift();
         private bool isDragging = false;
         private Point lastLocation;
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -55,7 +57,14 @@ namespace RicksStaffApp
 
         private void frmServerShift_Load(object sender, EventArgs e)
         {
-            lblEmpolyeeName.Text = EmployeeNameLabel;
+            ActivityList.Clear();
+            ActivityList = SqliteDataAccess.LoadActivities();
+            UIHelper.CreateActivityPanelsForEmpShift(ActivityList, flowActivityDisplay, flowIncidentToAdd);
+            
+            UIHelper.CreateIncidentPanelForEmpShift(EmployeeShiftToEdit.Incidents, flowIncidentToAdd);
+            
+
+            lblEmpolyeeName.Text = EmployeeShiftToEdit.EmployeeName;
         }
     }
 }

@@ -50,5 +50,14 @@ namespace RicksStaffApp
             }
             //set { Date = DateOnly.Parse(value, IFormatProvider? provider); }
         }
+        public DateTime DateAsDateTime
+        {
+            get { return new DateTime (Date.Year, Date.Month, Date.Day, 0,0,0); }
+            set
+            {
+                Date  = DateOnly.FromDateTime(value);
+            }
+            
+        }
     }
 }

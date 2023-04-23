@@ -14,6 +14,7 @@ namespace RicksStaffApp
 {
     public partial class frmNewShift : Form
     {
+        List<Shift> shifts = new List<Shift>();
         public frmNewShift()
         {
             InitializeComponent();
@@ -26,11 +27,7 @@ namespace RicksStaffApp
         }
 
         private void btnExcelLoad_Click(object sender, EventArgs e)
-        {
-
-
-
-            // Show the Open File dialog and get the selected file path
+        {            
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
@@ -39,7 +36,6 @@ namespace RicksStaffApp
             {
                 string filePath = openFileDialog.FileName;
 
-                // Load the Excel file into a new Application instance
                 Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
                 Workbook workbook = null;
 
@@ -144,7 +140,8 @@ namespace RicksStaffApp
 
         private void frmNewShift_Load(object sender, EventArgs e)
         {
-
+            shifts = SqliteDataAccess.LoadShifts();
+            UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
         }
 
         private void lbEmployees_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,6 +153,23 @@ namespace RicksStaffApp
                 frm.EmployeeNameLabel = employeeName; // set the employee name label on the frmServerShift form
                 frm.ShowDialog(); // show the frmServerShift form
             }
+        }
+
+        private void dtpShiftDate_ValueChanged(object sender, EventArgs e)
+        {
+            //List <EmployeeShift> employeeShifts = new List <EmployeeShift>();
+            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+
+
+        }
+
+        private void btnGetExcelEmployees_Click(object sender, EventArgs e)
+        {
+            frmExcelDownload frmExcelDownload = new frmExcelDownload();
+            pnlNewShiftDisplay.Controls.Clear();
+            frmExcelDownload.TopLevel= false;
+            pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
+            frmExcelDownload.Show();
         }
     }
 }

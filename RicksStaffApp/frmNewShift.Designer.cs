@@ -28,28 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             lblShiftDateDisplay = new Label();
             btnExcelLoad = new Button();
             label1 = new Label();
             lbEmployees = new ListBox();
+            dtpShiftDate = new DateTimePicker();
+            flowEmployeeShiftDisplay = new FlowLayoutPanel();
+            pnlNewShiftDisplay = new Panel();
+            btnGetExcelEmployees = new Button();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Red;
-            button1.Location = new Point(72, 53);
-            button1.Name = "button1";
-            button1.Size = new Size(137, 38);
-            button1.TabIndex = 0;
-            button1.Text = "ToDo Add event to server shift";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // lblShiftDateDisplay
             // 
             lblShiftDateDisplay.AutoSize = true;
-            lblShiftDateDisplay.Location = new Point(552, 65);
+            lblShiftDateDisplay.ForeColor = Color.White;
+            lblShiftDateDisplay.Location = new Point(22, 69);
             lblShiftDateDisplay.Name = "lblShiftDateDisplay";
             lblShiftDateDisplay.Size = new Size(96, 15);
             lblShiftDateDisplay.TabIndex = 1;
@@ -57,18 +50,21 @@
             // 
             // btnExcelLoad
             // 
-            btnExcelLoad.Location = new Point(335, 61);
+            btnExcelLoad.BackColor = Color.FromArgb(167, 204, 237);
+            btnExcelLoad.FlatAppearance.BorderSize = 0;
+            btnExcelLoad.FlatStyle = FlatStyle.Flat;
+            btnExcelLoad.Location = new Point(784, 12);
             btnExcelLoad.Name = "btnExcelLoad";
-            btnExcelLoad.Size = new Size(131, 23);
+            btnExcelLoad.Size = new Size(138, 29);
             btnExcelLoad.TabIndex = 2;
-            btnExcelLoad.Text = "Load From Excel";
-            btnExcelLoad.UseVisualStyleBackColor = true;
+            btnExcelLoad.Text = "Old Load From Excel";
+            btnExcelLoad.UseVisualStyleBackColor = false;
             btnExcelLoad.Click += btnExcelLoad_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(1022, 190);
+            label1.Location = new Point(373, 102);
             label1.Name = "label1";
             label1.Size = new Size(109, 15);
             label1.TabIndex = 3;
@@ -80,12 +76,49 @@
             lbEmployees.ForeColor = Color.FromArgb(199, 199, 199);
             lbEmployees.FormattingEnabled = true;
             lbEmployees.ItemHeight = 15;
-            lbEmployees.Location = new Point(297, 133);
+            lbEmployees.Location = new Point(932, 13);
             lbEmployees.MultiColumn = true;
             lbEmployees.Name = "lbEmployees";
-            lbEmployees.Size = new Size(429, 529);
+            lbEmployees.Size = new Size(346, 79);
             lbEmployees.TabIndex = 4;
             lbEmployees.SelectedIndexChanged += lbEmployees_SelectedIndexChanged;
+            // 
+            // dtpShiftDate
+            // 
+            dtpShiftDate.Location = new Point(124, 63);
+            dtpShiftDate.Name = "dtpShiftDate";
+            dtpShiftDate.Size = new Size(200, 23);
+            dtpShiftDate.TabIndex = 5;
+            dtpShiftDate.ValueChanged += dtpShiftDate_ValueChanged;
+            // 
+            // flowEmployeeShiftDisplay
+            // 
+            flowEmployeeShiftDisplay.BackColor = Color.FromArgb(37, 42, 64);
+            flowEmployeeShiftDisplay.Location = new Point(22, 120);
+            flowEmployeeShiftDisplay.Name = "flowEmployeeShiftDisplay";
+            flowEmployeeShiftDisplay.Size = new Size(475, 630);
+            flowEmployeeShiftDisplay.TabIndex = 6;
+            // 
+            // pnlNewShiftDisplay
+            // 
+            pnlNewShiftDisplay.BackColor = Color.FromArgb(69, 105, 144);
+            pnlNewShiftDisplay.Location = new Point(503, 120);
+            pnlNewShiftDisplay.Name = "pnlNewShiftDisplay";
+            pnlNewShiftDisplay.Size = new Size(775, 630);
+            pnlNewShiftDisplay.TabIndex = 7;
+            // 
+            // btnGetExcelEmployees
+            // 
+            btnGetExcelEmployees.BackColor = Color.FromArgb(167, 204, 237);
+            btnGetExcelEmployees.FlatAppearance.BorderSize = 0;
+            btnGetExcelEmployees.FlatStyle = FlatStyle.Flat;
+            btnGetExcelEmployees.Location = new Point(503, 69);
+            btnGetExcelEmployees.Name = "btnGetExcelEmployees";
+            btnGetExcelEmployees.Size = new Size(236, 45);
+            btnGetExcelEmployees.TabIndex = 8;
+            btnGetExcelEmployees.Text = "Load Employees";
+            btnGetExcelEmployees.UseVisualStyleBackColor = false;
+            btnGetExcelEmployees.Click += btnGetExcelEmployees_Click;
             // 
             // frmNewShift
             // 
@@ -93,11 +126,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(btnGetExcelEmployees);
             Controls.Add(lbEmployees);
+            Controls.Add(pnlNewShiftDisplay);
+            Controls.Add(flowEmployeeShiftDisplay);
+            Controls.Add(dtpShiftDate);
             Controls.Add(label1);
             Controls.Add(btnExcelLoad);
             Controls.Add(lblShiftDateDisplay);
-            Controls.Add(button1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmNewShift";
             Text = "frmNewShift";
@@ -107,11 +143,13 @@
         }
 
         #endregion
-
-        private Button button1;
         private Label lblShiftDateDisplay;
         private Button btnExcelLoad;
         private Label label1;
         private ListBox lbEmployees;
+        private DateTimePicker dtpShiftDate;
+        private FlowLayoutPanel flowEmployeeShiftDisplay;
+        private Panel pnlNewShiftDisplay;
+        private Button btnGetExcelEmployees;
     }
 }

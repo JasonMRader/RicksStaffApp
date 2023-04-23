@@ -60,7 +60,7 @@ namespace RicksStaffApp
             activityList = SqliteDataAccess.LoadActivities();
             UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
         }
-
+        //TODO fix the create shift without activity problem
         private void btnAddIncident_Click(object sender, EventArgs e)
         {
             Incident incident = new Incident();

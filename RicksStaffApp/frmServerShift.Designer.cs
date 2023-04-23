@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            flowActivityDisplay = new FlowLayoutPanel();
+            label2 = new Label();
+            label1 = new Label();
             lblEmpolyeeName = new Label();
             btnDone = new Button();
-            panel2 = new Panel();
-            listView1 = new ListView();
-            label1 = new Label();
-            label2 = new Label();
+            flowIncidentToAdd = new FlowLayoutPanel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,62 +43,38 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.FromArgb(46, 51, 73);
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(flowIncidentToAdd);
+            panel1.Controls.Add(flowActivityDisplay);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(listView1);
-            panel1.Controls.Add(panel2);
             panel1.Controls.Add(lblEmpolyeeName);
             panel1.Controls.Add(btnDone);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(10, 10);
-            panel1.Margin = new Padding(5);
+            panel1.Location = new Point(3, 3);
+            panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(930, 580);
+            panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
-            panel1.MouseDown += Form1_MouseDown;
-            panel1.MouseMove += Form1_MouseMove;
-            panel1.MouseUp += Form1_MouseUp;
             // 
-            // lblEmpolyeeName
+            // flowActivityDisplay
             // 
-            lblEmpolyeeName.AutoSize = true;
-            lblEmpolyeeName.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmpolyeeName.ForeColor = Color.White;
-            lblEmpolyeeName.Location = new Point(297, 18);
-            lblEmpolyeeName.Name = "lblEmpolyeeName";
-            lblEmpolyeeName.Size = new Size(263, 45);
-            lblEmpolyeeName.TabIndex = 1;
-            lblEmpolyeeName.Text = "Employee Name";
+            flowActivityDisplay.BackColor = Color.FromArgb(37, 42, 64);
+            flowActivityDisplay.FlowDirection = FlowDirection.TopDown;
+            flowActivityDisplay.Location = new Point(17, 92);
+            flowActivityDisplay.Name = "flowActivityDisplay";
+            flowActivityDisplay.Size = new Size(261, 460);
+            flowActivityDisplay.TabIndex = 5;
             // 
-            // btnDone
+            // label2
             // 
-            btnDone.BackColor = Color.FromArgb(167, 204, 237);
-            btnDone.FlatStyle = FlatStyle.Flat;
-            btnDone.Location = new Point(704, 529);
-            btnDone.Name = "btnDone";
-            btnDone.Size = new Size(160, 34);
-            btnDone.TabIndex = 0;
-            btnDone.Text = "Done";
-            btnDone.UseVisualStyleBackColor = false;
-            btnDone.Click += btnDone_Click;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.FromArgb(37, 42, 64);
-            panel2.Location = new Point(273, 92);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(652, 422);
-            panel2.TabIndex = 2;
-            // 
-            // listView1
-            // 
-            listView1.BackColor = Color.FromArgb(37, 42, 64);
-            listView1.Location = new Point(17, 92);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(250, 422);
-            listView1.TabIndex = 3;
-            listView1.UseCompatibleStateImageBehavior = false;
+            label2.AutoSize = true;
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(284, 74);
+            label2.Name = "label2";
+            label2.Size = new Size(76, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Edit Incident:";
             // 
             // label1
             // 
@@ -110,31 +86,50 @@
             label1.TabIndex = 4;
             label1.Text = "Choose Actions:";
             // 
-            // label2
+            // lblEmpolyeeName
             // 
-            label2.AutoSize = true;
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(273, 74);
-            label2.Name = "label2";
-            label2.Size = new Size(73, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Edit Actions:";
+            lblEmpolyeeName.AutoSize = true;
+            lblEmpolyeeName.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEmpolyeeName.ForeColor = Color.White;
+            lblEmpolyeeName.Location = new Point(254, -1);
+            lblEmpolyeeName.Name = "lblEmpolyeeName";
+            lblEmpolyeeName.Size = new Size(263, 45);
+            lblEmpolyeeName.TabIndex = 1;
+            lblEmpolyeeName.Text = "Employee Name";
+            // 
+            // btnDone
+            // 
+            btnDone.BackColor = Color.FromArgb(167, 204, 237);
+            btnDone.FlatStyle = FlatStyle.Flat;
+            btnDone.Location = new Point(579, 558);
+            btnDone.Name = "btnDone";
+            btnDone.Size = new Size(160, 34);
+            btnDone.TabIndex = 0;
+            btnDone.Text = "Done";
+            btnDone.UseVisualStyleBackColor = false;
+            btnDone.Click += btnDone_Click;
+            // 
+            // flowIncidentToAdd
+            // 
+            flowIncidentToAdd.BackColor = Color.FromArgb(37, 42, 64);
+            flowIncidentToAdd.FlowDirection = FlowDirection.TopDown;
+            flowIncidentToAdd.Location = new Point(284, 92);
+            flowIncidentToAdd.Name = "flowIncidentToAdd";
+            flowIncidentToAdd.Size = new Size(470, 460);
+            flowIncidentToAdd.TabIndex = 6;
             // 
             // frmServerShift
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(69, 105, 144);
-            ClientSize = new Size(950, 600);
+            ClientSize = new Size(775, 630);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmServerShift";
-            Padding = new Padding(10);
+            Padding = new Padding(3);
             Text = "frmServerShift";
             Load += frmServerShift_Load;
-            MouseDown += Form1_MouseDown;
-            MouseMove += Form1_MouseMove;
-            MouseUp += Form1_MouseUp;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -148,7 +143,7 @@
         public Label lblEmpolyeeName;
         private Label label2;
         private Label label1;
-        private ListView listView1;
-        private Panel panel2;
+        private FlowLayoutPanel flowActivityDisplay;
+        private FlowLayoutPanel flowIncidentToAdd;
     }
 }
