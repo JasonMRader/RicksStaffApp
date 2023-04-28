@@ -17,28 +17,7 @@ namespace RicksStaffApp
         public EmployeeShift EmployeeShiftToEdit = new EmployeeShift();
         private bool isDragging = false;
         private Point lastLocation;
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            isDragging = true;
-            lastLocation = e.Location;
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDragging)
-            {
-                this.Location = new Point(
-                    (this.Location.X - lastLocation.X) + e.X,
-                    (this.Location.Y - lastLocation.Y) + e.Y);
-
-                this.Update();
-            }
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            isDragging = false;
-        }
+        
 
         public frmServerShift()
         {
@@ -47,24 +26,118 @@ namespace RicksStaffApp
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            this.Close();
+            SqliteDataAccess.SaveEmployeeShiftIncidents(EmployeeShiftToEdit);
+            //this.Close();
+            //string s = "";
+            //foreach (Incident i in EmployeeShiftToEdit.Incidents)
+            //{
+            //    s += i.Name + " ";
+            //}
+            //MessageBox.Show(s);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void frmServerShift_Load(object sender, EventArgs e)
         {
             ActivityList.Clear();
             ActivityList = SqliteDataAccess.LoadActivities();
-            UIHelper.CreateActivityPanelsForEmpShift(ActivityList, flowActivityDisplay, flowIncidentToAdd);
-            
-            UIHelper.CreateIncidentPanelForEmpShift(EmployeeShiftToEdit.Incidents, flowIncidentToAdd);
-            
+            //UIHelper.CreateActivityPanelsForEmpShift(EmployeeShiftToEdit.Incidents, ActivityList, flowActivityDisplay, flowIncidentToAdd);
+            CreateActivityPanelsForEmpShift(EmployeeShiftToEdit, ActivityList, flowActivityDisplay, flowIncidentToAdd);
+            //UIHelper.CreateIncidentPanelForEmpShift(EmployeeShiftToEdit.Incidents, flowIncidentToAdd);
+
 
             lblEmpolyeeName.Text = EmployeeShiftToEdit.EmployeeName;
         }
+        private static void CreateActivityPanelsForEmpShift(EmployeeShift employeeShift, List<Activity> activityList, FlowLayoutPanel flowFormDisplay, FlowLayoutPanel flowToAdd)
+        {
+            // Clear existing panels
+            flowFormDisplay.Controls.Clear();
+            CreateIncidentPanelForEmpShift(employeeShift, flowToAdd);
+            
+            foreach (Activity activity in activityList)
+            {
+                FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowFormDisplay.Width, flowToAdd, employeeShift);
+
+                flowFormDisplay.Controls.Add(activityPanelContainer);
+            }
+
+
+        }
+        private static void CreateIncidentPanelForEmpShift(EmployeeShift employeeShift, FlowLayoutPanel flowDisplay)
+        {
+            int containerWidth = flowDisplay.Width;
+            int firstContainer = (int)(containerWidth - 40);
+            int nameWidth = (int)containerWidth / 4;
+            int ratingWidth = (int)containerWidth / 9;
+            int modPanelWidth = (int)containerWidth / 3;
+            flowDisplay.Controls.Clear();
+            foreach (Incident inc in employeeShift.Incidents)
+            {
+
+                FlowLayoutPanel pnlContainer = new FlowLayoutPanel();
+                //activityPanelContainer.Size = new Size(430, 30);
+                pnlContainer.AutoSize = true;
+                pnlContainer.MinimumSize = new Size(containerWidth, 30);
+                pnlContainer.MaximumSize = new Size(containerWidth, 200);
+                pnlContainer.BackColor = MyColors.LightHighlight;
+                pnlContainer.Margin = new Padding(0, 0, 0, 5);
+
+
+                FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
+                incidentPanel.FlowDirection = FlowDirection.LeftToRight;
+                incidentPanel.WrapContents = false;
+                incidentPanel.AutoSize = true;
+                incidentPanel.MaximumSize = new Size(firstContainer, 30);
+                incidentPanel.MinimumSize = new Size(firstContainer, 0);
+                incidentPanel.BackColor = UIHelper.GetBackColor(inc.BaseRatingImpact);
+
+                Label lblName = new Label();
+                lblName.Text = inc.Name;
+                lblName.AutoSize = false;
+                lblName.Size = new Size(nameWidth, 30);
+                lblName.TextAlign = ContentAlignment.MiddleCenter;
+                incidentPanel.Controls.Add(lblName);
+
+                Label lblBaseRating = new Label();
+                lblBaseRating.Text = inc.BaseRatingDisplay;
+                lblBaseRating.AutoSize = false;
+                lblBaseRating.Size = new Size(ratingWidth, 30);
+                lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
+                incidentPanel.Controls.Add(lblBaseRating);
+
+                pnlContainer.Controls.Add(incidentPanel);
+                Button btnDelete = new Button();
+                btnDelete.Text = "X";
+                btnDelete.Size = new Size(30, 30);
+                btnDelete.FlatStyle = FlatStyle.Flat;
+                btnDelete.FlatAppearance.BorderSize = 0;
+                btnDelete.Margin = new Padding(2, 2, 0, 0);
+
+                // Attach the click event to the delete button
+                btnDelete.Click += (sender, e) =>
+                {
+                    // Remove the pnlContainer from the flowDisplay
+                    flowDisplay.Controls.Remove(pnlContainer);
+                    // Find the incident to remove from the EmployeeShiftToEdit.Incidents list
+                    Incident incidentToRemove = employeeShift.Incidents.FirstOrDefault(i => i == inc);
+
+                    // Remove the incident from the EmployeeShiftToEdit.Incidents list
+                    if (incidentToRemove != null)
+                    {
+                        employeeShift.Incidents.Remove(incidentToRemove);
+                    }
+                };
+
+                // Add the delete button to the pnlContainer
+                pnlContainer.Controls.Add(btnDelete);
+
+                flowDisplay.Controls.Add(pnlContainer);
+            }
+            
+        }
+
+
     }
+
 }

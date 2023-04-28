@@ -208,22 +208,51 @@ namespace RicksStaffApp
                 cnn.Execute("DELETE FROM ActivityModifiers WHERE IncidentID = @IncidentId", new { IncidentId = incidentId });
             }
         }
+        public static void DeleteIncidentsByEmployeeShiftID(int employeeShiftID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from Incident where EmployeeShiftID = @EmployeeShiftID", new { EmployeeShiftID = employeeShiftID });
+            }
+        }
+        public static void SaveEmployeeShiftIncidents(EmployeeShift employeeShift)
+        {
+            // First, delete all existing incidents associated with the employeeShift
+            DeleteIncidentsByEmployeeShiftID(employeeShift.ID);
+
+            // Now, add the updated list of incidents
+            foreach (Incident incident in employeeShift.Incidents)
+            {
+                // If the incident already has an ID, update it, otherwise, add it as a new incident
+                if (incident.IncidentID > 0)
+                {
+                    UpdateIncident(incident);
+                }
+                else
+                {
+                    incident.EmployeeShiftID = employeeShift.ID;
+                    AddIncident(incident);
+                }
+            }
+        }
+
+
         public static void UpdateIncident(Incident incident)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update Incidents set ActivityID = @ActivityID, Note = @Note, Date = @Date where Id = @Id",
-            new { ActivityID = incident.ActivityID, Note = incident.Note, Date = incident.Date.ToString("yyyy-MM-dd"), Id = incident.ID });
+                cnn.Execute("update Incident set ActivityID = @ActivityID, Note = @Note, DateString = @DateString where Id = @IncidentId",
+            new { ActivityID = incident.ID, Note = incident.Note, DateString = incident.DateString, Id = incident.ID });
 
                 // Delete all existing activity modifiers for this incident
-                cnn.Execute("delete from ActivityModifiers where IncidentID = @IncidentID", new { IncidentID = incident.ID });
+                //cnn.Execute("delete from ActivityModifier where IncidentID = @IncidentID", new { IncidentID = incident.ID });
 
                 // Insert the incident's activity modifiers into the ActivityModifiers table
-                foreach (ActivityModifier modifier in incident.ActivityModifiers)
-                {
-                    cnn.Execute("insert into ActivityModifiers (IncidentID, Name, RatingAdjustment) values (@IncidentID, @Name, @RatingAdjustment)",
-                        new { IncidentID = incident.ID, Name = modifier.Name, RatingAdjustment = modifier.RatingAdjustment });
-                }
+                //foreach (ActivityModifier modifier in incident.ActivityModifiers)
+                //{
+                //    cnn.Execute("insert into ActivityModifier (IncidentID, Name, RatingAdjustment) values (@IncidentID, @Name, @RatingAdjustment)",
+                //        new { IncidentID = incident.ID, Name = modifier.Name, RatingAdjustment = modifier.RatingAdjustment });
+                //}
             }
         }
         //Activity Methods

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿//using Microsoft.Office.Interop.Excel;
+using Microsoft.VisualBasic.ApplicationServices;
 using RicksStaffApp.Properties;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
@@ -15,33 +16,61 @@ namespace RicksStaffApp
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
         //add panel for each incident in EmployeeShift with a label that has the name of the activity and a label that has the rating change
+        public static Color GetBackColor(int rating)
+        {
+            Color backcolor = new Color();
+            if (rating > 0)
+            {
+                backcolor = GoodColor;
+                //picUpDown.Image = Properties.Resources.Up_Arrow1;
+            }
+            else
+            {
+                backcolor = BadColor;
+                //picUpDown.Image = Properties.Resources.Down_Arrow;
+            }
+            return backcolor;
+        }
+        public static Image GetRatingImage(int rating)
+        {
+            if (rating > 0)
+            {
+                return Properties.Resources.Up_Arrow1;
+            }
+            if (rating < 0)
+            {
+                return Properties.Resources.Down_Arrow;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static Label CreateNameLable(string display)
+        {
+            Label lblLable = new Label();
+            lblLable.Text = display;
+            lblLable.Size = new Size(70, 30);
+            lblLable.ForeColor = Color.Black;
+            lblLable.TextAlign = ContentAlignment.MiddleCenter;
+            return lblLable;
+        }
+        //public static void UpdateIncidentList()
+
         public static void CreateIncidentPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay, List<Shift> shifts)
         {
             List<Activity> activities = SqliteDataAccess.LoadActivities();
             Incident.AssignActivitiesToIncidents(shifts, activities);
             // Clear existing panels
             //flowEmployeeDisplay.Controls.Clear();
-            // Loop through employee list and create a panel for each employee
+            
             foreach (Incident incident in incidentList)
             {
-                FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
-                //incidentPanel.Size = new Size(150, 30);
-                incidentPanel.AutoSize = true;
-                incidentPanel.BackColor = MyColors.NeutralColor;
-                Label lblIncidentName = new Label();
-                lblIncidentName.Text = incident.Name;
-                lblIncidentName.Size = new Size(70, 30);                
-                lblIncidentName.ForeColor = Color.Black;
-                lblIncidentName.TextAlign = ContentAlignment.MiddleCenter;
-                Label lblIncidentRating = new Label();
-                lblIncidentRating.Size = new Size(70, 30);
-                lblIncidentRating.TextAlign = ContentAlignment.MiddleCenter;
-                lblIncidentRating.Text = incident.BaseRatingImpact.ToString();
+                FlowLayoutPanel incidentPanel = incident.CreateFlowLayoutPanel();
+                
 
-                incidentPanel.Controls.Add(lblIncidentName);
-                incidentPanel.Controls.Add(lblIncidentRating);
                 flowDisplay.Controls.Add(incidentPanel);
-                //flowDisplay.Controls.Add(lblIncidentName);
+                
 
             }
         }
@@ -279,221 +308,154 @@ namespace RicksStaffApp
                 flowFormDisplay.Controls.Add(activityPanelContainer);
             }
         }
-        public static void CreateActivityPanelsForEmpShift(List<Activity> activityList, FlowLayoutPanel flowFormDisplay, FlowLayoutPanel flowToAdd)
-        {
-            // Clear existing panels
-            flowFormDisplay.Controls.Clear();
-            int containerWidth = flowFormDisplay.Width;
-            int firstContainer = (int)(containerWidth - 35);
-            int nameWidth = (int)containerWidth / 3;
-            int ratingWidth = (int)containerWidth / 12;
-            int modPanelWidth = (int)containerWidth / 3;
+        //public static void CreateActivityPanelsForEmpShift(List<Incident> incidents ,List<Activity> activityList, FlowLayoutPanel flowFormDisplay, FlowLayoutPanel flowToAdd)
+        //{
+        //    // Clear existing panels
+        //    flowFormDisplay.Controls.Clear();
+        //    CreateIncidentPanelForEmpShift(incidents, flowToAdd);
+            
+        //    foreach (Activity activity in activityList)
+        //    {
+        //        FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowFormDisplay.Width, flowToAdd);
 
-            //foreach (Incident incident in incidentList)
-            //{
-            //    FlowLayoutPanel incidentPanelContainer = new FlowLayoutPanel();
-            //    incidentPanelContainer.Size = new Size(430, 30);
-            //    incidentPanelContainer.AutoSize = true;
-            //    incidentPanelContainer.MinimumSize = new Size(containerWidth, 30);
-            //    incidentPanelContainer.MaximumSize = new Size(containerWidth, 200);
-            //    incidentPanelContainer.BackColor = MyColors.LightHighlight;
-            //    incidentPanelContainer.Margin = new Padding(0, 0, 0, 5);
-            //}
+        //        flowFormDisplay.Controls.Add(activityPanelContainer);
+        //    }                      
 
-            // Loop through employee list and create a panel for each employee
-            foreach (Activity activity in activityList)
-            {
-                FlowLayoutPanel activityPanelContainer = new FlowLayoutPanel();
-                //activityPanelContainer.Size = new Size(430, 30);
-                activityPanelContainer.AutoSize = true;
-                activityPanelContainer.MinimumSize = new Size(containerWidth, 30);
-                activityPanelContainer.MaximumSize = new Size(containerWidth, 200);
-                activityPanelContainer.BackColor = MyColors.LightHighlight;
-                activityPanelContainer.Margin = new Padding(0, 0, 0, 5);
-
-
-                FlowLayoutPanel activityPanel = new FlowLayoutPanel();
-                activityPanel.FlowDirection = FlowDirection.LeftToRight;
-                activityPanel.WrapContents = false;
-                activityPanel.AutoSize = true;
-                activityPanel.MaximumSize = new Size(firstContainer, 30);
-                activityPanel.MinimumSize = new Size(firstContainer, 0);
-
-                PictureBox picUpDown = new PictureBox();
-                picUpDown.Size = new Size(30, 30);
-                picUpDown.Margin = new Padding(15, 3, 0, 0);
-                
-                if (activity.BaseRatingImpact > 0)
-                {
-                    activityPanel.BackColor = GoodColor;
-                    picUpDown.Image = Properties.Resources.Up_Arrow1;
-                }
-                else
-                {
-                    activityPanel.BackColor = BadColor;
-                    picUpDown.Image = Properties.Resources.Down_Arrow;
-                }
-                
-                activityPanel.Margin = new Padding(1, 1, 1, 1);
-
-                //// Create label for employee name
-                Label lblName = new Label();
-                lblName.Text = activity.Name;
-                lblName.AutoSize = false;
-                lblName.Size = new Size(nameWidth, 30);
-                lblName.TextAlign = ContentAlignment.MiddleCenter;
-                lblName.Margin = new Padding(0, 0, 5, 0);
-                activityPanel.Controls.Add(lblName);
-
-                
-                activityPanel.Controls.Add(picUpDown);
-
-                Label lblBaseRating = new Label();
-                lblBaseRating.Text = activity.BaseRatingDisplay;
-                lblBaseRating.AutoSize = false;
-                lblBaseRating.Size = new Size(ratingWidth, 30);
-                lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
-                lblBaseRating.Margin = new Padding(0, 0, 0, 0);
-                activityPanel.Controls.Add(lblBaseRating);
-
-                activityPanelContainer.Controls.Add(activityPanel);
-
-                //Panel pnlModDisplay = new Panel();
-                //pnlModDisplay.Size = new Size(modPanelWidth, 30);
-                //pnlModDisplay.BackColor = MyColors.NeutralColor;
-                //Label modNumber = new Label();
-                //modNumber.Text = activity.ActivityModifiers.Count.ToString() + "  Mods";
-                //modNumber.AutoSize = false;
-                //modNumber.Size = new Size(((int)modPanelWidth / 3), 29);
-                //modNumber.TextAlign = ContentAlignment.MiddleCenter;
-                //pnlModDisplay.Controls.Add(modNumber);
-                //activityPanel.Controls.Add(pnlModDisplay);
-                activityPanelContainer.Controls.Add(activityPanel);
-                //if (activity.ActivityModifiers.Count > 0)
-                //{
-                //    System.Windows.Forms.Button btnViewMods = new System.Windows.Forms.Button();
-                //    btnViewMods.Text = "View Mods";
-                //    btnViewMods.BackColor = Color.Black;
-                //    btnViewMods.Margin = new Padding(0, 0, 0, 0);
-                //    //btnViewMods.Location = new Point(410, 0);
-                //    btnViewMods.ForeColor = Color.LightBlue;
-                //    btnViewMods.Font = new Font(btnViewMods.Font.FontFamily, 10);
-                //    btnViewMods.TextAlign = ContentAlignment.MiddleCenter;
-                //    btnViewMods.FlatStyle = FlatStyle.Flat;
-                //    btnViewMods.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                //    btnViewMods.Location = new Point((int)(modPanelWidth / 2.9), 1);
-                //    btnViewMods.FlatAppearance.BorderSize = 0;
-                //    btnViewMods.Click += (sender, e) =>
-                //    {
-
-                //        foreach (var mod in activity.ActivityModifiers)
-                //        {
-                //            CheckBox ck = new CheckBox();
-                //            ck.Text = mod.Name;
-                //            activityPanelContainer.Controls.Add(ck);
-                //        }
-                //    };
-                //    btnViewMods.Size = new Size(modPanelWidth - (int)(modPanelWidth / 2.9), 27);
-                //    pnlModDisplay.Controls.Add(btnViewMods);
-                //}
-
-                //foreach (Position pos in emp.Positions)
-                //{
-                //    Panel pnlPos = new Panel();
-                //    pnlPos.Size = new Size(60, 30);
-                //    pnlPos.BackColor = MyColors.PositionColor;
-                //    Label lblPos = new Label();
-                //    lblPos.Text = pos.Name;
-                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
-                //    lblPos.AutoSize = false;
-                //    lblPos.Size = new Size(60, 30);
-                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                //    pnlPos.Controls.Add(lblPos);
-                //    empPanel.Controls.Add(pnlPos);
-                //}
-                Button btnAddToEmpShift = new Button();
-                btnAddToEmpShift.Text = "+";
-                btnAddToEmpShift.Margin = new Padding(2, 2, 0, 0);
-                btnAddToEmpShift.Location = new Point(410, 0);
-                btnAddToEmpShift.ForeColor = Color.Black;
-                btnAddToEmpShift.Font = new Font(btnAddToEmpShift.Font.FontFamily, 10);
-                btnAddToEmpShift.TextAlign = ContentAlignment.MiddleCenter;
-                btnAddToEmpShift.FlatStyle = FlatStyle.Flat;
-                btnAddToEmpShift.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                btnAddToEmpShift.FlatAppearance.BorderSize = 0;
-                btnAddToEmpShift.Click += (sender, e) =>
-                {
-                    Incident incident = new Incident(activity);
-                    incident.ActivityID = activity.ID;
-                    //incident.DateString = 
-                    //incident.Note = txtIncidentNote.Text;
-                    //incident.EmployeeShiftID = Int32.Parse(txtIncident_EmployeeID.Text);
-
-                    //CreateIncidentPanelForEmpShift(flowToAdd);
-                    //SqliteDataAccess.AddIncident(incident);
-
-
-                    
-                    
-                };
-                btnAddToEmpShift.Size = new Size(27, 27);
-                activityPanelContainer.Controls.Add(btnAddToEmpShift);
-
-                flowFormDisplay.Controls.Add(activityPanelContainer);
-            }
-        }
-        public static void CreateIncidentPanelForEmpShift(List<Incident> incidents, FlowLayoutPanel flowDisplay)
+        
+        //}
+        
+        public static void AddOneIncidentForEmpShift(Incident incident, FlowLayoutPanel flowDisplay)
         {
             int containerWidth = flowDisplay.Width;
-            int firstContainer = (int)(containerWidth - 35);
+            int firstContainer = (int)(containerWidth - 40);
             int nameWidth = (int)containerWidth / 4;
             int ratingWidth = (int)containerWidth / 9;
             int modPanelWidth = (int)containerWidth / 3;
-            flowDisplay.Controls.Clear();
-            foreach (Incident inc in incidents)
+            
+            FlowLayoutPanel pnlContainer = new FlowLayoutPanel();
+            //activityPanelContainer.Size = new Size(430, 30);
+            pnlContainer.AutoSize = true;
+            pnlContainer.MinimumSize = new Size(containerWidth, 30);
+            pnlContainer.MaximumSize = new Size(containerWidth, 200);
+            pnlContainer.BackColor = MyColors.LightHighlight;
+            pnlContainer.Margin = new Padding(0, 0, 0, 5);
+
+
+            FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
+            incidentPanel.FlowDirection = FlowDirection.LeftToRight;
+            incidentPanel.WrapContents = false;
+            incidentPanel.AutoSize = true;
+            incidentPanel.MaximumSize = new Size(firstContainer, 30);
+            incidentPanel.MinimumSize = new Size(firstContainer, 0);
+            incidentPanel.BackColor = GetBackColor(incident.BaseRatingImpact);
+
+            Label lblName = new Label();
+            lblName.Text = incident.Name;
+            lblName.AutoSize = false;
+            lblName.Size = new Size(nameWidth, 30);
+            lblName.TextAlign = ContentAlignment.MiddleCenter;
+            incidentPanel.Controls.Add(lblName);
+
+            Label lblBaseRating = new Label();
+            lblBaseRating.Text = incident.BaseRatingDisplay;
+            lblBaseRating.AutoSize = false;
+            lblBaseRating.Size = new Size(ratingWidth, 30);
+            lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
+            incidentPanel.Controls.Add(lblBaseRating);
+
+            pnlContainer.Controls.Add(incidentPanel);
+            Button btnDelete = new Button();
+            btnDelete.Text = "X";
+            btnDelete.Size = new Size(30, 30);
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.FlatAppearance.BorderSize = 0;
+            btnDelete.Margin = new Padding(2, 2, 0, 0);
+
+            // Attach the click event to the delete button
+            btnDelete.Click += (sender, e) =>
             {
-                
-                FlowLayoutPanel pnlContainer = new FlowLayoutPanel();
-                //activityPanelContainer.Size = new Size(430, 30);
-                pnlContainer.AutoSize = true;
-                pnlContainer.MinimumSize = new Size(containerWidth, 30);
-                pnlContainer.MaximumSize = new Size(containerWidth, 200);
-                pnlContainer.BackColor = MyColors.LightHighlight;
-                pnlContainer.Margin = new Padding(0, 0, 0, 5);
+                // Remove the pnlContainer from the flowDisplay
+                flowDisplay.Controls.Remove(pnlContainer);
 
+                // Perform any additional actions needed to delete the incident from the data source
+                //DeleteIncident(inc);
+            };
 
-                FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
-                incidentPanel.FlowDirection = FlowDirection.LeftToRight;
-                incidentPanel.WrapContents = false;
-                incidentPanel.AutoSize = true;
-                incidentPanel.MaximumSize = new Size(firstContainer, 30);
-                incidentPanel.MinimumSize = new Size(firstContainer, 0);
-                if (inc.BaseRatingImpact > 0)
-                {
-                    incidentPanel.BackColor = GoodColor;
-                }
-                else
-                {
-                    incidentPanel.BackColor = BadColor;
-                }
-                Label lblName = new Label();
-                lblName.Text = inc.Name;
-                lblName.AutoSize = false;
-                lblName.Size = new Size(nameWidth, 30);
-                lblName.TextAlign = ContentAlignment.MiddleCenter;
-                incidentPanel.Controls.Add(lblName);
+            // Add the delete button to the pnlContainer
+            pnlContainer.Controls.Add(btnDelete);
+            flowDisplay.Controls.Add(pnlContainer);
 
-                Label lblBaseRating = new Label();
-                lblBaseRating.Text = inc.BaseRatingDisplay;
-                lblBaseRating.AutoSize = false;
-                lblBaseRating.Size = new Size(ratingWidth, 30);
-                lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
-                incidentPanel.Controls.Add(lblBaseRating);
-
-                pnlContainer.Controls.Add(incidentPanel);
-                flowDisplay.Controls.Add(pnlContainer);
-            }
         }
+        public static void RemoveThisIncident()
+        {
+
+        }
+        //public static void CreateIncidentPanelForEmpShift(List<Incident> incidents, FlowLayoutPanel flowDisplay)
+        //{
+        //    int containerWidth = flowDisplay.Width;
+        //    int firstContainer = (int)(containerWidth - 40);
+        //    int nameWidth = (int)containerWidth / 4;
+        //    int ratingWidth = (int)containerWidth / 9;
+        //    int modPanelWidth = (int)containerWidth / 3;
+        //    flowDisplay.Controls.Clear();
+        //    foreach (Incident inc in incidents)
+        //    {
+                
+        //        FlowLayoutPanel pnlContainer = new FlowLayoutPanel();
+        //        //activityPanelContainer.Size = new Size(430, 30);
+        //        pnlContainer.AutoSize = true;
+        //        pnlContainer.MinimumSize = new Size(containerWidth, 30);
+        //        pnlContainer.MaximumSize = new Size(containerWidth, 200);
+        //        pnlContainer.BackColor = MyColors.LightHighlight;
+        //        pnlContainer.Margin = new Padding(0, 0, 0, 5);
+
+
+        //        FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
+        //        incidentPanel.FlowDirection = FlowDirection.LeftToRight;
+        //        incidentPanel.WrapContents = false;
+        //        incidentPanel.AutoSize = true;
+        //        incidentPanel.MaximumSize = new Size(firstContainer, 30);
+        //        incidentPanel.MinimumSize = new Size(firstContainer, 0);
+        //        incidentPanel.BackColor = GetBackColor(inc.BaseRatingImpact);
+                
+        //        Label lblName = new Label();
+        //        lblName.Text = inc.Name;
+        //        lblName.AutoSize = false;
+        //        lblName.Size = new Size(nameWidth, 30);
+        //        lblName.TextAlign = ContentAlignment.MiddleCenter;
+        //        incidentPanel.Controls.Add(lblName);
+
+        //        Label lblBaseRating = new Label();
+        //        lblBaseRating.Text = inc.BaseRatingDisplay;
+        //        lblBaseRating.AutoSize = false;
+        //        lblBaseRating.Size = new Size(ratingWidth, 30);
+        //        lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
+        //        incidentPanel.Controls.Add(lblBaseRating);
+
+        //        pnlContainer.Controls.Add(incidentPanel);
+        //        Button btnDelete = new Button();
+        //        btnDelete.Text = "X";
+        //        btnDelete.Size = new Size(30, 30);
+        //        btnDelete.FlatStyle = FlatStyle.Flat;
+        //        btnDelete.FlatAppearance.BorderSize = 0;
+        //        btnDelete.Margin = new Padding(2, 2, 0, 0);
+
+        //        // Attach the click event to the delete button
+        //        btnDelete.Click += (sender, e) =>
+        //        {
+        //            // Remove the pnlContainer from the flowDisplay
+        //            flowDisplay.Controls.Remove(pnlContainer);
+
+        //            // Perform any additional actions needed to delete the incident from the data source
+        //            //DeleteIncident(inc);
+        //        };
+
+        //        // Add the delete button to the pnlContainer
+        //        pnlContainer.Controls.Add(btnDelete);
+
+        //        flowDisplay.Controls.Add(pnlContainer);
+        //    }
+        //}
         public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay)
         {
             // Clear existing panels

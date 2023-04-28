@@ -66,6 +66,11 @@ namespace RicksStaffApp
         }
         public List<Incident> Incidents { get; set; }
         public Image RatingDisplay { get; set; }
-        
+        public void AddIncident(Incident incident)
+        {
+            incident.EmployeeShiftID = this.ID;
+            Incidents.Add(incident);
+        }
+
     }
 }

@@ -13,8 +13,9 @@ namespace RicksStaffApp
         public Incident(Activity activity)
         {
             // Copy the properties from the activity object
-            ID = activity.ID;
+            //ID = activity.ID;
             Name = activity.Name;
+            ActivityID = activity.ID;
             
             BaseRatingImpact = activity.BaseRatingImpact;
             ActivityModifiers = activity.ActivityModifiers;
@@ -150,8 +151,52 @@ namespace RicksStaffApp
 
         public List<Control> CreateControls()
         {
-            throw new NotImplementedException();
+            List<Control> controls = new List<Control>();
+            Label lblIncidentName = UIHelper.CreateNameLable(Name);
+            //lblIncidentName.Text = Name;
+            //lblIncidentName.Size = new Size(70, 30);
+            //lblIncidentName.ForeColor = Color.Black;
+            //lblIncidentName.TextAlign = ContentAlignment.MiddleCenter;
+            controls.Add(lblIncidentName);
+
+            PictureBox picUpDown = new PictureBox();
+            picUpDown.Size = new Size(30, 30);
+            picUpDown.Margin = new Padding(15, 3, 0, 0);
+            picUpDown.Image = UIHelper.GetRatingImage(IncidentRatingChange);
+            controls.Add(picUpDown);
+
+            Label lblIncidentRating = new Label();
+            lblIncidentRating.Size = new Size(30, 30);
+            lblIncidentRating.TextAlign = ContentAlignment.MiddleCenter;
+            lblIncidentRating.Text = BaseRatingImpact.ToString();
+            controls.Add(lblIncidentRating);
+            return controls;
         }
+
+        public FlowLayoutPanel CreateFlowLayoutPanel()
+        {
+            FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
+            
+            incidentPanel.AutoSize = true;
+            incidentPanel.BackColor = UIHelper.GetBackColor(IncidentRatingChange);
+            
+            List<Control> controls = CreateControls();
+            foreach (Control control in controls)
+            {
+                incidentPanel.Controls.Add(control);
+            }
+            return incidentPanel;
+            
+        }
+        //public Label CreateLable()
+        //{
+        //    Label lblLable = new Label();
+        //    lblLable.Text = Name;
+        //    lblLable.Size = new Size(70, 30);
+        //    lblLable.ForeColor = Color.Black;
+        //    lblLable.TextAlign = ContentAlignment.MiddleCenter;
+        //    return lblLable;
+        //}
     }
 }
 
