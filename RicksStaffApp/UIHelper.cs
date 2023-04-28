@@ -576,6 +576,7 @@ namespace RicksStaffApp
                 {
                     foreach (EmployeeShift es in shift.EmployeeShifts)
                     {
+                        es.UpdateShiftRating();
                         FlowLayoutPanel empShiftContainer = new FlowLayoutPanel();
                         //activityPanelContainer.Size = new Size(430, 30);
                         empShiftContainer.AutoSize = true;

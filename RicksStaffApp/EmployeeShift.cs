@@ -11,6 +11,7 @@ namespace RicksStaffApp
             //ShiftRating = 6;
             Shift = new Shift();
             Employee = new Employee();
+            ShiftRating = _shiftRating;
         }
         public int ID { get; set; }
         public Employee Employee { get; set; }
@@ -23,24 +24,24 @@ namespace RicksStaffApp
         //{
         //    get { return _shiftRating; }
         //}
-        //public void UpdateShiftRating()
-        //{
-        //    float totalRatingChange = 0;
+        public void UpdateShiftRating()
+        {
+            float totalRatingChange = 0;
 
-        //    if (Incidents.Count > 0)
-        //    {
-        //        foreach (Incident incident in Incidents)
-        //        {
-        //            totalRatingChange += incident.IncidentRatingChange;
-        //        }
+            if (Incidents.Count > 0)
+            {
+                foreach (Incident incident in Incidents)
+                {
+                    totalRatingChange += incident.IncidentRatingChange;
+                }
 
-        //        _shiftRating = 6 + totalRatingChange;
-        //    }
-        //    else
-        //    {
-        //        _shiftRating = 6;
-        //    }
-        //}
+                _shiftRating = 6 + totalRatingChange;
+            }
+            else
+            {
+                _shiftRating = 6;
+            }
+        }
 
         public float ShiftRating
         {
@@ -70,6 +71,7 @@ namespace RicksStaffApp
         {
             incident.EmployeeShiftID = this.ID;
             Incidents.Add(incident);
+            ShiftRating = _shiftRating;
         }
 
     }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            lbEmployees = new ListBox();
             dateTimePicker1 = new DateTimePicker();
             button1 = new Button();
             label3 = new Label();
@@ -36,7 +37,6 @@
             flowLayoutPanel2 = new FlowLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label1 = new Label();
-            lbEmployees = new ListBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,6 +56,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
+            // 
+            // lbEmployees
+            // 
+            lbEmployees.FormattingEnabled = true;
+            lbEmployees.ItemHeight = 15;
+            lbEmployees.Location = new Point(25, 111);
+            lbEmployees.Name = "lbEmployees";
+            lbEmployees.Size = new Size(257, 484);
+            lbEmployees.TabIndex = 7;
             // 
             // dateTimePicker1
             // 
@@ -80,11 +89,11 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(498, 84);
+            label3.Location = new Point(359, 84);
             label3.Name = "label3";
-            label3.Size = new Size(102, 15);
+            label3.Size = new Size(95, 15);
             label3.TabIndex = 4;
-            label3.Text = "Staff For This Shift";
+            label3.Text = "Staff In Database";
             // 
             // label2
             // 
@@ -99,17 +108,17 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = Color.FromArgb(37, 42, 64);
-            flowLayoutPanel2.Location = new Point(678, 111);
+            flowLayoutPanel2.Location = new Point(326, 120);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(63, 490);
+            flowLayoutPanel2.Size = new Size(180, 490);
             flowLayoutPanel2.TabIndex = 2;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.FromArgb(37, 42, 64);
-            flowLayoutPanel1.Location = new Point(26, 111);
+            flowLayoutPanel1.Location = new Point(527, 120);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(338, 490);
+            flowLayoutPanel1.Size = new Size(214, 490);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // label1
@@ -122,15 +131,6 @@
             label1.Size = new Size(174, 45);
             label1.TabIndex = 0;
             label1.Text = "Excel Data";
-            // 
-            // lbEmployees
-            // 
-            lbEmployees.FormattingEnabled = true;
-            lbEmployees.ItemHeight = 15;
-            lbEmployees.Location = new Point(431, 116);
-            lbEmployees.Name = "lbEmployees";
-            lbEmployees.Size = new Size(186, 469);
-            lbEmployees.TabIndex = 7;
             // 
             // frmExcelDownload
             // 
