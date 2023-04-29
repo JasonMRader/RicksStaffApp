@@ -15,6 +15,10 @@ namespace RicksStaffApp
             Incidents = new List<Incident>();
             OverallRating = 6;
         }
+        public Employee(string fullName) : this()
+        {
+            SetNamesFromFullName(fullName);
+        }
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -71,6 +75,23 @@ namespace RicksStaffApp
             }
 
             OverallRating = totalRating / (EmployeeShifts.Count + 1); // divide total rating by number of shifts plus default value to get average
+        }
+        public void SetNamesFromFullName(string fullName)
+        {
+            if (!string.IsNullOrWhiteSpace(fullName))
+            {
+                string[] nameParts = fullName.Trim().Split(' ');
+
+                if (nameParts.Length >= 1)
+                {
+                    FirstName = nameParts[0];
+
+                    if (nameParts.Length >= 2)
+                    {
+                        LastName = nameParts[nameParts.Length - 1];
+                    }
+                }
+            }
         }
     }
 }

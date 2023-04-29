@@ -19,6 +19,10 @@ namespace RicksStaffApp
             InitializeComponent();
         }
         List<Employee> allEmployees = SqliteDataAccess.LoadEmployees();
+        string ignoreHost = "Host Card";
+        string ignoreBar = "PM BAR PM";
+        string ignoreBanquet = "Banquet Bartender 1";
+        string ignoreBanquetBar = "Banquet Server 1";
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -26,7 +30,7 @@ namespace RicksStaffApp
             openFileDialog.RestoreDirectory = true;
             //List<Employee> allEmployees = SqliteDataAccess.LoadEmployees(); // Assuming you have a method to get all employees from the database
             List<Employee> existingEmployees = new List<Employee>();
-            List<string> newEmployeeNames = new List<string>();
+            List<string> newEmployeeNamesStrings = new List<string>();
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -53,12 +57,16 @@ namespace RicksStaffApp
                             if (matchedEmployee != null)
                             {
                                 existingEmployees.Add(matchedEmployee);
-                                lbEmployees.Items.Add($"{fullName,-20} Server (Existing)");
+                                lbEmployees.Items.Add($"{fullName,-20} Server");
                             }
                             else
                             {
-                                newEmployeeNames.Add(fullName);
-                                lbEmployees.Items.Add($"{fullName,-20} Server (New)");
+                                if (fullName != ignoreBanquet)
+                                {
+                                    newEmployeeNamesStrings.Add(fullName);
+                                    lbEmployees.Items.Add($"{fullName,-20} Server (New)");
+                                }
+
                             }
                         }
                     }
@@ -80,6 +88,18 @@ namespace RicksStaffApp
                     Marshal.ReleaseComObject(excelApp);
                 }
             }
+            UIHelper.CreateEmployeePanels(existingEmployees, flowExistingStaff);
+            List<Employee> newEmployees = new List<Employee>();
+            foreach (string fullName in newEmployeeNamesStrings)
+            {
+                if (fullName != ignoreHost & fullName != ignoreBar)
+                {
+                    Employee newEmp = new Employee(fullName);
+                    newEmployees.Add(newEmp);
+                }
+
+            }
+            UIHelper.CreateEmployeePanels(newEmployees, flowNewStaff);
 
             // Now you can use the existingEmployees list for existing employees and newEmployeeNames list to create new employees and add them to the database.
         }

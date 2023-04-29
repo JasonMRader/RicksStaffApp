@@ -465,7 +465,7 @@ namespace RicksStaffApp
             foreach (Employee emp in employeeList)
             {
                 Panel empPanelContainer = new Panel();
-                empPanelContainer.Size = new Size(430, 30);
+                empPanelContainer.Size = new Size(370, 30);
                 empPanelContainer.BackColor = MyColors.LightHighlight;
                 empPanelContainer.Margin = new Padding(0, 0, 0, 5);
 
@@ -474,8 +474,8 @@ namespace RicksStaffApp
                 empPanel.FlowDirection = FlowDirection.LeftToRight;
                 empPanel.WrapContents = false;
                 empPanel.AutoSize = true;
-                empPanel.MaximumSize = new Size(400, 0);
-                empPanel.MinimumSize = new Size(400, 0);
+                empPanel.MaximumSize = new Size(340, 0);
+                empPanel.MinimumSize = new Size(340, 0);
                 empPanel.BackColor = MyColors.LightHighlight;
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
@@ -489,7 +489,7 @@ namespace RicksStaffApp
                 // Create button for employee name
                 Button btnName = new Button();
                 btnName.Text = emp.FullName;
-                btnName.Size = new Size(150, 30);
+                btnName.Size = new Size(140, 30);
                 btnName.TextAlign = ContentAlignment.MiddleCenter;
                 btnName.FlatStyle = FlatStyle.Flat;
 
@@ -527,7 +527,7 @@ namespace RicksStaffApp
                 pnlRating.Size = new Size(30, 30);
                 pnlRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 pnlRating.Margin = new Padding(0);
-                pnlRating.Location = new Point(410, 0);
+                pnlRating.Location = new Point(350, 0);
                 Label lblRating = new Label();
                 lblRating.Text = emp.OverallRating.ToString("F1");
                 pnlRating.Controls.Add(lblRating);

@@ -54,18 +54,18 @@
             panel1.Controls.Add(textBox1);
             panel1.Controls.Add(comboBox3);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(827, 72);
+            panel1.Location = new Point(873, 72);
             panel1.Margin = new Padding(8);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(8);
-            panel1.Size = new Size(456, 676);
+            panel1.Size = new Size(402, 676);
             panel1.TabIndex = 0;
             // 
             // flowEmployeeDisplay
             // 
             flowEmployeeDisplay.Location = new Point(11, 83);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
-            flowEmployeeDisplay.Size = new Size(435, 582);
+            flowEmployeeDisplay.Size = new Size(375, 582);
             flowEmployeeDisplay.TabIndex = 6;
             // 
             // label6
