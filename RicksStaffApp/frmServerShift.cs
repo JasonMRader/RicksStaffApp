@@ -17,7 +17,7 @@ namespace RicksStaffApp
         public EmployeeShift EmployeeShiftToEdit = new EmployeeShift();
         private bool isDragging = false;
         private Point lastLocation;
-        
+
 
         public frmServerShift()
         {
@@ -36,7 +36,7 @@ namespace RicksStaffApp
             //MessageBox.Show(s);
         }
 
-        
+
 
         private void frmServerShift_Load(object sender, EventArgs e)
         {
@@ -54,7 +54,7 @@ namespace RicksStaffApp
             // Clear existing panels
             flowFormDisplay.Controls.Clear();
             CreateIncidentPanelForEmpShift(employeeShift, flowToAdd);
-            
+
             foreach (Activity activity in activityList)
             {
                 FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowFormDisplay.Width, flowToAdd, employeeShift);
@@ -134,10 +134,13 @@ namespace RicksStaffApp
 
                 flowDisplay.Controls.Add(pnlContainer);
             }
-            
+
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 
 }

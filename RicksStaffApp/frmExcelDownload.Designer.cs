@@ -29,23 +29,21 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            lbEmployees = new ListBox();
-            dateTimePicker1 = new DateTimePicker();
-            button1 = new Button();
+            btnCreateShift = new Button();
             label3 = new Label();
             label2 = new Label();
             flowExistingStaff = new FlowLayoutPanel();
             flowNewStaff = new FlowLayoutPanel();
             label1 = new Label();
+            dtpShiftDate = new DateTimePicker();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(46, 51, 73);
-            panel1.Controls.Add(lbEmployees);
-            panel1.Controls.Add(dateTimePicker1);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(dtpShiftDate);
+            panel1.Controls.Add(btnCreateShift);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(flowExistingStaff);
@@ -57,33 +55,18 @@
             panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
             // 
-            // lbEmployees
+            // btnCreateShift
             // 
-            lbEmployees.FormattingEnabled = true;
-            lbEmployees.ItemHeight = 15;
-            lbEmployees.Location = new Point(14, 17);
-            lbEmployees.Name = "lbEmployees";
-            lbEmployees.Size = new Size(146, 64);
-            lbEmployees.TabIndex = 7;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(369, 17);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(245, 23);
-            dateTimePicker1.TabIndex = 6;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(167, 204, 237);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(620, 17);
-            button1.Name = "button1";
-            button1.Size = new Size(121, 36);
-            button1.TabIndex = 5;
-            button1.Text = "Add To Shift";
-            button1.UseVisualStyleBackColor = false;
+            btnCreateShift.BackColor = Color.FromArgb(167, 204, 237);
+            btnCreateShift.FlatAppearance.BorderSize = 0;
+            btnCreateShift.FlatStyle = FlatStyle.Flat;
+            btnCreateShift.Location = new Point(620, 17);
+            btnCreateShift.Name = "btnCreateShift";
+            btnCreateShift.Size = new Size(121, 36);
+            btnCreateShift.TabIndex = 5;
+            btnCreateShift.Text = "Create Shift";
+            btnCreateShift.UseVisualStyleBackColor = false;
+            btnCreateShift.Click += btnCreateShift_Click;
             // 
             // label3
             // 
@@ -91,9 +74,9 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(142, 102);
             label3.Name = "label3";
-            label3.Size = new Size(95, 15);
+            label3.Size = new Size(48, 15);
             label3.TabIndex = 4;
-            label3.Text = "Staff In Database";
+            label3.Text = "Existing";
             // 
             // label2
             // 
@@ -101,9 +84,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(539, 102);
             label2.Name = "label2";
-            label2.Size = new Size(92, 15);
+            label2.Size = new Size(58, 15);
             label2.TabIndex = 3;
-            label2.Text = "Staff From Excel";
+            label2.Text = "New Staff";
             // 
             // flowExistingStaff
             // 
@@ -127,11 +110,19 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(166, 4);
+            label1.Location = new Point(16, 8);
             label1.Name = "label1";
             label1.Size = new Size(174, 45);
             label1.TabIndex = 0;
             label1.Text = "Excel Data";
+            // 
+            // dtpShiftDate
+            // 
+            dtpShiftDate.CalendarMonthBackground = SystemColors.InactiveBorder;
+            dtpShiftDate.Location = new Point(267, 22);
+            dtpShiftDate.Name = "dtpShiftDate";
+            dtpShiftDate.Size = new Size(200, 23);
+            dtpShiftDate.TabIndex = 6;
             // 
             // frmExcelDownload
             // 
@@ -158,8 +149,7 @@
         private FlowLayoutPanel flowExistingStaff;
         private Label label3;
         private Label label2;
-        private Button button1;
-        private DateTimePicker dateTimePicker1;
-        private ListBox lbEmployees;
+        private Button btnCreateShift;
+        private DateTimePicker dtpShiftDate;
     }
 }

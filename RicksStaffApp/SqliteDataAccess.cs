@@ -152,6 +152,15 @@ namespace RicksStaffApp
                 }
             }
         }
+        public static bool IsDuplicateEmployee(string firstName, string lastName)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string sql = "SELECT COUNT(*) FROM Employee WHERE FirstName = @FirstName AND LastName = @LastName";
+                int count = cnn.ExecuteScalar<int>(sql, new { FirstName = firstName, LastName = lastName });
+                return count > 0;
+            }
+        }
         //Position Methods
         public static List<Position> LoadPositions()
         {
@@ -362,7 +371,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //string convertedString = shift.Date.ToString("MM/dd/yyyy");
+                
                 
                 cnn.Execute("insert into Shift (DateString, IsAm) values (@DateString, @IsAm)", new {shift.DateString, shift.IsAm });
                 shift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");

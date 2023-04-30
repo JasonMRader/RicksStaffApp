@@ -1,9 +1,4 @@
 ﻿//using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualBasic.ApplicationServices;
-using RicksStaffApp.Properties;
-using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using System.Resources;
 
 namespace RicksStaffApp
 {
@@ -13,6 +8,7 @@ namespace RicksStaffApp
         public static Color GoodColor = Color.FromArgb(192, 223, 161);
         public static Color BadColor = Color.FromArgb(226, 163, 199);
         public static Color NeutralColor = Color.FromArgb(184, 184, 243);
+        public static Color DefaultButton = Color.FromArgb(167, 204, 237);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
         //add panel for each incident in EmployeeShift with a label that has the name of the activity and a label that has the rating change
@@ -63,14 +59,14 @@ namespace RicksStaffApp
             Incident.AssignActivitiesToIncidents(shifts, activities);
             // Clear existing panels
             //flowEmployeeDisplay.Controls.Clear();
-            
+
             foreach (Incident incident in incidentList)
             {
                 FlowLayoutPanel incidentPanel = incident.CreateFlowLayoutPanel();
-                
+
 
                 flowDisplay.Controls.Add(incidentPanel);
-                
+
 
             }
         }
@@ -109,15 +105,15 @@ namespace RicksStaffApp
                 lblName.TextAlign = ContentAlignment.MiddleCenter;
                 shiftPanel.Controls.Add(lblName);
 
-                
 
-                
 
-                
+
+
+
 
 
                 activityPanelContainer.Controls.Add(shiftPanel);
-                
+
                 //foreach (Position pos in emp.Positions)
                 //{
                 //    Panel pnlPos = new Panel();
@@ -158,19 +154,19 @@ namespace RicksStaffApp
                         CreateShiftPanels(shiftList, flowEmployeeDisplay);
                     }
                 };
-                    btnDelete.Size = new Size(27, 27);
-                    shiftPanel.Parent.Controls.Add(btnDelete);
+                btnDelete.Size = new Size(27, 27);
+                shiftPanel.Parent.Controls.Add(btnDelete);
 
-                    flowEmployeeDisplay.Controls.Add(activityPanelContainer);
-                    foreach(EmployeeShift es in shift.EmployeeShifts)
-                    {
-                        Label lbl = new Label();
-                        lbl.Size = new Size(50, 25);
-                        lbl.Text = es.Employee.FullName;
-                        activityPanelContainer.Controls.Add(lbl);
-                    }
-               
-                
+                flowEmployeeDisplay.Controls.Add(activityPanelContainer);
+                foreach (EmployeeShift es in shift.EmployeeShifts)
+                {
+                    Label lbl = new Label();
+                    lbl.Size = new Size(50, 25);
+                    lbl.Text = es.Employee.FullName;
+                    activityPanelContainer.Controls.Add(lbl);
+                }
+
+
             }
         }
         public static void CreateActivityPanels(List<Activity> activityList, FlowLayoutPanel flowFormDisplay)
@@ -178,10 +174,10 @@ namespace RicksStaffApp
             // Clear existing panels
             flowFormDisplay.Controls.Clear();
             int containerWidth = flowFormDisplay.Width;
-            int firstContainer = (int)(containerWidth/1.1);
-            int nameWidth = (int)containerWidth/4;
-            int ratingWidth = (int)containerWidth/9;
-            int modPanelWidth = (int)containerWidth/3;
+            int firstContainer = (int)(containerWidth / 1.1);
+            int nameWidth = (int)containerWidth / 4;
+            int ratingWidth = (int)containerWidth / 9;
+            int modPanelWidth = (int)containerWidth / 3;
 
             // Loop through employee list and create a panel for each employee
             foreach (Activity activity in activityList)
@@ -225,7 +221,7 @@ namespace RicksStaffApp
                 Label modNumber = new Label();
                 modNumber.Text = activity.ActivityModifiers.Count.ToString() + "  Mods";
                 modNumber.AutoSize = false;
-                modNumber.Size = new Size(((int)modPanelWidth/3), 29);
+                modNumber.Size = new Size(((int)modPanelWidth / 3), 29);
                 modNumber.TextAlign = ContentAlignment.MiddleCenter;
                 pnlModDisplay.Controls.Add(modNumber);
                 activityPanel.Controls.Add(pnlModDisplay);
@@ -242,11 +238,11 @@ namespace RicksStaffApp
                     btnViewMods.TextAlign = ContentAlignment.MiddleCenter;
                     btnViewMods.FlatStyle = FlatStyle.Flat;
                     btnViewMods.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                    btnViewMods.Location = new Point((int)(modPanelWidth/2.9), 1);
+                    btnViewMods.Location = new Point((int)(modPanelWidth / 2.9), 1);
                     btnViewMods.FlatAppearance.BorderSize = 0;
                     btnViewMods.Click += (sender, e) =>
                     {
-                        
+
                         foreach (var mod in activity.ActivityModifiers)
                         {
                             CheckBox ck = new CheckBox();
@@ -254,13 +250,13 @@ namespace RicksStaffApp
                             activityPanelContainer.Controls.Add(ck);
                         }
                     };
-                    btnViewMods.Size = new Size(modPanelWidth-(int)(modPanelWidth / 2.9), 27);
+                    btnViewMods.Size = new Size(modPanelWidth - (int)(modPanelWidth / 2.9), 27);
                     pnlModDisplay.Controls.Add(btnViewMods);
                 }
 
-               
-               
-                
+
+
+
 
                 //foreach (Position pos in emp.Positions)
                 //{
@@ -313,7 +309,7 @@ namespace RicksStaffApp
         //    // Clear existing panels
         //    flowFormDisplay.Controls.Clear();
         //    CreateIncidentPanelForEmpShift(incidents, flowToAdd);
-            
+
         //    foreach (Activity activity in activityList)
         //    {
         //        FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowFormDisplay.Width, flowToAdd);
@@ -321,9 +317,9 @@ namespace RicksStaffApp
         //        flowFormDisplay.Controls.Add(activityPanelContainer);
         //    }                      
 
-        
+
         //}
-        
+
         public static void AddOneIncidentForEmpShift(Incident incident, FlowLayoutPanel flowDisplay)
         {
             int containerWidth = flowDisplay.Width;
@@ -331,7 +327,7 @@ namespace RicksStaffApp
             int nameWidth = (int)containerWidth / 4;
             int ratingWidth = (int)containerWidth / 9;
             int modPanelWidth = (int)containerWidth / 3;
-            
+
             FlowLayoutPanel pnlContainer = new FlowLayoutPanel();
             //activityPanelContainer.Size = new Size(430, 30);
             pnlContainer.AutoSize = true;
@@ -400,7 +396,7 @@ namespace RicksStaffApp
         //    flowDisplay.Controls.Clear();
         //    foreach (Incident inc in incidents)
         //    {
-                
+
         //        FlowLayoutPanel pnlContainer = new FlowLayoutPanel();
         //        //activityPanelContainer.Size = new Size(430, 30);
         //        pnlContainer.AutoSize = true;
@@ -417,7 +413,7 @@ namespace RicksStaffApp
         //        incidentPanel.MaximumSize = new Size(firstContainer, 30);
         //        incidentPanel.MinimumSize = new Size(firstContainer, 0);
         //        incidentPanel.BackColor = GetBackColor(inc.BaseRatingImpact);
-                
+
         //        Label lblName = new Label();
         //        lblName.Text = inc.Name;
         //        lblName.AutoSize = false;
@@ -595,7 +591,7 @@ namespace RicksStaffApp
                         lblPos.Text = es.Position.Name;
                         lblPos.Size = new Size(60, 30);
                         lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                        empShiftContainer.Controls.Add(lblPos );
+                        empShiftContainer.Controls.Add(lblPos);
 
                         Label lblShiftRating = new Label();
                         //es.UpdateShiftRating();
@@ -678,16 +674,196 @@ namespace RicksStaffApp
                 }
             }
             // Clear existing panels
-           
-            
+
+
         }
         public static void CreateExcelLoadDisplay()
         {
 
         }
+        public static void CreateOldEmployeePanelsExcel(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay)
+        {
+            // Clear existing panels
+            flowEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Employee emp in employeeList)
+            {
+                Panel empPanelContainer = new Panel();
+                empPanelContainer.Size = new Size(180, 22);
+                empPanelContainer.BackColor = MyColors.LightHighlight;
+                empPanelContainer.Margin = new Padding(2, 2, 2, 2);
+
+
+                FlowLayoutPanel empPanel = new FlowLayoutPanel();
+                empPanel.FlowDirection = FlowDirection.LeftToRight;
+                empPanel.WrapContents = false;
+                empPanel.AutoSize = true;
+                empPanel.MaximumSize = new Size(180, 0);
+                empPanel.MinimumSize = new Size(180, 0);
+                empPanel.BackColor = MyColors.LightHighlight;
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+                // Create label for employee name
+                Label lblName = new Label();
+                lblName.Text = emp.FullName;
+                lblName.AutoSize = false;
+                lblName.Size = new Size(150, 22);
+                lblName.TextAlign = ContentAlignment.MiddleCenter;
+                empPanel.Controls.Add(lblName);
+
+                // Create panels for employee positions
+                //foreach (Position pos in emp.Positions)
+                //{
+                //    Panel pnlPos = new Panel();
+                //    pnlPos.Size = new Size(60, 16);
+                //    pnlPos.BackColor = MyColors.PositionColor;
+                //    Label lblPos = new Label();
+                //    lblPos.Text = pos.Name;
+                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 8);
+                //    lblPos.AutoSize = false;
+                //    lblPos.Size = new Size(60, 16);
+                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
+                //    pnlPos.Controls.Add(lblPos);
+                //    empPanel.Controls.Add(pnlPos);
+                //}
+
+                // Add the employee panel to the container panel
+                empPanelContainer.Controls.Add(empPanel);
+                //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
+
+                // Add the delete button to the container panel
+                System.Windows.Forms.Button btnDelete = new System.Windows.Forms.Button();
+                btnDelete.Text = "X";
+                //btnDelete.AutoSize = true;
+                btnDelete.Margin = new Padding(0, 0, 0, 0);
+                btnDelete.Location = new Point(410, 0);
+                btnDelete.ForeColor = Color.Black;
+                btnDelete.Font = new Font(btnDelete.Font.FontFamily, 6);
+                btnDelete.TextAlign = ContentAlignment.MiddleCenter;
+                btnDelete.FlatStyle = FlatStyle.Flat;
+                btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                btnDelete.FlatAppearance.BorderSize = 0;
+                btnDelete.Click += (sender, e) =>
+                {
+                    // Prompt user to confirm deletion
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete this employee?", "Delete Employee", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        // Delete employee from database
+                        SqliteDataAccess.DeleteEmployee(emp.ID);
+
+                        // Remove employee from list
+                        employeeList.Remove(emp);
+
+                        // Update UI
+                        //CreateEmployeePanels();
+                    }
+                };
+                btnDelete.Size = new Size(16, 16);
+                empPanel.Parent.Controls.Add(btnDelete);
+                //empPanelContainer.Controls.Add(btnDelete);
+
+                flowEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
+        public static void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
+        {
+            // Clear existing panels
+            flowNewEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Employee emp in newEmployeeList)
+            {
+                Panel empPanelContainer = new Panel();
+                empPanelContainer.Size = new Size(350, 22);
+                empPanelContainer.BackColor = MyColors.LightHighlight;
+                empPanelContainer.Margin = new Padding(2, 2, 2, 2);
+
+
+                FlowLayoutPanel empPanel = new FlowLayoutPanel();
+                empPanel.FlowDirection = FlowDirection.LeftToRight;
+                empPanel.WrapContents = false;
+                empPanel.AutoSize = true;
+                empPanel.MaximumSize = new Size(180, 0);
+                empPanel.MinimumSize = new Size(180, 0);
+                empPanel.BackColor = MyColors.LightHighlight;
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+                // Create label for employee name
+                Label lblName = new Label();
+                lblName.Text = emp.FullName;
+                lblName.AutoSize = false;
+                lblName.Size = new Size(150, 20);
+                lblName.TextAlign = ContentAlignment.MiddleCenter;
+                empPanel.Controls.Add(lblName);
+
+                // Create panels for employee positions
+                //foreach (Position pos in emp.Positions)
+                //{
+                //    Panel pnlPos = new Panel();
+                //    pnlPos.Size = new Size(60, 16);
+                //    pnlPos.BackColor = MyColors.PositionColor;
+                //    Label lblPos = new Label();
+                //    lblPos.Text = pos.Name;
+                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 8);
+                //    lblPos.AutoSize = false;
+                //    lblPos.Size = new Size(60, 16);
+                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
+                //    pnlPos.Controls.Add(lblPos);
+                //    empPanel.Controls.Add(pnlPos);
+                //}
+
+                // Add the employee panel to the container panel
+                empPanelContainer.Controls.Add(empPanel);
+                //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
+
+                
+                Button btnAddEmployee = new Button();
+                btnAddEmployee.Text = "Add Employee";
+                //btnDelete.AutoSize = true;
+                btnAddEmployee.Margin = new Padding(0, 0, 0, 0);
+                btnAddEmployee.Location = new Point(185, 0);
+                btnAddEmployee.ForeColor = Color.Black;
+                btnAddEmployee.BackColor = DefaultButton;
+                //btnAddEmployee.Font = new Font(btnAddEmployee.Font.FontFamily, 6);
+                btnAddEmployee.TextAlign = ContentAlignment.TopCenter;
+                btnAddEmployee.FlatStyle = FlatStyle.Flat;
+                btnAddEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                btnAddEmployee.FlatAppearance.BorderSize = 0;
+                btnAddEmployee.Click += (sender, e) =>
+                {
+                    if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
+                    {
+                        existingEmployeeList.Add(emp);
+                        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
+                        newEmployeeList.Remove(emp);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+                    else
+                    {
+                        MessageBox.Show(emp.FullName + "already exists");
+                        newEmployeeList.Remove(emp);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+                    
+                    
+                };
+                btnAddEmployee.Size = new Size(160, 22);
+                empPanel.Parent.Controls.Add(btnAddEmployee);
+                //empPanelContainer.Controls.Add(btnDelete);
+
+                flowNewEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
         public static List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-        
+
     }
+}    
+        
+    
+
+
     
 
     //    public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay)
@@ -802,4 +978,4 @@ namespace RicksStaffApp
     //    }
     //}
 
-}
+

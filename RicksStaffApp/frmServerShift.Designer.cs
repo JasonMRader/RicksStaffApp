@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            flowIncidentToAdd = new FlowLayoutPanel();
             flowActivityDisplay = new FlowLayoutPanel();
             label2 = new Label();
             label1 = new Label();
             lblEmpolyeeName = new Label();
             btnDone = new Button();
-            flowIncidentToAdd = new FlowLayoutPanel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,7 +55,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
-            
+            panel1.Paint += panel1_Paint;
+            // 
+            // flowIncidentToAdd
+            // 
+            flowIncidentToAdd.BackColor = Color.FromArgb(37, 42, 64);
+            flowIncidentToAdd.FlowDirection = FlowDirection.TopDown;
+            flowIncidentToAdd.Location = new Point(284, 92);
+            flowIncidentToAdd.Name = "flowIncidentToAdd";
+            flowIncidentToAdd.Size = new Size(470, 460);
+            flowIncidentToAdd.TabIndex = 6;
             // 
             // flowActivityDisplay
             // 
@@ -108,15 +117,6 @@
             btnDone.Text = "Done";
             btnDone.UseVisualStyleBackColor = false;
             btnDone.Click += btnDone_Click;
-            // 
-            // flowIncidentToAdd
-            // 
-            flowIncidentToAdd.BackColor = Color.FromArgb(37, 42, 64);
-            flowIncidentToAdd.FlowDirection = FlowDirection.TopDown;
-            flowIncidentToAdd.Location = new Point(284, 92);
-            flowIncidentToAdd.Name = "flowIncidentToAdd";
-            flowIncidentToAdd.Size = new Size(470, 460);
-            flowIncidentToAdd.TabIndex = 6;
             // 
             // frmServerShift
             // 
