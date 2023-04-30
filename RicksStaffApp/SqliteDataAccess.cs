@@ -371,10 +371,24 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                
-                
-                cnn.Execute("insert into Shift (DateString, IsAm) values (@DateString, @IsAm)", new {shift.DateString, shift.IsAm });
-                shift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
+                // Check if a record with the same DateString and IsAm already exists
+                string checkExistingShiftQuery = "SELECT COUNT(*) FROM Shift WHERE DateString = @DateString AND IsAm = @IsAm";
+                int count = cnn.ExecuteScalar<int>(checkExistingShiftQuery, new { shift.DateString, shift.IsAm });
+
+                // If no such record exists, insert the new shift
+                if (count == 0)
+                {
+                    cnn.Execute("INSERT INTO Shift (DateString, IsAm) VALUES (@DateString, @IsAm)", new { shift.DateString, shift.IsAm });
+                    shift.ID = cnn.ExecuteScalar<int>("SELECT last_insert_rowid()");
+                }
+                else
+                {
+                    // Optional: You can throw an exception or return a boolean value to indicate that the shift was not added.
+                    throw new InvalidOperationException("A shift with the same Date and Am / Pm values already exists.");
+                }
+
+                //cnn.Execute("insert into Shift (DateString, IsAm) values (@DateString, @IsAm)", new {shift.DateString, shift.IsAm });
+                //shift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
             }
 
             //foreach (EmployeeShift employeeShift in shift.EmployeeShifts)

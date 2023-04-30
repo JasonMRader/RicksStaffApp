@@ -13,6 +13,12 @@ namespace RicksStaffApp
             Employee = new Employee();
             ShiftRating = _shiftRating;
         }
+        public EmployeeShift(Employee employee, Shift shift) : this()
+        {
+            Employee = employee;
+            Shift = shift;
+            ShiftRating = _shiftRating;
+        }
         public int ID { get; set; }
         public Employee Employee { get; set; }
         public Shift Shift { get; set; }

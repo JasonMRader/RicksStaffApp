@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             lblShiftDateDisplay = new Label();
-            btnExcelLoad = new Button();
             label1 = new Label();
-            lbEmployees = new ListBox();
             dtpShiftDate = new DateTimePicker();
             flowEmployeeShiftDisplay = new FlowLayoutPanel();
             pnlNewShiftDisplay = new Panel();
@@ -48,19 +46,6 @@
             lblShiftDateDisplay.TabIndex = 1;
             lblShiftDateDisplay.Text = "Shift On Date Of:";
             // 
-            // btnExcelLoad
-            // 
-            btnExcelLoad.BackColor = Color.FromArgb(167, 204, 237);
-            btnExcelLoad.FlatAppearance.BorderSize = 0;
-            btnExcelLoad.FlatStyle = FlatStyle.Flat;
-            btnExcelLoad.Location = new Point(784, 12);
-            btnExcelLoad.Name = "btnExcelLoad";
-            btnExcelLoad.Size = new Size(138, 29);
-            btnExcelLoad.TabIndex = 2;
-            btnExcelLoad.Text = "Old Load From Excel";
-            btnExcelLoad.UseVisualStyleBackColor = false;
-            btnExcelLoad.Click += btnExcelLoad_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -69,19 +54,6 @@
             label1.Size = new Size(109, 15);
             label1.TabIndex = 3;
             label1.Text = "Quick Add Incident";
-            // 
-            // lbEmployees
-            // 
-            lbEmployees.BackColor = Color.FromArgb(37, 42, 64);
-            lbEmployees.ForeColor = Color.FromArgb(199, 199, 199);
-            lbEmployees.FormattingEnabled = true;
-            lbEmployees.ItemHeight = 15;
-            lbEmployees.Location = new Point(932, 13);
-            lbEmployees.MultiColumn = true;
-            lbEmployees.Name = "lbEmployees";
-            lbEmployees.Size = new Size(346, 79);
-            lbEmployees.TabIndex = 4;
-            lbEmployees.SelectedIndexChanged += lbEmployees_SelectedIndexChanged;
             // 
             // dtpShiftDate
             // 
@@ -127,12 +99,10 @@
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
             Controls.Add(btnGetExcelEmployees);
-            Controls.Add(lbEmployees);
             Controls.Add(pnlNewShiftDisplay);
             Controls.Add(flowEmployeeShiftDisplay);
             Controls.Add(dtpShiftDate);
             Controls.Add(label1);
-            Controls.Add(btnExcelLoad);
             Controls.Add(lblShiftDateDisplay);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmNewShift";
@@ -144,9 +114,7 @@
 
         #endregion
         private Label lblShiftDateDisplay;
-        private Button btnExcelLoad;
         private Label label1;
-        private ListBox lbEmployees;
         private DateTimePicker dtpShiftDate;
         private FlowLayoutPanel flowEmployeeShiftDisplay;
         private Panel pnlNewShiftDisplay;

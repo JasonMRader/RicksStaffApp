@@ -40,7 +40,7 @@ namespace RicksStaffApp
                 // Load the Excel file into a new Application instance
                 Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
                 Workbook workbook = null;
-
+               
                 try
                 {
                     workbook = excelApp.Workbooks.Open(filePath);
@@ -109,25 +109,44 @@ namespace RicksStaffApp
 
         private void btnCreateShift_Click(object sender, EventArgs e)
         {
-            foreach (Employee employee in employeesOnShift)
+            try
             {
-                if (SqliteDataAccess.IsDuplicateEmployee(employee.FirstName, employee.LastName) == false)
+                foreach (Employee employee in employeesOnShift)
                 {
-                    SqliteDataAccess.AddEmployee(employee);
+                    if (SqliteDataAccess.IsDuplicateEmployee(employee.FirstName, employee.LastName) == false)
+                    {
+                        SqliteDataAccess.AddEmployee(employee);
+                    }
+                }
+
+                Shift s = new Shift();
+                s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
+                s.IsAm = false;
+                SqliteDataAccess.AddShift(s);
+                foreach (Employee emp in employeesOnShift)
+                {
+                    //EmployeeShift employeeShift = new EmployeeShift();
+                    //employeeShift.PositionID = 1;
+                    //employeeShift.Shift.ID = s.ID;
+                    //employeeShift.Employee.ID = emp.ID;
+                    EmployeeShift employeeShift = new EmployeeShift
+                    {
+                        PositionID = 1,
+                        Shift = s,
+                        Employee = emp
+                    };
+                    SqliteDataAccess.AddEmployeeShift(employeeShift);
                 }
             }
-
-            Shift s = new Shift();
-            s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);                      
-            s.IsAm = false;            
-            SqliteDataAccess.AddShift(s);
-            foreach (Employee emp in employeesOnShift)
+            catch (Exception ex)
             {
-                EmployeeShift employeeShift = new EmployeeShift();
-                employeeShift.Shift = s;
-                employeeShift.Employee = emp;
-                SqliteDataAccess.AddEmployeeShift(employeeShift);
+                MessageBox.Show($"Whoops!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            this.Close();
+            
+
+            
+            
         }
         /*
 private void frmExcelDownload_Load(object sender, EventArgs e)

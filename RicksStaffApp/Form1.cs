@@ -9,6 +9,19 @@ namespace RicksStaffApp
         private bool isDragging = false;
         private Point lastLocation;
 
+        private void CloseAllFormsExceptActive()
+        {
+            // Loop through each form in the collection of child forms
+            foreach (Form childForm in this.MdiChildren)
+            {
+                // Check if the form is not the currently active form
+                if (childForm != this.ActiveMdiChild)
+                {
+                    // Close the form
+                    childForm.Close();
+                }
+            }
+        }
 
         public Form1()
         {
@@ -62,11 +75,7 @@ namespace RicksStaffApp
             overview.Show();
         }
 
-        private void pnlDisplay_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        
 
 
         private void rdoOverviewForm_CheckedChanged(object sender, EventArgs e)
