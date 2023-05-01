@@ -26,17 +26,18 @@ namespace RicksStaffApp
             frmServerShift.ShowDialog();
         }
 
-        
 
-        
+
+
 
         private void frmNewShift_Load(object sender, EventArgs e)
         {
             shifts = SqliteDataAccess.LoadShifts();
-            UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
+            //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
+            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
 
-        
+
 
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)
         {

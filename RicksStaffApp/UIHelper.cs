@@ -11,6 +11,54 @@ namespace RicksStaffApp
         public static Color DefaultButton = Color.FromArgb(167, 204, 237);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
+        //static Image StarsTest = Properties.Resources._2_5_StarsTest;
+        //static Image StarsDisplayed = Properties.Resources._5_Stars;
+        public static Image GetStars(float rating)
+        {
+            Image StarsDisplayed;
+            switch (rating)
+            {
+                case float r when r >= 10 || r >= 9.5:
+                    StarsDisplayed = Properties.Resources._5_Stars;
+                    break;
+                case float r when r < 9.5 && r >= 8.5:
+                    StarsDisplayed = Properties.Resources._4_5_Stars;
+                    break;
+                case float r when r < 8.5 && r >= 7.5:
+                    StarsDisplayed = Properties.Resources._4_Stars;
+                    break;
+                case float r when r < 7.5 && r >= 6.5:
+                    StarsDisplayed = Properties.Resources._3_5_Stars;
+                    break;
+                case float r when r < 6.5 && r >= 5.5:
+                    StarsDisplayed = Properties.Resources._3_Stars;
+                    break;
+                case float r when r < 5.5 && r >= 4.5:
+                    StarsDisplayed = Properties.Resources._2_5_Stars;
+                    break;
+                case float r when r < 4.5 && r >= 3.5:
+                    StarsDisplayed = Properties.Resources._2_Stars;
+                    break;
+                case float r when r < 3.5 && r >= 2.5:
+                    StarsDisplayed = Properties.Resources._1_5_Stars;
+                    break;
+                case float r when r < 2.5 && r >= 1.5:
+                    StarsDisplayed = Properties.Resources._1_Stars;
+                    break;
+                case float r when r < 1.5 && r >= 0.5:
+                    StarsDisplayed = Properties.Resources.Half_Star;
+                    break;
+                case float r when r < 0.5 && r >= 0:
+                    StarsDisplayed = Properties.Resources.No_Stars;
+                    break;
+                default:
+                    StarsDisplayed = Properties.Resources.No_Stars; // Set a default image if the rating doesn't match any of the above cases
+                    break;
+            }
+            return StarsDisplayed;
+        }
+
+
         //add panel for each incident in EmployeeShift with a label that has the name of the activity and a label that has the rating change
         public static Color GetBackColor(int rating)
         {
@@ -607,7 +655,7 @@ namespace RicksStaffApp
                         PictureBox pbRating = new PictureBox();
                         pbRating.Size = new Size(90, 30);
                         pbRating.SizeMode = PictureBoxSizeMode.Zoom;
-                        pbRating.Image = stars;
+                        pbRating.Image = GetStars(es.ShiftRating);
                         empShiftContainer.Controls.Add(pbRating);
 
                         Button btnIncidents = new Button();

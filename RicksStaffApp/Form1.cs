@@ -8,18 +8,16 @@ namespace RicksStaffApp
     {
         private bool isDragging = false;
         private Point lastLocation;
+        private frmOverview _frmOverview;
+        private frmNewShift _frmNewShift;
+        private frmSettings _frmSettings;
 
         private void CloseAllFormsExceptActive()
         {
-            // Loop through each form in the collection of child forms
-            foreach (Form childForm in this.MdiChildren)
+            
+            foreach (Form childForm in pnlNav.Controls)
             {
-                // Check if the form is not the currently active form
-                if (childForm != this.ActiveMdiChild)
-                {
-                    // Close the form
-                    childForm.Close();
-                }
+                childForm.Close();
             }
         }
 
@@ -78,60 +76,120 @@ namespace RicksStaffApp
         
 
 
+        //private void rdoOverviewForm_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (rdoOverviewForm.Checked)
+        //    {
+        //        pnlNav.Controls.Clear();
+        //        //CloseAllFormsExceptActive();
+        //        frmOverview frmOverview = new frmOverview();
+        //        frmOverview.TopLevel = false;
+        //        frmOverview.AutoScroll = true;
+        //        pnlNav.Controls.Add(frmOverview);
+        //        frmOverview.Show();
+        //        pnlButtonSelected.Width = rdoOverviewForm.Width;
+        //        pnlButtonSelected.Top = rdoOverviewForm.Top;
+        //        pnlButtonSelected.Left = rdoOverviewForm.Left;
+        //    }
+        //    else
+        //    {
+        //        pnlNav.Controls.Clear();
+        //    }
+        //}
+
+        //private void rdoNewShiftForm_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (rdoNewShiftForm.Checked)
+        //    {
+        //        pnlNav.Controls.Clear();
+        //        //CloseAllFormsExceptActive();
+        //        frmNewShift frmNewShift = new frmNewShift();
+        //        frmNewShift.TopLevel = false;
+        //        frmNewShift.AutoScroll = true;
+        //        pnlNav.Controls.Add(frmNewShift);
+        //        frmNewShift.Show();
+        //        pnlButtonSelected.Width = rdoNewShiftForm.Width;
+        //        pnlButtonSelected.Top = rdoNewShiftForm.Top;
+        //        pnlButtonSelected.Left = rdoNewShiftForm.Left;
+        //    }
+        //    else
+        //    {
+        //        pnlNav.Controls.Clear();
+        //    }
+        //}
+
+        //private void rdoSettings_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (rdoSettings.Checked)
+        //    {
+        //        pnlNav.Controls.Clear();
+        //        //CloseAllFormsExceptActive();
+        //        frmSettings frmSettings = new frmSettings();
+        //        frmSettings.TopLevel = false;
+        //        frmSettings.AutoScroll = true;
+        //        pnlNav.Controls.Add(frmSettings);
+        //        frmSettings.Show();
+        //        pnlButtonSelected.Width = rdoSettings.Width;
+        //        pnlButtonSelected.Top = rdoSettings.Top;
+        //        pnlButtonSelected.Left = rdoSettings.Left;
+        //    }
+        //    else
+        //    {
+        //        pnlNav.Controls.Clear();
+        //    }
+        //}
         private void rdoOverviewForm_CheckedChanged(object sender, EventArgs e)
         {
+            pnlNav.Controls.Clear();
             if (rdoOverviewForm.Checked)
             {
-                frmOverview frmOverview = new frmOverview();
-                frmOverview.TopLevel = false;
-                frmOverview.AutoScroll = true;
-                pnlNav.Controls.Add(frmOverview);
-                frmOverview.Show();
+                // Only create a new instance if it doesn't already exist
+                if (_frmOverview == null)
+                {
+                    _frmOverview = new frmOverview { TopLevel = false, AutoScroll = true };
+                }
+
+                pnlNav.Controls.Add(_frmOverview);
+                _frmOverview.Show();
                 pnlButtonSelected.Width = rdoOverviewForm.Width;
                 pnlButtonSelected.Top = rdoOverviewForm.Top;
                 pnlButtonSelected.Left = rdoOverviewForm.Left;
-            }
-            else
-            {
-                pnlNav.Controls.Clear();
             }
         }
 
         private void rdoNewShiftForm_CheckedChanged(object sender, EventArgs e)
         {
+            pnlNav.Controls.Clear();
             if (rdoNewShiftForm.Checked)
             {
-                frmNewShift frmNewShift = new frmNewShift();
-                frmNewShift.TopLevel = false;
-                frmNewShift.AutoScroll = true;
-                pnlNav.Controls.Add(frmNewShift);
-                frmNewShift.Show();
+                if (_frmNewShift == null)
+                {
+                    _frmNewShift = new frmNewShift { TopLevel = false, AutoScroll = true };
+                }
+
+                pnlNav.Controls.Add(_frmNewShift);
+                _frmNewShift.Show();
                 pnlButtonSelected.Width = rdoNewShiftForm.Width;
                 pnlButtonSelected.Top = rdoNewShiftForm.Top;
                 pnlButtonSelected.Left = rdoNewShiftForm.Left;
-            }
-            else
-            {
-                pnlNav.Controls.Clear();
             }
         }
 
         private void rdoSettings_CheckedChanged(object sender, EventArgs e)
         {
+            pnlNav.Controls.Clear();
             if (rdoSettings.Checked)
             {
-                frmSettings frmSettings = new frmSettings();
-                frmSettings.TopLevel = false;
-                frmSettings.AutoScroll = true;
-                pnlNav.Controls.Add(frmSettings);
-                frmSettings.Show();
+                if (_frmSettings == null)
+                {
+                    _frmSettings = new frmSettings { TopLevel = false, AutoScroll = true };
+                }
+
+                pnlNav.Controls.Add(_frmSettings);
+                _frmSettings.Show();
                 pnlButtonSelected.Width = rdoSettings.Width;
                 pnlButtonSelected.Top = rdoSettings.Top;
                 pnlButtonSelected.Left = rdoSettings.Left;
-            }
-            else
-            {
-                pnlNav.Controls.Clear();
             }
         }
     }

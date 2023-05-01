@@ -17,8 +17,10 @@ namespace RicksStaffApp
         public frmExcelDownload()
         {
             InitializeComponent();
+            
         }
-        List<Employee> allEmployees = SqliteDataAccess.LoadEmployees();
+        //Shift newShift = new Shift();
+        List<Employee> allEmployees = new List<Employee>();
         List<Employee> employeesOnShift = new List<Employee>();
         string ignoreHost = "Host Card";
         string ignoreBar = "PM BAR PM";
@@ -26,6 +28,8 @@ namespace RicksStaffApp
         string ignoreBanquetBar = "Banquet Server 1";
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
+            //newShift.DateString = DateTime.Now.ToString("MM/dd/yyyy");
+            allEmployees = SqliteDataAccess.LoadEmployees();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
@@ -81,10 +85,16 @@ namespace RicksStaffApp
                 finally
                 {
                     // Close the workbook and release the Excel Application object
+                    //if (workbook != null)
+                    //{
+                    //    workbook.Close(false);
+                    //}
                     if (workbook != null)
                     {
                         workbook.Close(false);
+                        Marshal.ReleaseComObject(workbook);
                     }
+                    
                     excelApp.Quit();
                     Marshal.ReleaseComObject(excelApp);
                 }
@@ -122,7 +132,11 @@ namespace RicksStaffApp
                 Shift s = new Shift();
                 s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
                 s.IsAm = false;
-                SqliteDataAccess.AddShift(s);
+                
+                int shiftID = SqliteDataAccess.AddShift(s);
+
+                Shift newShift = SqliteDataAccess.LoadShift(s.IsAm, s.DateString); 
+
                 foreach (Employee emp in employeesOnShift)
                 {
                     //EmployeeShift employeeShift = new EmployeeShift();
@@ -132,7 +146,7 @@ namespace RicksStaffApp
                     EmployeeShift employeeShift = new EmployeeShift
                     {
                         PositionID = 1,
-                        Shift = s,
+                        Shift = newShift,
                         Employee = emp
                     };
                     SqliteDataAccess.AddEmployeeShift(employeeShift);

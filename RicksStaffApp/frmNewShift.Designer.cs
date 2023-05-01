@@ -65,6 +65,7 @@
             // 
             // flowEmployeeShiftDisplay
             // 
+            flowEmployeeShiftDisplay.AutoScroll = true;
             flowEmployeeShiftDisplay.BackColor = Color.FromArgb(37, 42, 64);
             flowEmployeeShiftDisplay.Location = new Point(22, 120);
             flowEmployeeShiftDisplay.Name = "flowEmployeeShiftDisplay";

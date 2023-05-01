@@ -41,7 +41,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Open();
+                //cnn.Open();
 
                 using (var transaction = cnn.BeginTransaction())
                 {
@@ -269,7 +269,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Open();
+                //cnn.Open();
 
                 using (var transaction = cnn.BeginTransaction())
                 {
@@ -367,10 +367,11 @@ namespace RicksStaffApp
             }
         }
         //Shift Methods
-        public static void AddShift(Shift shift)
+        public static int AddShift(Shift shift)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
+               
                 // Check if a record with the same DateString and IsAm already exists
                 string checkExistingShiftQuery = "SELECT COUNT(*) FROM Shift WHERE DateString = @DateString AND IsAm = @IsAm";
                 int count = cnn.ExecuteScalar<int>(checkExistingShiftQuery, new { shift.DateString, shift.IsAm });
@@ -386,9 +387,9 @@ namespace RicksStaffApp
                     // Optional: You can throw an exception or return a boolean value to indicate that the shift was not added.
                     throw new InvalidOperationException("A shift with the same Date and Am / Pm values already exists.");
                 }
-
-                //cnn.Execute("insert into Shift (DateString, IsAm) values (@DateString, @IsAm)", new {shift.DateString, shift.IsAm });
-                //shift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
+                
+                return shift.ID;
+                
             }
 
             //foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
@@ -396,6 +397,21 @@ namespace RicksStaffApp
             //    employeeShift.Shift = shift; // Associate the shift with the employee shift
             //    SaveEmployeeShift(employeeShift);
             //}
+        }
+        public static Shift LoadShift(bool isAm, string dateString)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = "SELECT * FROM Shift WHERE IsAm = @IsAm AND DateString = @DateString";
+                Shift shift = cnn.QueryFirstOrDefault<Shift>(query, new { IsAm = isAm, DateString = dateString });
+
+                if (shift == null)
+                {
+                    throw new InvalidOperationException("No shift with the specified Date and Am / Pm values was found.");
+                }
+
+                return shift;
+            }
         }
 
         //public static List<Shift> LoadShifts()
@@ -594,12 +610,21 @@ namespace RicksStaffApp
         //EmployeeShift Methods
         public static void AddEmployeeShift(EmployeeShift employeeShift)
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+
+            try
             {
-                cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, ShiftRating, PositionID) values (@EmployeeID, @ShiftID, @ShiftRating, @PositionID)", 
-                    new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, ShiftRating = employeeShift.ShiftRating, employeeShift.PositionID});
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, ShiftRating, PositionID) values (@EmployeeID, @ShiftID, @ShiftRating, @PositionID)",
+                        new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, ShiftRating = employeeShift.ShiftRating, employeeShift.PositionID });
                     //new { EmployeeId = employeeShift.Employee.ID, PositionId = employeeShift.Position.ID, ShiftRating = employeeShift.ShiftRating });
-                employeeShift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
+                    employeeShift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error adding employee shift: " + ex.Message);
             }
         }
         public static void UpdateEmployeeShift(EmployeeShift shift)

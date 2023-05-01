@@ -118,22 +118,88 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_1_star" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\1 star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="StarTest1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars132.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StarTest2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars133.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_.5_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_0_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_0_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars141.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1.5_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars111.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars121.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_1_Stars4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\5 Stars4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="_1_starTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\1 star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2.5_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars91.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars101.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_2_Stars3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\5 Stars3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3.5_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars71.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars81.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_3_Stars2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\5 Stars2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="_4.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_4.5_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_4_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_4_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\5 Stars1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="_4_Stars2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars61.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\5 Stars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Resources\5 Stars151.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_5_Stars1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\5 Stars15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

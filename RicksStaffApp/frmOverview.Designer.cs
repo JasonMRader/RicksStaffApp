@@ -63,6 +63,7 @@
             // 
             // flowEmployeeDisplay
             // 
+            flowEmployeeDisplay.AutoScroll = true;
             flowEmployeeDisplay.Location = new Point(11, 83);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
             flowEmployeeDisplay.Size = new Size(375, 582);

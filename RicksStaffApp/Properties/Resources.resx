@@ -118,14 +118,53 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="1.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5214.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5215.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars1331.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2.5_StarsTest2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars133.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5213.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="3.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5211.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="3_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5212.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="4.5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars52.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="4_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars521.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DoNotUse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars132.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Down Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Down Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Half_Star" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5216.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Image1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="No_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5 Stars5217.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Up Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Up Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

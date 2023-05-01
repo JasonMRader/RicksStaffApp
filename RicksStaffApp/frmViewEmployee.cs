@@ -53,13 +53,7 @@ namespace RicksStaffApp
         {
             lblEmployeeName.Text = ThisEmployee.FullName;
             cboFirstEmployeeTime.DrawMode = DrawMode.OwnerDrawFixed;
-            foreach(EmployeeShift es in ThisEmployee.EmployeeShifts)
-            {
-                MessageBox.Show(es.PositionID.ToString());
-            }
-
-
-
+            
             cboFirstEmployeeTime.SelectedIndex = 0;
             cboSeondEmployeeTime.SelectedIndex = 2;
 
