@@ -509,33 +509,31 @@ namespace RicksStaffApp
             foreach (Employee emp in employeeList)
             {
                 Panel empPanelContainer = new Panel();
-                empPanelContainer.Size = new Size(370, 30);
+                empPanelContainer.Size = new Size(350, 25);
                 empPanelContainer.BackColor = MyColors.LightHighlight;
-                empPanelContainer.Margin = new Padding(0, 0, 0, 5);
+                empPanelContainer.Margin = new Padding(0, 0, 0, 2);
+                empPanelContainer.Padding = new Padding(0, 0, 0, 0);
 
 
                 FlowLayoutPanel empPanel = new FlowLayoutPanel();
                 empPanel.FlowDirection = FlowDirection.LeftToRight;
                 empPanel.WrapContents = false;
                 empPanel.AutoSize = true;
-                empPanel.MaximumSize = new Size(340, 0);
-                empPanel.MinimumSize = new Size(340, 0);
+                empPanel.MaximumSize = new Size(320, 0);
+                empPanel.MinimumSize = new Size(320, 0);
                 empPanel.BackColor = MyColors.LightHighlight;
                 empPanel.Margin = new Padding(1, 1, 1, 1);
+                empPanel.Padding = new Padding(0, 0, 0, 0);
 
-                //// Create label for employee name
-                //Label lblName = new Label();
-                //lblName.Text = emp.FullName;
-                //lblName.AutoSize = false;
-                //lblName.Size = new Size(150, 16);
-                //lblName.TextAlign = ContentAlignment.MiddleCenter;
-                //empPanel.Controls.Add(lblName);
-                // Create button for employee name
+                
                 Button btnName = new Button();
                 btnName.Text = emp.FullName;
-                btnName.Size = new Size(140, 30);
+                btnName.Size = new Size(140, 25);
                 btnName.TextAlign = ContentAlignment.MiddleCenter;
                 btnName.FlatStyle = FlatStyle.Flat;
+                btnName.FlatAppearance.BorderSize = 0;
+                btnName.BackColor = DefaultButton;
+                btnName.Margin = new Padding(0, 0, 0, 0);
 
 
                 // Add event handler for button click
@@ -553,13 +551,13 @@ namespace RicksStaffApp
                 foreach (Position pos in emp.Positions)
                 {
                     Panel pnlPos = new Panel();
-                    pnlPos.Size = new Size(60, 30);
+                    pnlPos.Size = new Size(60, 25);
                     pnlPos.BackColor = MyColors.PositionColor;
                     Label lblPos = new Label();
                     lblPos.Text = pos.Name;
                     lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
                     lblPos.AutoSize = false;
-                    lblPos.Size = new Size(60, 30);
+                    lblPos.Size = new Size(60, 25);
                     lblPos.TextAlign = ContentAlignment.MiddleCenter;
                     pnlPos.Controls.Add(lblPos);
                     empPanel.Controls.Add(pnlPos);
@@ -568,44 +566,16 @@ namespace RicksStaffApp
                 // Add the employee panel to the container panel
                 empPanelContainer.Controls.Add(empPanel);
                 Panel pnlRating = new Panel();
-                pnlRating.Size = new Size(30, 30);
+                pnlRating.Size = new Size(30, 25);
                 pnlRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 pnlRating.Margin = new Padding(0);
-                pnlRating.Location = new Point(350, 0);
+                pnlRating.Location = new Point(320, 0);
                 Label lblRating = new Label();
                 lblRating.Text = emp.OverallRating.ToString("F1");
                 pnlRating.Controls.Add(lblRating);
                 empPanelContainer.Controls.Add(pnlRating);
 
-                // Add the delete button to the container panel
-                //System.Windows.Forms.Button btnDelete = new System.Windows.Forms.Button();
-                //btnDelete.Text = "X";
-                //btnDelete.Margin = new Padding(0, 0, 0, 0);
-                //btnDelete.Location = new Point(410, 0);
-                //btnDelete.ForeColor = Color.Black;
-                //btnDelete.Font = new Font(btnDelete.Font.FontFamily, 10);
-                //btnDelete.TextAlign = ContentAlignment.MiddleCenter;
-                //btnDelete.FlatStyle = FlatStyle.Flat;
-                //btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                //btnDelete.FlatAppearance.BorderSize = 0;
-                //btnDelete.Click += (sender, e) =>
-                //{
-                //    // Prompt user to confirm deletion
-                //    DialogResult result = MessageBox.Show("Are you sure you want to delete this employee?", "Delete Employee", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //    if (result == DialogResult.Yes)
-                //    {
-                //        // Delete employee from database
-                //        SqliteDataAccess.DeleteEmployee(emp.ID);
-
-                //        // Remove employee from list
-                //        employeeList.Remove(emp);
-
-                //        // Update UI
-                //        CreateEmployeePanels(employeeList, flowEmployeeDisplay);
-                //    }
-                //};
-                //btnDelete.Size = new Size(27, 27);
-                //empPanel.Parent.Controls.Add(btnDelete);
+               
 
                 flowEmployeeDisplay.Controls.Add(empPanelContainer);
             }

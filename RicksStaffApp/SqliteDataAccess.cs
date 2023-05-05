@@ -70,6 +70,62 @@ namespace RicksStaffApp
                 cnn.Execute("DELETE FROM EmployeePositions WHERE EmployeeID = @EmployeeId", new { EmployeeId = employeeId });
             }
         }
+        //public static List<Employee> LoadEmployees()
+        //{
+        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+        //        var employeeDictionary = new Dictionary<int, Employee>();
+        //        cnn.Query<Employee, Position, Employee>(
+        //            "select e.ID, e.FirstName, e.LastName, p.ID as PositionID, p.Name " +
+        //            "from Employee e " +
+        //            "left join EmployeePositions ep on e.ID = ep.EmployeeID " +
+        //            "left join Positions p on ep.PositionID = p.ID",
+        //            (employee, position) =>
+        //            {
+        //                if (!employeeDictionary.TryGetValue(employee.ID, out var emp))
+        //                {
+        //                    emp = employee;
+        //                    emp.Positions = new List<Position>();
+        //                    emp.EmployeeShifts = new List<EmployeeShift>();
+        //                    employeeDictionary.Add(emp.ID, emp);
+        //                }
+        //                if (position != null)
+        //                    emp.Positions.Add(position);
+        //                return emp;
+        //            },
+        //            splitOn: "PositionID");
+
+        //        var employees = employeeDictionary.Values.ToList();
+
+        //        foreach (var employee in employees)
+        //        {
+        //            string employeeShiftsQuery = 
+        //                @"SELECT es.ID, es.EmployeeID, es.ShiftID, es.PositionID,
+        //                s.ID as ShiftID, s.DateString, s.IsAm,
+        //                p.ID as PositionID, p.Name
+        //                FROM EmployeeShift es
+        //                JOIN Shift s ON es.ShiftID = s.ID
+        //                JOIN Positions p ON es.PositionID = p.ID
+        //                WHERE es.EmployeeID = @EmployeeID";
+        //            var employeeShifts = cnn.Query<EmployeeShift, Shift, Position, EmployeeShift>(employeeShiftsQuery,
+        //                (employeeShift, shift, position) =>
+        //                {
+        //                    employeeShift.Shift = shift;
+        //                    employeeShift.Position = position;
+        //                    return employeeShift;
+        //                },
+        //                new { EmployeeID = employee.ID },
+        //                splitOn: "ShiftID,PositionID")
+        //                .AsList();
+
+        //            employee.EmployeeShifts = employeeShifts;
+        //        }
+
+        //        return employeeDictionary.Values.ToList();
+        //    }
+
+            
+        //}
         public static List<Employee> LoadEmployees()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -99,33 +155,49 @@ namespace RicksStaffApp
 
                 foreach (var employee in employees)
                 {
-                    string employeeShiftsQuery = 
+                    string employeeShiftsQuery =
                         @"SELECT es.ID, es.EmployeeID, es.ShiftID, es.PositionID,
                         s.ID as ShiftID, s.DateString, s.IsAm,
-                        p.ID as PositionID, p.Name
+                        p.ID as PositionID, p.Name,
+                        i.ID as IncidentID, i.Note, i.EmployeeShiftID
                         FROM EmployeeShift es
                         JOIN Shift s ON es.ShiftID = s.ID
                         JOIN Positions p ON es.PositionID = p.ID
+                        LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID
                         WHERE es.EmployeeID = @EmployeeID";
-                    var employeeShifts = cnn.Query<EmployeeShift, Shift, Position, EmployeeShift>(employeeShiftsQuery,
-                        (employeeShift, shift, position) =>
+
+                    var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+                    cnn.Query<EmployeeShift, Shift, Position, Incident, EmployeeShift>(employeeShiftsQuery,
+                        (employeeShift, shift, position, incident) =>
                         {
-                            employeeShift.Shift = shift;
-                            employeeShift.Position = position;
-                            return employeeShift;
+                            if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+                            {
+                                currentEmployeeShift = employeeShift;
+                                currentEmployeeShift.Shift = shift;
+                                currentEmployeeShift.Position = position;
+                                currentEmployeeShift.Incidents = new List<Incident>();
+                                employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+                            }
+
+                            if (incident != null && incident.ID != default)
+                            {
+                                currentEmployeeShift.Incidents.Add(incident);
+                            }
+
+                            return currentEmployeeShift;
                         },
                         new { EmployeeID = employee.ID },
-                        splitOn: "ShiftID,PositionID")
-                        .AsList();
+                        splitOn: "ShiftID,PositionID,IncidentID")
+                        .Distinct().AsList();
 
-                    employee.EmployeeShifts = employeeShifts;
+                    employee.EmployeeShifts = employeeShiftsDictionary.Values.ToList();
                 }
 
                 return employeeDictionary.Values.ToList();
             }
-
-            
         }
+
         public static void UpdateEmployee(Employee employee)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -533,20 +605,7 @@ namespace RicksStaffApp
                     LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.ShiftID = @ShiftID";
 
-                //foreach (var shift in shifts)
-                //{
-                //    var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, EmployeeShift>(employeeShiftQuery,
-                //        (employeeShift, employee, position) =>
-                //        {
-                //            employeeShift.Employee = employee;
-                //            employeeShift.Position = position;
-                //            return employeeShift;
-                //        },
-                //        new { ShiftID = shift.ID },
-                //        splitOn: "ID,ID").AsList();
-
-                //    shift.EmployeeShifts = employeeShifts;
-                //}
+                
                 foreach (var shift in shifts)
                 {
                     var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
