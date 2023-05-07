@@ -586,11 +586,75 @@ namespace RicksStaffApp
                 lblRating.Location = new Point(320, 0);
                 lblRating.Size = new Size(30, 25);
                 lblRating.TextAlign = ContentAlignment.MiddleCenter;
+                emp.UpdateOverallRating();
                 lblRating.Text = emp.OverallRating.ToString("F1");
                
                 empPanelContainer.Controls.Add(lblRating);               
 
                 flowEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
+        public static void CreateSingleEmployeeShiftPanel(FlowLayoutPanel flowLayoutPanel, List<EmployeeShift> empShifts)
+        {
+            foreach (EmployeeShift es in empShifts)
+            {
+                es.UpdateShiftRating();
+                FlowLayoutPanel empShiftContainer = CreateFlowPanel(470, 30);
+
+                empShiftContainer.MinimumSize = new Size(470, 30);
+                empShiftContainer.MaximumSize = new Size(470, 1000);
+                empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+
+                Label lblName = new Label();
+                lblName.Text = es.Employee.FullName;
+                lblName.Size = new Size(100, 30);
+                lblName.TextAlign = ContentAlignment.MiddleCenter;
+                empShiftContainer.Controls.Add(lblName);
+
+                Label lblPos = new Label();
+                lblPos.Text = es.Position.Name;
+                lblPos.Size = new Size(60, 30);
+                lblPos.TextAlign = ContentAlignment.MiddleCenter;
+                empShiftContainer.Controls.Add(lblPos);
+
+                Label lblShiftRating = new Label();
+                //es.UpdateShiftRating();
+                lblShiftRating.Text = es.ShiftRating.ToString();
+                //foreach(Incident i in es.Incidents)
+                //{
+                //    es.ShiftRating = es.ShiftRating + in
+                //}
+                lblShiftRating.Size = new Size(25, 30);
+                lblShiftRating.TextAlign = ContentAlignment.MiddleCenter;
+                empShiftContainer.Controls.Add(lblShiftRating);
+
+                PictureBox pbRating = new PictureBox();
+                pbRating.Size = new Size(90, 30);
+                pbRating.SizeMode = PictureBoxSizeMode.Zoom;
+                pbRating.Image = GetStars(es.ShiftRating);
+                empShiftContainer.Controls.Add(pbRating);
+
+                //Button btnIncidents = CreateButtonTemplate(65, 30, "Incidents");
+                //btnIncidents.Click += (sender, e) =>
+                //{
+                //    CreateIncidentPanels(es.Incidents, empShiftContainer, empShifts);
+                //};
+                //empShiftContainer.Controls.Add(btnIncidents);
+
+                //Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
+                //btnAddIncidents.Click += (sender, e) =>
+                //{
+                //    //secondPanel.Controls.Clear();
+                //    //frmServerShift frmServerShift = new frmServerShift();
+                //    //frmServerShift.EmployeeShiftToEdit = es;
+                //    //frmServerShift.TopLevel = false;
+                //    //secondPanel.Controls.Add(frmServerShift);
+                //    //frmServerShift.Show();
+                //};
+                //empShiftContainer.Controls.Add(btnAddIncidents);
+
+                flowLayoutPanel.Controls.Add(empShiftContainer);
+
             }
         }
         public static void CreateEmployeeShiftPanels(List<Shift> shiftList, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)

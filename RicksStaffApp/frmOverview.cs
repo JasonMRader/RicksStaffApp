@@ -23,6 +23,10 @@ namespace RicksStaffApp
 
             employeeList.Clear();
             employeeList = SqliteDataAccess.LoadEmployees();
+            //foreach (Employee employee in employeeList)
+            //{
+            //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
+            //}
 
 
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay);

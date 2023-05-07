@@ -53,9 +53,10 @@ namespace RicksStaffApp
         {
             lblEmployeeName.Text = ThisEmployee.FullName;
             cboFirstEmployeeTime.DrawMode = DrawMode.OwnerDrawFixed;
-            
+
             cboFirstEmployeeTime.SelectedIndex = 0;
             cboSeondEmployeeTime.SelectedIndex = 2;
+            UIHelper.CreateSingleEmployeeShiftPanel(flowTest, ThisEmployee.EmployeeShifts);
 
 
         }

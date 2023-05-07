@@ -93,6 +93,7 @@
             cboSeondEmployeeTime = new ComboBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
+            flowTest = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panel16.SuspendLayout();
             panel17.SuspendLayout();
@@ -847,12 +848,21 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // flowTest
+            // 
+            flowTest.BackColor = Color.FromArgb(46, 51, 73);
+            flowTest.Location = new Point(913, 29);
+            flowTest.Name = "flowTest";
+            flowTest.Size = new Size(470, 550);
+            flowTest.TabIndex = 3;
+            // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(69, 105, 144);
-            ClientSize = new Size(903, 591);
+            ClientSize = new Size(1409, 591);
+            Controls.Add(flowTest);
             Controls.Add(button1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -972,5 +982,6 @@
         private ComboBox cboSeondEmployeeTime;
         private Button button2;
         private Button button3;
+        private FlowLayoutPanel flowTest;
     }
 }
