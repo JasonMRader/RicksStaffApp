@@ -13,6 +13,45 @@ namespace RicksStaffApp
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
         //static Image StarsTest = Properties.Resources._2_5_StarsTest;
         //static Image StarsDisplayed = Properties.Resources._5_Stars;
+        private static Panel CreatePanel(int width, int height)
+        {
+            Panel panel = new Panel();
+            panel.Width = width;
+            panel.Height = height;
+            panel.BackColor = MyColors.LightHighlight;
+            panel.BorderStyle = BorderStyle.None;
+            panel.Margin = new Padding(0);
+            panel.Padding = new Padding(0);
+
+            return panel;
+        }
+        private static FlowLayoutPanel CreateFlowPanel(int width, int height)
+        {
+            FlowLayoutPanel panel = new FlowLayoutPanel();
+            //panel.Width = width;
+            //panel.Height = height;
+            panel.BackColor = MyColors.LightHighlight;
+            panel.BorderStyle = BorderStyle.None;
+            panel.Margin = new Padding(0);
+            panel.Padding = new Padding(0);
+            panel.AutoSize = true;
+            panel.FlowDirection = FlowDirection.LeftToRight;
+            panel.MaximumSize = new Size(width-30, 0);
+            panel.MinimumSize = new Size(width-30, 0);
+            return panel;
+        }
+        private static Button CreateButtonTemplate (int width, int height, string buttonText)
+        {
+            Button button = new Button();
+            button.Text = buttonText;
+            button.Size = new Size(width, height);
+            button.TextAlign = ContentAlignment.MiddleCenter;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
+            button.BackColor = DefaultButton;
+            button.Margin = new Padding(0, 0, 0, 0);
+            return button;
+        }
         public static Image GetStars(float rating)
         {
             Image StarsDisplayed;
@@ -508,35 +547,13 @@ namespace RicksStaffApp
             // Loop through employee list and create a panel for each employee
             foreach (Employee emp in employeeList)
             {
-                Panel empPanelContainer = new Panel();
-                empPanelContainer.Size = new Size(350, 25);
-                empPanelContainer.BackColor = MyColors.LightHighlight;
+                Panel empPanelContainer = CreatePanel(350, 25);                
                 empPanelContainer.Margin = new Padding(0, 0, 0, 2);
-                empPanelContainer.Padding = new Padding(0, 0, 0, 0);
-
-
-                FlowLayoutPanel empPanel = new FlowLayoutPanel();
-                empPanel.FlowDirection = FlowDirection.LeftToRight;
-                empPanel.WrapContents = false;
-                empPanel.AutoSize = true;
-                empPanel.MaximumSize = new Size(320, 0);
-                empPanel.MinimumSize = new Size(320, 0);
-                empPanel.BackColor = MyColors.LightHighlight;
-                empPanel.Margin = new Padding(1, 1, 1, 1);
-                empPanel.Padding = new Padding(0, 0, 0, 0);
-
                 
-                Button btnName = new Button();
-                btnName.Text = emp.FullName;
-                btnName.Size = new Size(140, 25);
-                btnName.TextAlign = ContentAlignment.MiddleCenter;
-                btnName.FlatStyle = FlatStyle.Flat;
-                btnName.FlatAppearance.BorderSize = 0;
-                btnName.BackColor = DefaultButton;
-                btnName.Margin = new Padding(0, 0, 0, 0);
+                FlowLayoutPanel empPanel = CreateFlowPanel(350, 25);               
+                empPanel.Margin = new Padding(1, 1, 1, 1);
 
-
-                // Add event handler for button click
+                Button btnName = CreateButtonTemplate(140, 25, emp.FullName);                             
                 btnName.Click += (sender, e) =>
                 {
                     // Open frmViewEmployee form with clicked employee as a parameter
@@ -545,37 +562,33 @@ namespace RicksStaffApp
                 };
 
                 empPanel.Controls.Add(btnName);
-
-
                 // Create panels for employee positions
-                foreach (Position pos in emp.Positions)
-                {
-                    Panel pnlPos = new Panel();
-                    pnlPos.Size = new Size(60, 25);
-                    pnlPos.BackColor = MyColors.PositionColor;
-                    Label lblPos = new Label();
-                    lblPos.Text = pos.Name;
-                    lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
-                    lblPos.AutoSize = false;
-                    lblPos.Size = new Size(60, 25);
-                    lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                    pnlPos.Controls.Add(lblPos);
-                    empPanel.Controls.Add(pnlPos);
-                }
-
-                // Add the employee panel to the container panel
-                empPanelContainer.Controls.Add(empPanel);
-                Panel pnlRating = new Panel();
-                pnlRating.Size = new Size(30, 25);
-                pnlRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-                pnlRating.Margin = new Padding(0);
-                pnlRating.Location = new Point(320, 0);
-                Label lblRating = new Label();
-                lblRating.Text = emp.OverallRating.ToString("F1");
-                pnlRating.Controls.Add(lblRating);
-                empPanelContainer.Controls.Add(pnlRating);
-
+                //foreach (Position pos in emp.Positions)
+                //{
+                //    Panel pnlPos = new Panel();
+                //    pnlPos.Size = new Size(60, 25);
+                //    pnlPos.BackColor = MyColors.PositionColor;
+                //    Label lblPos = new Label();
+                //    lblPos.Text = pos.Name;
+                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
+                //    lblPos.AutoSize = false;
+                //    lblPos.Size = new Size(60, 25);
+                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
+                //    pnlPos.Controls.Add(lblPos);
+                //    empPanel.Controls.Add(pnlPos);
+                //}
                
+                empPanelContainer.Controls.Add(empPanel);
+                
+                Label lblRating = new Label();
+                lblRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                lblRating.Margin = new Padding(0);
+                lblRating.Location = new Point(320, 0);
+                lblRating.Size = new Size(30, 25);
+                lblRating.TextAlign = ContentAlignment.MiddleCenter;
+                lblRating.Text = emp.OverallRating.ToString("F1");
+               
+                empPanelContainer.Controls.Add(lblRating);               
 
                 flowEmployeeDisplay.Controls.Add(empPanelContainer);
             }
@@ -628,11 +641,11 @@ namespace RicksStaffApp
                         pbRating.Image = GetStars(es.ShiftRating);
                         empShiftContainer.Controls.Add(pbRating);
 
-                        Button btnIncidents = new Button();
-                        btnIncidents.Text = "Incidents";
-                        btnIncidents.Size = new Size(65, 30);
-                        btnIncidents.TextAlign = ContentAlignment.MiddleCenter;
-                        btnIncidents.FlatStyle = FlatStyle.Flat;
+                        Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");
+                        //btnIncidents.Text = "Incidents";
+                        //btnIncidents.Size = new Size(65, 30);
+                        //btnIncidents.TextAlign = ContentAlignment.MiddleCenter;
+                        //btnIncidents.FlatStyle = FlatStyle.Flat;
                         // Add event handler for button click
                         btnIncidents.Click += (sender, e) =>
                         {
@@ -640,11 +653,11 @@ namespace RicksStaffApp
                         };
                         empShiftContainer.Controls.Add(btnIncidents);
 
-                        Button btnAddIncidents = new Button();
-                        btnAddIncidents.Text = "Add/Edit";
-                        btnAddIncidents.Size = new Size(65, 30);
-                        btnAddIncidents.TextAlign = ContentAlignment.MiddleCenter;
-                        btnAddIncidents.FlatStyle = FlatStyle.Flat;
+                        Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
+                        //btnAddIncidents.Text = "Add/Edit";
+                        //btnAddIncidents.Size = new Size(65, 30);
+                        //btnAddIncidents.TextAlign = ContentAlignment.MiddleCenter;
+                        //btnAddIncidents.FlatStyle = FlatStyle.Flat;
                         // Add event handler for button click
                         btnAddIncidents.Click += (sender, e) =>
                         {
@@ -658,41 +671,12 @@ namespace RicksStaffApp
                         empShiftContainer.Controls.Add(btnAddIncidents);
 
                         flowEmployeeDisplay.Controls.Add(empShiftContainer);
-                        //Panel empNamePanel = new Panel();                    
-                        //empNamePanel.Size = new Size(75, 30);                   
-                        //empNamePanel.BackColor = MyColors.LightHighlight;
-                        //empNamePanel.Margin = new Padding(1, 1, 1, 1);
-                        //// Create button for employee name
-
-                        //empNamePanel.Controls.Add(btnName);
-                        //// Create panels for employee positions
-                        //foreach (Position pos in shift.Employee.Positions)
-                        //{
-                        //    Panel pnlPos = new Panel();
-                        //    pnlPos.Size = new Size(60, 30);
-                        //    pnlPos.BackColor = MyColors.PositionColor;
-                        //    Label lblPos = new Label();
-                        //    lblPos.Text = pos.Name;
-                        //    lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
-                        //    lblPos.AutoSize = false;
-                        //    lblPos.Size = new Size(60, 30);
-                        //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                        //    pnlPos.Controls.Add(lblPos);
-                        //    empNamePanel.Controls.Add(pnlPos);
-                        //}
-                        //// Add the employee panel to the container panel
-                        //empShiftContainer.Controls.Add(empNamePanel);
-                        //Panel pnlRating = new Panel();
-                        //pnlRating.Size = new Size(30, 30);
-                        //pnlRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-                        //pnlRating.Margin = new Padding(0);
-                        //pnlRating.Location = new Point(410, 0);
+                        
                     }
 
                 }
             }
-            // Clear existing panels
-
+            
 
         }
         public static void CreateExcelLoadDisplay()
@@ -713,13 +697,8 @@ namespace RicksStaffApp
                 empPanelContainer.Margin = new Padding(2, 2, 2, 2);
 
 
-                FlowLayoutPanel empPanel = new FlowLayoutPanel();
-                empPanel.FlowDirection = FlowDirection.LeftToRight;
-                empPanel.WrapContents = false;
-                empPanel.AutoSize = true;
-                empPanel.MaximumSize = new Size(180, 0);
-                empPanel.MinimumSize = new Size(180, 0);
-                empPanel.BackColor = MyColors.LightHighlight;
+                FlowLayoutPanel empPanel = CreateFlowPanel(180, 25);
+
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
                 // Create label for employee name
@@ -731,20 +710,7 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions
-                //foreach (Position pos in emp.Positions)
-                //{
-                //    Panel pnlPos = new Panel();
-                //    pnlPos.Size = new Size(60, 16);
-                //    pnlPos.BackColor = MyColors.PositionColor;
-                //    Label lblPos = new Label();
-                //    lblPos.Text = pos.Name;
-                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 8);
-                //    lblPos.AutoSize = false;
-                //    lblPos.Size = new Size(60, 16);
-                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                //    pnlPos.Controls.Add(lblPos);
-                //    empPanel.Controls.Add(pnlPos);
-                //}
+                
 
                 // Add the employee panel to the container panel
                 empPanelContainer.Controls.Add(empPanel);
@@ -799,13 +765,8 @@ namespace RicksStaffApp
                 empPanelContainer.Margin = new Padding(2, 2, 2, 2);
 
 
-                FlowLayoutPanel empPanel = new FlowLayoutPanel();
-                empPanel.FlowDirection = FlowDirection.LeftToRight;
-                empPanel.WrapContents = false;
-                empPanel.AutoSize = true;
-                empPanel.MaximumSize = new Size(180, 0);
-                empPanel.MinimumSize = new Size(180, 0);
-                empPanel.BackColor = MyColors.LightHighlight;
+                FlowLayoutPanel empPanel = CreateFlowPanel(180, 22);
+
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
                 // Create label for employee name
@@ -817,38 +778,15 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions
-                //foreach (Position pos in emp.Positions)
-                //{
-                //    Panel pnlPos = new Panel();
-                //    pnlPos.Size = new Size(60, 16);
-                //    pnlPos.BackColor = MyColors.PositionColor;
-                //    Label lblPos = new Label();
-                //    lblPos.Text = pos.Name;
-                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 8);
-                //    lblPos.AutoSize = false;
-                //    lblPos.Size = new Size(60, 16);
-                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                //    pnlPos.Controls.Add(lblPos);
-                //    empPanel.Controls.Add(pnlPos);
-                //}
-
-                // Add the employee panel to the container panel
+                
                 empPanelContainer.Controls.Add(empPanel);
                 //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
 
-                
-                Button btnAddEmployee = new Button();
-                btnAddEmployee.Text = "Add Employee";
-                //btnDelete.AutoSize = true;
-                btnAddEmployee.Margin = new Padding(0, 0, 0, 0);
+
+                Button btnAddEmployee = CreateButtonTemplate(160, 22, "Add Employee");
+               
                 btnAddEmployee.Location = new Point(185, 0);
-                btnAddEmployee.ForeColor = Color.Black;
-                btnAddEmployee.BackColor = DefaultButton;
-                //btnAddEmployee.Font = new Font(btnAddEmployee.Font.FontFamily, 6);
-                btnAddEmployee.TextAlign = ContentAlignment.TopCenter;
-                btnAddEmployee.FlatStyle = FlatStyle.Flat;
-                btnAddEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                btnAddEmployee.FlatAppearance.BorderSize = 0;
+                
                 btnAddEmployee.Click += (sender, e) =>
                 {
                     if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
@@ -867,9 +805,9 @@ namespace RicksStaffApp
                     
                     
                 };
-                btnAddEmployee.Size = new Size(160, 22);
+               
                 empPanel.Parent.Controls.Add(btnAddEmployee);
-                //empPanelContainer.Controls.Add(btnDelete);
+               
 
                 flowNewEmployeeDisplay.Controls.Add(empPanelContainer);
             }
