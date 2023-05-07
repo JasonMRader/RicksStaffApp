@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace RicksStaffApp
@@ -29,6 +30,8 @@ namespace RicksStaffApp
                 return FirstName + " " + LastName;
             }
         }
+        //public string fullNameCleaned = Regex.Replace(this.FullName.ToLower().Trim(), @"\s+", " ");
+
         public float OverallRating { get; set; }
         public List<Position> Positions { get; set; }
 

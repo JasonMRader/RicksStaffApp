@@ -604,12 +604,10 @@ namespace RicksStaffApp
                     foreach (EmployeeShift es in shift.EmployeeShifts)
                     {
                         es.UpdateShiftRating();
-                        FlowLayoutPanel empShiftContainer = new FlowLayoutPanel();
-                        //activityPanelContainer.Size = new Size(430, 30);
-                        empShiftContainer.AutoSize = true;
+                        FlowLayoutPanel empShiftContainer = CreateFlowPanel(470,30);                       
+                      
                         empShiftContainer.MinimumSize = new Size(470, 30);
                         empShiftContainer.MaximumSize = new Size(470, 1000);
-                        empShiftContainer.BackColor = MyColors.LightHighlight;
                         empShiftContainer.Margin = new Padding(0, 0, 0, 5);
 
                         Label lblName = new Label();
@@ -641,24 +639,14 @@ namespace RicksStaffApp
                         pbRating.Image = GetStars(es.ShiftRating);
                         empShiftContainer.Controls.Add(pbRating);
 
-                        Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");
-                        //btnIncidents.Text = "Incidents";
-                        //btnIncidents.Size = new Size(65, 30);
-                        //btnIncidents.TextAlign = ContentAlignment.MiddleCenter;
-                        //btnIncidents.FlatStyle = FlatStyle.Flat;
-                        // Add event handler for button click
+                        Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");                        
                         btnIncidents.Click += (sender, e) =>
                         {
                             CreateIncidentPanels(es.Incidents, empShiftContainer, shiftList);
                         };
                         empShiftContainer.Controls.Add(btnIncidents);
 
-                        Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
-                        //btnAddIncidents.Text = "Add/Edit";
-                        //btnAddIncidents.Size = new Size(65, 30);
-                        //btnAddIncidents.TextAlign = ContentAlignment.MiddleCenter;
-                        //btnAddIncidents.FlatStyle = FlatStyle.Flat;
-                        // Add event handler for button click
+                        Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");                     
                         btnAddIncidents.Click += (sender, e) =>
                         {
                             secondPanel.Controls.Clear();

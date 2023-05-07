@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,45 @@ namespace RicksStaffApp
         string ignoreBar = "PM BAR PM";
         string ignoreBanquet = "Banquet Bartender 1";
         string ignoreBanquetBar = "Banquet Server 1";
+        public static int LevenshteinDistance(string s, string t)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.IsNullOrEmpty(t) ? 0 : t.Length;
+            }
+
+            if (string.IsNullOrEmpty(t))
+            {
+                return s.Length;
+            }
+
+            int[] v0 = new int[t.Length + 1];
+            int[] v1 = new int[t.Length + 1];
+
+            for (int i = 0; i < v0.Length; i++)
+            {
+                v0[i] = i;
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                v1[0] = i + 1;
+
+                for (int j = 0; j < t.Length; j++)
+                {
+                    int cost = (s[i] == t[j]) ? 0 : 1;
+                    v1[j + 1] = Math.Min(v1[j] + 1, Math.Min(v0[j + 1] + 1, v0[j] + cost));
+                }
+
+                for (int j = 0; j < v0.Length; j++)
+                {
+                    v0[j] = v1[j];
+                }
+            }
+
+            return v1[t.Length];
+        }
+
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
             //newShift.DateString = DateTime.Now.ToString("MM/dd/yyyy");
@@ -36,6 +76,7 @@ namespace RicksStaffApp
             //List<Employee> allEmployees = SqliteDataAccess.LoadEmployees(); // Assuming you have a method to get all employees from the database
             //List<Employee> employeesOnShift = new List<Employee>();
             List<string> newEmployeeNamesStrings = new List<string>();
+            
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -52,13 +93,23 @@ namespace RicksStaffApp
                     // Get the names from the first worksheet (A5:A24) with the "Server" column
                     Worksheet worksheet1 = workbook.Sheets[1];
                     Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+                    
 
                     for (int i = 1; i <= range1.Rows.Count; i++)
                     {
                         string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
                         if (!string.IsNullOrWhiteSpace(fullName))
                         {
-                            Employee matchedEmployee = allEmployees.FirstOrDefault(e => e.FullName == fullName);
+                            string fullNameCleaned = Regex.Replace(fullName.ToLower().Trim(), @"\s+", " ");
+                            int threshold = 2;
+
+                            //Employee matchedEmployee = allEmployees.FirstOrDefault(e => e.FullName == fullName);
+                            Employee matchedEmployee = allEmployees.FirstOrDefault(e => {
+                                string dbFullNameCleaned = Regex.Replace(e.FullName.ToLower().Trim(), @"\s+", " ");
+                                int distance = LevenshteinDistance(fullNameCleaned, dbFullNameCleaned);
+                                return distance <= threshold;
+                            });
+
                             if (matchedEmployee != null)
                             {
                                 employeesOnShift.Add(matchedEmployee);
