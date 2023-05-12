@@ -41,7 +41,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //cnn.Open();
+                cnn.Open();
 
                 using (var transaction = cnn.BeginTransaction())
                 {
