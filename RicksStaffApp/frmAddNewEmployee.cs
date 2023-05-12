@@ -53,7 +53,7 @@ namespace RicksStaffApp
             foreach (Employee emp in employeeList)
             {
                 Panel empPanelContainer = new Panel();
-                empPanelContainer.Size = new Size(430, 17);
+                empPanelContainer.Size = new Size(425, 17);
                 empPanelContainer.BackColor = MyColors.LightHighlight;
                 empPanelContainer.Margin = new Padding(0, 0, 0, 5);
 
@@ -62,8 +62,8 @@ namespace RicksStaffApp
                 empPanel.FlowDirection = FlowDirection.LeftToRight;
                 empPanel.WrapContents = false;
                 empPanel.AutoSize = true;
-                empPanel.MaximumSize = new Size(410, 0);
-                empPanel.MinimumSize = new Size(410, 0);
+                empPanel.MaximumSize = new Size(405, 0);
+                empPanel.MinimumSize = new Size(405, 0);
                 empPanel.BackColor = MyColors.LightHighlight;
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 

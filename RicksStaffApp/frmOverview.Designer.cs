@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            pnlEmployeeDisplay = new Panel();
             flowEmployeeDisplay = new FlowLayoutPanel();
             label6 = new Label();
             textBox1 = new TextBox();
@@ -42,31 +42,31 @@
             comboBox1 = new ComboBox();
             label2 = new Label();
             label3 = new Label();
-            panel1.SuspendLayout();
+            pnlEmployeeDisplay.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // pnlEmployeeDisplay
             // 
-            panel1.BackColor = Color.FromArgb(37, 42, 64);
-            panel1.Controls.Add(flowEmployeeDisplay);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(comboBox3);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(873, 72);
-            panel1.Margin = new Padding(8);
-            panel1.Name = "panel1";
-            panel1.Padding = new Padding(8);
-            panel1.Size = new Size(402, 676);
-            panel1.TabIndex = 0;
+            pnlEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeDisplay.Controls.Add(flowEmployeeDisplay);
+            pnlEmployeeDisplay.Controls.Add(label6);
+            pnlEmployeeDisplay.Controls.Add(textBox1);
+            pnlEmployeeDisplay.Controls.Add(comboBox3);
+            pnlEmployeeDisplay.Controls.Add(label1);
+            pnlEmployeeDisplay.Location = new Point(827, 72);
+            pnlEmployeeDisplay.Margin = new Padding(8);
+            pnlEmployeeDisplay.Name = "pnlEmployeeDisplay";
+            pnlEmployeeDisplay.Padding = new Padding(8);
+            pnlEmployeeDisplay.Size = new Size(450, 675);
+            pnlEmployeeDisplay.TabIndex = 0;
             // 
             // flowEmployeeDisplay
             // 
             flowEmployeeDisplay.AutoScroll = true;
-            flowEmployeeDisplay.Location = new Point(11, 83);
+            flowEmployeeDisplay.Location = new Point(11, 112);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
-            flowEmployeeDisplay.Size = new Size(375, 582);
+            flowEmployeeDisplay.Size = new Size(426, 553);
             flowEmployeeDisplay.TabIndex = 6;
             // 
             // label6
@@ -204,7 +204,7 @@
             Controls.Add(btnAddEmployee);
             Controls.Add(label2);
             Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(pnlEmployeeDisplay);
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(1320, 820);
             Name = "frmOverview";
@@ -212,8 +212,8 @@
             Text = "frmOverview";
             TopMost = true;
             Load += frmOverview_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            pnlEmployeeDisplay.ResumeLayout(false);
+            pnlEmployeeDisplay.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
@@ -222,7 +222,7 @@
 
         #endregion
 
-        private Panel panel1;
+        private Panel pnlEmployeeDisplay;
         private Panel panel2;
         private Panel panel4;
         private Panel panel3;

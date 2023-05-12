@@ -60,6 +60,7 @@ namespace RicksStaffApp
 
                     transaction.Commit();
                 }
+                cnn.Close();
             }
         }
         public static void DeleteEmployee(int employeeId)

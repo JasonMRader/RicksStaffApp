@@ -35,16 +35,14 @@
             label2 = new Label();
             clbPositions = new CheckedListBox();
             flowEmployeeDisplay = new FlowLayoutPanel();
-            panel1 = new Panel();
             label3 = new Label();
             btnCloseAddEmployee = new Button();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // txtFirstName
             // 
             txtFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtFirstName.Location = new Point(8, 113);
+            txtFirstName.Location = new Point(12, 71);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(198, 29);
             txtFirstName.TabIndex = 1;
@@ -52,7 +50,7 @@
             // txtLastName
             // 
             txtLastName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtLastName.Location = new Point(8, 174);
+            txtLastName.Location = new Point(12, 140);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(198, 29);
             txtLastName.TabIndex = 1;
@@ -62,9 +60,9 @@
             btnAddEmployee.BackColor = Color.FromArgb(167, 204, 237);
             btnAddEmployee.FlatStyle = FlatStyle.Flat;
             btnAddEmployee.ForeColor = Color.Black;
-            btnAddEmployee.Location = new Point(8, 329);
+            btnAddEmployee.Location = new Point(12, 187);
             btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(198, 43);
+            btnAddEmployee.Size = new Size(421, 27);
             btnAddEmployee.TabIndex = 2;
             btnAddEmployee.Text = "Add Employee";
             btnAddEmployee.UseVisualStyleBackColor = false;
@@ -75,7 +73,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(6, 85);
+            label1.Location = new Point(6, 37);
             label1.Name = "label1";
             label1.Size = new Size(102, 25);
             label1.TabIndex = 3;
@@ -86,7 +84,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(6, 145);
+            label2.Location = new Point(8, 103);
             label2.Name = "label2";
             label2.Size = new Size(100, 25);
             label2.TabIndex = 3;
@@ -97,7 +95,7 @@
             clbPositions.CheckOnClick = true;
             clbPositions.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point);
             clbPositions.FormattingEnabled = true;
-            clbPositions.Location = new Point(8, 211);
+            clbPositions.Location = new Point(226, 55);
             clbPositions.Name = "clbPositions";
             clbPositions.Size = new Size(198, 114);
             clbPositions.TabIndex = 4;
@@ -105,33 +103,17 @@
             // flowEmployeeDisplay
             // 
             flowEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeDisplay.Location = new Point(220, 73);
+            flowEmployeeDisplay.Location = new Point(8, 220);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
-            flowEmployeeDisplay.Size = new Size(435, 664);
+            flowEmployeeDisplay.Size = new Size(425, 443);
             flowEmployeeDisplay.TabIndex = 7;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(46, 51, 73);
-            panel1.Controls.Add(flowEmployeeDisplay);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(clbPositions);
-            panel1.Controls.Add(txtFirstName);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(txtLastName);
-            panel1.Controls.Add(btnAddEmployee);
-            panel1.Location = new Point(4, 28);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(666, 745);
-            panel1.TabIndex = 8;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.FromArgb(99, 135, 174);
-            label3.Location = new Point(8, 16);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(100, 5);
             label3.Name = "label3";
             label3.Size = new Size(236, 32);
             label3.TabIndex = 3;
@@ -142,7 +124,7 @@
             btnCloseAddEmployee.FlatAppearance.BorderSize = 0;
             btnCloseAddEmployee.FlatStyle = FlatStyle.Flat;
             btnCloseAddEmployee.ForeColor = Color.White;
-            btnCloseAddEmployee.Location = new Point(649, -1);
+            btnCloseAddEmployee.Location = new Point(420, -2);
             btnCloseAddEmployee.Name = "btnCloseAddEmployee";
             btnCloseAddEmployee.Size = new Size(30, 23);
             btnCloseAddEmployee.TabIndex = 9;
@@ -155,9 +137,16 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(69, 105, 144);
-            ClientSize = new Size(675, 777);
+            ClientSize = new Size(450, 675);
+            Controls.Add(label1);
+            Controls.Add(clbPositions);
+            Controls.Add(label3);
+            Controls.Add(txtFirstName);
+            Controls.Add(flowEmployeeDisplay);
+            Controls.Add(label2);
             Controls.Add(btnCloseAddEmployee);
-            Controls.Add(panel1);
+            Controls.Add(txtLastName);
+            Controls.Add(btnAddEmployee);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmAddNewEmployee";
             StartPosition = FormStartPosition.CenterScreen;
@@ -166,9 +155,8 @@
             MouseDown += Form1_MouseDown;
             MouseMove += Form1_MouseMove;
             MouseUp += Form1_MouseUp;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -179,7 +167,6 @@
         private Label label2;
         private CheckedListBox clbPositions;
         private FlowLayoutPanel flowEmployeeDisplay;
-        private Panel panel1;
         private Button btnCloseAddEmployee;
         private Label label3;
     }
