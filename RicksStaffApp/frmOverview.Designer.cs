@@ -43,6 +43,7 @@
             label2 = new Label();
             label3 = new Label();
             pnlEmployeeDisplay.SuspendLayout();
+            pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
             // 
             // pnlEmployeeDisplay
@@ -121,6 +122,7 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeStats.Controls.Add(label2);
             pnlEmployeeStats.Location = new Point(17, 72);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
@@ -181,7 +183,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(374, 34);
+            label2.Location = new Point(3, 4);
             label2.Name = "label2";
             label2.Size = new Size(98, 30);
             label2.TabIndex = 0;
@@ -209,7 +211,6 @@
             Controls.Add(label5);
             Controls.Add(label3);
             Controls.Add(label4);
-            Controls.Add(label2);
             Controls.Add(comboBox2);
             Controls.Add(pnlEmployeeStats);
             Controls.Add(comboBox1);
@@ -223,6 +224,8 @@
             Load += frmOverview_Load;
             pnlEmployeeDisplay.ResumeLayout(false);
             pnlEmployeeDisplay.PerformLayout();
+            pnlEmployeeStats.ResumeLayout(false);
+            pnlEmployeeStats.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

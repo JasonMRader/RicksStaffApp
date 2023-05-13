@@ -556,7 +556,8 @@ namespace RicksStaffApp
                 Button btnName = CreateButtonTemplate(140, 25, emp.FullName);                             
                 btnName.Click += (sender, e) =>
                 {
-                    
+                    parentPanel.Controls.Clear();
+
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;

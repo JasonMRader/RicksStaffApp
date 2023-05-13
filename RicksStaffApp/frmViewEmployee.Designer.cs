@@ -134,9 +134,9 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(90, 6);
+            button3.Location = new Point(549, 106);
             button3.Name = "button3";
-            button3.Size = new Size(75, 33);
+            button3.Size = new Size(107, 33);
             button3.TabIndex = 5;
             button3.Text = "Shifts";
             button3.UseVisualStyleBackColor = false;
@@ -147,9 +147,9 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(6, 6);
+            button2.Location = new Point(442, 106);
             button2.Name = "button2";
-            button2.Size = new Size(75, 33);
+            button2.Size = new Size(101, 33);
             button2.TabIndex = 5;
             button2.Text = "Stats";
             button2.UseVisualStyleBackColor = false;
@@ -158,11 +158,9 @@
             // 
             panel16.Controls.Add(panel17);
             panel16.Controls.Add(panel18);
-            panel16.Controls.Add(button3);
-            panel16.Controls.Add(button2);
-            panel16.Location = new Point(447, 139);
+            panel16.Location = new Point(447, 182);
             panel16.Name = "panel16";
-            panel16.Size = new Size(329, 510);
+            panel16.Size = new Size(209, 438);
             panel16.TabIndex = 4;
             // 
             // panel17
@@ -175,7 +173,7 @@
             panel17.Controls.Add(label28);
             panel17.Controls.Add(label29);
             panel17.Controls.Add(label30);
-            panel17.Location = new Point(3, 49);
+            panel17.Location = new Point(3, 23);
             panel17.Name = "panel17";
             panel17.Size = new Size(182, 112);
             panel17.TabIndex = 2;
@@ -271,9 +269,9 @@
             panel18.Controls.Add(panel20);
             panel18.Controls.Add(panel21);
             panel18.Controls.Add(label34);
-            panel18.Location = new Point(3, 167);
+            panel18.Location = new Point(6, 161);
             panel18.Name = "panel18";
-            panel18.Size = new Size(191, 333);
+            panel18.Size = new Size(190, 200);
             panel18.TabIndex = 2;
             // 
             // panel19
@@ -348,9 +346,9 @@
             // dateTimePicker2
             // 
             dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(546, 110);
+            dateTimePicker2.Location = new Point(549, 145);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(86, 23);
+            dateTimePicker2.Size = new Size(107, 23);
             dateTimePicker2.TabIndex = 4;
             // 
             // panel9
@@ -358,7 +356,7 @@
             panel9.Controls.Add(panel10);
             panel9.Controls.Add(panel11);
             panel9.Controls.Add(panel15);
-            panel9.Location = new Point(11, 139);
+            panel9.Location = new Point(9, 110);
             panel9.Margin = new Padding(0);
             panel9.Name = "panel9";
             panel9.Size = new Size(197, 510);
@@ -579,9 +577,9 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(442, 110);
+            dateTimePicker1.Location = new Point(442, 145);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(86, 23);
+            dateTimePicker1.Size = new Size(101, 23);
             dateTimePicker1.TabIndex = 4;
             // 
             // panel3
@@ -589,7 +587,7 @@
             panel3.Controls.Add(panel5);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel2);
-            panel3.Location = new Point(234, 139);
+            panel3.Location = new Point(223, 110);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
             panel3.Size = new Size(197, 510);
@@ -829,7 +827,9 @@
             ClientSize = new Size(800, 675);
             Controls.Add(button1);
             Controls.Add(lblEmployeeName);
+            Controls.Add(button3);
             Controls.Add(panel3);
+            Controls.Add(button2);
             Controls.Add(dateTimePicker2);
             Controls.Add(panel9);
             Controls.Add(dateTimePicker1);
@@ -839,7 +839,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmViewEmployee";
             Load += frmViewEmployee_Load;
-           
             panel16.ResumeLayout(false);
             panel17.ResumeLayout(false);
             panel17.PerformLayout();

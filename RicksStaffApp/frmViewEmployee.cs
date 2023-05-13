@@ -13,7 +13,7 @@ namespace RicksStaffApp
 {
     public partial class frmViewEmployee : Form
     {
-       
+
         Employee ThisEmployee = new Employee();
         public frmViewEmployee(Employee employee)
         {
