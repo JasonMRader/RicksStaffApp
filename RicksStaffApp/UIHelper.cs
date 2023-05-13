@@ -539,7 +539,7 @@ namespace RicksStaffApp
         //        flowDisplay.Controls.Add(pnlContainer);
         //    }
         //}
-        public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay)
+        public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel)
         {
             // Clear existing panels
             flowEmployeeDisplay.Controls.Clear();
@@ -556,27 +556,18 @@ namespace RicksStaffApp
                 Button btnName = CreateButtonTemplate(140, 25, emp.FullName);                             
                 btnName.Click += (sender, e) =>
                 {
-                    // Open frmViewEmployee form with clicked employee as a parameter
+                    
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
-                    viewEmployeeForm.ShowDialog();
+                    viewEmployeeForm.TopLevel = false;
+                    viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+                    viewEmployeeForm.Dock = DockStyle.Fill;
+                    parentPanel.Controls.Add(viewEmployeeForm);
+                    viewEmployeeForm.Show();
                 };
 
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
-                //foreach (Position pos in emp.Positions)
-                //{
-                //    Panel pnlPos = new Panel();
-                //    pnlPos.Size = new Size(60, 25);
-                //    pnlPos.BackColor = MyColors.PositionColor;
-                //    Label lblPos = new Label();
-                //    lblPos.Text = pos.Name;
-                //    lblPos.Font = new Font(lblPos.Font.FontFamily, 10);
-                //    lblPos.AutoSize = false;
-                //    lblPos.Size = new Size(60, 25);
-                //    lblPos.TextAlign = ContentAlignment.MiddleCenter;
-                //    pnlPos.Controls.Add(lblPos);
-                //    empPanel.Controls.Add(pnlPos);
-                //}
+               
                
                 empPanelContainer.Controls.Add(empPanel);
                 

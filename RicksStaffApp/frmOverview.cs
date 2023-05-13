@@ -40,7 +40,7 @@ namespace RicksStaffApp
             //}
 
 
-            UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay);
+            UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

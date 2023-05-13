@@ -131,42 +131,50 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.Enabled = false;
             label5.ForeColor = Color.DimGray;
             label5.Location = new Point(247, 15);
             label5.Name = "label5";
             label5.Size = new Size(50, 15);
             label5.TabIndex = 2;
             label5.Text = "Position";
+            label5.Visible = false;
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.Enabled = false;
             label4.ForeColor = Color.DimGray;
             label4.Location = new Point(51, 15);
             label4.Name = "label4";
             label4.Size = new Size(64, 15);
             label4.TabIndex = 2;
             label4.Text = "Timeframe";
+            label4.Visible = false;
             // 
             // comboBox2
             // 
             comboBox2.BackColor = SystemColors.ScrollBar;
+            comboBox2.Enabled = false;
             comboBox2.FormattingEnabled = true;
             comboBox2.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
             comboBox2.Location = new Point(303, 12);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(121, 23);
             comboBox2.TabIndex = 1;
+            comboBox2.Visible = false;
             // 
             // comboBox1
             // 
             comboBox1.BackColor = SystemColors.ScrollBar;
+            comboBox1.Enabled = false;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
             comboBox1.Location = new Point(120, 12);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 1;
+            comboBox1.Visible = false;
             // 
             // label2
             // 
