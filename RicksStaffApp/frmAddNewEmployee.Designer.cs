@@ -132,7 +132,7 @@
             btnCloseAddEmployee.ForeColor = Color.Black;
             btnCloseAddEmployee.Location = new Point(351, -2);
             btnCloseAddEmployee.Name = "btnCloseAddEmployee";
-            btnCloseAddEmployee.Size = new Size(99, 23);
+            btnCloseAddEmployee.Size = new Size(100, 23);
             btnCloseAddEmployee.TabIndex = 9;
             btnCloseAddEmployee.Text = "Finished";
             btnCloseAddEmployee.UseVisualStyleBackColor = false;

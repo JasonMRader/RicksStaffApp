@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             lblEmployeeName = new Label();
-            panel1 = new Panel();
             button3 = new Button();
             button2 = new Button();
             panel16 = new Panel();
-            pnlEmployeeShifts = new Panel();
             panel17 = new Panel();
             label24 = new Label();
             label25 = new Label();
@@ -93,8 +91,6 @@
             cboSeondEmployeeTime = new ComboBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
-            flowTest = new FlowLayoutPanel();
-            panel1.SuspendLayout();
             panel16.SuspendLayout();
             panel17.SuspendLayout();
             panel18.SuspendLayout();
@@ -125,29 +121,12 @@
             lblEmployeeName.AutoSize = true;
             lblEmployeeName.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             lblEmployeeName.ForeColor = Color.White;
-            lblEmployeeName.Location = new Point(395, 17);
+            lblEmployeeName.Location = new Point(330, 9);
             lblEmployeeName.Name = "lblEmployeeName";
             lblEmployeeName.Size = new Size(90, 37);
             lblEmployeeName.TabIndex = 0;
             lblEmployeeName.Text = "label1";
             lblEmployeeName.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(46, 51, 73);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(panel16);
-            panel1.Controls.Add(dateTimePicker2);
-            panel1.Controls.Add(panel9);
-            panel1.Controls.Add(dateTimePicker1);
-            panel1.Controls.Add(panel3);
-            panel1.Controls.Add(lblEmployeeName);
-            panel1.Location = new Point(12, 29);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(880, 550);
-            panel1.TabIndex = 1;
-            panel1.Paint += panel1_Paint;
             // 
             // button3
             // 
@@ -155,7 +134,7 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(537, 92);
+            button3.Location = new Point(90, 6);
             button3.Name = "button3";
             button3.Size = new Size(75, 33);
             button3.TabIndex = 5;
@@ -168,7 +147,7 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(458, 92);
+            button2.Location = new Point(6, 6);
             button2.Name = "button2";
             button2.Size = new Size(75, 33);
             button2.TabIndex = 5;
@@ -177,21 +156,14 @@
             // 
             // panel16
             // 
-            panel16.Controls.Add(pnlEmployeeShifts);
             panel16.Controls.Add(panel17);
             panel16.Controls.Add(panel18);
-            panel16.Location = new Point(458, 149);
+            panel16.Controls.Add(button3);
+            panel16.Controls.Add(button2);
+            panel16.Location = new Point(447, 139);
             panel16.Name = "panel16";
-            panel16.Size = new Size(405, 387);
+            panel16.Size = new Size(329, 510);
             panel16.TabIndex = 4;
-            // 
-            // pnlEmployeeShifts
-            // 
-            pnlEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
-            pnlEmployeeShifts.Location = new Point(3, 169);
-            pnlEmployeeShifts.Name = "pnlEmployeeShifts";
-            pnlEmployeeShifts.Size = new Size(182, 201);
-            pnlEmployeeShifts.TabIndex = 5;
             // 
             // panel17
             // 
@@ -203,7 +175,7 @@
             panel17.Controls.Add(label28);
             panel17.Controls.Add(label29);
             panel17.Controls.Add(label30);
-            panel17.Location = new Point(3, 33);
+            panel17.Location = new Point(3, 49);
             panel17.Name = "panel17";
             panel17.Size = new Size(182, 112);
             panel17.TabIndex = 2;
@@ -299,9 +271,9 @@
             panel18.Controls.Add(panel20);
             panel18.Controls.Add(panel21);
             panel18.Controls.Add(label34);
-            panel18.Location = new Point(200, 33);
+            panel18.Location = new Point(3, 167);
             panel18.Name = "panel18";
-            panel18.Size = new Size(191, 337);
+            panel18.Size = new Size(191, 333);
             panel18.TabIndex = 2;
             // 
             // panel19
@@ -376,7 +348,7 @@
             // dateTimePicker2
             // 
             dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(754, 97);
+            dateTimePicker2.Location = new Point(546, 110);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(86, 23);
             dateTimePicker2.TabIndex = 4;
@@ -386,10 +358,10 @@
             panel9.Controls.Add(panel10);
             panel9.Controls.Add(panel11);
             panel9.Controls.Add(panel15);
-            panel9.Location = new Point(12, 86);
+            panel9.Location = new Point(11, 139);
             panel9.Margin = new Padding(0);
             panel9.Name = "panel9";
-            panel9.Size = new Size(197, 450);
+            panel9.Size = new Size(197, 510);
             panel9.TabIndex = 2;
             // 
             // panel10
@@ -607,7 +579,7 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(633, 97);
+            dateTimePicker1.Location = new Point(442, 110);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(86, 23);
             dateTimePicker1.TabIndex = 4;
@@ -617,10 +589,10 @@
             panel3.Controls.Add(panel5);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel2);
-            panel3.Location = new Point(229, 86);
+            panel3.Location = new Point(234, 139);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(197, 450);
+            panel3.Size = new Size(197, 510);
             panel3.TabIndex = 2;
             // 
             // panel5
@@ -837,44 +809,37 @@
             // 
             // button1
             // 
+            button1.BackColor = Color.FromArgb(167, 204, 237);
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(875, 0);
+            button1.ForeColor = Color.Black;
+            button1.Location = new Point(693, 13);
             button1.Name = "button1";
-            button1.Size = new Size(26, 23);
+            button1.Size = new Size(74, 33);
             button1.TabIndex = 2;
-            button1.Text = "X";
-            button1.UseVisualStyleBackColor = true;
+            button1.Text = "Finished";
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // flowTest
-            // 
-            flowTest.BackColor = Color.FromArgb(46, 51, 73);
-            flowTest.Location = new Point(913, 29);
-            flowTest.Name = "flowTest";
-            flowTest.Size = new Size(470, 550);
-            flowTest.TabIndex = 3;
             // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(69, 105, 144);
-            ClientSize = new Size(1409, 591);
-            Controls.Add(flowTest);
+            BackColor = Color.FromArgb(37, 42, 64);
+            ClientSize = new Size(800, 675);
             Controls.Add(button1);
-            Controls.Add(panel1);
+            Controls.Add(lblEmployeeName);
+            Controls.Add(panel3);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(panel9);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(panel16);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmViewEmployee";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmViewEmployee";
             Load += frmViewEmployee_Load;
-            MouseDown += Form1_MouseDown;
-            MouseMove += Form1_MouseMove;
-            MouseUp += Form1_MouseUp;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+           
             panel16.ResumeLayout(false);
             panel17.ResumeLayout(false);
             panel17.PerformLayout();
@@ -913,12 +878,12 @@
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Label lblEmployeeName;
-        private Panel panel1;
         private Button button1;
         private Panel panel2;
         private PictureBox pictureBox1;
@@ -960,7 +925,6 @@
         private Label label11;
         private Label label10;
         private Panel panel16;
-        private Panel pnlEmployeeShifts;
         private Panel panel17;
         private Label label24;
         private Label label25;
@@ -982,6 +946,5 @@
         private ComboBox cboSeondEmployeeTime;
         private Button button2;
         private Button button3;
-        private FlowLayoutPanel flowTest;
     }
 }

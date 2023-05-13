@@ -18,7 +18,7 @@ namespace RicksStaffApp
         public frmOverview()
         {
             InitializeComponent();
-            
+
         }
 
         private void frmAddNewEmployee_FormClosed(object? sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace RicksStaffApp
             frmAddNewEmployee.TopLevel = false;
             pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
             frmAddNewEmployee.Show();
-            
+
         }
     }
 }

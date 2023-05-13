@@ -30,12 +30,12 @@
         {
             pnlEmployeeDisplay = new Panel();
             flowEmployeeDisplay = new FlowLayoutPanel();
+            btnAddEmployee = new Button();
             label6 = new Label();
             textBox1 = new TextBox();
             comboBox3 = new ComboBox();
             label1 = new Label();
-            btnAddEmployee = new Button();
-            panel2 = new Panel();
+            pnlEmployeeStats = new Panel();
             label5 = new Label();
             label4 = new Label();
             comboBox2 = new ComboBox();
@@ -43,13 +43,13 @@
             label2 = new Label();
             label3 = new Label();
             pnlEmployeeDisplay.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // pnlEmployeeDisplay
             // 
             pnlEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
             pnlEmployeeDisplay.Controls.Add(flowEmployeeDisplay);
+            pnlEmployeeDisplay.Controls.Add(btnAddEmployee);
             pnlEmployeeDisplay.Controls.Add(label6);
             pnlEmployeeDisplay.Controls.Add(textBox1);
             pnlEmployeeDisplay.Controls.Add(comboBox3);
@@ -68,6 +68,19 @@
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
             flowEmployeeDisplay.Size = new Size(426, 553);
             flowEmployeeDisplay.TabIndex = 6;
+            // 
+            // btnAddEmployee
+            // 
+            btnAddEmployee.BackColor = Color.FromArgb(167, 204, 237);
+            btnAddEmployee.FlatAppearance.BorderSize = 0;
+            btnAddEmployee.FlatStyle = FlatStyle.Flat;
+            btnAddEmployee.Location = new Point(350, 0);
+            btnAddEmployee.Name = "btnAddEmployee";
+            btnAddEmployee.Size = new Size(100, 23);
+            btnAddEmployee.TabIndex = 4;
+            btnAddEmployee.Text = "Edit Employees";
+            btnAddEmployee.UseVisualStyleBackColor = false;
+            btnAddEmployee.Click += btnAddEmployee_Click;
             // 
             // label6
             // 
@@ -105,38 +118,21 @@
             label1.TabIndex = 2;
             label1.Text = "Search Employees";
             // 
-            // btnAddEmployee
+            // pnlEmployeeStats
             // 
-            btnAddEmployee.BackColor = Color.FromArgb(167, 204, 237);
-            btnAddEmployee.FlatAppearance.BorderSize = 0;
-            btnAddEmployee.FlatStyle = FlatStyle.Flat;
-            btnAddEmployee.Location = new Point(1175, 38);
-            btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(100, 23);
-            btnAddEmployee.TabIndex = 4;
-            btnAddEmployee.Text = "Edit Employees";
-            btnAddEmployee.UseVisualStyleBackColor = false;
-            btnAddEmployee.Click += btnAddEmployee_Click;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.FromArgb(37, 42, 64);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(comboBox2);
-            panel2.Controls.Add(comboBox1);
-            panel2.Location = new Point(17, 72);
-            panel2.Margin = new Padding(8);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(794, 676);
-            panel2.TabIndex = 0;
-            panel2.Paint += panel2_Paint;
+            pnlEmployeeStats.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeStats.Location = new Point(17, 72);
+            pnlEmployeeStats.Margin = new Padding(8);
+            pnlEmployeeStats.Name = "pnlEmployeeStats";
+            pnlEmployeeStats.Size = new Size(800, 675);
+            pnlEmployeeStats.TabIndex = 0;
+            pnlEmployeeStats.Paint += panel2_Paint;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(235, 22);
+            label5.ForeColor = Color.DimGray;
+            label5.Location = new Point(247, 15);
             label5.Name = "label5";
             label5.Size = new Size(50, 15);
             label5.TabIndex = 2;
@@ -145,8 +141,8 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(39, 22);
+            label4.ForeColor = Color.DimGray;
+            label4.Location = new Point(51, 15);
             label4.Name = "label4";
             label4.Size = new Size(64, 15);
             label4.TabIndex = 2;
@@ -154,18 +150,20 @@
             // 
             // comboBox2
             // 
+            comboBox2.BackColor = SystemColors.ScrollBar;
             comboBox2.FormattingEnabled = true;
             comboBox2.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox2.Location = new Point(291, 19);
+            comboBox2.Location = new Point(303, 12);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(121, 23);
             comboBox2.TabIndex = 1;
             // 
             // comboBox1
             // 
+            comboBox1.BackColor = SystemColors.ScrollBar;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox1.Location = new Point(108, 19);
+            comboBox1.Location = new Point(120, 12);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 1;
@@ -200,10 +198,13 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(label5);
             Controls.Add(label3);
-            Controls.Add(btnAddEmployee);
+            Controls.Add(label4);
             Controls.Add(label2);
-            Controls.Add(panel2);
+            Controls.Add(comboBox2);
+            Controls.Add(pnlEmployeeStats);
+            Controls.Add(comboBox1);
             Controls.Add(pnlEmployeeDisplay);
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(1320, 820);
@@ -214,8 +215,6 @@
             Load += frmOverview_Load;
             pnlEmployeeDisplay.ResumeLayout(false);
             pnlEmployeeDisplay.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -223,7 +222,7 @@
         #endregion
 
         private Panel pnlEmployeeDisplay;
-        private Panel panel2;
+        private Panel pnlEmployeeStats;
         private Panel panel4;
         private Panel panel3;
         private Label label6;
