@@ -15,30 +15,9 @@ namespace RicksStaffApp
     {
         List<Employee> employeeList = new List<Employee>();
         List<Position> positionList = new List<Position>();
-        private bool isDragging = false;
-        private Point lastLocation;
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            isDragging = true;
-            lastLocation = e.Location;
-        }
 
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDragging)
-            {
-                this.Location = new Point(
-                    (this.Location.X - lastLocation.X) + e.X,
-                    (this.Location.Y - lastLocation.Y) + e.Y);
 
-                this.Update();
-            }
-        }
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            isDragging = false;
-        }
         public frmAddNewEmployee()
         {
             InitializeComponent();
@@ -194,9 +173,11 @@ namespace RicksStaffApp
             string positions = string.Join(", ", employee.Positions.Select(p => p.Name));
             e.Value += " - " + positions;
         }
+        public event EventHandler FormClosed;
 
         private void btnCloseAddEmployee_Click(object sender, EventArgs e)
         {
+            FormClosed?.Invoke(this, e);
             this.Close();
         }
     }

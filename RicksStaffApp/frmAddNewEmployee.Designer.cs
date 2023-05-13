@@ -102,10 +102,15 @@
             // 
             // flowEmployeeDisplay
             // 
+            flowEmployeeDisplay.AutoScroll = true;
+            flowEmployeeDisplay.AutoSize = true;
             flowEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeDisplay.Location = new Point(8, 220);
+            flowEmployeeDisplay.Dock = DockStyle.Bottom;
+            flowEmployeeDisplay.Location = new Point(0, 225);
+            flowEmployeeDisplay.MaximumSize = new Size(450, 450);
+            flowEmployeeDisplay.MinimumSize = new Size(427, 450);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
-            flowEmployeeDisplay.Size = new Size(425, 443);
+            flowEmployeeDisplay.Size = new Size(450, 450);
             flowEmployeeDisplay.TabIndex = 7;
             // 
             // label3
@@ -113,7 +118,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(100, 5);
+            label3.Location = new Point(12, 5);
             label3.Name = "label3";
             label3.Size = new Size(236, 32);
             label3.TabIndex = 3;
@@ -121,22 +126,23 @@
             // 
             // btnCloseAddEmployee
             // 
+            btnCloseAddEmployee.BackColor = Color.FromArgb(167, 204, 237);
             btnCloseAddEmployee.FlatAppearance.BorderSize = 0;
             btnCloseAddEmployee.FlatStyle = FlatStyle.Flat;
-            btnCloseAddEmployee.ForeColor = Color.White;
-            btnCloseAddEmployee.Location = new Point(420, -2);
+            btnCloseAddEmployee.ForeColor = Color.Black;
+            btnCloseAddEmployee.Location = new Point(351, -2);
             btnCloseAddEmployee.Name = "btnCloseAddEmployee";
-            btnCloseAddEmployee.Size = new Size(30, 23);
+            btnCloseAddEmployee.Size = new Size(99, 23);
             btnCloseAddEmployee.TabIndex = 9;
-            btnCloseAddEmployee.Text = "X";
-            btnCloseAddEmployee.UseVisualStyleBackColor = true;
+            btnCloseAddEmployee.Text = "Finished";
+            btnCloseAddEmployee.UseVisualStyleBackColor = false;
             btnCloseAddEmployee.Click += btnCloseAddEmployee_Click;
             // 
             // frmAddNewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(69, 105, 144);
+            BackColor = Color.FromArgb(37, 42, 64);
             ClientSize = new Size(450, 675);
             Controls.Add(label1);
             Controls.Add(clbPositions);
@@ -152,9 +158,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmAddNewEmployee";
             Load += frmAddNewEmployee_Load;
-            MouseDown += Form1_MouseDown;
-            MouseMove += Form1_MouseMove;
-            MouseUp += Form1_MouseUp;
             ResumeLayout(false);
             PerformLayout();
         }
