@@ -362,7 +362,9 @@ namespace RicksStaffApp
                 }
             }
         }
+        
 
+        
 
         public static void UpdateIncident(Incident incident)
         {
@@ -687,6 +689,7 @@ namespace RicksStaffApp
                 return shifts;
             }
         }
+        //TODO -Fix this
         public static List<Employee> LoadEmployees()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -756,7 +759,7 @@ namespace RicksStaffApp
                                 employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
                             }
                             //if (incident != null && incident.ID != default)
-                            if (incident != null && incident.ID != default)// && !currentEmployeeShift.Incidents.Any(i => i.ID == incident.ID))
+                            if (incident != null && incident.ID != default && !currentEmployeeShift.Incidents.Any(i => i.ID == incident.ID))
                             {
                                 currentEmployeeShift.Incidents.Add(incident);
                             }
@@ -765,9 +768,7 @@ namespace RicksStaffApp
                         },
                         new { EmployeeID = employee.ID },
                         //splitOn: "ShiftID,PositionID,IncidentID")
-                        splitOn: "ShiftID,PositionID,IncidentEmployeeShiftID")
-
-                        .Distinct().AsList();
+                        splitOn: "ShiftID,PositionID,IncidentEmployeeShiftID").Distinct().AsList();
 
                     employee.EmployeeShifts = employeeShiftsDictionary.Values.ToList();
                 }

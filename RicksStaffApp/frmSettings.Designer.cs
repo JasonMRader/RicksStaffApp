@@ -79,13 +79,10 @@
             btnLoadShifts = new Button();
             btnAddShift = new Button();
             panel6 = new Panel();
-            btnLoadEmployeeShifts = new Button();
-            btnAddEmployeeShift = new Button();
-            txtTestInput = new TextBox();
-            dtpTestOutput = new DateTimePicker();
-            btnTest = new Button();
             nudPositionID = new NumericUpDown();
+            btnLoadEmployeeShifts = new Button();
             label13 = new Label();
+            btnAddEmployeeShift = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -625,6 +622,13 @@
             panel6.Size = new Size(145, 400);
             panel6.TabIndex = 9;
             // 
+            // nudPositionID
+            // 
+            nudPositionID.Location = new Point(68, 276);
+            nudPositionID.Name = "nudPositionID";
+            nudPositionID.Size = new Size(40, 23);
+            nudPositionID.TabIndex = 7;
+            // 
             // btnLoadEmployeeShifts
             // 
             btnLoadEmployeeShifts.Location = new Point(21, 345);
@@ -633,48 +637,6 @@
             btnLoadEmployeeShifts.TabIndex = 6;
             btnLoadEmployeeShifts.Text = "Load";
             btnLoadEmployeeShifts.UseVisualStyleBackColor = true;
-            // 
-            // btnAddEmployeeShift
-            // 
-            btnAddEmployeeShift.Location = new Point(21, 306);
-            btnAddEmployeeShift.Name = "btnAddEmployeeShift";
-            btnAddEmployeeShift.Size = new Size(100, 23);
-            btnAddEmployeeShift.TabIndex = 6;
-            btnAddEmployeeShift.Text = "Add";
-            btnAddEmployeeShift.UseVisualStyleBackColor = true;
-            btnAddEmployeeShift.Click += btnAddEmployeeShift_Click;
-            // 
-            // txtTestInput
-            // 
-            txtTestInput.Location = new Point(633, 580);
-            txtTestInput.Name = "txtTestInput";
-            txtTestInput.Size = new Size(100, 23);
-            txtTestInput.TabIndex = 10;
-            // 
-            // dtpTestOutput
-            // 
-            dtpTestOutput.Format = DateTimePickerFormat.Short;
-            dtpTestOutput.Location = new Point(783, 580);
-            dtpTestOutput.Name = "dtpTestOutput";
-            dtpTestOutput.Size = new Size(147, 23);
-            dtpTestOutput.TabIndex = 11;
-            // 
-            // btnTest
-            // 
-            btnTest.Location = new Point(692, 637);
-            btnTest.Name = "btnTest";
-            btnTest.Size = new Size(75, 23);
-            btnTest.TabIndex = 12;
-            btnTest.Text = "Test";
-            btnTest.UseVisualStyleBackColor = true;
-            btnTest.Click += btnTest_Click;
-            // 
-            // nudPositionID
-            // 
-            nudPositionID.Location = new Point(68, 276);
-            nudPositionID.Name = "nudPositionID";
-            nudPositionID.Size = new Size(40, 23);
-            nudPositionID.TabIndex = 7;
             // 
             // label13
             // 
@@ -687,15 +649,22 @@
             label13.TabIndex = 4;
             label13.Text = "PosID";
             // 
+            // btnAddEmployeeShift
+            // 
+            btnAddEmployeeShift.Location = new Point(21, 306);
+            btnAddEmployeeShift.Name = "btnAddEmployeeShift";
+            btnAddEmployeeShift.Size = new Size(100, 23);
+            btnAddEmployeeShift.TabIndex = 6;
+            btnAddEmployeeShift.Text = "Add";
+            btnAddEmployeeShift.UseVisualStyleBackColor = true;
+            btnAddEmployeeShift.Click += btnAddEmployeeShift_Click;
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1290, 755);
-            Controls.Add(btnTest);
-            Controls.Add(dtpTestOutput);
-            Controls.Add(txtTestInput);
             Controls.Add(panel1);
             Controls.Add(btnNewAction);
             Controls.Add(label1);
@@ -777,9 +746,6 @@
         private Button btnAddEmployeeShift;
         private CheckBox cbIsAmShift;
         private DateTimePicker dtpShiftDate;
-        private TextBox txtTestInput;
-        private DateTimePicker dtpTestOutput;
-        private Button btnTest;
         private TextBox txtIncident_EmployeeID;
         private DateTimePicker dtpIncidentDate;
         private Label label11;

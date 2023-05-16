@@ -111,15 +111,12 @@ namespace RicksStaffApp
             UIHelper.CreateShiftPanels(shiftList, flowSettingDisplay);
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            dtpTestOutput.Value = DateTime.Parse(txtTestInput.Text);
-        }
+        
 
         private void btnAddEmployeeShift_Click(object sender, EventArgs e)
         {
             EmployeeShift empShift = new EmployeeShift();
-            empShift.PositionID = Decimal.ToInt32(nudPositionID.Value); 
+            empShift.PositionID = Decimal.ToInt32(nudPositionID.Value);
             empShift.Shift.ID = Int32.Parse(txtEmployeeShift_ShiftID.Text);
             empShift.Employee.ID = Int32.Parse(txtEmployeeIDShiftEmployeeName.Text);
 
