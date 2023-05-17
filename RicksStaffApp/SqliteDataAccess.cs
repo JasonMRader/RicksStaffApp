@@ -722,16 +722,7 @@ namespace RicksStaffApp
 
                 foreach (var employee in employees)
                 {
-                    //string employeeShiftsQuery =
-                    //    @"SELECT es.ID, es.EmployeeID, es.ShiftID, es.PositionID,
-                    //    s.ID as ShiftID, s.DateString, s.IsAm,
-                    //    p.ID as PositionID, p.Name,
-                    //    i.ID as IncidentID, i.Note, i.EmployeeShiftID
-                    //    FROM EmployeeShift es
-                    //    JOIN Shift s ON es.ShiftID = s.ID
-                    //    JOIN Positions p ON es.PositionID = p.ID
-                    //    LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID
-                    //    WHERE es.EmployeeID = @EmployeeID";
+
                     string employeeShiftsQuery =
                         @"SELECT es.ID, es.EmployeeID, es.ShiftID, es.PositionID,
                         s.ID as ShiftID, s.DateString, s.IsAm,
@@ -744,6 +735,7 @@ namespace RicksStaffApp
                         WHERE es.EmployeeID = @EmployeeID";
 
 
+
                     var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
 
                     cnn.Query<EmployeeShift, Shift, Position, Incident, EmployeeShift>(employeeShiftsQuery,
@@ -753,13 +745,14 @@ namespace RicksStaffApp
                             {
                                 currentEmployeeShift = employeeShift;
                                 currentEmployeeShift.Employee = employee;
-                                currentEmployeeShift.Shift = shift;
+                                currentEmployeeShift.Shift = shift;      
                                 currentEmployeeShift.Position = position;
                                 currentEmployeeShift.Incidents = new List<Incident>();
+                                
                                 employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
                             }
                             //if (incident != null && incident.ID != default)
-                            if (incident != null && incident.ID != default && !currentEmployeeShift.Incidents.Any(i => i.ID == incident.ID))
+                            if (incident != null && incident.ID != default)
                             {
                                 currentEmployeeShift.Incidents.Add(incident);
                             }
@@ -768,7 +761,7 @@ namespace RicksStaffApp
                         },
                         new { EmployeeID = employee.ID },
                         //splitOn: "ShiftID,PositionID,IncidentID")
-                        splitOn: "ShiftID,PositionID,IncidentEmployeeShiftID").Distinct().AsList();
+                        splitOn: "ShiftID, PositionID, IncidentEmployeeShiftID").Distinct().AsList();
 
                     employee.EmployeeShifts = employeeShiftsDictionary.Values.ToList();
                 }
@@ -887,6 +880,47 @@ namespace RicksStaffApp
         //        return employeeShiftsDictionary.Values.ToList();
         //    }
         //}
+        public static List<EmployeeShift> LoadEmployeeShifts(Employee employee)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string employeeShiftsQuery =
+                    @"SELECT es.*, s.*, p.*, i.*
+            FROM EmployeeShift es
+            JOIN Shift s ON es.ShiftID = s.ID
+            JOIN Positions p ON es.PositionID = p.ID
+            LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID
+            WHERE es.EmployeeID = @EmployeeID";
+
+                var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+                var employeeShifts = cnn.Query<EmployeeShift, Shift, Position, Incident, EmployeeShift>(
+                    employeeShiftsQuery,
+                    (employeeShift, shift, position, incident) =>
+                    {
+                        if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+                        {
+                            currentEmployeeShift = employeeShift;
+                            currentEmployeeShift.Employee = employee;
+                            currentEmployeeShift.Shift = shift;
+                            currentEmployeeShift.Position = position;
+                            currentEmployeeShift.Incidents = new List<Incident>();
+                            employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+                        }
+
+                        if (incident != null && incident.ID != default && !currentEmployeeShift.Incidents.Any(i => i.ID == incident.ID))
+                        {
+                            currentEmployeeShift.Incidents.Add(incident);
+                        }
+
+                        return currentEmployeeShift;
+                    },
+                    new { EmployeeID = employee.ID },
+                    splitOn: "ID,ID,ID").Distinct().AsList();
+
+                return employeeShifts;
+            }
+        }
 
         public static void AddEmployeeShift(EmployeeShift employeeShift)
         {

@@ -1,5 +1,8 @@
 ﻿//using Microsoft.Office.Interop.Excel;
 
+using System.Data.SQLite;
+using System.Data;
+
 namespace RicksStaffApp
 {
     public static class UIHelper
@@ -96,7 +99,57 @@ namespace RicksStaffApp
             }
             return StarsDisplayed;
         }
+        //public static List<Shift> LoadShifts()
+        //{
+        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+        //        string query = "SELECT * FROM Shift";
+        //        var shifts = cnn.Query<Shift>(query).AsList();
 
+        //        string employeeShiftQuery = @"
+        //            SELECT es.*, e.*, p.*, i.*
+        //            FROM EmployeeShift es
+        //            INNER JOIN Employee e ON es.EmployeeID = e.ID
+        //            INNER JOIN Positions p ON es.PositionID = p.ID
+        //            LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
+        //            WHERE es.ShiftID = @ShiftID";
+
+
+        //        foreach (var shift in shifts)
+        //        {
+        //            var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+        //            var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, EmployeeShift>(employeeShiftQuery,
+        //                (employeeShift, employee, position, incident) =>
+        //                {
+        //                    // Check if the employee shift is already added to the dictionary
+        //                    if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+        //                    {
+        //                        currentEmployeeShift = employeeShift;
+        //                        currentEmployeeShift.Employee = employee;
+        //                        currentEmployeeShift.Position = position;
+        //                        currentEmployeeShift.Incidents = new List<Incident>();
+        //                        employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+        //                    }
+
+        //                    // Add the incident to the employee shift if it exists
+        //                    if (incident != null && incident.ID != default)
+        //                    {
+        //                        currentEmployeeShift.Incidents.Add(incident);
+        //                    }
+
+        //                    return currentEmployeeShift;
+        //                },
+        //                new { ShiftID = shift.ID },
+        //                splitOn: "ID,ID,ID").Distinct().AsList();
+
+        //            shift.EmployeeShifts = employeeShifts;
+        //        }
+        //        List<Activity> activities = LoadActivities();
+        //        Incident.AssignActivitiesToIncidents(shifts, activities);
+        //        return shifts;
+        //    }
+        //}
 
         //add panel for each incident in EmployeeShift with a label that has the name of the activity and a label that has the rating change
         public static Color GetBackColor(int rating)

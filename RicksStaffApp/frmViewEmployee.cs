@@ -28,9 +28,9 @@ namespace RicksStaffApp
         private void frmViewEmployee_Load(object sender, EventArgs e)
         {
             lblEmployeeName.Text = ThisEmployee.FullName;
-            cboFirstEmployeeTime.DrawMode = DrawMode.OwnerDrawFixed;
+            SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
+            
 
-            cboFirstEmployeeTime.SelectedIndex = 0;
             cboSeondEmployeeTime.SelectedIndex = 2;
             //UIHelper.CreateSingleEmployeeShiftPanel(flowTest, ThisEmployee.EmployeeShifts);
 

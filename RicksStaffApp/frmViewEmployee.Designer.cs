@@ -31,44 +31,7 @@
             lblEmployeeName = new Label();
             button3 = new Button();
             button2 = new Button();
-            panel16 = new Panel();
-            panel17 = new Panel();
-            label24 = new Label();
-            label25 = new Label();
-            label26 = new Label();
-            label27 = new Label();
-            label28 = new Label();
-            label29 = new Label();
-            label30 = new Label();
-            panel18 = new Panel();
-            panel19 = new Panel();
-            label31 = new Label();
-            panel20 = new Panel();
-            label32 = new Label();
-            panel21 = new Panel();
-            label33 = new Label();
-            label34 = new Label();
             dateTimePicker2 = new DateTimePicker();
-            panel9 = new Panel();
-            panel10 = new Panel();
-            label13 = new Label();
-            label14 = new Label();
-            label15 = new Label();
-            label16 = new Label();
-            label17 = new Label();
-            label18 = new Label();
-            label19 = new Label();
-            panel11 = new Panel();
-            panel12 = new Panel();
-            label20 = new Label();
-            panel13 = new Panel();
-            label21 = new Label();
-            panel14 = new Panel();
-            label22 = new Label();
-            label23 = new Label();
-            panel15 = new Panel();
-            cboFirstEmployeeTime = new ComboBox();
-            pictureBox2 = new PictureBox();
             dateTimePicker1 = new DateTimePicker();
             panel3 = new Panel();
             panel5 = new Panel();
@@ -91,20 +54,7 @@
             cboSeondEmployeeTime = new ComboBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
-            panel16.SuspendLayout();
-            panel17.SuspendLayout();
-            panel18.SuspendLayout();
-            panel19.SuspendLayout();
-            panel20.SuspendLayout();
-            panel21.SuspendLayout();
-            panel9.SuspendLayout();
-            panel10.SuspendLayout();
-            panel11.SuspendLayout();
-            panel12.SuspendLayout();
-            panel13.SuspendLayout();
-            panel14.SuspendLayout();
-            panel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -154,195 +104,6 @@
             button2.Text = "Stats";
             button2.UseVisualStyleBackColor = false;
             // 
-            // panel16
-            // 
-            panel16.Controls.Add(panel17);
-            panel16.Controls.Add(panel18);
-            panel16.Location = new Point(447, 182);
-            panel16.Name = "panel16";
-            panel16.Size = new Size(209, 438);
-            panel16.TabIndex = 4;
-            // 
-            // panel17
-            // 
-            panel17.BackColor = Color.FromArgb(37, 42, 64);
-            panel17.Controls.Add(label24);
-            panel17.Controls.Add(label25);
-            panel17.Controls.Add(label26);
-            panel17.Controls.Add(label27);
-            panel17.Controls.Add(label28);
-            panel17.Controls.Add(label29);
-            panel17.Controls.Add(label30);
-            panel17.Location = new Point(3, 23);
-            panel17.Name = "panel17";
-            panel17.Size = new Size(182, 112);
-            panel17.TabIndex = 2;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label24.ForeColor = Color.FromArgb(226, 163, 199);
-            label24.Location = new Point(87, 82);
-            label24.Name = "label24";
-            label24.Size = new Size(64, 21);
-            label24.TabIndex = 2;
-            label24.Text = "8 (07%)";
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label25.ForeColor = Color.FromArgb(153, 178, 221);
-            label25.Location = new Point(87, 56);
-            label25.Name = "label25";
-            label25.Size = new Size(73, 21);
-            label25.TabIndex = 2;
-            label25.Text = "40 (38%)";
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label26.ForeColor = Color.FromArgb(192, 223, 161);
-            label26.Location = new Point(87, 30);
-            label26.Name = "label26";
-            label26.Size = new Size(73, 21);
-            label26.TabIndex = 2;
-            label26.Text = "57 (55%)";
-            // 
-            // label27
-            // 
-            label27.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label27.AutoSize = true;
-            label27.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label27.ForeColor = Color.White;
-            label27.Location = new Point(3, 87);
-            label27.Name = "label27";
-            label27.Size = new Size(36, 17);
-            label27.TabIndex = 1;
-            label27.Text = "Poor";
-            label27.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label28
-            // 
-            label28.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label28.AutoSize = true;
-            label28.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label28.ForeColor = Color.White;
-            label28.Location = new Point(3, 61);
-            label28.Name = "label28";
-            label28.Size = new Size(56, 17);
-            label28.TabIndex = 1;
-            label28.Text = "Average";
-            label28.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label29
-            // 
-            label29.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label29.ForeColor = Color.White;
-            label29.Location = new Point(3, 35);
-            label29.Name = "label29";
-            label29.Size = new Size(41, 17);
-            label29.TabIndex = 1;
-            label29.Text = "Good";
-            label29.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label30
-            // 
-            label30.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label30.AutoSize = true;
-            label30.ForeColor = Color.White;
-            label30.Location = new Point(78, 11);
-            label30.Name = "label30";
-            label30.Size = new Size(39, 15);
-            label30.TabIndex = 1;
-            label30.Text = "Shifts:";
-            label30.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panel18
-            // 
-            panel18.BackColor = Color.FromArgb(37, 42, 64);
-            panel18.Controls.Add(panel19);
-            panel18.Controls.Add(panel20);
-            panel18.Controls.Add(panel21);
-            panel18.Controls.Add(label34);
-            panel18.Location = new Point(6, 161);
-            panel18.Name = "panel18";
-            panel18.Size = new Size(190, 200);
-            panel18.TabIndex = 2;
-            // 
-            // panel19
-            // 
-            panel19.BackColor = Color.FromArgb(226, 163, 199);
-            panel19.Controls.Add(label31);
-            panel19.Location = new Point(9, 136);
-            panel19.Name = "panel19";
-            panel19.Size = new Size(173, 38);
-            panel19.TabIndex = 2;
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label31.Location = new Point(67, 9);
-            label31.Name = "label31";
-            label31.Size = new Size(37, 20);
-            label31.TabIndex = 0;
-            label31.Text = "Late";
-            // 
-            // panel20
-            // 
-            panel20.BackColor = Color.FromArgb(192, 223, 161);
-            panel20.Controls.Add(label32);
-            panel20.Location = new Point(9, 92);
-            panel20.Name = "panel20";
-            panel20.Size = new Size(173, 38);
-            panel20.TabIndex = 2;
-            // 
-            // label32
-            // 
-            label32.AutoSize = true;
-            label32.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label32.Location = new Point(9, 9);
-            label32.Name = "label32";
-            label32.Size = new Size(147, 20);
-            label32.TabIndex = 0;
-            label32.Text = "Went The Extra Mile";
-            // 
-            // panel21
-            // 
-            panel21.BackColor = Color.FromArgb(192, 223, 161);
-            panel21.Controls.Add(label33);
-            panel21.Location = new Point(9, 48);
-            panel21.Name = "panel21";
-            panel21.Size = new Size(173, 38);
-            panel21.TabIndex = 2;
-            // 
-            // label33
-            // 
-            label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label33.Location = new Point(35, 9);
-            label33.Name = "label33";
-            label33.Size = new Size(105, 20);
-            label33.TabIndex = 0;
-            label33.Text = "Great Attitude";
-            // 
-            // label34
-            // 
-            label34.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label34.AutoSize = true;
-            label34.ForeColor = Color.White;
-            label34.Location = new Point(30, 14);
-            label34.Name = "label34";
-            label34.Size = new Size(72, 15);
-            label34.TabIndex = 1;
-            label34.Text = "All Activites:";
-            label34.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // dateTimePicker2
             // 
             dateTimePicker2.Format = DateTimePickerFormat.Short;
@@ -350,229 +111,6 @@
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(107, 23);
             dateTimePicker2.TabIndex = 4;
-            // 
-            // panel9
-            // 
-            panel9.Controls.Add(panel10);
-            panel9.Controls.Add(panel11);
-            panel9.Controls.Add(panel15);
-            panel9.Location = new Point(9, 110);
-            panel9.Margin = new Padding(0);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(197, 510);
-            panel9.TabIndex = 2;
-            // 
-            // panel10
-            // 
-            panel10.BackColor = Color.FromArgb(37, 42, 64);
-            panel10.Controls.Add(label13);
-            panel10.Controls.Add(label14);
-            panel10.Controls.Add(label15);
-            panel10.Controls.Add(label16);
-            panel10.Controls.Add(label17);
-            panel10.Controls.Add(label18);
-            panel10.Controls.Add(label19);
-            panel10.Location = new Point(3, 95);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(191, 114);
-            panel10.TabIndex = 2;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label13.ForeColor = Color.FromArgb(226, 163, 199);
-            label13.Location = new Point(87, 82);
-            label13.Name = "label13";
-            label13.Size = new Size(64, 21);
-            label13.TabIndex = 2;
-            label13.Text = "8 (07%)";
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.ForeColor = Color.FromArgb(153, 178, 221);
-            label14.Location = new Point(87, 56);
-            label14.Name = "label14";
-            label14.Size = new Size(73, 21);
-            label14.TabIndex = 2;
-            label14.Text = "40 (38%)";
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.ForeColor = Color.FromArgb(192, 223, 161);
-            label15.Location = new Point(87, 30);
-            label15.Name = "label15";
-            label15.Size = new Size(73, 21);
-            label15.TabIndex = 2;
-            label15.Text = "57 (55%)";
-            // 
-            // label16
-            // 
-            label16.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label16.ForeColor = Color.White;
-            label16.Location = new Point(3, 87);
-            label16.Name = "label16";
-            label16.Size = new Size(36, 17);
-            label16.TabIndex = 1;
-            label16.Text = "Poor";
-            label16.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label17
-            // 
-            label17.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label17.ForeColor = Color.White;
-            label17.Location = new Point(3, 61);
-            label17.Name = "label17";
-            label17.Size = new Size(56, 17);
-            label17.TabIndex = 1;
-            label17.Text = "Average";
-            label17.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label18
-            // 
-            label18.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label18.ForeColor = Color.White;
-            label18.Location = new Point(3, 35);
-            label18.Name = "label18";
-            label18.Size = new Size(41, 17);
-            label18.TabIndex = 1;
-            label18.Text = "Good";
-            label18.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label19
-            // 
-            label19.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label19.AutoSize = true;
-            label19.ForeColor = Color.White;
-            label19.Location = new Point(78, 11);
-            label19.Name = "label19";
-            label19.Size = new Size(39, 15);
-            label19.TabIndex = 1;
-            label19.Text = "Shifts:";
-            label19.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panel11
-            // 
-            panel11.BackColor = Color.FromArgb(37, 42, 64);
-            panel11.Controls.Add(panel12);
-            panel11.Controls.Add(panel13);
-            panel11.Controls.Add(panel14);
-            panel11.Controls.Add(label23);
-            panel11.Location = new Point(3, 233);
-            panel11.Name = "panel11";
-            panel11.Size = new Size(191, 200);
-            panel11.TabIndex = 2;
-            // 
-            // panel12
-            // 
-            panel12.BackColor = Color.FromArgb(226, 163, 199);
-            panel12.Controls.Add(label20);
-            panel12.Location = new Point(9, 136);
-            panel12.Name = "panel12";
-            panel12.Size = new Size(173, 38);
-            panel12.TabIndex = 2;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.Location = new Point(67, 9);
-            label20.Name = "label20";
-            label20.Size = new Size(37, 20);
-            label20.TabIndex = 0;
-            label20.Text = "Late";
-            // 
-            // panel13
-            // 
-            panel13.BackColor = Color.FromArgb(192, 223, 161);
-            panel13.Controls.Add(label21);
-            panel13.Location = new Point(9, 92);
-            panel13.Name = "panel13";
-            panel13.Size = new Size(173, 38);
-            panel13.TabIndex = 2;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.Location = new Point(9, 9);
-            label21.Name = "label21";
-            label21.Size = new Size(147, 20);
-            label21.TabIndex = 0;
-            label21.Text = "Went The Extra Mile";
-            // 
-            // panel14
-            // 
-            panel14.BackColor = Color.FromArgb(192, 223, 161);
-            panel14.Controls.Add(label22);
-            panel14.Location = new Point(9, 48);
-            panel14.Name = "panel14";
-            panel14.Size = new Size(173, 38);
-            panel14.TabIndex = 2;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.Location = new Point(35, 9);
-            label22.Name = "label22";
-            label22.Size = new Size(105, 20);
-            label22.TabIndex = 0;
-            label22.Text = "Great Attitude";
-            // 
-            // label23
-            // 
-            label23.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label23.AutoSize = true;
-            label23.ForeColor = Color.White;
-            label23.Location = new Point(30, 14);
-            label23.Name = "label23";
-            label23.Size = new Size(135, 15);
-            label23.TabIndex = 1;
-            label23.Text = "Most Frequent Activites:";
-            label23.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panel15
-            // 
-            panel15.BackColor = Color.FromArgb(37, 42, 64);
-            panel15.Controls.Add(cboFirstEmployeeTime);
-            panel15.Controls.Add(pictureBox2);
-            panel15.Location = new Point(3, 3);
-            panel15.Name = "panel15";
-            panel15.Size = new Size(191, 65);
-            panel15.TabIndex = 1;
-            // 
-            // cboFirstEmployeeTime
-            // 
-            cboFirstEmployeeTime.BackColor = Color.FromArgb(74, 79, 99);
-            cboFirstEmployeeTime.FlatStyle = FlatStyle.Flat;
-            cboFirstEmployeeTime.ForeColor = Color.White;
-            cboFirstEmployeeTime.FormattingEnabled = true;
-            cboFirstEmployeeTime.Items.AddRange(new object[] { "All Time", "Last 30 Days", "Last 3 Months", "Last 6 Months", "Last Year" });
-            cboFirstEmployeeTime.Location = new Point(35, 3);
-            cboFirstEmployeeTime.Name = "cboFirstEmployeeTime";
-            cboFirstEmployeeTime.Size = new Size(121, 23);
-            cboFirstEmployeeTime.TabIndex = 3;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = resourse._5_Stars;
-            pictureBox2.Location = new Point(25, 32);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(140, 29);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
             // 
             // dateTimePicker1
             // 
@@ -587,10 +125,10 @@
             panel3.Controls.Add(panel5);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel2);
-            panel3.Location = new Point(223, 110);
+            panel3.Location = new Point(9, 110);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(197, 510);
+            panel3.Size = new Size(206, 510);
             panel3.TabIndex = 2;
             // 
             // panel5
@@ -819,50 +357,32 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Location = new Point(255, 205);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(475, 415);
+            flowLayoutPanel1.TabIndex = 6;
+            // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(37, 42, 64);
             ClientSize = new Size(800, 675);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(button1);
             Controls.Add(lblEmployeeName);
             Controls.Add(button3);
             Controls.Add(panel3);
             Controls.Add(button2);
             Controls.Add(dateTimePicker2);
-            Controls.Add(panel9);
             Controls.Add(dateTimePicker1);
-            Controls.Add(panel16);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmViewEmployee";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmViewEmployee";
             Load += frmViewEmployee_Load;
-            panel16.ResumeLayout(false);
-            panel17.ResumeLayout(false);
-            panel17.PerformLayout();
-            panel18.ResumeLayout(false);
-            panel18.PerformLayout();
-            panel19.ResumeLayout(false);
-            panel19.PerformLayout();
-            panel20.ResumeLayout(false);
-            panel20.PerformLayout();
-            panel21.ResumeLayout(false);
-            panel21.PerformLayout();
-            panel9.ResumeLayout(false);
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
-            panel11.ResumeLayout(false);
-            panel11.PerformLayout();
-            panel12.ResumeLayout(false);
-            panel12.PerformLayout();
-            panel13.ResumeLayout(false);
-            panel13.PerformLayout();
-            panel14.ResumeLayout(false);
-            panel14.PerformLayout();
-            panel15.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel3.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
@@ -900,50 +420,14 @@
         private Panel panel7;
         private Label label8;
         private Label label5;
-        private Panel panel9;
-        private Panel panel10;
-        private Label label13;
-        private Label label14;
-        private Label label15;
-        private Label label16;
-        private Label label17;
-        private Label label18;
-        private Label label19;
-        private Panel panel11;
-        private Panel panel12;
-        private Label label20;
-        private Panel panel13;
-        private Label label21;
-        private Panel panel14;
-        private Label label22;
-        private Label label23;
-        private Panel panel15;
-        private ComboBox cboFirstEmployeeTime;
-        private PictureBox pictureBox2;
         private Label label12;
         private Label label11;
         private Label label10;
-        private Panel panel16;
-        private Panel panel17;
-        private Label label24;
-        private Label label25;
-        private Label label26;
-        private Label label27;
-        private Label label28;
-        private Label label29;
-        private Label label30;
-        private Panel panel18;
-        private Panel panel19;
-        private Label label31;
-        private Panel panel20;
-        private Label label32;
-        private Panel panel21;
-        private Label label33;
-        private Label label34;
         private DateTimePicker dateTimePicker2;
         private DateTimePicker dateTimePicker1;
         private ComboBox cboSeondEmployeeTime;
         private Button button2;
         private Button button3;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
