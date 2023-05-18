@@ -33,13 +33,17 @@ namespace RicksStaffApp
         {
 
             employeeList.Clear();
-            employeeList = SqliteDataAccess.LoadEmployees();
+            employeeList = SqliteDataAccess.TestLoadEmployees();
             //foreach (Employee employee in employeeList)
             //{
             //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
             //}
 
-
+            foreach (Employee employee in employeeList)
+            {
+                employee.AddIncidentsFromShifts();
+                employee.UpdateOverallRating();
+            }
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats);
         }
 

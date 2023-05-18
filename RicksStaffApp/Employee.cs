@@ -72,9 +72,10 @@ namespace RicksStaffApp
         {
             float totalRating = 6; // initialize total rating to default value
 
-            foreach (EmployeeShift shift in EmployeeShifts)
+            foreach (EmployeeShift employeeShift in EmployeeShifts)
             {
-                totalRating += shift.ShiftRating; // add shift rating to total rating
+                employeeShift.UpdateShiftRating(); // update shift rating
+                totalRating += employeeShift.ShiftRating; // add shift rating to total rating
             }
 
             OverallRating = totalRating / (EmployeeShifts.Count + 1); // divide total rating by number of shifts plus default value to get average
