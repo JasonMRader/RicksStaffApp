@@ -51,10 +51,11 @@
             label5 = new Label();
             label2 = new Label();
             panel2 = new Panel();
+            picBoxEmployeeRating = new PictureBox();
             cboSeondEmployeeTime = new ComboBox();
-            pictureBox1 = new PictureBox();
             button1 = new Button();
             flowEmployeeShifts = new FlowLayoutPanel();
+            lblRating = new Label();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -62,7 +63,7 @@
             panel7.SuspendLayout();
             panel6.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
             SuspendLayout();
             // 
             // lblEmployeeName
@@ -314,34 +315,35 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(37, 42, 64);
-            panel2.Controls.Add(cboSeondEmployeeTime);
-            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(lblRating);
+            panel2.Controls.Add(picBoxEmployeeRating);
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(191, 65);
             panel2.TabIndex = 1;
             // 
+            // picBoxEmployeeRating
+            // 
+            picBoxEmployeeRating.Image = resourse._5_Stars;
+            picBoxEmployeeRating.Location = new Point(25, 32);
+            picBoxEmployeeRating.Name = "picBoxEmployeeRating";
+            picBoxEmployeeRating.Size = new Size(140, 29);
+            picBoxEmployeeRating.SizeMode = PictureBoxSizeMode.Zoom;
+            picBoxEmployeeRating.TabIndex = 0;
+            picBoxEmployeeRating.TabStop = false;
+            // 
             // cboSeondEmployeeTime
             // 
             cboSeondEmployeeTime.BackColor = Color.FromArgb(74, 79, 99);
+            cboSeondEmployeeTime.Enabled = false;
             cboSeondEmployeeTime.FlatStyle = FlatStyle.Flat;
             cboSeondEmployeeTime.ForeColor = Color.White;
             cboSeondEmployeeTime.FormattingEnabled = true;
             cboSeondEmployeeTime.Items.AddRange(new object[] { "All Time", "Last 30 Days", "Last 3 Months", "Last 6 Months", "Last Year" });
-            cboSeondEmployeeTime.Location = new Point(35, 3);
+            cboSeondEmployeeTime.Location = new Point(42, 23);
             cboSeondEmployeeTime.Name = "cboSeondEmployeeTime";
             cboSeondEmployeeTime.Size = new Size(121, 23);
             cboSeondEmployeeTime.TabIndex = 3;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = resourse._5_Stars;
-            pictureBox1.Location = new Point(25, 32);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(140, 29);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // button1
             // 
@@ -364,12 +366,24 @@
             flowEmployeeShifts.Size = new Size(475, 415);
             flowEmployeeShifts.TabIndex = 6;
             // 
+            // lblRating
+            // 
+            lblRating.AutoSize = true;
+            lblRating.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblRating.ForeColor = SystemColors.ButtonHighlight;
+            lblRating.Location = new Point(66, 1);
+            lblRating.Name = "lblRating";
+            lblRating.Size = new Size(61, 25);
+            lblRating.TabIndex = 1;
+            lblRating.Text = "label1";
+            // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(37, 42, 64);
             ClientSize = new Size(800, 675);
+            Controls.Add(cboSeondEmployeeTime);
             Controls.Add(flowEmployeeShifts);
             Controls.Add(button1);
             Controls.Add(lblEmployeeName);
@@ -395,7 +409,8 @@
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -405,7 +420,7 @@
         private Label lblEmployeeName;
         private Button button1;
         private Panel panel2;
-        private PictureBox pictureBox1;
+        private PictureBox picBoxEmployeeRating;
         private Panel panel3;
         private Panel panel5;
         private Label label4;
@@ -429,5 +444,6 @@
         private Button button2;
         private Button button3;
         private FlowLayoutPanel flowEmployeeShifts;
+        private Label lblRating;
     }
 }

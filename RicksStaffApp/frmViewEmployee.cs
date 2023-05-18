@@ -33,8 +33,9 @@ namespace RicksStaffApp
             {
                 UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
             }
-
-            cboSeondEmployeeTime.SelectedIndex = 2;
+            picBoxEmployeeRating.Image = UIHelper.GetStars(ThisEmployee.OverallRating);
+            lblRating.Text = ThisEmployee.OverallRating.ToString();
+            cboSeondEmployeeTime.SelectedIndex = 0;
             //UIHelper.CreateSingleEmployeeShiftPanel(flowTest, ThisEmployee.EmployeeShifts);
 
 
