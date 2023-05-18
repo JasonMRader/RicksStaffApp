@@ -16,5 +16,34 @@ namespace RicksStaffApp
         {
             InitializeComponent();
         }
+        List<Employee> employees = new List<Employee>();
+        List<Shift> shifts = new List<Shift>();
+        List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        List<Incident> incidents = new List<Incident>();
+        List<Activity> activitys = new List<Activity>();
+        private void btnLoadEmployees_Click(object sender, EventArgs e)
+        {
+            employees = SqliteDataAccess.TestLoadEmployees();
+        }
+
+        private void btnLoadShifts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLoadEmployeeShifts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLoadIncidents_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLoadActivities_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

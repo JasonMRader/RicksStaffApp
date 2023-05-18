@@ -192,5 +192,11 @@ namespace RicksStaffApp
                 pnlButtonSelected.Left = rdoSettings.Left;
             }
         }
+
+        private void btnOpenTestForm_Click(object sender, EventArgs e)
+        {
+            Form frmTest = new frmTest();
+            frmTest.Show();
+        }
     }
 }

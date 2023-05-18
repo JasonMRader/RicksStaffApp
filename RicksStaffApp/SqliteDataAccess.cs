@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Office.Interop.Excel;
 using RicksStaffApp;
 using System;
 using System.Collections.Generic;
@@ -370,6 +371,57 @@ namespace RicksStaffApp
                 List<Activity> activities = LoadActivities();
                 Incident.AssignActivitiesToIncidents(shifts, activities);
                 return shifts;
+            }
+        }
+        public static List<Employee> TestLoadEmployees()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = "SELECT * FROM Employee";
+                var employees = cnn.Query<Employee>(query).AsList();
+
+                string employeeShiftQuery = @"
+                    SELECT es.*, s.*, p.*, i.*
+                    FROM EmployeeShift es
+                    INNER JOIN Shift s ON es.ShiftID = s.ID
+                    INNER JOIN Positions p ON es.PositionID = p.ID
+                    LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
+                    WHERE es.EmployeeID = @EmployeeID";
+                foreach (var employee in employees)
+                {
+                    var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+                    var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, EmployeeShift>(employeeShiftQuery,
+                        (employeeShift, employee, position, incident) =>
+                        {
+                            // Check if the employee shift is already added to the dictionary
+                            if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+                            {
+                                currentEmployeeShift = employeeShift;
+                                currentEmployeeShift.Employee = employee;
+                                currentEmployeeShift.Position = position;
+                                currentEmployeeShift.Incidents = new List<Incident>();
+                                employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+                            }
+
+                            // Add the incident to the employee shift if it exists
+                            if (incident != null && incident.ID != default)
+                            {
+                                currentEmployeeShift.Incidents.Add(incident);
+                            }
+
+                            return currentEmployeeShift;
+                        },
+                        new { EmployeeID = employee.ID },
+                        splitOn: "ID,ID,ID").Distinct().AsList();
+
+                    employee.EmployeeShifts = employeeShifts;
+                }
+                List<Activity> activities = LoadActivities();
+                Incident.AssignActivitiesToEmployeeIncidents(employees, activities);
+                return employees;
+
+                
             }
         }
         //TODO -Fix this
