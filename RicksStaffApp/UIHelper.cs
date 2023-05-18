@@ -55,6 +55,16 @@ namespace RicksStaffApp
             button.Margin = new Padding(0, 0, 0, 0);
             return button;
         }
+        private static Label CreateLabel (int width, int height, string text)
+        {
+            Label label = new Label();
+            label.Text = text;
+            label.Width = width;
+            label.Height = height;
+            label.AutoSize = false;
+            label.TextAlign = ContentAlignment.MiddleCenter;
+            return label;
+        }
         public static Image GetStars(float rating)
         {
             Image StarsDisplayed;
@@ -99,57 +109,15 @@ namespace RicksStaffApp
             }
             return StarsDisplayed;
         }
-        //public static List<Shift> LoadShifts()
-        //{
-        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-        //    {
-        //        string query = "SELECT * FROM Shift";
-        //        var shifts = cnn.Query<Shift>(query).AsList();
-
-        //        string employeeShiftQuery = @"
-        //            SELECT es.*, e.*, p.*, i.*
-        //            FROM EmployeeShift es
-        //            INNER JOIN Employee e ON es.EmployeeID = e.ID
-        //            INNER JOIN Positions p ON es.PositionID = p.ID
-        //            LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
-        //            WHERE es.ShiftID = @ShiftID";
-
-
-        //        foreach (var shift in shifts)
-        //        {
-        //            var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
-
-        //            var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, EmployeeShift>(employeeShiftQuery,
-        //                (employeeShift, employee, position, incident) =>
-        //                {
-        //                    // Check if the employee shift is already added to the dictionary
-        //                    if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
-        //                    {
-        //                        currentEmployeeShift = employeeShift;
-        //                        currentEmployeeShift.Employee = employee;
-        //                        currentEmployeeShift.Position = position;
-        //                        currentEmployeeShift.Incidents = new List<Incident>();
-        //                        employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
-        //                    }
-
-        //                    // Add the incident to the employee shift if it exists
-        //                    if (incident != null && incident.ID != default)
-        //                    {
-        //                        currentEmployeeShift.Incidents.Add(incident);
-        //                    }
-
-        //                    return currentEmployeeShift;
-        //                },
-        //                new { ShiftID = shift.ID },
-        //                splitOn: "ID,ID,ID").Distinct().AsList();
-
-        //            shift.EmployeeShifts = employeeShifts;
-        //        }
-        //        List<Activity> activities = LoadActivities();
-        //        Incident.AssignActivitiesToIncidents(shifts, activities);
-        //        return shifts;
-        //    }
-        //}
+        private static PictureBox CreateRatingPictureBox (int width, int height, float rating)
+        {
+            PictureBox pictureBox = new PictureBox ();
+            pictureBox.Width = width; 
+            pictureBox.Height = height;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox.Image = GetStars(rating);
+            return pictureBox;
+        }
 
         //add panel for each incident in EmployeeShift with a label that has the name of the activity and a label that has the rating change
         public static Color GetBackColor(int rating)
@@ -719,33 +687,16 @@ namespace RicksStaffApp
                         empShiftContainer.MaximumSize = new Size(470, 1000);
                         empShiftContainer.Margin = new Padding(0, 0, 0, 5);
 
-                        Label lblName = new Label();
-                        lblName.Text = es.Employee.FullName;
-                        lblName.Size = new Size(100, 30);
-                        lblName.TextAlign = ContentAlignment.MiddleCenter;
+                        Label lblName = CreateLabel(100, 30, es.Employee.FullName);                       
                         empShiftContainer.Controls.Add(lblName);
 
-                        Label lblPos = new Label();
-                        lblPos.Text = es.Position.Name;
-                        lblPos.Size = new Size(60, 30);
-                        lblPos.TextAlign = ContentAlignment.MiddleCenter;
+                        Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
                         empShiftContainer.Controls.Add(lblPos);
 
-                        Label lblShiftRating = new Label();
-                        //es.UpdateShiftRating();
-                        lblShiftRating.Text = es.ShiftRating.ToString();
-                        //foreach(Incident i in es.Incidents)
-                        //{
-                        //    es.ShiftRating = es.ShiftRating + in
-                        //}
-                        lblShiftRating.Size = new Size(25, 30);
-                        lblShiftRating.TextAlign = ContentAlignment.MiddleCenter;
+                        Label lblShiftRating = CreateLabel(25, 30, es.ShiftRating.ToString());                 
                         empShiftContainer.Controls.Add(lblShiftRating);
 
-                        PictureBox pbRating = new PictureBox();
-                        pbRating.Size = new Size(90, 30);
-                        pbRating.SizeMode = PictureBoxSizeMode.Zoom;
-                        pbRating.Image = GetStars(es.ShiftRating);
+                        PictureBox pbRating = CreateRatingPictureBox(90, 30, es.ShiftRating);
                         empShiftContainer.Controls.Add(pbRating);
 
                         Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");                        
@@ -798,12 +749,9 @@ namespace RicksStaffApp
 
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
-                // Create label for employee name
-                Label lblName = new Label();
-                lblName.Text = emp.FullName;
-                lblName.AutoSize = false;
-                lblName.Size = new Size(150, 22);
-                lblName.TextAlign = ContentAlignment.MiddleCenter;
+
+                Label lblName = CreateLabel(150, 22, emp.FullName);
+                
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions
@@ -814,7 +762,7 @@ namespace RicksStaffApp
                 //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
 
                 // Add the delete button to the container panel
-                System.Windows.Forms.Button btnDelete = new System.Windows.Forms.Button();
+                Button btnDelete = CreateButtonTemplate(16, 16, "X");
                 btnDelete.Text = "X";
                 //btnDelete.AutoSize = true;
                 btnDelete.Margin = new Padding(0, 0, 0, 0);
@@ -883,25 +831,25 @@ namespace RicksStaffApp
                 Button btnAddEmployee = CreateButtonTemplate(160, 22, "Add Employee");
                
                 btnAddEmployee.Location = new Point(185, 0);
-                
-                btnAddEmployee.Click += (sender, e) =>
-                {
-                    if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
-                    {
-                        existingEmployeeList.Add(emp);
-                        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
-                        newEmployeeList.Remove(emp);
-                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
-                    }
-                    else
-                    {
-                        MessageBox.Show(emp.FullName + "already exists");
-                        newEmployeeList.Remove(emp);
-                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
-                    }
+                //TODO: handle duplicate check some other way
+                //btnAddEmployee.Click += (sender, e) =>
+                //{
+                //    if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
+                //    {
+                //        existingEmployeeList.Add(emp);
+                //        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
+                //        newEmployeeList.Remove(emp);
+                //        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show(emp.FullName + "already exists");
+                //        newEmployeeList.Remove(emp);
+                //        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                //    }
                     
                     
-                };
+                //};
                
                 empPanel.Parent.Controls.Add(btnAddEmployee);
                

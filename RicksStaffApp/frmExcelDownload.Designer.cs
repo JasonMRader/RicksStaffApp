@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            dtpShiftDate = new DateTimePicker();
             btnCreateShift = new Button();
             label3 = new Label();
             label2 = new Label();
             flowExistingStaff = new FlowLayoutPanel();
             flowNewStaff = new FlowLayoutPanel();
             label1 = new Label();
-            dtpShiftDate = new DateTimePicker();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,6 +54,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
+            // 
+            // dtpShiftDate
+            // 
+            dtpShiftDate.CalendarMonthBackground = SystemColors.InactiveBorder;
+            dtpShiftDate.Location = new Point(267, 22);
+            dtpShiftDate.Name = "dtpShiftDate";
+            dtpShiftDate.Size = new Size(200, 23);
+            dtpShiftDate.TabIndex = 6;
             // 
             // btnCreateShift
             // 
@@ -115,14 +124,6 @@
             label1.Size = new Size(174, 45);
             label1.TabIndex = 0;
             label1.Text = "Excel Data";
-            // 
-            // dtpShiftDate
-            // 
-            dtpShiftDate.CalendarMonthBackground = SystemColors.InactiveBorder;
-            dtpShiftDate.Location = new Point(267, 22);
-            dtpShiftDate.Name = "dtpShiftDate";
-            dtpShiftDate.Size = new Size(200, 23);
-            dtpShiftDate.TabIndex = 6;
             // 
             // frmExcelDownload
             // 
