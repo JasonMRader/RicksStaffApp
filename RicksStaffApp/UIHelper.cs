@@ -670,6 +670,51 @@ namespace RicksStaffApp
 
             }
         }
+        public static void CreateEmployeeShiftOverviewPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
+        {
+            
+                employeeShift.UpdateShiftRating();
+                FlowLayoutPanel empShiftContainer = CreateFlowPanel(470, 30);
+
+                empShiftContainer.MinimumSize = new Size(470, 30);
+                empShiftContainer.MaximumSize = new Size(470, 1000);
+                empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+
+                Label lblName = CreateLabel(100, 30, employeeShift.Employee.FullName);
+                empShiftContainer.Controls.Add(lblName);
+
+                Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
+                empShiftContainer.Controls.Add(lblPos);
+
+                Label lblShiftRating = CreateLabel(25, 30, employeeShift.ShiftRating.ToString());
+                empShiftContainer.Controls.Add(lblShiftRating);
+
+                PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
+                empShiftContainer.Controls.Add(pbRating);
+
+                //Button btnIncidents = CreateButtonTemplate(65, 30, "Incidents");
+                //btnIncidents.Click += (sender, e) =>
+                //{
+                //    CreateIncidentPanels(employeeShift.Incidents, empShiftContainer, shiftList);
+                //};
+                //empShiftContainer.Controls.Add(btnIncidents);
+
+                ////Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
+                ////btnAddIncidents.Click += (sender, e) =>
+                ////{
+                ////    secondPanel.Controls.Clear();
+                ////    frmServerShift frmServerShift = new frmServerShift();
+                ////    frmServerShift.EmployeeShiftToEdit = employeeShift;
+                ////    frmServerShift.TopLevel = false;
+                ////    secondPanel.Controls.Add(frmServerShift);
+                ////    frmServerShift.Show();
+                ////};
+                //empShiftContainer.Controls.Add(btnAddIncidents);
+
+                flowLayoutPanel.Controls.Add(empShiftContainer);
+
+            
+        }
         public static void CreateEmployeeShiftPanels(List<Shift> shiftList, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
             flowEmployeeDisplay.Controls.Clear();

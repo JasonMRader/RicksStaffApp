@@ -29,7 +29,10 @@ namespace RicksStaffApp
         {
             lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
-            
+            foreach (EmployeeShift employeeShift in ThisEmployee.EmployeeShifts)
+            {
+                UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
+            }
 
             cboSeondEmployeeTime.SelectedIndex = 2;
             //UIHelper.CreateSingleEmployeeShiftPanel(flowTest, ThisEmployee.EmployeeShifts);

@@ -54,7 +54,7 @@
             cboSeondEmployeeTime = new ComboBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flowEmployeeShifts = new FlowLayoutPanel();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -357,12 +357,12 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // flowLayoutPanel1
+            // flowEmployeeShifts
             // 
-            flowLayoutPanel1.Location = new Point(255, 205);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(475, 415);
-            flowLayoutPanel1.TabIndex = 6;
+            flowEmployeeShifts.Location = new Point(255, 205);
+            flowEmployeeShifts.Name = "flowEmployeeShifts";
+            flowEmployeeShifts.Size = new Size(475, 415);
+            flowEmployeeShifts.TabIndex = 6;
             // 
             // frmViewEmployee
             // 
@@ -370,7 +370,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(37, 42, 64);
             ClientSize = new Size(800, 675);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(flowEmployeeShifts);
             Controls.Add(button1);
             Controls.Add(lblEmployeeName);
             Controls.Add(button3);
@@ -428,6 +428,6 @@
         private ComboBox cboSeondEmployeeTime;
         private Button button2;
         private Button button3;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flowEmployeeShifts;
     }
 }
