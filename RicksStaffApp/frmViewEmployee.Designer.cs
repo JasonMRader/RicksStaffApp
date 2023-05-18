@@ -35,9 +35,9 @@
             dateTimePicker1 = new DateTimePicker();
             panel3 = new Panel();
             panel5 = new Panel();
-            label7 = new Label();
-            label6 = new Label();
-            label4 = new Label();
+            lblPoorShifts = new Label();
+            lblAverageShifts = new Label();
+            lblGoodShifts = new Label();
             label12 = new Label();
             label11 = new Label();
             label10 = new Label();
@@ -51,11 +51,11 @@
             label5 = new Label();
             label2 = new Label();
             panel2 = new Panel();
+            lblRating = new Label();
             picBoxEmployeeRating = new PictureBox();
             cboSeondEmployeeTime = new ComboBox();
             button1 = new Button();
             flowEmployeeShifts = new FlowLayoutPanel();
-            lblRating = new Label();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -135,9 +135,9 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(37, 42, 64);
-            panel5.Controls.Add(label7);
-            panel5.Controls.Add(label6);
-            panel5.Controls.Add(label4);
+            panel5.Controls.Add(lblPoorShifts);
+            panel5.Controls.Add(lblAverageShifts);
+            panel5.Controls.Add(lblGoodShifts);
             panel5.Controls.Add(label12);
             panel5.Controls.Add(label11);
             panel5.Controls.Add(label10);
@@ -147,38 +147,38 @@
             panel5.Size = new Size(191, 114);
             panel5.TabIndex = 2;
             // 
-            // label7
+            // lblPoorShifts
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ForeColor = Color.FromArgb(226, 163, 199);
-            label7.Location = new Point(87, 82);
-            label7.Name = "label7";
-            label7.Size = new Size(64, 21);
-            label7.TabIndex = 2;
-            label7.Text = "8 (07%)";
+            lblPoorShifts.AutoSize = true;
+            lblPoorShifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPoorShifts.ForeColor = Color.FromArgb(226, 163, 199);
+            lblPoorShifts.Location = new Point(87, 82);
+            lblPoorShifts.Name = "lblPoorShifts";
+            lblPoorShifts.Size = new Size(64, 21);
+            lblPoorShifts.TabIndex = 2;
+            lblPoorShifts.Text = "8 (07%)";
             // 
-            // label6
+            // lblAverageShifts
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.ForeColor = Color.FromArgb(153, 178, 221);
-            label6.Location = new Point(87, 56);
-            label6.Name = "label6";
-            label6.Size = new Size(73, 21);
-            label6.TabIndex = 2;
-            label6.Text = "40 (38%)";
+            lblAverageShifts.AutoSize = true;
+            lblAverageShifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAverageShifts.ForeColor = Color.FromArgb(153, 178, 221);
+            lblAverageShifts.Location = new Point(87, 56);
+            lblAverageShifts.Name = "lblAverageShifts";
+            lblAverageShifts.Size = new Size(73, 21);
+            lblAverageShifts.TabIndex = 2;
+            lblAverageShifts.Text = "40 (38%)";
             // 
-            // label4
+            // lblGoodShifts
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.ForeColor = Color.FromArgb(192, 223, 161);
-            label4.Location = new Point(87, 30);
-            label4.Name = "label4";
-            label4.Size = new Size(73, 21);
-            label4.TabIndex = 2;
-            label4.Text = "57 (55%)";
+            lblGoodShifts.AutoSize = true;
+            lblGoodShifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblGoodShifts.ForeColor = Color.FromArgb(192, 223, 161);
+            lblGoodShifts.Location = new Point(87, 30);
+            lblGoodShifts.Name = "lblGoodShifts";
+            lblGoodShifts.Size = new Size(73, 21);
+            lblGoodShifts.TabIndex = 2;
+            lblGoodShifts.Text = "57 (55%)";
             // 
             // label12
             // 
@@ -322,6 +322,17 @@
             panel2.Size = new Size(191, 65);
             panel2.TabIndex = 1;
             // 
+            // lblRating
+            // 
+            lblRating.AutoSize = true;
+            lblRating.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblRating.ForeColor = SystemColors.ButtonHighlight;
+            lblRating.Location = new Point(66, 1);
+            lblRating.Name = "lblRating";
+            lblRating.Size = new Size(61, 25);
+            lblRating.TabIndex = 1;
+            lblRating.Text = "label1";
+            // 
             // picBoxEmployeeRating
             // 
             picBoxEmployeeRating.Image = resourse._5_Stars;
@@ -365,17 +376,6 @@
             flowEmployeeShifts.Name = "flowEmployeeShifts";
             flowEmployeeShifts.Size = new Size(475, 415);
             flowEmployeeShifts.TabIndex = 6;
-            // 
-            // lblRating
-            // 
-            lblRating.AutoSize = true;
-            lblRating.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblRating.ForeColor = SystemColors.ButtonHighlight;
-            lblRating.Location = new Point(66, 1);
-            lblRating.Name = "lblRating";
-            lblRating.Size = new Size(61, 25);
-            lblRating.TabIndex = 1;
-            lblRating.Text = "label1";
             // 
             // frmViewEmployee
             // 
@@ -423,12 +423,12 @@
         private PictureBox picBoxEmployeeRating;
         private Panel panel3;
         private Panel panel5;
-        private Label label4;
+        private Label lblGoodShifts;
         private Label label3;
         private Panel panel4;
         private Label label2;
-        private Label label7;
-        private Label label6;
+        private Label lblPoorShifts;
+        private Label lblAverageShifts;
         private Panel panel6;
         private Panel panel8;
         private Label label9;
