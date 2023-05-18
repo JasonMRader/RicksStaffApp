@@ -763,16 +763,12 @@ namespace RicksStaffApp
 
                 // Add the delete button to the container panel
                 Button btnDelete = CreateButtonTemplate(16, 16, "X");
-                btnDelete.Text = "X";
+               
                 //btnDelete.AutoSize = true;
                 btnDelete.Margin = new Padding(0, 0, 0, 0);
-                btnDelete.Location = new Point(410, 0);
-                btnDelete.ForeColor = Color.Black;
-                btnDelete.Font = new Font(btnDelete.Font.FontFamily, 6);
-                btnDelete.TextAlign = ContentAlignment.MiddleCenter;
-                btnDelete.FlatStyle = FlatStyle.Flat;
-                btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                btnDelete.FlatAppearance.BorderSize = 0;
+                btnDelete.Location = new Point(410, 0);               
+                btnDelete.Font = new Font(btnDelete.Font.FontFamily, 6);               
+                btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;               
                 btnDelete.Click += (sender, e) =>
                 {
                     // Prompt user to confirm deletion
@@ -789,7 +785,7 @@ namespace RicksStaffApp
                         //CreateEmployeePanels();
                     }
                 };
-                btnDelete.Size = new Size(16, 16);
+                
                 empPanel.Parent.Controls.Add(btnDelete);
                 //empPanelContainer.Controls.Add(btnDelete);
 
@@ -815,11 +811,7 @@ namespace RicksStaffApp
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
                 // Create label for employee name
-                Label lblName = new Label();
-                lblName.Text = emp.FullName;
-                lblName.AutoSize = false;
-                lblName.Size = new Size(150, 20);
-                lblName.TextAlign = ContentAlignment.MiddleCenter;
+                Label lblName = CreateLabel(150, 20, emp.FullName);                
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions

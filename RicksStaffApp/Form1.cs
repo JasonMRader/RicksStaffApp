@@ -14,7 +14,7 @@ namespace RicksStaffApp
 
         private void CloseAllFormsExceptActive()
         {
-            
+
             foreach (Form childForm in pnlNav.Controls)
             {
                 childForm.Close();
@@ -73,7 +73,7 @@ namespace RicksStaffApp
             overview.Show();
         }
 
-        
+
 
 
         //private void rdoOverviewForm_CheckedChanged(object sender, EventArgs e)

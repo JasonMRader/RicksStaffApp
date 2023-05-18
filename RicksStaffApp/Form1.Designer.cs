@@ -37,6 +37,7 @@
             rdoOverviewForm = new RadioButton();
             pnlNav = new Panel();
             panel1 = new Panel();
+            btnOpenTestForm = new Button();
             pnlForm1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -58,6 +59,7 @@
             // pnlForm1
             // 
             pnlForm1.BackColor = Color.FromArgb(24, 30, 54);
+            pnlForm1.Controls.Add(btnOpenTestForm);
             pnlForm1.Controls.Add(pnlButtonSelected);
             pnlForm1.Controls.Add(label1);
             pnlForm1.Controls.Add(rdoSettings);
@@ -177,6 +179,17 @@
             panel1.MouseMove += Form1_MouseMove;
             panel1.MouseUp += Form1_MouseUp;
             // 
+            // btnOpenTestForm
+            // 
+            btnOpenTestForm.BackColor = Color.FromArgb(192, 255, 255);
+            btnOpenTestForm.FlatStyle = FlatStyle.Flat;
+            btnOpenTestForm.Location = new Point(565, 6);
+            btnOpenTestForm.Name = "btnOpenTestForm";
+            btnOpenTestForm.Size = new Size(103, 38);
+            btnOpenTestForm.TabIndex = 1;
+            btnOpenTestForm.Text = "Test Form";
+            btnOpenTestForm.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -215,5 +228,6 @@
         private Label label1;
         private Panel panel1;
         private Panel pnlButtonSelected;
+        private Button btnOpenTestForm;
     }
 }
