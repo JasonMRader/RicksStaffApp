@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             lblEmployeeName = new Label();
-            button3 = new Button();
-            button2 = new Button();
-            dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
             panel3 = new Panel();
             flowFrequentIncidents = new FlowLayoutPanel();
             panel5 = new Panel();
@@ -52,19 +48,15 @@
             picBoxEmployeeRating = new PictureBox();
             label2 = new Label();
             lblTotalShiftsLabelHeader = new Label();
-            panel8 = new Panel();
-            label9 = new Label();
-            panel6 = new Panel();
-            label5 = new Label();
             cboSeondEmployeeTime = new ComboBox();
             button1 = new Button();
             flowEmployeeShifts = new FlowLayoutPanel();
+            label3 = new Label();
+            label4 = new Label();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
-            panel8.SuspendLayout();
-            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // lblEmployeeName
@@ -79,48 +71,6 @@
             lblEmployeeName.TabIndex = 0;
             lblEmployeeName.Text = "label1";
             lblEmployeeName.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // button3
-            // 
-            button3.BackColor = Color.FromArgb(167, 204, 237);
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(549, 106);
-            button3.Name = "button3";
-            button3.Size = new Size(107, 33);
-            button3.TabIndex = 5;
-            button3.Text = "Shifts";
-            button3.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.FromArgb(167, 204, 237);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(442, 106);
-            button2.Name = "button2";
-            button2.Size = new Size(101, 33);
-            button2.TabIndex = 5;
-            button2.Text = "Stats";
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(549, 145);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(107, 23);
-            dateTimePicker2.TabIndex = 4;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(442, 145);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(101, 23);
-            dateTimePicker1.TabIndex = 4;
             // 
             // panel3
             // 
@@ -137,6 +87,7 @@
             // 
             // flowFrequentIncidents
             // 
+            flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
             flowFrequentIncidents.Location = new Point(3, 246);
             flowFrequentIncidents.Name = "flowFrequentIncidents";
             flowFrequentIncidents.Size = new Size(200, 252);
@@ -346,44 +297,6 @@
             lblTotalShiftsLabelHeader.Text = "Shifts";
             lblTotalShiftsLabelHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel8
-            // 
-            panel8.BackColor = Color.FromArgb(226, 163, 199);
-            panel8.Controls.Add(label9);
-            panel8.Location = new Point(238, 130);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(173, 38);
-            panel8.TabIndex = 2;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(67, 9);
-            label9.Name = "label9";
-            label9.Size = new Size(37, 20);
-            label9.TabIndex = 0;
-            label9.Text = "Late";
-            // 
-            // panel6
-            // 
-            panel6.BackColor = Color.FromArgb(192, 223, 161);
-            panel6.Controls.Add(label5);
-            panel6.Location = new Point(238, 86);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(173, 38);
-            panel6.TabIndex = 2;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(35, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(105, 20);
-            label5.TabIndex = 0;
-            label5.Text = "Great Attitude";
-            // 
             // cboSeondEmployeeTime
             // 
             cboSeondEmployeeTime.BackColor = Color.FromArgb(74, 79, 99);
@@ -396,6 +309,7 @@
             cboSeondEmployeeTime.Name = "cboSeondEmployeeTime";
             cboSeondEmployeeTime.Size = new Size(121, 23);
             cboSeondEmployeeTime.TabIndex = 3;
+            cboSeondEmployeeTime.Visible = false;
             // 
             // button1
             // 
@@ -413,28 +327,47 @@
             // 
             // flowEmployeeShifts
             // 
-            flowEmployeeShifts.Location = new Point(255, 205);
+            flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
+            flowEmployeeShifts.Location = new Point(255, 113);
             flowEmployeeShifts.Name = "flowEmployeeShifts";
-            flowEmployeeShifts.Size = new Size(475, 415);
+            flowEmployeeShifts.Size = new Size(475, 507);
             flowEmployeeShifts.TabIndex = 6;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(83, 70);
+            label3.Name = "label3";
+            label3.Size = new Size(55, 25);
+            label3.TabIndex = 7;
+            label3.Text = "Stats";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(455, 70);
+            label4.Name = "label4";
+            label4.Size = new Size(61, 25);
+            label4.TabIndex = 7;
+            label4.Text = "Shifts";
             // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(37, 42, 64);
+            BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(800, 675);
-            Controls.Add(panel8);
-            Controls.Add(panel6);
+            Controls.Add(label4);
+            Controls.Add(label3);
             Controls.Add(cboSeondEmployeeTime);
             Controls.Add(flowEmployeeShifts);
             Controls.Add(button1);
             Controls.Add(lblEmployeeName);
-            Controls.Add(button3);
             Controls.Add(panel3);
-            Controls.Add(button2);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmViewEmployee";
             StartPosition = FormStartPosition.CenterScreen;
@@ -447,10 +380,6 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).EndInit();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -467,18 +396,10 @@
         private Label label2;
         private Label lblPoorShifts;
         private Label lblAverageShifts;
-        private Panel panel6;
-        private Panel panel8;
-        private Label label9;
-        private Label label5;
         private Label label12;
         private Label label11;
         private Label label10;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
         private ComboBox cboSeondEmployeeTime;
-        private Button button2;
-        private Button button3;
         private FlowLayoutPanel flowEmployeeShifts;
         private Label lblRating;
         private Label lblBadShiftPercent;
@@ -488,5 +409,7 @@
         private Label lblTotalShiftsLabelHeader;
         private FlowLayoutPanel flowFrequentIncidents;
         private Label label1;
+        private Label label3;
+        private Label label4;
     }
 }

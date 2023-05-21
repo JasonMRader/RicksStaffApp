@@ -70,7 +70,7 @@ namespace RicksStaffApp
             lblRating.Text = ThisEmployee.OverallRating.ToString("0.00");
             cboSeondEmployeeTime.SelectedIndex = 0;
             UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents, flowFrequentIncidents);
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
