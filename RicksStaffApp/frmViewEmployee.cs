@@ -27,15 +27,12 @@ namespace RicksStaffApp
         {
             InitializeComponent();
         }
-
-        private void frmViewEmployee_Load(object sender, EventArgs e)
+        private void GetEmployeeShiftGoodBadDistribution(List<EmployeeShift> employeeShifts)
         {
-
-            lblEmployeeName.Text = ThisEmployee.FullName;
-            SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
-            foreach (EmployeeShift employeeShift in ThisEmployee.EmployeeShifts)
+            (goodShiftCount, badShiftCount, averageShiftCount) = (0, 0, 0);
+            foreach (EmployeeShift employeeShift in employeeShifts)
             {
-                UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
+                
                 if (employeeShift.ShiftRating <= 5.5)
                 {
                     badShiftCount++;
@@ -49,13 +46,22 @@ namespace RicksStaffApp
                     averageShiftCount++;
                 }
             }
+        }
+        private void frmViewEmployee_Load(object sender, EventArgs e)
+        {
+
+            lblEmployeeName.Text = ThisEmployee.FullName;
+            SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
+            
+            GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
             lblGoodShifts.Text = goodShiftCount.ToString();
             lblAverageShifts.Text = averageShiftCount.ToString();
             lblPoorShifts.Text = badShiftCount.ToString();
             picBoxEmployeeRating.Image = UIHelper.GetStars(ThisEmployee.OverallRating);
             lblRating.Text = ThisEmployee.OverallRating.ToString();
             cboSeondEmployeeTime.SelectedIndex = 0;
-            //UIHelper.CreateSingleEmployeeShiftPanel(flowTest, ThisEmployee.EmployeeShifts);
+
+
 
 
         }
