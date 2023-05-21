@@ -35,6 +35,11 @@
             dateTimePicker1 = new DateTimePicker();
             panel3 = new Panel();
             panel5 = new Panel();
+            lblBadShiftPercent = new Label();
+            lblAverageShiftPercent = new Label();
+            lblGoodShiftPercent = new Label();
+            lblTotalShifts = new Label();
+            lblTotalShiftsLabelHeader = new Label();
             lblPoorShifts = new Label();
             lblAverageShifts = new Label();
             lblGoodShifts = new Label();
@@ -55,11 +60,6 @@
             cboSeondEmployeeTime = new ComboBox();
             button1 = new Button();
             flowEmployeeShifts = new FlowLayoutPanel();
-            lblTotalShifts = new Label();
-            label3 = new Label();
-            lblGoodShiftPercent = new Label();
-            lblAverageShiftPercent = new Label();
-            lblBadShiftPercent = new Label();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -142,8 +142,8 @@
             panel5.Controls.Add(lblBadShiftPercent);
             panel5.Controls.Add(lblAverageShiftPercent);
             panel5.Controls.Add(lblGoodShiftPercent);
-            panel5.Controls.Add(label3);
             panel5.Controls.Add(lblTotalShifts);
+            panel5.Controls.Add(lblTotalShiftsLabelHeader);
             panel5.Controls.Add(lblPoorShifts);
             panel5.Controls.Add(lblAverageShifts);
             panel5.Controls.Add(lblGoodShifts);
@@ -154,6 +154,63 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(191, 114);
             panel5.TabIndex = 2;
+            // 
+            // lblBadShiftPercent
+            // 
+            lblBadShiftPercent.AutoSize = true;
+            lblBadShiftPercent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblBadShiftPercent.ForeColor = Color.FromArgb(226, 163, 199);
+            lblBadShiftPercent.Location = new Point(128, 86);
+            lblBadShiftPercent.Name = "lblBadShiftPercent";
+            lblBadShiftPercent.Size = new Size(32, 21);
+            lblBadShiftPercent.TabIndex = 8;
+            lblBadShiftPercent.Text = "8%";
+            // 
+            // lblAverageShiftPercent
+            // 
+            lblAverageShiftPercent.AutoSize = true;
+            lblAverageShiftPercent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAverageShiftPercent.ForeColor = Color.FromArgb(153, 178, 221);
+            lblAverageShiftPercent.Location = new Point(123, 60);
+            lblAverageShiftPercent.Name = "lblAverageShiftPercent";
+            lblAverageShiftPercent.Size = new Size(41, 21);
+            lblAverageShiftPercent.TabIndex = 7;
+            lblAverageShiftPercent.Text = "40%";
+            // 
+            // lblGoodShiftPercent
+            // 
+            lblGoodShiftPercent.AutoSize = true;
+            lblGoodShiftPercent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblGoodShiftPercent.ForeColor = Color.FromArgb(192, 223, 161);
+            lblGoodShiftPercent.Location = new Point(128, 33);
+            lblGoodShiftPercent.Name = "lblGoodShiftPercent";
+            lblGoodShiftPercent.Size = new Size(41, 21);
+            lblGoodShiftPercent.TabIndex = 6;
+            lblGoodShiftPercent.Text = "57%";
+            // 
+            // lblTotalShifts
+            // 
+            lblTotalShifts.AutoSize = true;
+            lblTotalShifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTotalShifts.ForeColor = Color.White;
+            lblTotalShifts.Location = new Point(85, 6);
+            lblTotalShifts.Name = "lblTotalShifts";
+            lblTotalShifts.Size = new Size(37, 21);
+            lblTotalShifts.TabIndex = 4;
+            lblTotalShifts.Text = "100";
+            // 
+            // lblTotalShiftsLabelHeader
+            // 
+            lblTotalShiftsLabelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTotalShiftsLabelHeader.AutoSize = true;
+            lblTotalShiftsLabelHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTotalShiftsLabelHeader.ForeColor = Color.White;
+            lblTotalShiftsLabelHeader.Location = new Point(3, 8);
+            lblTotalShiftsLabelHeader.Name = "lblTotalShiftsLabelHeader";
+            lblTotalShiftsLabelHeader.Size = new Size(39, 17);
+            lblTotalShiftsLabelHeader.TabIndex = 3;
+            lblTotalShiftsLabelHeader.Text = "Shifts";
+            lblTotalShiftsLabelHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblPoorShifts
             // 
@@ -373,63 +430,6 @@
             flowEmployeeShifts.Size = new Size(475, 415);
             flowEmployeeShifts.TabIndex = 6;
             // 
-            // lblTotalShifts
-            // 
-            lblTotalShifts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblTotalShifts.AutoSize = true;
-            lblTotalShifts.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotalShifts.ForeColor = Color.White;
-            lblTotalShifts.Location = new Point(3, 8);
-            lblTotalShifts.Name = "lblTotalShifts";
-            lblTotalShifts.Size = new Size(39, 17);
-            lblTotalShifts.TabIndex = 3;
-            lblTotalShifts.Text = "Shifts";
-            lblTotalShifts.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(85, 6);
-            label3.Name = "label3";
-            label3.Size = new Size(37, 21);
-            label3.TabIndex = 4;
-            label3.Text = "100";
-            // 
-            // lblGoodShiftPercent
-            // 
-            lblGoodShiftPercent.AutoSize = true;
-            lblGoodShiftPercent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblGoodShiftPercent.ForeColor = Color.FromArgb(192, 223, 161);
-            lblGoodShiftPercent.Location = new Point(128, 33);
-            lblGoodShiftPercent.Name = "lblGoodShiftPercent";
-            lblGoodShiftPercent.Size = new Size(41, 21);
-            lblGoodShiftPercent.TabIndex = 6;
-            lblGoodShiftPercent.Text = "57%";
-            // 
-            // lblAverageShiftPercent
-            // 
-            lblAverageShiftPercent.AutoSize = true;
-            lblAverageShiftPercent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAverageShiftPercent.ForeColor = Color.FromArgb(153, 178, 221);
-            lblAverageShiftPercent.Location = new Point(123, 60);
-            lblAverageShiftPercent.Name = "lblAverageShiftPercent";
-            lblAverageShiftPercent.Size = new Size(41, 21);
-            lblAverageShiftPercent.TabIndex = 7;
-            lblAverageShiftPercent.Text = "40%";
-            // 
-            // lblBadShiftPercent
-            // 
-            lblBadShiftPercent.AutoSize = true;
-            lblBadShiftPercent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblBadShiftPercent.ForeColor = Color.FromArgb(226, 163, 199);
-            lblBadShiftPercent.Location = new Point(128, 86);
-            lblBadShiftPercent.Name = "lblBadShiftPercent";
-            lblBadShiftPercent.Size = new Size(32, 21);
-            lblBadShiftPercent.TabIndex = 8;
-            lblBadShiftPercent.Text = "8%";
-            // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -500,7 +500,7 @@
         private Label lblBadShiftPercent;
         private Label lblAverageShiftPercent;
         private Label lblGoodShiftPercent;
-        private Label label3;
         private Label lblTotalShifts;
+        private Label lblTotalShiftsLabelHeader;
     }
 }

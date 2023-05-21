@@ -18,6 +18,7 @@ namespace RicksStaffApp
         int goodShiftCount = 0;
         int badShiftCount = 0;
         int averageShiftCount = 0;
+        int totalShiftCount = 0;
         public frmViewEmployee(Employee employee)
         {
             ThisEmployee = employee;
@@ -30,9 +31,10 @@ namespace RicksStaffApp
         private void GetEmployeeShiftGoodBadDistribution(List<EmployeeShift> employeeShifts)
         {
             (goodShiftCount, badShiftCount, averageShiftCount) = (0, 0, 0);
+            totalShiftCount = employeeShifts.Count;
             foreach (EmployeeShift employeeShift in employeeShifts)
             {
-                
+                UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
                 if (employeeShift.ShiftRating <= 5.5)
                 {
                     badShiftCount++;
@@ -46,19 +48,27 @@ namespace RicksStaffApp
                     averageShiftCount++;
                 }
             }
+            lblTotalShifts.Text = totalShiftCount.ToString();
+            lblGoodShifts.Text = goodShiftCount.ToString();
+            lblAverageShifts.Text = averageShiftCount.ToString();
+            lblPoorShifts.Text = badShiftCount.ToString();            
+            double goodPercentage = (Double)goodShiftCount / totalShiftCount;
+            double averagePercentage = (Double)averageShiftCount / totalShiftCount;
+            double badPercentage = (Double)badShiftCount / totalShiftCount;
+            lblGoodShiftPercent.Text = goodPercentage.ToString("0.00"+"%");
+            lblAverageShiftPercent.Text = averagePercentage.ToString("0.00" + "%");
+            lblBadShiftPercent.Text = badPercentage.ToString("0.00" + "%");
         }
         private void frmViewEmployee_Load(object sender, EventArgs e)
         {
 
             lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
-            
+
             GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
-            lblGoodShifts.Text = goodShiftCount.ToString();
-            lblAverageShifts.Text = averageShiftCount.ToString();
-            lblPoorShifts.Text = badShiftCount.ToString();
+
             picBoxEmployeeRating.Image = UIHelper.GetStars(ThisEmployee.OverallRating);
-            lblRating.Text = ThisEmployee.OverallRating.ToString();
+            lblRating.Text = ThisEmployee.OverallRating.ToString("0.00");
             cboSeondEmployeeTime.SelectedIndex = 0;
 
 
