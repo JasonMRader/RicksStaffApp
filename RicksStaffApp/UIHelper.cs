@@ -2,6 +2,8 @@
 
 using System.Data.SQLite;
 using System.Data;
+//using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
 
 namespace RicksStaffApp
 {
@@ -160,6 +162,56 @@ namespace RicksStaffApp
             return lblLable;
         }
         //public static void UpdateIncidentList()
+
+        public static void CreateIncidentFrequencyPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay)
+        {
+            var groupedIncidents = incidentList.GroupBy(i => i.Name);
+            var sortedIncidents = groupedIncidents.OrderByDescending(g => g.Count());
+            
+
+            foreach (var group in sortedIncidents)
+            {
+                var positiveIncident = group.Where(i => i.IncidentRatingChange > 0);
+                var negativeIncident = group.Where(i => i.IncidentRatingChange < 0);
+
+                Panel incidentPanel = CreateFlowPanel(200, 50);
+                incidentPanel.MinimumSize = new Size(200, 50);
+                incidentPanel.Margin = new Padding(0, 2, 2, 0);
+                Label incidentLabel = CreateLabel(140, 50, group.Key);
+                Label incidentFrequency = CreateLabel(45, 50, group.Count().ToString() + "X");
+                incidentLabel.Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold); 
+                incidentFrequency.Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold);
+                if (group.FirstOrDefault().IncidentRatingChange > 0)
+                {
+                    incidentPanel.BackColor = GoodColor;
+                }
+                else if (group.FirstOrDefault().IncidentRatingChange < 0)
+                {
+                    incidentPanel.BackColor = BadColor;
+                }
+                else
+                {
+                    incidentPanel.BackColor = NeutralColor;
+                }
+                //if (positiveIncident.Count() > 0)
+                //{
+                //    incidentPanel.BackColor = GoodColor;
+                //}
+                //if (negativeIncident.Count() > 0)
+                //{
+                //    incidentPanel.BackColor = BadColor;
+                //}
+                //else
+                //{
+                //    incidentPanel.BackColor = NeutralColor;
+                //}
+                
+                
+                incidentPanel.Controls.Add(incidentLabel);
+                incidentPanel.Controls.Add(incidentFrequency);
+                flowDisplay.Controls.Add(incidentPanel);
+            }
+        }
 
         public static void CreateIncidentPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay, List<Shift> shifts)
         {

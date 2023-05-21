@@ -51,17 +51,16 @@ namespace RicksStaffApp
             lblTotalShifts.Text = totalShiftCount.ToString();
             lblGoodShifts.Text = goodShiftCount.ToString();
             lblAverageShifts.Text = averageShiftCount.ToString();
-            lblPoorShifts.Text = badShiftCount.ToString();            
+            lblPoorShifts.Text = badShiftCount.ToString();
             double goodPercentage = (Double)goodShiftCount / totalShiftCount;
             double averagePercentage = (Double)averageShiftCount / totalShiftCount;
             double badPercentage = (Double)badShiftCount / totalShiftCount;
-            lblGoodShiftPercent.Text = goodPercentage.ToString("0.00"+"%");
+            lblGoodShiftPercent.Text = goodPercentage.ToString("0.00" + "%");
             lblAverageShiftPercent.Text = averagePercentage.ToString("0.00" + "%");
             lblBadShiftPercent.Text = badPercentage.ToString("0.00" + "%");
         }
         private void frmViewEmployee_Load(object sender, EventArgs e)
         {
-
             lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
 
@@ -70,10 +69,8 @@ namespace RicksStaffApp
             picBoxEmployeeRating.Image = UIHelper.GetStars(ThisEmployee.OverallRating);
             lblRating.Text = ThisEmployee.OverallRating.ToString("0.00");
             cboSeondEmployeeTime.SelectedIndex = 0;
-
-
-
-
+            UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents, flowFrequentIncidents);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

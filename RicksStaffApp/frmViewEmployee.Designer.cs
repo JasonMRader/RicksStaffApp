@@ -34,40 +34,37 @@
             dateTimePicker2 = new DateTimePicker();
             dateTimePicker1 = new DateTimePicker();
             panel3 = new Panel();
+            flowFrequentIncidents = new FlowLayoutPanel();
             panel5 = new Panel();
+            label1 = new Label();
             lblBadShiftPercent = new Label();
             lblAverageShiftPercent = new Label();
             lblGoodShiftPercent = new Label();
             lblTotalShifts = new Label();
-            lblTotalShiftsLabelHeader = new Label();
             lblPoorShifts = new Label();
             lblAverageShifts = new Label();
             lblGoodShifts = new Label();
             label12 = new Label();
             label11 = new Label();
             label10 = new Label();
-            panel4 = new Panel();
-            panel8 = new Panel();
-            label9 = new Label();
-            panel7 = new Panel();
-            label8 = new Label();
-            panel6 = new Panel();
-            label5 = new Label();
-            label2 = new Label();
             panel2 = new Panel();
             lblRating = new Label();
             picBoxEmployeeRating = new PictureBox();
+            label2 = new Label();
+            lblTotalShiftsLabelHeader = new Label();
+            panel8 = new Panel();
+            label9 = new Label();
+            panel6 = new Panel();
+            label5 = new Label();
             cboSeondEmployeeTime = new ComboBox();
             button1 = new Button();
             flowEmployeeShifts = new FlowLayoutPanel();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
-            panel4.SuspendLayout();
-            panel8.SuspendLayout();
-            panel7.SuspendLayout();
-            panel6.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
+            panel8.SuspendLayout();
+            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // lblEmployeeName
@@ -127,23 +124,32 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(flowFrequentIncidents);
             panel3.Controls.Add(panel5);
-            panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel2);
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(lblTotalShiftsLabelHeader);
             panel3.Location = new Point(9, 110);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
             panel3.Size = new Size(206, 510);
             panel3.TabIndex = 2;
             // 
+            // flowFrequentIncidents
+            // 
+            flowFrequentIncidents.Location = new Point(3, 246);
+            flowFrequentIncidents.Name = "flowFrequentIncidents";
+            flowFrequentIncidents.Size = new Size(200, 252);
+            flowFrequentIncidents.TabIndex = 3;
+            // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(37, 42, 64);
+            panel5.Controls.Add(label1);
             panel5.Controls.Add(lblBadShiftPercent);
             panel5.Controls.Add(lblAverageShiftPercent);
             panel5.Controls.Add(lblGoodShiftPercent);
             panel5.Controls.Add(lblTotalShifts);
-            panel5.Controls.Add(lblTotalShiftsLabelHeader);
             panel5.Controls.Add(lblPoorShifts);
             panel5.Controls.Add(lblAverageShifts);
             panel5.Controls.Add(lblGoodShifts);
@@ -154,6 +160,19 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(191, 114);
             panel5.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(3, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(36, 17);
+            label1.TabIndex = 9;
+            label1.Text = "Total";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblBadShiftPercent
             // 
@@ -198,19 +217,6 @@
             lblTotalShifts.Size = new Size(37, 21);
             lblTotalShifts.TabIndex = 4;
             lblTotalShifts.Text = "100";
-            // 
-            // lblTotalShiftsLabelHeader
-            // 
-            lblTotalShiftsLabelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblTotalShiftsLabelHeader.AutoSize = true;
-            lblTotalShiftsLabelHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotalShiftsLabelHeader.ForeColor = Color.White;
-            lblTotalShiftsLabelHeader.Location = new Point(3, 8);
-            lblTotalShiftsLabelHeader.Name = "lblTotalShiftsLabelHeader";
-            lblTotalShiftsLabelHeader.Size = new Size(39, 17);
-            lblTotalShiftsLabelHeader.TabIndex = 3;
-            lblTotalShiftsLabelHeader.Text = "Shifts";
-            lblTotalShiftsLabelHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblPoorShifts
             // 
@@ -284,87 +290,6 @@
             label10.Text = "Good";
             label10.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel4
-            // 
-            panel4.BackColor = Color.FromArgb(37, 42, 64);
-            panel4.Controls.Add(panel8);
-            panel4.Controls.Add(panel7);
-            panel4.Controls.Add(panel6);
-            panel4.Controls.Add(label2);
-            panel4.Location = new Point(3, 233);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(191, 200);
-            panel4.TabIndex = 2;
-            // 
-            // panel8
-            // 
-            panel8.BackColor = Color.FromArgb(226, 163, 199);
-            panel8.Controls.Add(label9);
-            panel8.Location = new Point(9, 136);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(173, 38);
-            panel8.TabIndex = 2;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(67, 9);
-            label9.Name = "label9";
-            label9.Size = new Size(37, 20);
-            label9.TabIndex = 0;
-            label9.Text = "Late";
-            // 
-            // panel7
-            // 
-            panel7.BackColor = Color.FromArgb(192, 223, 161);
-            panel7.Controls.Add(label8);
-            panel7.Location = new Point(9, 92);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(173, 38);
-            panel7.TabIndex = 2;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(9, 9);
-            label8.Name = "label8";
-            label8.Size = new Size(147, 20);
-            label8.TabIndex = 0;
-            label8.Text = "Went The Extra Mile";
-            // 
-            // panel6
-            // 
-            panel6.BackColor = Color.FromArgb(192, 223, 161);
-            panel6.Controls.Add(label5);
-            panel6.Location = new Point(9, 48);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(173, 38);
-            panel6.TabIndex = 2;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(35, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(105, 20);
-            label5.TabIndex = 0;
-            label5.Text = "Great Attitude";
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(30, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(135, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Most Frequent Activites:";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(37, 42, 64);
@@ -395,6 +320,69 @@
             picBoxEmployeeRating.SizeMode = PictureBoxSizeMode.Zoom;
             picBoxEmployeeRating.TabIndex = 0;
             picBoxEmployeeRating.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(37, 228);
+            label2.Name = "label2";
+            label2.Size = new Size(132, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Most Frequent Activites";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblTotalShiftsLabelHeader
+            // 
+            lblTotalShiftsLabelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTotalShiftsLabelHeader.AutoSize = true;
+            lblTotalShiftsLabelHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTotalShiftsLabelHeader.ForeColor = Color.White;
+            lblTotalShiftsLabelHeader.Location = new Point(79, 71);
+            lblTotalShiftsLabelHeader.Name = "lblTotalShiftsLabelHeader";
+            lblTotalShiftsLabelHeader.Size = new Size(39, 17);
+            lblTotalShiftsLabelHeader.TabIndex = 3;
+            lblTotalShiftsLabelHeader.Text = "Shifts";
+            lblTotalShiftsLabelHeader.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel8
+            // 
+            panel8.BackColor = Color.FromArgb(226, 163, 199);
+            panel8.Controls.Add(label9);
+            panel8.Location = new Point(238, 130);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(173, 38);
+            panel8.TabIndex = 2;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Location = new Point(67, 9);
+            label9.Name = "label9";
+            label9.Size = new Size(37, 20);
+            label9.TabIndex = 0;
+            label9.Text = "Late";
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.FromArgb(192, 223, 161);
+            panel6.Controls.Add(label5);
+            panel6.Location = new Point(238, 86);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(173, 38);
+            panel6.TabIndex = 2;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(35, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(105, 20);
+            label5.TabIndex = 0;
+            label5.Text = "Great Attitude";
             // 
             // cboSeondEmployeeTime
             // 
@@ -436,6 +424,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(37, 42, 64);
             ClientSize = new Size(800, 675);
+            Controls.Add(panel8);
+            Controls.Add(panel6);
             Controls.Add(cboSeondEmployeeTime);
             Controls.Add(flowEmployeeShifts);
             Controls.Add(button1);
@@ -451,19 +441,16 @@
             Text = "frmViewEmployee";
             Load += frmViewEmployee_Load;
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).EndInit();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -477,15 +464,12 @@
         private Panel panel3;
         private Panel panel5;
         private Label lblGoodShifts;
-        private Panel panel4;
         private Label label2;
         private Label lblPoorShifts;
         private Label lblAverageShifts;
         private Panel panel6;
         private Panel panel8;
         private Label label9;
-        private Panel panel7;
-        private Label label8;
         private Label label5;
         private Label label12;
         private Label label11;
@@ -502,5 +486,7 @@
         private Label lblGoodShiftPercent;
         private Label lblTotalShifts;
         private Label lblTotalShiftsLabelHeader;
+        private FlowLayoutPanel flowFrequentIncidents;
+        private Label label1;
     }
 }
