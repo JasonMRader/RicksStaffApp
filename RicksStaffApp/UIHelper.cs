@@ -732,7 +732,7 @@ namespace RicksStaffApp
                 empShiftContainer.MaximumSize = new Size(470, 1000);
                 empShiftContainer.Margin = new Padding(0, 0, 0, 5);
 
-                Label lblName = CreateLabel(100, 30, employeeShift.Employee.FullName);
+                Label lblName = CreateLabel(100, 30, employeeShift.Shift.DateString);
                 empShiftContainer.Controls.Add(lblName);
 
                 Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);

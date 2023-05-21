@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RicksStaffApp
 {
-    public class Shift
+    public class Shift 
     {
         public Shift() { }
         public int ID { get; set; }

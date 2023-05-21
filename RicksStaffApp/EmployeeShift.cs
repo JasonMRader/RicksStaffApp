@@ -22,7 +22,9 @@ namespace RicksStaffApp
         public int ID { get; set; }
         public Employee Employee { get; set; }
         public Shift Shift { get; set; }
+        public int ShiftID { get; set; }    
         public Position Position { get; set; }
+        public string DateString { get; set; }
         public int PositionID { get; set; }
         private float _shiftRating;
         public string EmployeeName { get {return this.Employee.FullName; } }
@@ -81,4 +83,14 @@ namespace RicksStaffApp
         }
 
     }
+    //public static void AssignShiftToEmployeeShifts(List<EmployeeShift> employeeShifts, List<Shift> shifts)
+    //{
+    //    // Create a dictionary to efficiently lookup shifts by their ID
+    //    Dictionary<int, Shift> shiftLookup = shifts.ToDictionary(shift => shift.ID);
+    //    // Iterate over the employee shifts
+    //    foreach (EmployeeShift employeeShift in employeeShifts)
+    //    {
+            
+    //    }
+    //}
 }

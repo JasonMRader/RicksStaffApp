@@ -373,17 +373,50 @@ namespace RicksStaffApp
                 return shifts;
             }
         }
+        public static List<EmployeeShift> AssignShiftsToEmployeeShifts(List<EmployeeShift> employeeShifts)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = @"
+            SELECT es.*, s.*
+            FROM EmployeeShift es
+            INNER JOIN Shift s ON es.ShiftID = s.ID
+            WHERE es.ShiftID IN @ShiftIDs";
+
+                var shiftIDs = employeeShifts.Select(es => es.Shift.ID).Distinct();
+                var result = connection.Query<EmployeeShift, Shift, EmployeeShift>(query,
+                    (employeeShift, shift) =>
+                    {
+                        employeeShift.Shift = shift;
+                        return employeeShift;
+                    },
+                    new { ShiftIDs = shiftIDs },
+                    splitOn: "ID").ToList();
+
+                return result;
+            }
+        }
+
         public static List<Employee> TestLoadEmployees()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 string query = "SELECT * FROM Employee";
                 var employees = cnn.Query<Employee>(query).AsList();
-
+                /*
+                 * es.ID as EmployeeShiftID,
+                    s.ID as ShiftID,
+                    p.ID as PositionID,
+                    i.ID as IncidentID
+                 * 
+                 */
+                string shiftQuery = "SELECT * FROM Shift WHERE ID = @ShiftID";
                 string employeeShiftQuery = @"
                     SELECT es.*, s.*, p.*, i.*
+                    
+                    
                     FROM EmployeeShift es
-                    INNER JOIN Shift s ON es.ShiftID = s.ID
+                    LEFT JOIN Shift s ON es.ShiftID = s.ID
                     INNER JOIN Positions p ON es.PositionID = p.ID
                     LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.EmployeeID = @EmployeeID";
@@ -399,6 +432,7 @@ namespace RicksStaffApp
                             {
                                 currentEmployeeShift = employeeShift;
                                 currentEmployeeShift.Employee = employee;
+                                
                                 currentEmployeeShift.Position = position;
                                 currentEmployeeShift.Incidents = new List<Incident>();
                                 employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
@@ -413,11 +447,24 @@ namespace RicksStaffApp
                             return currentEmployeeShift;
                         },
                         new { EmployeeID = employee.ID },
-                        splitOn: "ID,ID,ID").Distinct().AsList();
+                        splitOn: "ID, ID, ID").Distinct().AsList();
+                    foreach (var employeeShift in employeeShifts)
+                    {
+                        // Retrieve the shift object
+                        var shift = cnn.QueryFirstOrDefault<Shift>(shiftQuery, new { ShiftID = employeeShift.ShiftID });
+
+                        // Assign the shift to the employeeShift
+                        employeeShift.Shift = shift;
+                    }
+
+
 
                     employee.EmployeeShifts = employeeShifts;
                 }
+                //TODO: remove LoadActivities() from here
                 List<Activity> activities = LoadActivities();
+                
+
                 Incident.AssignActivitiesToEmployeeIncidents(employees, activities);
                 return employees;
 
