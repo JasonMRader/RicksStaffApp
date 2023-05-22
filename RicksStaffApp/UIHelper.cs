@@ -235,11 +235,15 @@ namespace RicksStaffApp
             List<Activity> activities = SqliteDataAccess.LoadActivities();
             Incident.AssignActivitiesToIncidents(incidentList, activities);
             // Clear existing panels
-            //flowEmployeeDisplay.Controls.Clear();
+            //flowDisplay.Controls.Clear();
+
 
             foreach (Incident incident in incidentList)
             {
                 FlowLayoutPanel incidentPanel = incident.CreateFlowLayoutPanel();
+                incidentPanel.AutoSize = false;
+                incidentPanel.Width = 425;
+                incidentPanel.Height = 30;
 
 
                 flowDisplay.Controls.Add(incidentPanel);
@@ -759,11 +763,23 @@ namespace RicksStaffApp
 
                 PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
                 empShiftContainer.Controls.Add(pbRating);
-
+            FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
             Button btnIncidents = CreateButtonTemplate(65, 30, "Incidents");
-            btnIncidents.Click += (sender, e) =>
+            bool btnClicked = false;
+            btnIncidents.Click += (sender, e) =>            
             {
-                CreateIncidentPanels(employeeShift.Incidents, empShiftContainer);
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer); 
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
             };
             empShiftContainer.Controls.Add(btnIncidents);
 
