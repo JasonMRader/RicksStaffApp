@@ -30,6 +30,7 @@
         {
             btnExitApp = new Button();
             pnlForm1 = new Panel();
+            btnOpenTestForm = new Button();
             pnlButtonSelected = new Panel();
             label1 = new Label();
             rdoSettings = new RadioButton();
@@ -37,7 +38,6 @@
             rdoOverviewForm = new RadioButton();
             pnlNav = new Panel();
             panel1 = new Panel();
-            btnOpenTestForm = new Button();
             pnlForm1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -59,7 +59,6 @@
             // pnlForm1
             // 
             pnlForm1.BackColor = Color.FromArgb(24, 30, 54);
-            pnlForm1.Controls.Add(btnOpenTestForm);
             pnlForm1.Controls.Add(pnlButtonSelected);
             pnlForm1.Controls.Add(label1);
             pnlForm1.Controls.Add(rdoSettings);
@@ -73,6 +72,18 @@
             pnlForm1.MouseDown += Form1_MouseDown;
             pnlForm1.MouseMove += Form1_MouseMove;
             pnlForm1.MouseUp += Form1_MouseUp;
+            // 
+            // btnOpenTestForm
+            // 
+            btnOpenTestForm.BackColor = Color.FromArgb(192, 255, 255);
+            btnOpenTestForm.FlatStyle = FlatStyle.Flat;
+            btnOpenTestForm.Location = new Point(12, 1);
+            btnOpenTestForm.Name = "btnOpenTestForm";
+            btnOpenTestForm.Size = new Size(40, 23);
+            btnOpenTestForm.TabIndex = 1;
+            btnOpenTestForm.Text = "Test Form";
+            btnOpenTestForm.UseVisualStyleBackColor = false;
+            btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // pnlButtonSelected
             // 
@@ -168,6 +179,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(24, 30, 54);
+            panel1.Controls.Add(btnOpenTestForm);
             panel1.Controls.Add(btnExitApp);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -178,18 +190,6 @@
             panel1.MouseDown += Form1_MouseDown;
             panel1.MouseMove += Form1_MouseMove;
             panel1.MouseUp += Form1_MouseUp;
-            // 
-            // btnOpenTestForm
-            // 
-            btnOpenTestForm.BackColor = Color.FromArgb(192, 255, 255);
-            btnOpenTestForm.FlatStyle = FlatStyle.Flat;
-            btnOpenTestForm.Location = new Point(565, 6);
-            btnOpenTestForm.Name = "btnOpenTestForm";
-            btnOpenTestForm.Size = new Size(103, 38);
-            btnOpenTestForm.TabIndex = 1;
-            btnOpenTestForm.Text = "Test Form";
-            btnOpenTestForm.UseVisualStyleBackColor = false;
-            btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // Form1
             // 

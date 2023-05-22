@@ -135,7 +135,7 @@ namespace RicksStaffApp
             //set { Date = DateOnly.Parse(value, IFormatProvider? provider); }
         }
         //TODO remove assign activities for effecency
-        public static void AssignActivitiesToIncidents(List<Shift> shifts, List<Activity> activities)
+        public static void AssignActivitiesToIncidents_REPLACE(List<Shift> shifts, List<Activity> activities)
         {
             // Create a dictionary to efficiently lookup activities by their ID
             Dictionary<int, Activity> activityLookup = activities.ToDictionary(activity => activity.ID);
@@ -161,6 +161,27 @@ namespace RicksStaffApp
                     }
                 }
             }
+        }
+        public static void AssignActivitiesToIncidents(List<Incident> incidents, List<Activity> activities)
+        {
+            // Create a dictionary to efficiently lookup activities by their ID
+            Dictionary<int, Activity> activityLookup = activities.ToDictionary(activity => activity.ID);                
+                
+            // Iterate over the incidents in the current employee shift
+            foreach (Incident incident in incidents)
+            {
+                // Check if the incident's ActivityID is in the activityLookup dictionary
+                if (activityLookup.TryGetValue(incident.ActivityID, out Activity activity))
+                {
+                    // Assign the activity properties to the incident
+                    incident.Name = activity.Name;
+                    //incident.AdjustedRatingChange = activity.AdjustedRatingChange;
+                    incident.BaseRatingImpact = activity.BaseRatingImpact;
+                    incident.ActivityModifiers = activity.ActivityModifiers;
+                }
+            }
+                
+            
         }
         public static void AssignActivitiesToEmployeeIncidents(List<Employee> employees, List<Activity> activities)
         {

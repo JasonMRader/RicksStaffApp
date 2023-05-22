@@ -369,7 +369,7 @@ namespace RicksStaffApp
                     shift.EmployeeShifts = employeeShifts;
                 }
                 List<Activity> activities = LoadActivities();
-                Incident.AssignActivitiesToIncidents(shifts, activities);
+                Incident.AssignActivitiesToIncidents_REPLACE(shifts, activities);
                 return shifts;
             }
         }

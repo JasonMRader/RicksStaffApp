@@ -213,10 +213,10 @@ namespace RicksStaffApp
             }
         }
 
-        public static void CreateIncidentPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay, List<Shift> shifts)
+        public static void CreateIncidentPanels_REPLACE(List<Incident> incidentList, FlowLayoutPanel flowDisplay, List<Shift> shifts)
         {
             List<Activity> activities = SqliteDataAccess.LoadActivities();
-            Incident.AssignActivitiesToIncidents(shifts, activities);
+            Incident.AssignActivitiesToIncidents_REPLACE(shifts, activities);
             // Clear existing panels
             //flowEmployeeDisplay.Controls.Clear();
 
@@ -230,7 +230,23 @@ namespace RicksStaffApp
 
             }
         }
+        public static void CreateIncidentPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay)
+        {
+            List<Activity> activities = SqliteDataAccess.LoadActivities();
+            Incident.AssignActivitiesToIncidents(incidentList, activities);
+            // Clear existing panels
+            //flowEmployeeDisplay.Controls.Clear();
 
+            foreach (Incident incident in incidentList)
+            {
+                FlowLayoutPanel incidentPanel = incident.CreateFlowLayoutPanel();
+
+
+                flowDisplay.Controls.Add(incidentPanel);
+
+
+            }
+        }
         public static void CreateShiftPanels(List<Shift> shiftList, FlowLayoutPanel flowEmployeeDisplay)
         {
             // Clear existing panels
@@ -744,26 +760,26 @@ namespace RicksStaffApp
                 PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
                 empShiftContainer.Controls.Add(pbRating);
 
-                //Button btnIncidents = CreateButtonTemplate(65, 30, "Incidents");
-                //btnIncidents.Click += (sender, e) =>
-                //{
-                //    CreateIncidentPanels(employeeShift.Incidents, empShiftContainer, shiftList);
-                //};
-                //empShiftContainer.Controls.Add(btnIncidents);
+            Button btnIncidents = CreateButtonTemplate(65, 30, "Incidents");
+            btnIncidents.Click += (sender, e) =>
+            {
+                CreateIncidentPanels(employeeShift.Incidents, empShiftContainer);
+            };
+            empShiftContainer.Controls.Add(btnIncidents);
 
-                ////Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
-                ////btnAddIncidents.Click += (sender, e) =>
-                ////{
-                ////    secondPanel.Controls.Clear();
-                ////    frmServerShift frmServerShift = new frmServerShift();
-                ////    frmServerShift.EmployeeShiftToEdit = employeeShift;
-                ////    frmServerShift.TopLevel = false;
-                ////    secondPanel.Controls.Add(frmServerShift);
-                ////    frmServerShift.Show();
-                ////};
-                //empShiftContainer.Controls.Add(btnAddIncidents);
+            ////Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
+            ////btnAddIncidents.Click += (sender, e) =>
+            ////{
+            ////    secondPanel.Controls.Clear();
+            ////    frmServerShift frmServerShift = new frmServerShift();
+            ////    frmServerShift.EmployeeShiftToEdit = employeeShift;
+            ////    frmServerShift.TopLevel = false;
+            ////    secondPanel.Controls.Add(frmServerShift);
+            ////    frmServerShift.Show();
+            ////};
+            //empShiftContainer.Controls.Add(btnAddIncidents);
 
-                flowLayoutPanel.Controls.Add(empShiftContainer);
+            flowLayoutPanel.Controls.Add(empShiftContainer);
 
             
         }
@@ -799,7 +815,7 @@ namespace RicksStaffApp
                         Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");                        
                         btnIncidents.Click += (sender, e) =>
                         {
-                            CreateIncidentPanels(es.Incidents, empShiftContainer, shiftList);
+                            CreateIncidentPanels_REPLACE(es.Incidents, empShiftContainer, shiftList);
                         };
                         empShiftContainer.Controls.Add(btnIncidents);
 
