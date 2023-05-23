@@ -36,14 +36,14 @@
             comboBox3 = new ComboBox();
             label1 = new Label();
             pnlEmployeeStats = new Panel();
+            flowEmployeeRankings = new FlowLayoutPanel();
+            label7 = new Label();
             label2 = new Label();
             label5 = new Label();
             label4 = new Label();
             comboBox2 = new ComboBox();
             comboBox1 = new ComboBox();
             label3 = new Label();
-            label7 = new Label();
-            flowLayoutPanel1 = new FlowLayoutPanel();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -124,7 +124,7 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(37, 42, 64);
-            pnlEmployeeStats.Controls.Add(flowLayoutPanel1);
+            pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
             pnlEmployeeStats.Controls.Add(label7);
             pnlEmployeeStats.Controls.Add(label2);
             pnlEmployeeStats.Location = new Point(17, 72);
@@ -133,6 +133,24 @@
             pnlEmployeeStats.Size = new Size(800, 675);
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
+            // 
+            // flowEmployeeRankings
+            // 
+            flowEmployeeRankings.Location = new Point(34, 112);
+            flowEmployeeRankings.Name = "flowEmployeeRankings";
+            flowEmployeeRankings.Size = new Size(426, 363);
+            flowEmployeeRankings.TabIndex = 2;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(34, 56);
+            label7.Name = "label7";
+            label7.Size = new Size(144, 30);
+            label7.TabIndex = 1;
+            label7.Text = "Highest Rated";
             // 
             // label2
             // 
@@ -204,24 +222,6 @@
             label3.TabIndex = 1;
             label3.Text = "Employees";
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(34, 56);
-            label7.Name = "label7";
-            label7.Size = new Size(144, 30);
-            label7.TabIndex = 1;
-            label7.Text = "Highest Rated";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Location = new Point(34, 112);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(549, 363);
-            flowLayoutPanel1.TabIndex = 2;
-            // 
             // frmOverview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -270,7 +270,7 @@
         private Label label3;
         private Button btnAddEmployee;
         private FlowLayoutPanel flowEmployeeDisplay;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flowEmployeeRankings;
         private Label label7;
     }
 }

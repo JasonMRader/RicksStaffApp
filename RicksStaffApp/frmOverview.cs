@@ -45,6 +45,7 @@ namespace RicksStaffApp
                 employee.UpdateOverallRating();
             }
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats);
+            UIHelper.CreateEmployeePanels(employeeList, flowEmployeeRankings, pnlEmployeeStats);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
