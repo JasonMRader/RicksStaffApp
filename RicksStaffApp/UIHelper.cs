@@ -661,8 +661,10 @@ namespace RicksStaffApp
 
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
-               
-               
+
+                PictureBox pbRating = CreateRatingPictureBox(90, 30, emp.OverallRating);
+                empPanel.Controls.Add(pbRating);
+
                 empPanelContainer.Controls.Add(empPanel);
                 
                 Label lblRating = new Label();
