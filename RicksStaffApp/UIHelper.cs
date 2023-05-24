@@ -2,6 +2,7 @@
 
 using System.Data.SQLite;
 using System.Data;
+using System.Drawing.Drawing2D;
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Excel;
 
@@ -78,49 +79,210 @@ namespace RicksStaffApp
             label.TextAlign = ContentAlignment.MiddleCenter;
             return label;
         }
+        //public static Image AssignColor (Image starsImage, float rating)
+        //{
+        //    Bitmap resultImage = new Bitmap(starsImage.Width, starsImage.Height);
+        //    Color starColor;
+
+        //    using (Graphics graphics = Graphics.FromImage(resultImage))
+        //    {
+        //        // Draw the starsImage onto the resultImage
+        //        graphics.DrawImage(starsImage, Point.Empty);
+
+        //        // Define the region that corresponds to the stars inside the image
+        //        GraphicsPath starsRegion = new GraphicsPath();
+        //        starsRegion.AddPolygon(new[]
+        //        {
+        //    new Point(13, 0),
+        //    new Point(16, 8),
+        //    new Point(24, 9),
+        //    new Point(18, 15),
+        //    new Point(20, 23),
+        //    new Point(13, 19),
+        //    new Point(6, 23),
+        //    new Point(8, 15),
+        //    new Point(2, 9),
+        //    new Point(10, 8)
+        //});
+
+        //        // Create a region from the stars path
+        //        Region starsRegionMask = new Region(starsRegion);
+
+        //        // Set the clipping region of the graphics object to the stars region
+        //        graphics.SetClip(starsRegionMask, CombineMode.Intersect);
+
+        //        // Apply the corresponding color based on the rating
+                
+        //        if (rating >= 10 || rating >= 9.5)
+        //        {
+        //            starColor = RatingTen;
+        //        }
+        //        else if (rating < 9.5 && rating >= 8.5)
+        //        {
+        //            starColor = RatingNine;
+        //        }
+        //        // Add more cases for other ratings and their corresponding colors
+
+        //        // Fill the clipped region with the corresponding color
+        //        using (Brush brush = new SolidBrush(starColor))
+        //        {
+        //            graphics.FillRegion(brush, graphics.Clip);
+        //        }
+        //    }
+        //    return resultImage;
+        //}
         public static Image GetStars(float rating)
         {
-            Image StarsDisplayed;
+            Image starsImage;
+            Color starColor = Color.White;
             switch (rating)
             {
                 case float r when r >= 10 || r >= 9.5:
-                    StarsDisplayed = Properties.Resources._5_Stars;
+                    starsImage = Properties.Resources._5_Stars;
+                    //starColor = RatingTen;
                     break;
                 case float r when r < 9.5 && r >= 8.5:
-                    StarsDisplayed = Properties.Resources._4_5_Stars;
+                    starsImage = Properties.Resources._4_5_Stars;
+                    //starColor = RatingNine;
                     break;
                 case float r when r < 8.5 && r >= 7.5:
-                    StarsDisplayed = Properties.Resources._4_Stars;
+                    starsImage = Properties.Resources._4_Stars;
+                    //starColor = RatingEight;
                     break;
                 case float r when r < 7.5 && r >= 6.5:
-                    StarsDisplayed = Properties.Resources._3_5_Stars;
+                    starsImage = Properties.Resources._3_5_Stars;
+                    //starColor = RatingSeven;
                     break;
                 case float r when r < 6.5 && r >= 5.5:
-                    StarsDisplayed = Properties.Resources._3_Stars;
+                    starsImage = Properties.Resources._3_Stars;
+                    //starColor = RatingSix;
                     break;
                 case float r when r < 5.5 && r >= 4.5:
-                    StarsDisplayed = Properties.Resources._2_5_Stars;
+                    starsImage = Properties.Resources._2_5_Stars;
+                    //starColor = RatingFive;
                     break;
                 case float r when r < 4.5 && r >= 3.5:
-                    StarsDisplayed = Properties.Resources._2_Stars;
+                    starsImage = Properties.Resources._2_Stars;
+                    //starColor = RatingFour;
                     break;
                 case float r when r < 3.5 && r >= 2.5:
-                    StarsDisplayed = Properties.Resources._1_5_Stars;
+                    starsImage = Properties.Resources._1_5_Stars;
+                    //starColor = RatingThree;
                     break;
                 case float r when r < 2.5 && r >= 1.5:
-                    StarsDisplayed = Properties.Resources._1_Stars;
+                    starsImage = Properties.Resources._1_Stars;
+                    //starColor = RatingTwo;
                     break;
                 case float r when r < 1.5 && r >= 0.5:
-                    StarsDisplayed = Properties.Resources.Half_Star;
+                    starsImage = Properties.Resources.Half_Star;
+                    //starColor = RatingOne;
                     break;
                 case float r when r < 0.5 && r >= 0:
-                    StarsDisplayed = Properties.Resources.No_Stars;
+                    starsImage = Properties.Resources.No_Stars;
+                    //starColor = RatingZero;
                     break;
                 default:
-                    StarsDisplayed = Properties.Resources.No_Stars; // Set a default image if the rating doesn't match any of the above cases
+                    starsImage = Properties.Resources.No_Stars; // Set a default image if the rating doesn't match any of the above cases
+                    //starColor = RatingZero;
                     break;
             }
-            return StarsDisplayed;
+            Bitmap resultImage = new Bitmap(starsImage.Width, starsImage.Height);
+
+            using (Graphics graphics = Graphics.FromImage(resultImage))
+            {
+                // Draw the starsImage onto the resultImage
+                graphics.DrawImage(starsImage, Point.Empty);
+
+                // Define the region that corresponds to the stars inside the image
+                GraphicsPath starsRegion = new GraphicsPath();
+                starsRegion.AddPolygon(new[]
+                {
+            new Point(13, 0),
+            new Point(16, 8),
+            new Point(24, 9),
+            new Point(18, 15),
+            new Point(20, 23),
+            new Point(13, 19),
+            new Point(6, 23),
+            new Point(8, 15),
+            new Point(2, 9),
+            new Point(10, 8)
+        });
+
+                // Create a region from the stars path
+                Region starsRegionMask = new Region(starsRegion);
+
+                // Set the clipping region of the graphics object to the stars region
+                graphics.SetClip(starsRegionMask, CombineMode.Intersect);
+
+                // Apply the corresponding color based on the rating
+                //Color starColor;
+                if (rating >= 10 || rating >= 9.5)
+                {
+                    starColor = RatingTen;
+                }
+                if (rating < 9.5 && rating >= 8.5)
+                {
+                    starColor = RatingNine;
+                }
+                if (rating < 8.5 && rating >= 7.5)
+                {
+                    starColor = RatingEight;
+                }
+                if ( rating < 7.5 && rating >= 6.5)
+                {
+                    starColor = RatingSeven;
+                }
+                else
+                {
+                    starColor = RatingSix;
+                }
+                // Add more cases for other ratings and their corresponding colors
+
+                // Fill the clipped region with the corresponding color
+                using (Brush brush = new SolidBrush(starColor))
+                {
+                    graphics.FillRegion(brush, graphics.Clip);
+                }
+            }
+            return resultImage;
+            //using (Graphics graphics = Graphics.FromImage(StarsDisplayed))
+            //using (Brush brush = new SolidBrush(starColor))
+            //{
+            //    graphics.FillRectangle(brush, 0, 0, StarsDisplayed.Width, StarsDisplayed.Height);
+            //}
+            //    Bitmap resultImage = new Bitmap(StarsDisplayed.Width, StarsDisplayed.Height);
+            //    using (Graphics graphics = Graphics.FromImage(resultImage))
+            //    {
+            //        graphics.DrawImage(StarsDisplayed, Point.Empty); // Draw the stars image onto the result image
+
+            //        // Define the region that corresponds to the stars inside the image
+            //        GraphicsPath starsRegion = new GraphicsPath();
+            //        starsRegion.AddPolygon(new[]
+            //        {
+            //    new Point(2, 29),
+            //    new Point(17, 28),
+            //    new Point(23, 45),
+            //    new Point(15, 61),
+            //    new Point(2, 56),
+            //});
+
+            //        // Create a region from the stars path
+            //        Region starsRegionMask = new Region(starsRegion);
+
+            //        // Set the clipping region of the graphics object to the stars region
+            //        graphics.SetClip(starsRegionMask, CombineMode.Intersect);
+
+            //        // Fill the clipped region with the desired color
+            //        using (Brush brush = new SolidBrush(RatingTen))
+            //        {
+            //            graphics.FillRegion(brush, graphics.Clip);
+            //        }
+            //    }
+
+            //    return resultImage;
+
+            //    //return StarsDisplayed;
         }
         private static PictureBox CreateRatingPictureBox (int width, int height, float rating)
         {
