@@ -14,6 +14,17 @@ namespace RicksStaffApp
         public static Color BadColor = Color.FromArgb(226, 163, 199);
         public static Color NeutralColor = Color.FromArgb(184, 184, 243);
         public static Color DefaultButton = Color.FromArgb(167, 204, 237);
+        public static Color RatingTen = Color.FromArgb(0, 255, 0);
+        public static Color RatingNine = Color.FromArgb(100, 255, 0);
+        public static Color RatingEight = Color.FromArgb(150, 255, 0);
+        public static Color RatingSeven = Color.FromArgb(200, 255, 0);
+        public static Color RatingSix = Color.FromArgb(215, 255, 0);
+        public static Color RatingFive = Color.FromArgb(255, 255, 0);
+        public static Color RatingFour = Color.FromArgb(255, 220, 0);
+        public static Color RatingThree = Color.FromArgb(255, 180, 0);
+        public static Color RatingTwo = Color.FromArgb(255, 125, 0);
+        public static Color RatingOne = Color.FromArgb(255, 40, 0);
+        public static Color RatingZero = Color.FromArgb(255, 0, 0);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
         //static Image StarsTest = Properties.Resources._2_5_StarsTest;
