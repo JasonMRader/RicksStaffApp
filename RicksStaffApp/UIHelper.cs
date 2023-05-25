@@ -134,7 +134,7 @@ namespace RicksStaffApp
         public static Image GetStars(float rating)
         {
             Image starsImage;
-            Color starColor = Color.White;
+            //Color starColor = Color.White;
             switch (rating)
             {
                 case float r when r >= 10 || r >= 9.5:
@@ -186,66 +186,67 @@ namespace RicksStaffApp
                     //starColor = RatingZero;
                     break;
             }
-            Bitmap resultImage = new Bitmap(starsImage.Width, starsImage.Height);
+            return starsImage;
+        //    Bitmap resultImage = new Bitmap(starsImage.Width, starsImage.Height);
 
-            using (Graphics graphics = Graphics.FromImage(resultImage))
-            {
-                // Draw the starsImage onto the resultImage
-                graphics.DrawImage(starsImage, Point.Empty);
+        //    using (Graphics graphics = Graphics.FromImage(resultImage))
+        //    {
+        //        // Draw the starsImage onto the resultImage
+        //        graphics.DrawImage(starsImage, Point.Empty);
 
-                // Define the region that corresponds to the stars inside the image
-                GraphicsPath starsRegion = new GraphicsPath();
-                starsRegion.AddPolygon(new[]
-                {
-            new Point(13, 0),
-            new Point(16, 8),
-            new Point(24, 9),
-            new Point(18, 15),
-            new Point(20, 23),
-            new Point(13, 19),
-            new Point(6, 23),
-            new Point(8, 15),
-            new Point(2, 9),
-            new Point(10, 8)
-        });
+        //        // Define the region that corresponds to the stars inside the image
+        //        GraphicsPath starsRegion = new GraphicsPath();
+        //        starsRegion.AddPolygon(new[]
+        //        {
+        //    new Point(13, 0),
+        //    new Point(16, 8),
+        //    new Point(24, 9),
+        //    new Point(18, 15),
+        //    new Point(20, 23),
+        //    new Point(13, 19),
+        //    new Point(6, 23),
+        //    new Point(8, 15),
+        //    new Point(2, 9),
+        //    new Point(10, 8)
+        //});
 
-                // Create a region from the stars path
-                Region starsRegionMask = new Region(starsRegion);
+        //        // Create a region from the stars path
+        //        Region starsRegionMask = new Region(starsRegion);
 
-                // Set the clipping region of the graphics object to the stars region
-                graphics.SetClip(starsRegionMask, CombineMode.Intersect);
+        //        // Set the clipping region of the graphics object to the stars region
+        //        graphics.SetClip(starsRegionMask, CombineMode.Intersect);
 
-                // Apply the corresponding color based on the rating
-                //Color starColor;
-                if (rating >= 10 || rating >= 9.5)
-                {
-                    starColor = RatingTen;
-                }
-                if (rating < 9.5 && rating >= 8.5)
-                {
-                    starColor = RatingNine;
-                }
-                if (rating < 8.5 && rating >= 7.5)
-                {
-                    starColor = RatingEight;
-                }
-                if ( rating < 7.5 && rating >= 6.5)
-                {
-                    starColor = RatingSeven;
-                }
-                else
-                {
-                    starColor = RatingSix;
-                }
-                // Add more cases for other ratings and their corresponding colors
+        //        // Apply the corresponding color based on the rating
+        //        //Color starColor;
+        //        if (rating >= 10 || rating >= 9.5)
+        //        {
+        //            starColor = RatingTen;
+        //        }
+        //        if (rating < 9.5 && rating >= 8.5)
+        //        {
+        //            starColor = RatingNine;
+        //        }
+        //        if (rating < 8.5 && rating >= 7.5)
+        //        {
+        //            starColor = RatingEight;
+        //        }
+        //        if ( rating < 7.5 && rating >= 6.5)
+        //        {
+        //            starColor = RatingSeven;
+        //        }
+        //        else
+        //        {
+        //            starColor = RatingSix;
+        //        }
+        //        // Add more cases for other ratings and their corresponding colors
 
-                // Fill the clipped region with the corresponding color
-                using (Brush brush = new SolidBrush(starColor))
-                {
-                    graphics.FillRegion(brush, graphics.Clip);
-                }
-            }
-            return resultImage;
+        //        // Fill the clipped region with the corresponding color
+        //        using (Brush brush = new SolidBrush(starColor))
+        //        {
+        //            graphics.FillRegion(brush, graphics.Clip);
+        //        }
+        //    }
+            
             //using (Graphics graphics = Graphics.FromImage(StarsDisplayed))
             //using (Brush brush = new SolidBrush(starColor))
             //{
@@ -835,7 +836,7 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
 
-                PictureBox pbRating = CreateRatingPictureBox(90, 30, emp.OverallRating);
+                PictureBox pbRating = CreateRatingPictureBox(90, 25, emp.OverallRating);
                 empPanel.Controls.Add(pbRating);
 
                 empPanelContainer.Controls.Add(empPanel);
