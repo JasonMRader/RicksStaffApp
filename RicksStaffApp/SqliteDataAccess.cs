@@ -180,7 +180,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //cnn.Open();
+                cnn.Open();
 
                 using (var transaction = cnn.BeginTransaction())
                 {
@@ -202,6 +202,7 @@ namespace RicksStaffApp
 
                     transaction.Commit();
                 }
+                cnn.Close();
             }
         }
         public static void DeleteActivity(int activityId)
@@ -584,7 +585,7 @@ namespace RicksStaffApp
                     @"SELECT es.*, s.*, p.*, i.*
             FROM EmployeeShift es
             JOIN Shift s ON es.ShiftID = s.ID
-            JOIN Positions p ON es.PositionID = p.ID
+            JOIN Position p ON es.PositionID = p.ID
             LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID
             WHERE es.EmployeeID = @EmployeeID";
 

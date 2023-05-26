@@ -30,12 +30,12 @@
         {
             btnExitApp = new Button();
             pnlForm1 = new Panel();
-            btnOpenTestForm = new Button();
             pnlButtonSelected = new Panel();
             label1 = new Label();
             rdoSettings = new RadioButton();
             rdoNewShiftForm = new RadioButton();
             rdoOverviewForm = new RadioButton();
+            btnOpenTestForm = new Button();
             pnlNav = new Panel();
             panel1 = new Panel();
             pnlForm1.SuspendLayout();
@@ -72,18 +72,6 @@
             pnlForm1.MouseDown += Form1_MouseDown;
             pnlForm1.MouseMove += Form1_MouseMove;
             pnlForm1.MouseUp += Form1_MouseUp;
-            // 
-            // btnOpenTestForm
-            // 
-            btnOpenTestForm.BackColor = Color.FromArgb(192, 255, 255);
-            btnOpenTestForm.FlatStyle = FlatStyle.Flat;
-            btnOpenTestForm.Location = new Point(12, 1);
-            btnOpenTestForm.Name = "btnOpenTestForm";
-            btnOpenTestForm.Size = new Size(40, 23);
-            btnOpenTestForm.TabIndex = 1;
-            btnOpenTestForm.Text = "Test Form";
-            btnOpenTestForm.UseVisualStyleBackColor = false;
-            btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // pnlButtonSelected
             // 
@@ -141,7 +129,7 @@
             rdoNewShiftForm.Name = "rdoNewShiftForm";
             rdoNewShiftForm.Size = new Size(174, 50);
             rdoNewShiftForm.TabIndex = 0;
-            rdoNewShiftForm.Text = "New Shift";
+            rdoNewShiftForm.Text = "Shifts";
             rdoNewShiftForm.TextAlign = ContentAlignment.MiddleCenter;
             rdoNewShiftForm.UseVisualStyleBackColor = false;
             rdoNewShiftForm.CheckedChanged += rdoNewShiftForm_CheckedChanged;
@@ -166,6 +154,18 @@
             rdoOverviewForm.TextAlign = ContentAlignment.MiddleCenter;
             rdoOverviewForm.UseVisualStyleBackColor = false;
             rdoOverviewForm.CheckedChanged += rdoOverviewForm_CheckedChanged;
+            // 
+            // btnOpenTestForm
+            // 
+            btnOpenTestForm.BackColor = Color.FromArgb(192, 255, 255);
+            btnOpenTestForm.FlatStyle = FlatStyle.Flat;
+            btnOpenTestForm.Location = new Point(12, 1);
+            btnOpenTestForm.Name = "btnOpenTestForm";
+            btnOpenTestForm.Size = new Size(40, 23);
+            btnOpenTestForm.TabIndex = 1;
+            btnOpenTestForm.Text = "Test Form";
+            btnOpenTestForm.UseVisualStyleBackColor = false;
+            btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // pnlNav
             // 
