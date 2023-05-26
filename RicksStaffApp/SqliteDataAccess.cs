@@ -333,7 +333,7 @@ namespace RicksStaffApp
                     SELECT es.*, e.*, p.*, i.*
                     FROM EmployeeShift es
                     INNER JOIN Employee e ON es.EmployeeID = e.ID
-                    INNER JOIN Positions p ON es.PositionID = p.ID
+                    INNER JOIN Position p ON es.PositionID = p.ID
                     LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.ShiftID = @ShiftID";
 
@@ -417,7 +417,7 @@ namespace RicksStaffApp
                     
                     FROM EmployeeShift es
                     LEFT JOIN Shift s ON es.ShiftID = s.ID
-                    INNER JOIN Positions p ON es.PositionID = p.ID
+                    INNER JOIN Position p ON es.PositionID = p.ID
                     LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.EmployeeID = @EmployeeID";
                 foreach (var employee in employees)
@@ -483,8 +483,8 @@ namespace RicksStaffApp
                 cnn.Query<Employee, Position, Employee>(
                     "select e.ID, e.FirstName, e.LastName, p.ID as PositionID, p.Name " +
                     "from Employee e " +
-                    "left join EmployeePositions ep on e.ID = ep.EmployeeID " +
-                    "left join Positions p on ep.PositionID = p.ID",
+                    "left join EmployeePosition ep on e.ID = ep.EmployeeID " +
+                    "left join Position p on ep.PositionID = p.ID",
                     (employee, position) =>
                     {
                         if (!employeeDictionary.TryGetValue(employee.ID, out var emp))
@@ -512,7 +512,7 @@ namespace RicksStaffApp
                         i.ID as IncidentID, i.Note, i.EmployeeShiftID as IncidentEmployeeShiftID
                         FROM EmployeeShift es
                         JOIN Shift s ON es.ShiftID = s.ID
-                        JOIN Positions p ON es.PositionID = p.ID
+                        JOIN Position p ON es.PositionID = p.ID
                         LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID
                         WHERE es.EmployeeID = @EmployeeID";
 
@@ -624,8 +624,8 @@ namespace RicksStaffApp
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, ShiftRating, PositionID) values (@EmployeeID, @ShiftID, @ShiftRating, @PositionID)",
-                        new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, ShiftRating = employeeShift.ShiftRating, employeeShift.PositionID });
+                    cnn.Execute("insert into EmployeeShift (EmployeeID, ShiftID, PositionID) values (@EmployeeID, @ShiftID, @PositionID)",
+                        new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, employeeShift.PositionID });
                     //new { EmployeeId = employeeShift.Employee.ID, PositionId = employeeShift.Position.ID, ShiftRating = employeeShift.ShiftRating });
                     employeeShift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
                 }
@@ -640,8 +640,8 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update EmployeeShift set EmployeeId = @EmployeeId, PositionId = @PositionId, ShiftRating = @ShiftRating where ID = @ID",
-                    new { EmployeeId = shift.Employee.ID, ShiftRating = shift.ShiftRating, ID = shift.ID });
+                cnn.Execute("update EmployeeShift set EmployeeId = @EmployeeId, PositionId = @PositionId, where ID = @ID",
+                    new { EmployeeId = shift.Employee.ID, ID = shift.ID });
                 //PositionId = shift.Position.ID, 
             }
         }

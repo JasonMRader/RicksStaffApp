@@ -1129,26 +1129,26 @@ namespace RicksStaffApp
                
                 btnAddEmployee.Location = new Point(185, 0);
                 //TODO: handle duplicate check some other way
-                //btnAddEmployee.Click += (sender, e) =>
-                //{
-                //    if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
-                //    {
-                //        existingEmployeeList.Add(emp);
-                //        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
-                //        newEmployeeList.Remove(emp);
-                //        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show(emp.FullName + "already exists");
-                //        newEmployeeList.Remove(emp);
-                //        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
-                //    }
-                    
-                    
-                //};
-               
-                empPanel.Parent.Controls.Add(btnAddEmployee);
+                btnAddEmployee.Click += (sender, e) =>
+                {
+                    if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
+                    {
+                        existingEmployeeList.Add(emp);
+                        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
+                        newEmployeeList.Remove(emp);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+                    else
+                    {
+                        MessageBox.Show(emp.FullName + "already exists");
+                        newEmployeeList.Remove(emp);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+
+
+                    };
+
+                    empPanel.Parent.Controls.Add(btnAddEmployee);
                
 
                 flowNewEmployeeDisplay.Controls.Add(empPanelContainer);
