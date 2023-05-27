@@ -148,11 +148,23 @@
   <data name="5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5 Stars5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Blank_Slate_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blank Slate Stars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DoNotUse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5 Stars132.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Down Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Down Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EightStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FiveStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FourStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Half_Star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5 Stars5216.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,16 +175,49 @@
   <data name="Image1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="NineStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="NoStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NoStars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Image21.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NoStarsZero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="No_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5 Stars5217.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OneStar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SevenStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SixStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TenPoints" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TenPoints.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TenStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Test.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThreeStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TwoStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Up Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Up Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Up Arrow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Up Arrow1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZeroStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\twoPointWeight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

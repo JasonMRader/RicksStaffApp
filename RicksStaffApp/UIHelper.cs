@@ -138,47 +138,47 @@ namespace RicksStaffApp
             switch (rating)
             {
                 case float r when r >= 10 || r >= 9.5:
-                    starsImage = Properties.Resources._5_Stars;
+                    starsImage = Properties.Resources.TenStars;
                     //starColor = RatingTen;
                     break;
                 case float r when r < 9.5 && r >= 8.5:
-                    starsImage = Properties.Resources._4_5_Stars;
+                    starsImage = Properties.Resources.NineStars;
                     //starColor = RatingNine;
                     break;
                 case float r when r < 8.5 && r >= 7.5:
-                    starsImage = Properties.Resources._4_Stars;
+                    starsImage = Properties.Resources.EightStars;
                     //starColor = RatingEight;
                     break;
                 case float r when r < 7.5 && r >= 6.5:
-                    starsImage = Properties.Resources._3_5_Stars;
+                    starsImage = Properties.Resources.SevenStars;
                     //starColor = RatingSeven;
                     break;
                 case float r when r < 6.5 && r >= 5.5:
-                    starsImage = Properties.Resources._3_Stars;
+                    starsImage = Properties.Resources.SixStars;
                     //starColor = RatingSix;
                     break;
                 case float r when r < 5.5 && r >= 4.5:
-                    starsImage = Properties.Resources._2_5_Stars;
+                    starsImage = Properties.Resources.FiveStars;
                     //starColor = RatingFive;
                     break;
                 case float r when r < 4.5 && r >= 3.5:
-                    starsImage = Properties.Resources._2_Stars;
+                    starsImage = Properties.Resources.FourStars;
                     //starColor = RatingFour;
                     break;
                 case float r when r < 3.5 && r >= 2.5:
-                    starsImage = Properties.Resources._1_5_Stars;
+                    starsImage = Properties.Resources.ThreeStars;
                     //starColor = RatingThree;
                     break;
                 case float r when r < 2.5 && r >= 1.5:
-                    starsImage = Properties.Resources._1_Stars;
+                    starsImage = Properties.Resources.TwoStars;
                     //starColor = RatingTwo;
                     break;
                 case float r when r < 1.5 && r >= 0.5:
-                    starsImage = Properties.Resources.Half_Star;
+                    starsImage = Properties.Resources.OneStar;
                     //starColor = RatingOne;
                     break;
                 case float r when r < 0.5:
-                    starsImage = Properties.Resources.NoStars;
+                    starsImage = Properties.Resources.NoStarsZero;
                     //starColor = RatingZero;
                     break;
                 default:
@@ -292,6 +292,8 @@ namespace RicksStaffApp
             pictureBox.Height = height;
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.Image = GetStars(rating);
+            pictureBox.Margin = new Padding(0, 0, 0, 0);
+            pictureBox.Padding = new Padding(0, 0, 0, 0);
             return pictureBox;
         }
 
@@ -836,7 +838,7 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
 
-                PictureBox pbRating = CreateRatingPictureBox(90, 25, emp.OverallRating);
+                PictureBox pbRating = CreateRatingPictureBox(160, 25, emp.OverallRating);
                 empPanel.Controls.Add(pbRating);
 
                 empPanelContainer.Controls.Add(empPanel);
