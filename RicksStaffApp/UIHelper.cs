@@ -177,8 +177,8 @@ namespace RicksStaffApp
                     starsImage = Properties.Resources.Half_Star;
                     //starColor = RatingOne;
                     break;
-                case float r when r < 0.5 && r >= 0:
-                    starsImage = Properties.Resources.No_Stars;
+                case float r when r < 0.5:
+                    starsImage = Properties.Resources.NoStars;
                     //starColor = RatingZero;
                     break;
                 default:

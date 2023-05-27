@@ -223,6 +223,16 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NoStars {
+            get {
+                object obj = ResourceManager.GetObject("NoStars", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Up_Arrow {
             get {
                 object obj = ResourceManager.GetObject("Up Arrow", resourceCulture);
