@@ -100,7 +100,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<Position>("select * from Positions", new DynamicParameters());
+                var output = cnn.Query<Position>("select * from Position", new DynamicParameters());
                 return output.ToList();
             }
         }

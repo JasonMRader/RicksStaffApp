@@ -14,7 +14,7 @@ namespace RicksStaffApp
             Positions = new List<Position>();
             EmployeeShifts = new List<EmployeeShift>();
             Incidents = new List<Incident>();
-            OverallRating = 6;
+            //OverallRating = 6;
         }
         public Employee(string fullName) : this()
         {
@@ -70,7 +70,7 @@ namespace RicksStaffApp
         
         public void UpdateOverallRating()
         {
-            float totalRating = 6; // initialize total rating to default value
+            float totalRating = 0; // initialize total rating to default value
 
             foreach (EmployeeShift employeeShift in EmployeeShifts)
             {
@@ -78,7 +78,7 @@ namespace RicksStaffApp
                 totalRating += employeeShift.ShiftRating; // add shift rating to total rating
             }
 
-            OverallRating = totalRating / (EmployeeShifts.Count + 1); // divide total rating by number of shifts plus default value to get average
+            OverallRating = totalRating / (EmployeeShifts.Count); // divide total rating by number of shifts plus default value to get average
         }
         public void SetNamesFromFullName(string fullName)
         {
