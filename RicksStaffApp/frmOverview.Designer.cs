@@ -138,7 +138,7 @@
             // 
             flowEmployeeRankings.Location = new Point(34, 112);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
-            flowEmployeeRankings.Size = new Size(426, 363);
+            flowEmployeeRankings.Size = new Size(501, 553);
             flowEmployeeRankings.TabIndex = 2;
             // 
             // label7
