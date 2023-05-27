@@ -838,8 +838,13 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
 
-                PictureBox pbRating = CreateRatingPictureBox(160, 25, emp.OverallRating);
-                empPanel.Controls.Add(pbRating);
+                PictureBox pbRating = CreateRatingPictureBox(96, 15, emp.OverallRating);
+                Panel RatingPicPanel = CreatePanel(115, 25);
+                RatingPicPanel.Margin = new Padding(20, 5, 0, 0);
+                RatingPicPanel.Padding = new Padding(15,5,0,5);
+                RatingPicPanel.Controls.Add(pbRating);
+
+                empPanel.Controls.Add(RatingPicPanel);
 
                 empPanelContainer.Controls.Add(empPanel);
                 
