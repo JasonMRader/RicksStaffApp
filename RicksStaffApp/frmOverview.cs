@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RicksStaffApp
 {
@@ -34,12 +35,37 @@ namespace RicksStaffApp
 
             employeeList.Clear();
             employeeList = SqliteDataAccess.TestLoadEmployees();
-            //foreach (Employee employee in employeeList)
-            //{
-            //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
-            //}
+            string[] names = employeeList.Select(e => e.FullName).ToArray();
+            AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
+            autoComplete.AddRange(names);
+            txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
+            txtBxEmployeeSearch.Validated += (sender, e) =>
+            {
+                // This code will run when the TextBox loses focus.
+                // The user's input can be retrieved with textBox1.Text.
+                string selectedName = txtBxEmployeeSearch.Text;
 
-            foreach (Employee employee in employeeList)
+                // Find the employee with the matching name.
+                Employee selectedEmployee = employeeList.FirstOrDefault(emp => emp.FullName == selectedName);
+
+                if (selectedEmployee != null)
+                {
+                    pnlEmployeeStats.Controls.Clear();
+
+                    frmViewEmployee viewEmployeeForm = new frmViewEmployee();
+                    viewEmployeeForm.TopLevel = false;
+                    viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+                    viewEmployeeForm.Dock = DockStyle.Fill;
+                    pnlEmployeeStats.Controls.Add(viewEmployeeForm);
+                    viewEmployeeForm.Show();
+                }
+            };
+                //foreach (Employee employee in employeeList)
+                //{
+                //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
+                //}
+
+                foreach (Employee employee in employeeList)
             {
                 employee.AddIncidentsFromShifts();
                 employee.UpdateOverallRating();
@@ -48,6 +74,8 @@ namespace RicksStaffApp
             var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
             UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeRankings, pnlEmployeeStats);
         }
+
+        
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -66,6 +94,11 @@ namespace RicksStaffApp
             frmAddNewEmployee.TopLevel = false;
             pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
             frmAddNewEmployee.Show();
+
+        }
+
+        private void txtBxEmployeeSearch_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

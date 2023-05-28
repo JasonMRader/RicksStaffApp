@@ -32,7 +32,7 @@
             flowEmployeeDisplay = new FlowLayoutPanel();
             btnAddEmployee = new Button();
             label6 = new Label();
-            textBox1 = new TextBox();
+            txtBxEmployeeSearch = new TextBox();
             comboBox3 = new ComboBox();
             label1 = new Label();
             pnlEmployeeStats = new Panel();
@@ -54,7 +54,7 @@
             pnlEmployeeDisplay.Controls.Add(flowEmployeeDisplay);
             pnlEmployeeDisplay.Controls.Add(btnAddEmployee);
             pnlEmployeeDisplay.Controls.Add(label6);
-            pnlEmployeeDisplay.Controls.Add(textBox1);
+            pnlEmployeeDisplay.Controls.Add(txtBxEmployeeSearch);
             pnlEmployeeDisplay.Controls.Add(comboBox3);
             pnlEmployeeDisplay.Controls.Add(label1);
             pnlEmployeeDisplay.Location = new Point(827, 72);
@@ -95,12 +95,15 @@
             label6.TabIndex = 2;
             label6.Text = "Position";
             // 
-            // textBox1
+            // txtBxEmployeeSearch
             // 
-            textBox1.Location = new Point(11, 44);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(222, 23);
-            textBox1.TabIndex = 3;
+            txtBxEmployeeSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBxEmployeeSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtBxEmployeeSearch.Location = new Point(11, 44);
+            txtBxEmployeeSearch.Name = "txtBxEmployeeSearch";
+            txtBxEmployeeSearch.Size = new Size(222, 23);
+            txtBxEmployeeSearch.TabIndex = 3;
+            txtBxEmployeeSearch.TextChanged += txtBxEmployeeSearch_TextChanged;
             // 
             // comboBox3
             // 
@@ -146,7 +149,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(34, 56);
+            label7.Location = new Point(216, 64);
             label7.Name = "label7";
             label7.Size = new Size(144, 30);
             label7.TabIndex = 1;
@@ -157,11 +160,11 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(367, 10);
+            label2.Location = new Point(328, 10);
             label2.Name = "label2";
-            label2.Size = new Size(98, 30);
+            label2.Size = new Size(194, 30);
             label2.TabIndex = 0;
-            label2.Text = "Overview";
+            label2.Text = "Employee Overview";
             // 
             // label5
             // 
@@ -259,7 +262,7 @@
         private Panel panel4;
         private Panel panel3;
         private Label label6;
-        private TextBox textBox1;
+        private TextBox txtBxEmployeeSearch;
         private ComboBox comboBox3;
         private Label label1;
         private Label label5;
