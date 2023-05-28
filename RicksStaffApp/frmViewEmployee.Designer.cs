@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblEmployeeName = new Label();
             panel3 = new Panel();
             flowFrequentIncidents = new FlowLayoutPanel();
             panel5 = new Panel();
@@ -58,19 +57,6 @@
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
             SuspendLayout();
-            // 
-            // lblEmployeeName
-            // 
-            lblEmployeeName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblEmployeeName.AutoSize = true;
-            lblEmployeeName.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblEmployeeName.ForeColor = Color.White;
-            lblEmployeeName.Location = new Point(330, 9);
-            lblEmployeeName.Name = "lblEmployeeName";
-            lblEmployeeName.Size = new Size(90, 37);
-            lblEmployeeName.TabIndex = 0;
-            lblEmployeeName.Text = "label1";
-            lblEmployeeName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
@@ -323,6 +309,7 @@
             button1.TabIndex = 2;
             button1.Text = "Finished";
             button1.UseVisualStyleBackColor = false;
+            button1.Visible = false;
             button1.Click += button1_Click;
             // 
             // flowEmployeeShifts
@@ -366,7 +353,6 @@
             Controls.Add(cboSeondEmployeeTime);
             Controls.Add(flowEmployeeShifts);
             Controls.Add(button1);
-            Controls.Add(lblEmployeeName);
             Controls.Add(panel3);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmViewEmployee";
@@ -385,8 +371,6 @@
         }
 
         #endregion
-
-        private Label lblEmployeeName;
         private Button button1;
         private Panel panel2;
         private PictureBox picBoxEmployeeRating;

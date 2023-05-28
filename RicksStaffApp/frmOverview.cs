@@ -60,22 +60,22 @@ namespace RicksStaffApp
                     viewEmployeeForm.Show();
                 }
             };
-                //foreach (Employee employee in employeeList)
-                //{
-                //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
-                //}
+            //foreach (Employee employee in employeeList)
+            //{
+            //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
+            //}
 
-                foreach (Employee employee in employeeList)
+            foreach (Employee employee in employeeList)
             {
                 employee.AddIncidentsFromShifts();
                 employee.UpdateOverallRating();
             }
-            UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats);
+            UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
             UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeRankings, pnlEmployeeStats);
         }
 
-        
+
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -100,6 +100,19 @@ namespace RicksStaffApp
         private void txtBxEmployeeSearch_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            pnlEmployeeStats.Controls.Clear();
+            lblMainWindowDescription.Text = "Overview";
+            btnReset.Visible = false;
+            FlowLayoutPanel flowEmployeeDisplay = new FlowLayoutPanel();
+            flowEmployeeDisplay.Size = new System.Drawing.Size(501, 553);
+            flowEmployeeDisplay.Location = new System.Drawing.Point(31, 112);
+            pnlEmployeeStats.Controls.Add(flowEmployeeDisplay);
+            var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats);
         }
     }
 }

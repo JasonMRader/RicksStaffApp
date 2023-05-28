@@ -834,11 +834,11 @@ namespace RicksStaffApp
         //        flowDisplay.Controls.Add(pnlContainer);
         //    }
         //}
-        public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel)
+        public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, Button reset)
         {
             // Clear existing panels
             flowEmployeeDisplay.Controls.Clear();
-
+            //reset.Visible = true;
             // Loop through employee list and create a panel for each employee
             foreach (Employee emp in employeeList)
             {
@@ -852,7 +852,8 @@ namespace RicksStaffApp
                 btnName.Click += (sender, e) =>
                 {
                     parentPanel.Controls.Clear();
-
+                    lblMain.Text = emp.FullName;
+                    reset.Visible = true;
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
@@ -907,7 +908,7 @@ namespace RicksStaffApp
                 btnName.Click += (sender, e) =>
                 {
                     parentPanel.Controls.Clear();
-
+                    
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;

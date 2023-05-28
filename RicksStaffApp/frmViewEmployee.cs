@@ -61,7 +61,7 @@ namespace RicksStaffApp
         }
         private void frmViewEmployee_Load(object sender, EventArgs e)
         {
-            lblEmployeeName.Text = ThisEmployee.FullName;
+            //lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
 
             GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
