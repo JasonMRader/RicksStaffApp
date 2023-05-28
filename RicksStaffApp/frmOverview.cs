@@ -73,7 +73,7 @@ namespace RicksStaffApp
             employeeList = employeeList.OrderBy(emp => emp.FullName).ToList();
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeRankings, pnlEmployeeStats);
+            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
 
@@ -108,12 +108,22 @@ namespace RicksStaffApp
             pnlEmployeeStats.Controls.Clear();
             lblMainWindowDescription.Text = "Overview";
             btnReset.Visible = false;
+
             FlowLayoutPanel flowEmployeeDisplay = new FlowLayoutPanel();
             flowEmployeeDisplay.Size = new System.Drawing.Size(501, 553);
-            flowEmployeeDisplay.Location = new System.Drawing.Point(31, 112);
+            flowEmployeeDisplay.Location = new System.Drawing.Point(127, 62);
             pnlEmployeeStats.Controls.Add(flowEmployeeDisplay);
+
+            Label lblOverviewDisplay = new Label();
+            lblOverviewDisplay.Text = "Highest Rated";
+            lblOverviewDisplay.Font = new Font("Segoe UI", 16);
+            lblOverviewDisplay.Location = new System.Drawing.Point(286, 19);
+            lblOverviewDisplay.AutoSize = true;
+            lblOverviewDisplay.ForeColor = Color.FromArgb(255, 255, 255);
+            pnlEmployeeStats.Controls.Add(lblOverviewDisplay);
+
             var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats);
+            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
     }
 }

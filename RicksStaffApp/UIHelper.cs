@@ -834,7 +834,7 @@ namespace RicksStaffApp
         //        flowDisplay.Controls.Add(pnlContainer);
         //    }
         //}
-        public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, Button reset)
+        public static void CreateEmployeePanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, Button btnReset)
         {
             // Clear existing panels
             flowEmployeeDisplay.Controls.Clear();
@@ -853,7 +853,7 @@ namespace RicksStaffApp
                 {
                     parentPanel.Controls.Clear();
                     lblMain.Text = emp.FullName;
-                    reset.Visible = true;
+                    btnReset.Visible = true;
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
@@ -889,7 +889,7 @@ namespace RicksStaffApp
                 flowEmployeeDisplay.Controls.Add(empPanelContainer);
             }
         }
-        public static void CreateEmployeeOverviewPanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel)
+        public static void CreateEmployeeOverviewPanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, Button btnReset)
         {
             // Clear existing panels
             flowEmployeeDisplay.Controls.Clear();
@@ -908,7 +908,8 @@ namespace RicksStaffApp
                 btnName.Click += (sender, e) =>
                 {
                     parentPanel.Controls.Clear();
-                    
+                    lblMain.Text = emp.FullName;
+                    btnReset.Visible = true;
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;

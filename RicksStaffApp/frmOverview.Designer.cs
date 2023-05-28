@@ -139,7 +139,7 @@
             // 
             // flowEmployeeRankings
             // 
-            flowEmployeeRankings.Location = new Point(34, 112);
+            flowEmployeeRankings.Location = new Point(127, 62);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
             flowEmployeeRankings.Size = new Size(501, 553);
             flowEmployeeRankings.TabIndex = 2;
@@ -149,7 +149,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(216, 64);
+            label7.Location = new Point(286, 19);
             label7.Name = "label7";
             label7.Size = new Size(144, 30);
             label7.TabIndex = 1;
@@ -158,11 +158,11 @@
             // lblMainWindowDescription
             // 
             lblMainWindowDescription.AutoSize = true;
-            lblMainWindowDescription.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMainWindowDescription.Font = new Font("Segoe UI", 18.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblMainWindowDescription.ForeColor = Color.White;
-            lblMainWindowDescription.Location = new Point(341, 31);
+            lblMainWindowDescription.Location = new Point(303, 26);
             lblMainWindowDescription.Name = "lblMainWindowDescription";
-            lblMainWindowDescription.Size = new Size(194, 30);
+            lblMainWindowDescription.Size = new Size(250, 35);
             lblMainWindowDescription.TabIndex = 0;
             lblMainWindowDescription.Text = "Employee Overview";
             // 
@@ -230,7 +230,7 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(559, 38);
+            btnReset.Location = new Point(632, 39);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(124, 23);
             btnReset.TabIndex = 3;
