@@ -1105,10 +1105,23 @@ namespace RicksStaffApp
                         PictureBox pbRating = CreateRatingPictureBox(90, 30, es.ShiftRating);
                         empShiftContainer.Controls.Add(pbRating);
 
-                        Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");                        
+                        Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");
+                        FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
+                        bool btnClicked = false;
                         btnIncidents.Click += (sender, e) =>
                         {
-                            CreateIncidentPanels_REPLACE(es.Incidents, empShiftContainer, shiftList);
+                            btnClicked = !btnClicked;
+                            if (btnClicked)
+                            {
+                                CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shiftList);
+                                empShiftContainer.Controls.Add(incidentContainer);
+                            }
+                            else
+                            {
+                                incidentContainer.Controls.Clear();
+                                empShiftContainer.Controls.Remove(incidentContainer);
+                            }
+                            
                         };
                         empShiftContainer.Controls.Add(btnIncidents);
 
