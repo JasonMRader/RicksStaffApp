@@ -70,6 +70,7 @@ namespace RicksStaffApp
                 employee.AddIncidentsFromShifts();
                 employee.UpdateOverallRating();
             }
+            employeeList = employeeList.OrderBy(emp => emp.FullName).ToList();
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
             UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeRankings, pnlEmployeeStats);
