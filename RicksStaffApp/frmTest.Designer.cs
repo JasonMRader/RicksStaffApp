@@ -33,6 +33,16 @@
             btnLoadEmployeeShifts = new Button();
             btnLoadIncidents = new Button();
             btnLoadActivities = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            button1 = new Button();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            label3 = new Label();
+            label1 = new Label();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnLoadEmployees
@@ -85,11 +95,91 @@
             btnLoadActivities.UseVisualStyleBackColor = true;
             btnLoadActivities.Click += btnLoadActivities_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(37, 42, 64);
+            panel1.Controls.Add(panel2);
+            panel1.Location = new Point(288, 157);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(475, 507);
+            panel1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(142, 164, 210);
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(label1);
+            panel2.Location = new Point(2, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(470, 30);
+            panel2.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(167, 204, 237);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Gill Sans MT", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(207, -1);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 30);
+            button1.TabIndex = 2;
+            button1.Text = "3 Incidents";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.EightStars;
+            pictureBox1.Location = new Point(330, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(90, 30);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("MS Reference Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(426, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(30, 30);
+            label2.TabIndex = 0;
+            label2.Text = "8";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.BackColor = Color.Transparent;
+            label3.Dock = DockStyle.Left;
+            label3.FlatStyle = FlatStyle.Flat;
+            label3.Font = new Font("Bahnschrift SemiBold", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(0, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(75, 30);
+            label3.TabIndex = 0;
+            label3.Text = "Monday";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Bahnschrift SemiLight SemiConde", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(81, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(120, 30);
+            label1.TabIndex = 0;
+            label1.Text = "May 1st, 23";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1110, 740);
+            Controls.Add(panel1);
             Controls.Add(btnLoadActivities);
             Controls.Add(btnLoadIncidents);
             Controls.Add(btnLoadEmployeeShifts);
@@ -97,6 +187,9 @@
             Controls.Add(btnLoadEmployees);
             Name = "frmTest";
             Text = "frmTest";
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -107,5 +200,12 @@
         private Button btnLoadEmployeeShifts;
         private Button btnLoadIncidents;
         private Button btnLoadActivities;
+        private Panel panel1;
+        private Panel panel2;
+        private Label label1;
+        private Button button1;
+        private PictureBox pictureBox1;
+        private Label label2;
+        private Label label3;
     }
 }

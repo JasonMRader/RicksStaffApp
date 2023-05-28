@@ -158,7 +158,6 @@
             // btnOpenTestForm
             // 
             btnOpenTestForm.BackColor = Color.FromArgb(192, 255, 255);
-            btnOpenTestForm.Enabled = false;
             btnOpenTestForm.FlatStyle = FlatStyle.Flat;
             btnOpenTestForm.Location = new Point(12, 1);
             btnOpenTestForm.Name = "btnOpenTestForm";
@@ -166,7 +165,6 @@
             btnOpenTestForm.TabIndex = 1;
             btnOpenTestForm.Text = "Test Form";
             btnOpenTestForm.UseVisualStyleBackColor = false;
-            btnOpenTestForm.Visible = false;
             btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // pnlNav

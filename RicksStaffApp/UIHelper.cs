@@ -26,8 +26,34 @@ namespace RicksStaffApp
         public static Color RatingTwo = Color.FromArgb(255, 125, 0);
         public static Color RatingOne = Color.FromArgb(255, 40, 0);
         public static Color RatingZero = Color.FromArgb(255, 0, 0);
+        public static Font WeekDayDisplay = new Font("Bahnschrift SemiBold", 14, FontStyle.Bold);
+        public static Font DateDisplay = new Font("Bahnschrift SemiLight SemiConde", 12, FontStyle.Bold);
+        public static Font ButtonDisplay = new Font("Gill Sans MT", 12, FontStyle.Regular);
+        public static Font RatingDisplay = new Font("MS Reference Sans Serif", 12, FontStyle.Bold);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
+        public static string ToOrdinalString(this DateTime date)
+        {
+            var day = date.Day;
+            var dayString = day.ToString();
+
+            // Add the correct suffix to the day.
+            string suffix = string.Empty;
+            if (day % 100 >= 11 && day % 100 <= 13)
+                suffix = "th";
+            else if (day % 10 == 1)
+                suffix = "st";
+            else if (day % 10 == 2)
+                suffix = "nd";
+            else if (day % 10 == 3)
+                suffix = "rd";
+            else
+                suffix = "th";
+
+            // Format the date.
+            return string.Format("{0} {1}{2}, {3}", date.ToString("MMM"), dayString, suffix, date.ToString("yy"));
+        }
+
         //static Image StarsTest = Properties.Resources._2_5_StarsTest;
         //static Image StarsDisplayed = Properties.Resources._5_Stars;
         private static Panel CreatePanel(int width, int height)
@@ -978,36 +1004,38 @@ namespace RicksStaffApp
         }
         public static void CreateEmployeeShiftOverviewPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
         {
+
             
-                employeeShift.UpdateShiftRating();
-                FlowLayoutPanel empShiftContainer = CreateFlowPanel(470, 30);
+            employeeShift.UpdateShiftRating();
+            FlowLayoutPanel empShiftContainer = CreateFlowPanel(470, 30);
 
-                empShiftContainer.MinimumSize = new Size(470, 30);
-                empShiftContainer.MaximumSize = new Size(470, 1000);
-                empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+            empShiftContainer.MinimumSize = new Size(470, 30);
+            empShiftContainer.MaximumSize = new Size(470, 1000);
+            empShiftContainer.Margin = new Padding(0, 0, 0, 5);
 
-                Label lblName = CreateLabel(100, 30, employeeShift.Shift.DateString);
-                empShiftContainer.Controls.Add(lblName);
+            Label lblWeekday = CreateLabel(75, 30, employeeShift.Shift.DateAsDateTime.DayOfWeek.ToString());
+            lblWeekday.Font = WeekDayDisplay;
+            empShiftContainer.Controls.Add(lblWeekday);
 
-                Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
-                empShiftContainer.Controls.Add(lblPos);
+            Label lblName = CreateLabel(100, 30, employeeShift.Shift.DateAsDateTime.ToOrdinalString());
+            lblName.Font = DateDisplay;
+            empShiftContainer.Controls.Add(lblName);
 
-                Label lblShiftRating = CreateLabel(25, 30, employeeShift.ShiftRating.ToString());
-                empShiftContainer.Controls.Add(lblShiftRating);
-
-                PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
-                empShiftContainer.Controls.Add(pbRating);
+            //Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
+            //empShiftContainer.Controls.Add(lblPos);
             FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
-            Button btnIncidents = CreateButtonTemplate(65, 30, "Incidents");
+            Button btnIncidents = CreateButtonTemplate(100, 30, employeeShift.Incidents.Count.ToString() + " Incidents");
+            btnIncidents.Margin = new Padding(10, 0, 0, 0);
             bool btnClicked = false;
-            btnIncidents.Click += (sender, e) =>            
+            btnIncidents.Font = ButtonDisplay;
+            btnIncidents.Click += (sender, e) =>
             {
                 btnClicked = !btnClicked;
 
                 if (btnClicked == true)
                 {
                     CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
-                    empShiftContainer.Controls.Add(incidentContainer); 
+                    empShiftContainer.Controls.Add(incidentContainer);
                 }
                 else
                 {
@@ -1016,6 +1044,19 @@ namespace RicksStaffApp
                 }
             };
             empShiftContainer.Controls.Add(btnIncidents);
+
+
+            PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
+            pbRating.Margin = new Padding(10, 0, 0, 0);
+            empShiftContainer.Controls.Add(pbRating);
+
+            
+            
+
+            Label lblShiftRating = CreateLabel(40, 30, employeeShift.ShiftRating.ToString());
+            lblShiftRating.Margin = new Padding(5, 0, 0, 0);
+            lblShiftRating.Font = RatingDisplay;
+            empShiftContainer.Controls.Add(lblShiftRating);
 
             ////Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
             ////btnAddIncidents.Click += (sender, e) =>
