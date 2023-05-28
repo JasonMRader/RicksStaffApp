@@ -43,7 +43,7 @@ namespace RicksStaffApp
         {
             //List <EmployeeShift> employeeShifts = new List <EmployeeShift>();
             UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
-
+            shifts = SqliteDataAccess.LoadShifts();
 
         }
 

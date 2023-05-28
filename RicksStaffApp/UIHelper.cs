@@ -1013,7 +1013,7 @@ namespace RicksStaffApp
             empShiftContainer.MaximumSize = new Size(470, 1000);
             empShiftContainer.Margin = new Padding(0, 0, 0, 5);
 
-            Label lblWeekday = CreateLabel(75, 30, employeeShift.Shift.DateAsDateTime.DayOfWeek.ToString());
+            Label lblWeekday = CreateLabel(75, 30, employeeShift.Shift.DateAsDateTime.ToString("ddd"));
             lblWeekday.Font = WeekDayDisplay;
             empShiftContainer.Controls.Add(lblWeekday);
 

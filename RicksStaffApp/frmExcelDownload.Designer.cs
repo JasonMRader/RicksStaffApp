@@ -63,6 +63,7 @@
             dtpShiftDate.Name = "dtpShiftDate";
             dtpShiftDate.Size = new Size(200, 23);
             dtpShiftDate.TabIndex = 6;
+            dtpShiftDate.ValueChanged += dtpShiftDate_ValueChanged;
             // 
             // btnCreateShift
             // 
