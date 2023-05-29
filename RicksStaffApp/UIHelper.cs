@@ -3,6 +3,7 @@
 using System.Data.SQLite;
 using System.Data;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Excel;
 
@@ -851,13 +852,28 @@ namespace RicksStaffApp
                 Button btnName = CreateButtonTemplate(140, 25, emp.FullName);                             
                 btnName.Click += (sender, e) =>
                 {
-                    parentPanel.Controls.Clear();
+                    foreach (Control control in parentPanel.Controls)
+                    {
+                        if (control is Form form)
+                        {
+                            parentPanel.Controls.Remove(form);
+                            form.Dispose();
+                        }
+                        else
+                        {
+                            control.Visible = false;
+                        }
+                        
+
+                    }
+                    
                     lblMain.Text = emp.FullName;
                     btnReset.Visible = true;
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
-                    viewEmployeeForm.Dock = DockStyle.Fill;
+                    //viewEmployeeForm.Dock = DockStyle.Fill;
+                    viewEmployeeForm.Location = new Point(20, 20);
                     parentPanel.Controls.Add(viewEmployeeForm);
                     viewEmployeeForm.Show();
                 };

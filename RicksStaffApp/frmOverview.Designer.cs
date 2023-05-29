@@ -130,6 +130,7 @@
             pnlEmployeeStats.BackColor = Color.FromArgb(37, 42, 64);
             pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
             pnlEmployeeStats.Controls.Add(label7);
+            pnlEmployeeStats.Controls.Add(comboBox1);
             pnlEmployeeStats.Location = new Point(17, 72);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
@@ -139,7 +140,7 @@
             // 
             // flowEmployeeRankings
             // 
-            flowEmployeeRankings.Location = new Point(127, 62);
+            flowEmployeeRankings.Location = new Point(255, 40);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
             flowEmployeeRankings.Size = new Size(501, 553);
             flowEmployeeRankings.TabIndex = 2;
@@ -149,7 +150,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(286, 19);
+            label7.Location = new Point(437, 7);
             label7.Name = "label7";
             label7.Size = new Size(144, 30);
             label7.TabIndex = 1;
@@ -208,7 +209,7 @@
             comboBox1.Enabled = false;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox1.Location = new Point(17, 27);
+            comboBox1.Location = new Point(599, 7);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 1;
@@ -254,7 +255,6 @@
             Controls.Add(label4);
             Controls.Add(comboBox2);
             Controls.Add(pnlEmployeeStats);
-            Controls.Add(comboBox1);
             Controls.Add(pnlEmployeeDisplay);
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(1320, 820);

@@ -65,10 +65,10 @@
             panel3.Controls.Add(panel2);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(lblTotalShiftsLabelHeader);
-            panel3.Location = new Point(9, 110);
+            panel3.Location = new Point(9, 40);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(206, 510);
+            panel3.Size = new Size(206, 580);
             panel3.TabIndex = 2;
             // 
             // flowFrequentIncidents
@@ -291,9 +291,9 @@
             cboSeondEmployeeTime.ForeColor = Color.White;
             cboSeondEmployeeTime.FormattingEnabled = true;
             cboSeondEmployeeTime.Items.AddRange(new object[] { "All Time", "Last 30 Days", "Last 3 Months", "Last 6 Months", "Last Year" });
-            cboSeondEmployeeTime.Location = new Point(42, 23);
+            cboSeondEmployeeTime.Location = new Point(552, 5);
             cboSeondEmployeeTime.Name = "cboSeondEmployeeTime";
-            cboSeondEmployeeTime.Size = new Size(121, 23);
+            cboSeondEmployeeTime.Size = new Size(178, 23);
             cboSeondEmployeeTime.TabIndex = 3;
             cboSeondEmployeeTime.Visible = false;
             // 
@@ -303,9 +303,9 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.Black;
-            button1.Location = new Point(693, 13);
+            button1.Location = new Point(15, 5);
             button1.Name = "button1";
-            button1.Size = new Size(74, 33);
+            button1.Size = new Size(74, 12);
             button1.TabIndex = 2;
             button1.Text = "Finished";
             button1.UseVisualStyleBackColor = false;
@@ -315,9 +315,9 @@
             // flowEmployeeShifts
             // 
             flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeShifts.Location = new Point(255, 113);
+            flowEmployeeShifts.Location = new Point(255, 40);
             flowEmployeeShifts.Name = "flowEmployeeShifts";
-            flowEmployeeShifts.Size = new Size(475, 507);
+            flowEmployeeShifts.Size = new Size(475, 580);
             flowEmployeeShifts.TabIndex = 6;
             // 
             // label3
@@ -325,7 +325,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(83, 70);
+            label3.Location = new Point(79, 12);
             label3.Name = "label3";
             label3.Size = new Size(55, 25);
             label3.TabIndex = 7;
@@ -336,7 +336,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(455, 70);
+            label4.Location = new Point(450, 12);
             label4.Name = "label4";
             label4.Size = new Size(61, 25);
             label4.TabIndex = 7;
@@ -347,7 +347,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            ClientSize = new Size(800, 675);
+            ClientSize = new Size(760, 635);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(cboSeondEmployeeTime);

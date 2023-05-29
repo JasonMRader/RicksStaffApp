@@ -105,25 +105,37 @@ namespace RicksStaffApp
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            pnlEmployeeStats.Controls.Clear();
+            //pnlEmployeeStats.Controls.Clear();
+            foreach (Control control in pnlEmployeeStats.Controls)
+            {
+                if (control is frmViewEmployee)
+                {
+                    control.Dispose();
+                }
+                else
+                {
+                    control.Visible = true;
+                }
+                
+            }
             lblMainWindowDescription.Text = "Overview";
             btnReset.Visible = false;
 
-            FlowLayoutPanel flowEmployeeDisplay = new FlowLayoutPanel();
-            flowEmployeeDisplay.Size = new System.Drawing.Size(501, 553);
-            flowEmployeeDisplay.Location = new System.Drawing.Point(127, 62);
-            pnlEmployeeStats.Controls.Add(flowEmployeeDisplay);
+            //FlowLayoutPanel flowEmployeeDisplay = new FlowLayoutPanel();
+            //flowEmployeeDisplay.Size = new System.Drawing.Size(501, 553);
+            //flowEmployeeDisplay.Location = new System.Drawing.Point(127, 62);
+            //pnlEmployeeStats.Controls.Add(flowEmployeeDisplay);
 
-            Label lblOverviewDisplay = new Label();
-            lblOverviewDisplay.Text = "Highest Rated";
-            lblOverviewDisplay.Font = new Font("Segoe UI", 16);
-            lblOverviewDisplay.Location = new System.Drawing.Point(286, 19);
-            lblOverviewDisplay.AutoSize = true;
-            lblOverviewDisplay.ForeColor = Color.FromArgb(255, 255, 255);
-            pnlEmployeeStats.Controls.Add(lblOverviewDisplay);
+            //Label lblOverviewDisplay = new Label();
+            //lblOverviewDisplay.Text = "Highest Rated";
+            //lblOverviewDisplay.Font = new Font("Segoe UI", 16);
+            //lblOverviewDisplay.Location = new System.Drawing.Point(286, 19);
+            //lblOverviewDisplay.AutoSize = true;
+            //lblOverviewDisplay.ForeColor = Color.FromArgb(255, 255, 255);
+            //pnlEmployeeStats.Controls.Add(lblOverviewDisplay);
 
-            var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            //var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+            //UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
     }
 }
