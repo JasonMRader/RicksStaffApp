@@ -116,7 +116,7 @@ namespace RicksStaffApp
                 {
                     control.Visible = true;
                 }
-                
+
             }
             lblMainWindowDescription.Text = "Overview";
             btnReset.Visible = false;

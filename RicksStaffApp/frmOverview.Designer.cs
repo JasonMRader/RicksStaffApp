@@ -36,13 +36,16 @@
             comboBox3 = new ComboBox();
             label1 = new Label();
             pnlEmployeeStats = new Panel();
+            panel3 = new Panel();
+            panel2 = new Panel();
+            panel1 = new Panel();
             flowEmployeeRankings = new FlowLayoutPanel();
             label7 = new Label();
+            comboBox1 = new ComboBox();
             lblMainWindowDescription = new Label();
             label5 = new Label();
             label4 = new Label();
             comboBox2 = new ComboBox();
-            comboBox1 = new ComboBox();
             label3 = new Label();
             btnReset = new Button();
             pnlEmployeeDisplay.SuspendLayout();
@@ -127,7 +130,10 @@
             // 
             // pnlEmployeeStats
             // 
-            pnlEmployeeStats.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(panel3);
+            pnlEmployeeStats.Controls.Add(panel2);
+            pnlEmployeeStats.Controls.Add(panel1);
             pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
             pnlEmployeeStats.Controls.Add(label7);
             pnlEmployeeStats.Controls.Add(comboBox1);
@@ -138,8 +144,33 @@
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
             // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(37, 42, 64);
+            panel3.Location = new Point(12, 286);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(191, 307);
+            panel3.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(37, 42, 64);
+            panel2.Location = new Point(12, 135);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(191, 114);
+            panel2.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(37, 42, 64);
+            panel1.Location = new Point(12, 43);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(191, 65);
+            panel1.TabIndex = 3;
+            // 
             // flowEmployeeRankings
             // 
+            flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
             flowEmployeeRankings.Location = new Point(255, 40);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
             flowEmployeeRankings.Size = new Size(501, 553);
@@ -155,6 +186,19 @@
             label7.Size = new Size(144, 30);
             label7.TabIndex = 1;
             label7.Text = "Highest Rated";
+            // 
+            // comboBox1
+            // 
+            comboBox1.BackColor = Color.FromArgb(74, 79, 99);
+            comboBox1.Enabled = false;
+            comboBox1.FlatStyle = FlatStyle.Flat;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
+            comboBox1.Location = new Point(635, 7);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 1;
+            comboBox1.Visible = false;
             // 
             // lblMainWindowDescription
             // 
@@ -203,18 +247,6 @@
             comboBox2.TabIndex = 1;
             comboBox2.Visible = false;
             // 
-            // comboBox1
-            // 
-            comboBox1.BackColor = SystemColors.ScrollBar;
-            comboBox1.Enabled = false;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox1.Location = new Point(599, 7);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 1;
-            comboBox1.Visible = false;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -231,7 +263,7 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(632, 39);
+            btnReset.Location = new Point(649, 39);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(124, 23);
             btnReset.TabIndex = 3;
@@ -292,5 +324,7 @@
         private FlowLayoutPanel flowEmployeeRankings;
         private Label label7;
         private Button btnReset;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

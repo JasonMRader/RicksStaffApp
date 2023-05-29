@@ -872,8 +872,8 @@ namespace RicksStaffApp
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
                     viewEmployeeForm.TopLevel = false;
                     viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
-                    //viewEmployeeForm.Dock = DockStyle.Fill;
-                    viewEmployeeForm.Location = new Point(20, 20);
+                    viewEmployeeForm.Dock = DockStyle.Fill;
+                    //viewEmployeeForm.Location = new Point(20, 20);
                     parentPanel.Controls.Add(viewEmployeeForm);
                     viewEmployeeForm.Show();
                 };
@@ -923,7 +923,21 @@ namespace RicksStaffApp
                 btnName.Font = new Font("Arial", 12, FontStyle.Bold);
                 btnName.Click += (sender, e) =>
                 {
-                    parentPanel.Controls.Clear();
+                    foreach (Control control in parentPanel.Controls)
+                    {
+                        if (control is Form form)
+                        {
+                            parentPanel.Controls.Remove(form);
+                            form.Dispose();
+                        }
+                        else
+                        {
+                            control.Visible = false;
+                        }
+
+
+                    }
+                    //parentPanel.Controls.Clear();
                     lblMain.Text = emp.FullName;
                     btnReset.Visible = true;
                     frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);

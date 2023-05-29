@@ -76,7 +76,7 @@
             flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
             flowFrequentIncidents.Location = new Point(3, 246);
             flowFrequentIncidents.Name = "flowFrequentIncidents";
-            flowFrequentIncidents.Size = new Size(200, 252);
+            flowFrequentIncidents.Size = new Size(200, 331);
             flowFrequentIncidents.TabIndex = 3;
             // 
             // panel5
@@ -286,16 +286,14 @@
             // cboSeondEmployeeTime
             // 
             cboSeondEmployeeTime.BackColor = Color.FromArgb(74, 79, 99);
-            cboSeondEmployeeTime.Enabled = false;
             cboSeondEmployeeTime.FlatStyle = FlatStyle.Flat;
             cboSeondEmployeeTime.ForeColor = Color.White;
             cboSeondEmployeeTime.FormattingEnabled = true;
             cboSeondEmployeeTime.Items.AddRange(new object[] { "All Time", "Last 30 Days", "Last 3 Months", "Last 6 Months", "Last Year" });
-            cboSeondEmployeeTime.Location = new Point(552, 5);
+            cboSeondEmployeeTime.Location = new Point(635, 7);
             cboSeondEmployeeTime.Name = "cboSeondEmployeeTime";
-            cboSeondEmployeeTime.Size = new Size(178, 23);
+            cboSeondEmployeeTime.Size = new Size(121, 23);
             cboSeondEmployeeTime.TabIndex = 3;
-            cboSeondEmployeeTime.Visible = false;
             // 
             // button1
             // 
@@ -347,7 +345,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            ClientSize = new Size(760, 635);
+            ClientSize = new Size(800, 675);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(cboSeondEmployeeTime);
