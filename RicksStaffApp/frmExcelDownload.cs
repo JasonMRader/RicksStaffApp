@@ -209,6 +209,7 @@ namespace RicksStaffApp
                 MessageBox.Show($"Whoops!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             this.Close();
+            this.Dispose();
 
 
 

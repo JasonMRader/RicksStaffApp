@@ -27,7 +27,8 @@ namespace RicksStaffApp
         private void btnDone_Click(object sender, EventArgs e)
         {
             SqliteDataAccess.SaveEmployeeShiftIncidents(EmployeeShiftToEdit);
-            //this.Close();
+            this.Close();
+            this.Dispose();
             //string s = "";
             //foreach (Incident i in EmployeeShiftToEdit.Incidents)
             //{
