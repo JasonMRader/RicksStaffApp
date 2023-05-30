@@ -365,6 +365,34 @@ namespace RicksStaffApp
             return lblLable;
         }
         //public static void UpdateIncidentList()
+        public static void CreateEmployeeGoodShiftRatioPanels(List<Employee> employeeList, FlowLayoutPanel flowDisplay)
+        {
+            
+            foreach (var employee in employeeList)
+            {
+                Panel employeePanel = CreateFlowPanel(190, 30);
+                employeePanel.MinimumSize = new Size(190, 30);
+                employeePanel.Margin = new Padding(10, 5, 10, 5);
+                employeePanel.Padding = new Padding(0, 0, 0, 0);
+                Label employeeLabel = CreateLabel(120, 30, employee.FullName);
+                Label employeeGoodShiftRatio = CreateLabel(55, 30, employee.GoodShiftPercentage.ToString("0.0" + "%"));
+                employeeLabel.Font = new Font("Segoe UI Semibold", 10);
+                employeeLabel.Margin = new Padding(0, 0, 0, 0);
+                employeeGoodShiftRatio.Font = new Font("Segoe UI Semibold", 10);
+                employeeGoodShiftRatio.TextAlign = ContentAlignment.MiddleCenter;
+                //employeeGoodShiftRatio.ForeColor = Color.White;
+                //employeeGoodShiftRatio.BackColor = GetBackColor(employee.GoodShiftRatio);
+                //employeeGoodShiftRatio.Padding = new Padding(0, 0, 0, 0);
+                employeeGoodShiftRatio.Margin = new Padding(0, 0, 0, 0);
+                employeeGoodShiftRatio.AutoSize = false;
+                //employeeGoodShiftRatio.MinimumSize = new Size(45, 50);
+                //employeeGoodShiftRatio.MaximumSize = new Size(45, 50);
+                //employeeGoodShiftRatio.Dock = DockStyle.Right;
+                employeePanel.Controls.Add(employeeLabel);
+                employeePanel.Controls.Add(employeeGoodShiftRatio);
+                flowDisplay.Controls.Add(employeePanel);
+            }
+        }
 
         public static void CreateIncidentFrequencyPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay)
         {

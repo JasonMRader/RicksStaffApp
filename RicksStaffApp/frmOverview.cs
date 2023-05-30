@@ -68,7 +68,7 @@ namespace RicksStaffApp
             //{
             //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
             //}
-
+            List<Employee> HighestGoodShiftRation = new List<Employee>();
             foreach (Employee employee in employeeList)
             {
                 employee.AddIncidentsFromShifts();
@@ -76,8 +76,11 @@ namespace RicksStaffApp
             }
             employeeList = employeeList.OrderBy(emp => emp.FullName).ToList();
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-            UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+            var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(10).ToList();
+            UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
+
         }
 
 

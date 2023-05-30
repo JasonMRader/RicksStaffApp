@@ -34,19 +34,19 @@
             comboBox3 = new ComboBox();
             btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            flowGoodShiftRankings = new FlowLayoutPanel();
+            label2 = new Label();
+            label1 = new Label();
             flowEmployeeRankings = new FlowLayoutPanel();
             comboBox1 = new ComboBox();
             label7 = new Label();
             panel3 = new Panel();
-            panel2 = new Panel();
             lblMainWindowDescription = new Label();
             label5 = new Label();
             label4 = new Label();
             comboBox2 = new ComboBox();
             label3 = new Label();
             btnReset = new Button();
-            label1 = new Label();
-            label2 = new Label();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -68,8 +68,9 @@
             // 
             flowEmployeeDisplay.AutoScroll = true;
             flowEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeDisplay.Location = new Point(11, 44);
+            flowEmployeeDisplay.Location = new Point(11, 43);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
+            flowEmployeeDisplay.Padding = new Padding(15, 15, 0, 0);
             flowEmployeeDisplay.Size = new Size(426, 597);
             flowEmployeeDisplay.TabIndex = 6;
             // 
@@ -109,13 +110,13 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(flowGoodShiftRankings);
             pnlEmployeeStats.Controls.Add(label2);
             pnlEmployeeStats.Controls.Add(label1);
             pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
             pnlEmployeeStats.Controls.Add(comboBox1);
             pnlEmployeeStats.Controls.Add(label7);
             pnlEmployeeStats.Controls.Add(panel3);
-            pnlEmployeeStats.Controls.Add(panel2);
             pnlEmployeeStats.Location = new Point(17, 72);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
@@ -123,11 +124,42 @@
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
             // 
+            // flowGoodShiftRankings
+            // 
+            flowGoodShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
+            flowGoodShiftRankings.Location = new Point(23, 44);
+            flowGoodShiftRankings.Name = "flowGoodShiftRankings";
+            flowGoodShiftRankings.Size = new Size(210, 247);
+            flowGoodShiftRankings.TabIndex = 10;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(75, 317);
+            label2.Name = "label2";
+            label2.Size = new Size(87, 21);
+            label2.TabIndex = 9;
+            label2.Text = "Best Shifts";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(44, 14);
+            label1.Name = "label1";
+            label1.Size = new Size(158, 21);
+            label1.TabIndex = 8;
+            label1.Text = "Good Shift Rankings";
+            // 
             // flowEmployeeRankings
             // 
             flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
             flowEmployeeRankings.Location = new Point(255, 43);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
+            flowEmployeeRankings.Padding = new Padding(0, 10, 0, 0);
             flowEmployeeRankings.Size = new Size(501, 598);
             flowEmployeeRankings.TabIndex = 2;
             // 
@@ -161,14 +193,6 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(210, 300);
             panel3.TabIndex = 4;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.FromArgb(37, 42, 64);
-            panel2.Location = new Point(23, 43);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(210, 247);
-            panel2.TabIndex = 4;
             // 
             // lblMainWindowDescription
             // 
@@ -242,28 +266,6 @@
             btnReset.Visible = false;
             btnReset.Click += btnReset_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(23, 13);
-            label1.Name = "label1";
-            label1.Size = new Size(211, 21);
-            label1.TabIndex = 8;
-            label1.Text = "Best Good Shift Percentage";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(75, 317);
-            label2.Name = "label2";
-            label2.Size = new Size(87, 21);
-            label2.TabIndex = 9;
-            label2.Text = "Best Shifts";
-            // 
             // frmOverview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -315,8 +317,8 @@
         private FlowLayoutPanel flowEmployeeRankings;
         private Label label7;
         private Button btnReset;
-        private Panel panel2;
         private Label label1;
         private Label label2;
+        private FlowLayoutPanel flowGoodShiftRankings;
     }
 }
