@@ -11,6 +11,34 @@ namespace RicksStaffApp
 {
     public static class UIHelper
     {
+        private static void FlowLayoutPanel_MouseWheel(object sender, MouseEventArgs e)
+        {
+            const int scrollSpeed = 30;  // adjust this to the desired scroll speed
+            FlowLayoutPanel flowLayoutPanel = sender as FlowLayoutPanel;
+
+            if (flowLayoutPanel != null)
+            {
+                if (e.Delta > 0)  // scroll up
+                {
+                    if (flowLayoutPanel.VerticalScroll.Value - scrollSpeed >= flowLayoutPanel.VerticalScroll.Minimum)
+                        flowLayoutPanel.VerticalScroll.Value -= scrollSpeed;
+                    else
+                        flowLayoutPanel.VerticalScroll.Value = flowLayoutPanel.VerticalScroll.Minimum;
+                }
+                else  // scroll down
+                {
+                    if (flowLayoutPanel.VerticalScroll.Value + scrollSpeed <= flowLayoutPanel.VerticalScroll.Maximum)
+                        flowLayoutPanel.VerticalScroll.Value += scrollSpeed;
+                    else
+                        flowLayoutPanel.VerticalScroll.Value = flowLayoutPanel.VerticalScroll.Maximum;
+                }
+            }
+        }
+        public static void ConfigureFlowLayoutPanel(FlowLayoutPanel flowLayoutPanel)
+        {
+            flowLayoutPanel.AutoScroll = false;
+            flowLayoutPanel.MouseWheel += FlowLayoutPanel_MouseWheel;
+        }
         //Make factory Pattern? at least more modular
         public static Color GoodColor = Color.FromArgb(192, 223, 161);
         public static Color BadColor = Color.FromArgb(226, 163, 199);
@@ -82,6 +110,7 @@ namespace RicksStaffApp
             panel.FlowDirection = FlowDirection.LeftToRight;
             panel.MaximumSize = new Size(width-30, 0);
             panel.MinimumSize = new Size(width-30, 0);
+
             return panel;
         }
         private static Button CreateButtonTemplate (int width, int height, string buttonText)
@@ -378,20 +407,17 @@ namespace RicksStaffApp
                 Label employeeGoodShiftRatio = CreateLabel(55, 30, employee.GoodShiftPercentage.ToString("0.0" + "%"));
                 employeeLabel.Font = new Font("Segoe UI Semibold", 10);
                 employeeLabel.Margin = new Padding(0, 0, 0, 0);
-                employeeGoodShiftRatio.Font = new Font("Segoe UI Semibold", 10);
-                employeeGoodShiftRatio.TextAlign = ContentAlignment.MiddleCenter;
-                //employeeGoodShiftRatio.ForeColor = Color.White;
-                //employeeGoodShiftRatio.BackColor = GetBackColor(employee.GoodShiftRatio);
-                //employeeGoodShiftRatio.Padding = new Padding(0, 0, 0, 0);
+                employeeGoodShiftRatio.Font = new Font("Segoe UI Semibold", 10);                
                 employeeGoodShiftRatio.Margin = new Padding(0, 0, 0, 0);
                 employeeGoodShiftRatio.AutoSize = false;
-                //employeeGoodShiftRatio.MinimumSize = new Size(45, 50);
-                //employeeGoodShiftRatio.MaximumSize = new Size(45, 50);
-                //employeeGoodShiftRatio.Dock = DockStyle.Right;
+                
                 employeePanel.Controls.Add(employeeLabel);
                 employeePanel.Controls.Add(employeeGoodShiftRatio);
                 flowDisplay.Controls.Add(employeePanel);
+                
+                
             }
+            //flowDisplay.MouseWheel += FlowLayoutPanel_MouseWheel;
         }
 
         public static void CreateIncidentFrequencyPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay)
@@ -1329,6 +1355,22 @@ namespace RicksStaffApp
             }
         }
         public static List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        public static void CreateShiftRankingPanel(List<Shift> shift, FlowLayoutPanel flowDisplay)
+        {
+            flowDisplay.Controls.Clear();
+            foreach (Shift s in shift)
+            {
+                Panel shiftPanelContainer = new Panel();
+                shiftPanelContainer.Size = new Size(190, 22);
+                shiftPanelContainer.BackColor = MyColors.LightHighlight;
+                shiftPanelContainer.Margin = new Padding(2, 2, 2, 2);
+                Label shiftDate = CreateLabel(80, 18, s.DateAsDateTime.ToOrdinalString());
+                shiftPanelContainer.Controls.Add(shiftDate);
+                Label shiftAvg = CreateLabel(80, 18, s.AverageRating.ToString("0.00"));
+                shiftPanelContainer.Controls.Add(shiftAvg);
+                flowDisplay.Controls.Add(shiftPanelContainer);
+            }
+        }
 
     }
 }    

@@ -40,13 +40,13 @@
             flowEmployeeRankings = new FlowLayoutPanel();
             comboBox1 = new ComboBox();
             label7 = new Label();
-            panel3 = new Panel();
             lblMainWindowDescription = new Label();
             label5 = new Label();
             label4 = new Label();
             comboBox2 = new ComboBox();
             label3 = new Label();
             btnReset = new Button();
+            flowShiftRankings = new FlowLayoutPanel();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -110,13 +110,13 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(flowShiftRankings);
             pnlEmployeeStats.Controls.Add(flowGoodShiftRankings);
             pnlEmployeeStats.Controls.Add(label2);
             pnlEmployeeStats.Controls.Add(label1);
             pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
             pnlEmployeeStats.Controls.Add(comboBox1);
             pnlEmployeeStats.Controls.Add(label7);
-            pnlEmployeeStats.Controls.Add(panel3);
             pnlEmployeeStats.Location = new Point(17, 72);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
@@ -127,6 +127,7 @@
             // flowGoodShiftRankings
             // 
             flowGoodShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
+            flowGoodShiftRankings.FlowDirection = FlowDirection.TopDown;
             flowGoodShiftRankings.Location = new Point(23, 44);
             flowGoodShiftRankings.Name = "flowGoodShiftRankings";
             flowGoodShiftRankings.Size = new Size(210, 247);
@@ -185,14 +186,6 @@
             label7.Size = new Size(136, 25);
             label7.TabIndex = 1;
             label7.Text = "Highest Rated";
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.FromArgb(37, 42, 64);
-            panel3.Location = new Point(23, 341);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(210, 300);
-            panel3.TabIndex = 4;
             // 
             // lblMainWindowDescription
             // 
@@ -257,14 +250,22 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(740, 38);
+            btnReset.Location = new Point(559, 31);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(77, 23);
+            btnReset.Size = new Size(33, 23);
             btnReset.TabIndex = 3;
-            btnReset.Text = "Overview";
+            btnReset.Text = "X";
             btnReset.UseVisualStyleBackColor = false;
             btnReset.Visible = false;
             btnReset.Click += btnReset_Click;
+            // 
+            // flowShiftRankings
+            // 
+            flowShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
+            flowShiftRankings.Location = new Point(23, 341);
+            flowShiftRankings.Name = "flowShiftRankings";
+            flowShiftRankings.Size = new Size(210, 300);
+            flowShiftRankings.TabIndex = 11;
             // 
             // frmOverview
             // 
@@ -303,7 +304,6 @@
         private Panel pnlEmployeeDisplay;
         private Panel pnlEmployeeStats;
         private Panel panel4;
-        private Panel panel3;
         private TextBox txtBxEmployeeSearch;
         private ComboBox comboBox3;
         private Label label5;
@@ -320,5 +320,6 @@
         private Label label1;
         private Label label2;
         private FlowLayoutPanel flowGoodShiftRankings;
+        private FlowLayoutPanel flowShiftRankings;
     }
 }

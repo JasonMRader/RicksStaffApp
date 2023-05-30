@@ -34,6 +34,27 @@ namespace RicksStaffApp
             }
         }
         public List<EmployeeShift> EmployeeShifts { get; set; }
+        public float AverageRating
+        {
+            get
+            {
+                if (EmployeeShifts.Count == 0) return 0;
+                else
+                {
+                    float totalRating = 0;
+                    foreach (EmployeeShift employeeShift in EmployeeShifts)
+                    {
+                        employeeShift.UpdateShiftRating();
+                        {
+                            totalRating += employeeShift.ShiftRating;
+                        }
+                    }
+                    var avgRating = totalRating / EmployeeShifts.Count;
+                    return avgRating;
+                }
+                
+            }
+        }
         //public DateTime DateTime
         //{
         //    get { return Date.FromDateTime(this.Date); }

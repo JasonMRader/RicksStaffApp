@@ -14,6 +14,7 @@ namespace RicksStaffApp
     public partial class frmOverview : Form
     {
 
+        List<Shift> ShiftList = new List<Shift>();
         List<Employee> employeeList = new List<Employee>();
         private frmAddNewEmployee frmAddNewEmployee;
         int goodShiftCount = 0;
@@ -39,6 +40,9 @@ namespace RicksStaffApp
 
             employeeList.Clear();
             employeeList = SqliteDataAccess.TestLoadEmployees();
+            ShiftList.Clear();
+            ShiftList = SqliteDataAccess.LoadShifts();
+            UIHelper.CreateShiftRankingPanel(ShiftList, flowShiftRankings);
             string[] names = employeeList.Select(e => e.FullName).ToArray();
             AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
             autoComplete.AddRange(names);
@@ -80,6 +84,8 @@ namespace RicksStaffApp
             var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(10).ToList();
             UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
+            //UIHelper.ConfigureFlowLayoutPanel(flowGoodShiftRankings);
+            //UIHelper.ConfigureFlowLayoutPanel(flowEmployeeDisplay);
 
         }
 
