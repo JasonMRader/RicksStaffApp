@@ -16,6 +16,10 @@ namespace RicksStaffApp
 
         List<Employee> employeeList = new List<Employee>();
         private frmAddNewEmployee frmAddNewEmployee;
+        int goodShiftCount = 0;
+        int badShiftCount = 0;
+        int averageShiftCount = 0;
+        int totalShiftCount = 0;
         public frmOverview()
         {
             InitializeComponent();

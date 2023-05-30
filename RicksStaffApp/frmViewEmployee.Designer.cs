@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel3 = new Panel();
             flowFrequentIncidents = new FlowLayoutPanel();
             panel5 = new Panel();
             label1 = new Label();
@@ -48,35 +47,20 @@
             label2 = new Label();
             lblTotalShiftsLabelHeader = new Label();
             cboSeondEmployeeTime = new ComboBox();
-            button1 = new Button();
             flowEmployeeShifts = new FlowLayoutPanel();
             label3 = new Label();
             label4 = new Label();
-            panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
             SuspendLayout();
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(flowFrequentIncidents);
-            panel3.Controls.Add(panel5);
-            panel3.Controls.Add(panel2);
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(lblTotalShiftsLabelHeader);
-            panel3.Location = new Point(9, 40);
-            panel3.Margin = new Padding(0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(206, 580);
-            panel3.TabIndex = 2;
-            // 
             // flowFrequentIncidents
             // 
             flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
-            flowFrequentIncidents.Location = new Point(3, 246);
+            flowFrequentIncidents.Location = new Point(23, 286);
             flowFrequentIncidents.Name = "flowFrequentIncidents";
-            flowFrequentIncidents.Size = new Size(200, 331);
+            flowFrequentIncidents.Size = new Size(210, 355);
             flowFrequentIncidents.TabIndex = 3;
             // 
             // panel5
@@ -93,9 +77,9 @@
             panel5.Controls.Add(label12);
             panel5.Controls.Add(label11);
             panel5.Controls.Add(label10);
-            panel5.Location = new Point(3, 95);
+            panel5.Location = new Point(23, 136);
             panel5.Name = "panel5";
-            panel5.Size = new Size(191, 114);
+            panel5.Size = new Size(210, 114);
             panel5.TabIndex = 2;
             // 
             // label1
@@ -232,9 +216,9 @@
             panel2.BackColor = Color.FromArgb(37, 42, 64);
             panel2.Controls.Add(lblRating);
             panel2.Controls.Add(picBoxEmployeeRating);
-            panel2.Location = new Point(3, 3);
+            panel2.Location = new Point(23, 43);
             panel2.Name = "panel2";
-            panel2.Size = new Size(191, 65);
+            panel2.Size = new Size(210, 65);
             panel2.TabIndex = 1;
             // 
             // lblRating
@@ -263,7 +247,7 @@
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(37, 228);
+            label2.Location = new Point(62, 268);
             label2.Name = "label2";
             label2.Size = new Size(132, 15);
             label2.TabIndex = 1;
@@ -276,7 +260,7 @@
             lblTotalShiftsLabelHeader.AutoSize = true;
             lblTotalShiftsLabelHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblTotalShiftsLabelHeader.ForeColor = Color.White;
-            lblTotalShiftsLabelHeader.Location = new Point(79, 71);
+            lblTotalShiftsLabelHeader.Location = new Point(109, 116);
             lblTotalShiftsLabelHeader.Name = "lblTotalShiftsLabelHeader";
             lblTotalShiftsLabelHeader.Size = new Size(39, 17);
             lblTotalShiftsLabelHeader.TabIndex = 3;
@@ -290,32 +274,17 @@
             cboSeondEmployeeTime.ForeColor = Color.White;
             cboSeondEmployeeTime.FormattingEnabled = true;
             cboSeondEmployeeTime.Items.AddRange(new object[] { "All Time", "Last 30 Days", "Last 3 Months", "Last 6 Months", "Last Year" });
-            cboSeondEmployeeTime.Location = new Point(635, 7);
+            cboSeondEmployeeTime.Location = new Point(609, 12);
             cboSeondEmployeeTime.Name = "cboSeondEmployeeTime";
-            cboSeondEmployeeTime.Size = new Size(121, 23);
+            cboSeondEmployeeTime.Size = new Size(147, 23);
             cboSeondEmployeeTime.TabIndex = 3;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(167, 204, 237);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(15, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(74, 12);
-            button1.TabIndex = 2;
-            button1.Text = "Finished";
-            button1.UseVisualStyleBackColor = false;
-            button1.Visible = false;
-            button1.Click += button1_Click;
             // 
             // flowEmployeeShifts
             // 
             flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeShifts.Location = new Point(255, 40);
+            flowEmployeeShifts.Location = new Point(255, 43);
             flowEmployeeShifts.Name = "flowEmployeeShifts";
-            flowEmployeeShifts.Size = new Size(475, 580);
+            flowEmployeeShifts.Size = new Size(501, 598);
             flowEmployeeShifts.TabIndex = 6;
             // 
             // label3
@@ -323,7 +292,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(79, 12);
+            label3.Location = new Point(101, 12);
             label3.Name = "label3";
             label3.Size = new Size(55, 25);
             label3.TabIndex = 7;
@@ -346,19 +315,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(800, 675);
+            Controls.Add(label2);
+            Controls.Add(flowFrequentIncidents);
             Controls.Add(label4);
+            Controls.Add(panel5);
+            Controls.Add(lblTotalShiftsLabelHeader);
             Controls.Add(label3);
+            Controls.Add(panel2);
             Controls.Add(cboSeondEmployeeTime);
             Controls.Add(flowEmployeeShifts);
-            Controls.Add(button1);
-            Controls.Add(panel3);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmViewEmployee";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmViewEmployee";
             Load += frmViewEmployee_Load;
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             panel2.ResumeLayout(false);
@@ -369,10 +339,8 @@
         }
 
         #endregion
-        private Button button1;
         private Panel panel2;
         private PictureBox picBoxEmployeeRating;
-        private Panel panel3;
         private Panel panel5;
         private Label lblGoodShifts;
         private Label label2;

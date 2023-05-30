@@ -377,10 +377,11 @@ namespace RicksStaffApp
                 var positiveIncident = group.Where(i => i.IncidentRatingChange > 0);
                 var negativeIncident = group.Where(i => i.IncidentRatingChange < 0);
 
-                Panel incidentPanel = CreateFlowPanel(200, 50);
-                incidentPanel.MinimumSize = new Size(200, 50);
-                incidentPanel.Margin = new Padding(0, 2, 2, 0);
-                Label incidentLabel = CreateLabel(140, 50, group.Key);
+                Panel incidentPanel = CreateFlowPanel(190, 50);
+                incidentPanel.MinimumSize = new Size(190, 50);
+                incidentPanel.Margin = new Padding(10, 5, 10, 5);
+                
+                Label incidentLabel = CreateLabel(130, 50, group.Key);
                 Label incidentFrequency = CreateLabel(45, 50, group.Count().ToString() + "X");
                 incidentLabel.Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold); 
                 incidentFrequency.Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold);
@@ -913,13 +914,14 @@ namespace RicksStaffApp
             // Loop through employee list and create a panel for each employee
             foreach (Employee emp in employeeList)
             {
-                Panel empPanelContainer = CreatePanel(500, 50);
-                empPanelContainer.Margin = new Padding(0, 0, 0, 2);
+                Panel empPanelContainer = CreatePanel(470, 50);
+                empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+                
 
-                FlowLayoutPanel empPanel = CreateFlowPanel(430, 50);
+                FlowLayoutPanel empPanel = CreateFlowPanel(400, 50);
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
-                Button btnName = CreateButtonTemplate(190, 50, emp.FullName);
+                Button btnName = CreateButtonTemplate(180, 50, emp.FullName);
                 btnName.Font = new Font("Arial", 12, FontStyle.Bold);
                 btnName.Click += (sender, e) =>
                 {
@@ -951,7 +953,7 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
 
-                PictureBox pbRating = CreateRatingPictureBox(190, 50, emp.OverallRating);
+                PictureBox pbRating = CreateRatingPictureBox(180, 50, emp.OverallRating);
                 empPanel.Controls.Add(pbRating);
 
                 empPanelContainer.Controls.Add(empPanel);
@@ -960,7 +962,7 @@ namespace RicksStaffApp
                 lblRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
                 lblRating.Margin = new Padding(0);
-                lblRating.Location = new Point(440, 0);
+                lblRating.Location = new Point(410, 0);
                 lblRating.Size = new Size(50, 50);
                 lblRating.TextAlign = ContentAlignment.MiddleCenter;
                 emp.UpdateOverallRating();
@@ -1043,7 +1045,7 @@ namespace RicksStaffApp
 
             empShiftContainer.MinimumSize = new Size(470, 30);
             empShiftContainer.MaximumSize = new Size(470, 1000);
-            empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+            empShiftContainer.Margin = new Padding(15, 7, 15, 0);
 
             Label lblWeekday = CreateLabel(75, 30, employeeShift.Shift.DateAsDateTime.ToString("ddd"));
             lblWeekday.Font = WeekDayDisplay;

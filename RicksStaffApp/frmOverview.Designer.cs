@@ -30,37 +30,33 @@
         {
             pnlEmployeeDisplay = new Panel();
             flowEmployeeDisplay = new FlowLayoutPanel();
-            btnAddEmployee = new Button();
-            label6 = new Label();
             txtBxEmployeeSearch = new TextBox();
             comboBox3 = new ComboBox();
-            label1 = new Label();
+            btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            flowEmployeeRankings = new FlowLayoutPanel();
+            comboBox1 = new ComboBox();
+            label7 = new Label();
             panel3 = new Panel();
             panel2 = new Panel();
-            panel1 = new Panel();
-            flowEmployeeRankings = new FlowLayoutPanel();
-            label7 = new Label();
-            comboBox1 = new ComboBox();
             lblMainWindowDescription = new Label();
             label5 = new Label();
             label4 = new Label();
             comboBox2 = new ComboBox();
             label3 = new Label();
             btnReset = new Button();
+            label1 = new Label();
+            label2 = new Label();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
             // 
             // pnlEmployeeDisplay
             // 
-            pnlEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeDisplay.BackColor = Color.FromArgb(46, 51, 73);
             pnlEmployeeDisplay.Controls.Add(flowEmployeeDisplay);
-            pnlEmployeeDisplay.Controls.Add(btnAddEmployee);
-            pnlEmployeeDisplay.Controls.Add(label6);
             pnlEmployeeDisplay.Controls.Add(txtBxEmployeeSearch);
             pnlEmployeeDisplay.Controls.Add(comboBox3);
-            pnlEmployeeDisplay.Controls.Add(label1);
             pnlEmployeeDisplay.Location = new Point(827, 72);
             pnlEmployeeDisplay.Margin = new Padding(8);
             pnlEmployeeDisplay.Name = "pnlEmployeeDisplay";
@@ -71,17 +67,38 @@
             // flowEmployeeDisplay
             // 
             flowEmployeeDisplay.AutoScroll = true;
-            flowEmployeeDisplay.Location = new Point(11, 112);
+            flowEmployeeDisplay.BackColor = Color.FromArgb(37, 42, 64);
+            flowEmployeeDisplay.Location = new Point(11, 44);
             flowEmployeeDisplay.Name = "flowEmployeeDisplay";
-            flowEmployeeDisplay.Size = new Size(426, 553);
+            flowEmployeeDisplay.Size = new Size(426, 597);
             flowEmployeeDisplay.TabIndex = 6;
+            // 
+            // txtBxEmployeeSearch
+            // 
+            txtBxEmployeeSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBxEmployeeSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtBxEmployeeSearch.Location = new Point(11, 11);
+            txtBxEmployeeSearch.Name = "txtBxEmployeeSearch";
+            txtBxEmployeeSearch.PlaceholderText = "Search Employees";
+            txtBxEmployeeSearch.Size = new Size(179, 23);
+            txtBxEmployeeSearch.TabIndex = 3;
+            txtBxEmployeeSearch.TextChanged += txtBxEmployeeSearch_TextChanged;
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Items.AddRange(new object[] { "Position", "Server", "Busser", "Runner", "Host", "Barback", "Valet", "Bartender" });
+            comboBox3.Location = new Point(221, 11);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(133, 23);
+            comboBox3.TabIndex = 1;
             // 
             // btnAddEmployee
             // 
             btnAddEmployee.BackColor = Color.FromArgb(167, 204, 237);
             btnAddEmployee.FlatAppearance.BorderSize = 0;
             btnAddEmployee.FlatStyle = FlatStyle.Flat;
-            btnAddEmployee.Location = new Point(350, 0);
+            btnAddEmployee.Location = new Point(1177, 39);
             btnAddEmployee.Name = "btnAddEmployee";
             btnAddEmployee.Size = new Size(100, 23);
             btnAddEmployee.TabIndex = 4;
@@ -89,54 +106,16 @@
             btnAddEmployee.UseVisualStyleBackColor = false;
             btnAddEmployee.Click += btnAddEmployee_Click;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(242, 19);
-            label6.Name = "label6";
-            label6.Size = new Size(50, 15);
-            label6.TabIndex = 2;
-            label6.Text = "Position";
-            // 
-            // txtBxEmployeeSearch
-            // 
-            txtBxEmployeeSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtBxEmployeeSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtBxEmployeeSearch.Location = new Point(11, 44);
-            txtBxEmployeeSearch.Name = "txtBxEmployeeSearch";
-            txtBxEmployeeSearch.Size = new Size(222, 23);
-            txtBxEmployeeSearch.TabIndex = 3;
-            txtBxEmployeeSearch.TextChanged += txtBxEmployeeSearch_TextChanged;
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox3.Location = new Point(242, 44);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 23);
-            comboBox3.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(11, 22);
-            label1.Name = "label1";
-            label1.Size = new Size(102, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Search Employees";
-            // 
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(label2);
+            pnlEmployeeStats.Controls.Add(label1);
+            pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
+            pnlEmployeeStats.Controls.Add(comboBox1);
+            pnlEmployeeStats.Controls.Add(label7);
             pnlEmployeeStats.Controls.Add(panel3);
             pnlEmployeeStats.Controls.Add(panel2);
-            pnlEmployeeStats.Controls.Add(panel1);
-            pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
-            pnlEmployeeStats.Controls.Add(label7);
-            pnlEmployeeStats.Controls.Add(comboBox1);
             pnlEmployeeStats.Location = new Point(17, 72);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
@@ -144,61 +123,52 @@
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
             // 
+            // flowEmployeeRankings
+            // 
+            flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
+            flowEmployeeRankings.Location = new Point(255, 43);
+            flowEmployeeRankings.Name = "flowEmployeeRankings";
+            flowEmployeeRankings.Size = new Size(501, 598);
+            flowEmployeeRankings.TabIndex = 2;
+            // 
+            // comboBox1
+            // 
+            comboBox1.BackColor = Color.FromArgb(74, 79, 99);
+            comboBox1.FlatStyle = FlatStyle.Flat;
+            comboBox1.ForeColor = Color.White;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
+            comboBox1.Location = new Point(609, 12);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(147, 23);
+            comboBox1.TabIndex = 1;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(415, 13);
+            label7.Name = "label7";
+            label7.Size = new Size(136, 25);
+            label7.TabIndex = 1;
+            label7.Text = "Highest Rated";
+            // 
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(37, 42, 64);
-            panel3.Location = new Point(12, 286);
+            panel3.Location = new Point(23, 341);
             panel3.Name = "panel3";
-            panel3.Size = new Size(191, 307);
+            panel3.Size = new Size(210, 300);
             panel3.TabIndex = 4;
             // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(37, 42, 64);
-            panel2.Location = new Point(12, 135);
+            panel2.Location = new Point(23, 43);
             panel2.Name = "panel2";
-            panel2.Size = new Size(191, 114);
+            panel2.Size = new Size(210, 247);
             panel2.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(37, 42, 64);
-            panel1.Location = new Point(12, 43);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(191, 65);
-            panel1.TabIndex = 3;
-            // 
-            // flowEmployeeRankings
-            // 
-            flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeRankings.Location = new Point(255, 40);
-            flowEmployeeRankings.Name = "flowEmployeeRankings";
-            flowEmployeeRankings.Size = new Size(501, 553);
-            flowEmployeeRankings.TabIndex = 2;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(437, 7);
-            label7.Name = "label7";
-            label7.Size = new Size(144, 30);
-            label7.TabIndex = 1;
-            label7.Text = "Highest Rated";
-            // 
-            // comboBox1
-            // 
-            comboBox1.BackColor = Color.FromArgb(74, 79, 99);
-            comboBox1.Enabled = false;
-            comboBox1.FlatStyle = FlatStyle.Flat;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox1.Location = new Point(635, 7);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 1;
-            comboBox1.Visible = false;
             // 
             // lblMainWindowDescription
             // 
@@ -263,14 +233,36 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(649, 39);
+            btnReset.Location = new Point(740, 38);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(124, 23);
+            btnReset.Size = new Size(77, 23);
             btnReset.TabIndex = 3;
-            btnReset.Text = "Back To Overview";
+            btnReset.Text = "Overview";
             btnReset.UseVisualStyleBackColor = false;
             btnReset.Visible = false;
             btnReset.Click += btnReset_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(23, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(211, 21);
+            label1.TabIndex = 8;
+            label1.Text = "Best Good Shift Percentage";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(75, 317);
+            label2.Name = "label2";
+            label2.Size = new Size(87, 21);
+            label2.TabIndex = 9;
+            label2.Text = "Best Shifts";
             // 
             // frmOverview
             // 
@@ -281,6 +273,7 @@
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
             Controls.Add(btnReset);
+            Controls.Add(btnAddEmployee);
             Controls.Add(label5);
             Controls.Add(label3);
             Controls.Add(lblMainWindowDescription);
@@ -309,10 +302,8 @@
         private Panel pnlEmployeeStats;
         private Panel panel4;
         private Panel panel3;
-        private Label label6;
         private TextBox txtBxEmployeeSearch;
         private ComboBox comboBox3;
-        private Label label1;
         private Label label5;
         private Label label4;
         private ComboBox comboBox2;
@@ -324,7 +315,8 @@
         private FlowLayoutPanel flowEmployeeRankings;
         private Label label7;
         private Button btnReset;
-        private Panel panel1;
         private Panel panel2;
+        private Label label1;
+        private Label label2;
     }
 }
