@@ -1360,13 +1360,18 @@ namespace RicksStaffApp
             flowDisplay.Controls.Clear();
             foreach (Shift s in shift)
             {
-                Panel shiftPanelContainer = new Panel();
-                shiftPanelContainer.Size = new Size(190, 22);
+                FlowLayoutPanel shiftPanelContainer = CreateFlowPanel(190, 30);
+                shiftPanelContainer.AutoSize = false;
+                shiftPanelContainer.Size = new Size(200, 30);
+                shiftPanelContainer.MinimumSize = new Size(190, 30);
                 shiftPanelContainer.BackColor = MyColors.LightHighlight;
-                shiftPanelContainer.Margin = new Padding(2, 2, 2, 2);
-                Label shiftDate = CreateLabel(80, 18, s.DateAsDateTime.ToOrdinalString());
+                shiftPanelContainer.Margin = new Padding(10, 5, 10, 5);
+                Label shiftDate = CreateLabel(90, 30, s.DateAsDateTime.ToOrdinalString());
+                shiftDate.Margin = new Padding(0);
                 shiftPanelContainer.Controls.Add(shiftDate);
-                Label shiftAvg = CreateLabel(80, 18, s.AverageRating.ToString("0.00"));
+                Label shiftAvg = CreateLabel(70, 30, s.AverageRating.ToString("0.00"));
+                shiftAvg.Margin = new Padding(0);
+                //shiftAvg.Location = new Point(0, 75);
                 shiftPanelContainer.Controls.Add(shiftAvg);
                 flowDisplay.Controls.Add(shiftPanelContainer);
             }
