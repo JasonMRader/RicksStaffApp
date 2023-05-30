@@ -15,10 +15,10 @@ namespace RicksStaffApp
     {
 
         Employee ThisEmployee = new Employee();
-        int goodShiftCount = 0;
-        int badShiftCount = 0;
-        int averageShiftCount = 0;
-        int totalShiftCount = 0;
+        //int goodShiftCount = 0;
+        //int badShiftCount = 0;
+        //int averageShiftCount = 0;
+        //int totalShiftCount = 0;
         public frmViewEmployee(Employee employee)
         {
             ThisEmployee = employee;
@@ -30,34 +30,40 @@ namespace RicksStaffApp
         }
         private void GetEmployeeShiftGoodBadDistribution(List<EmployeeShift> employeeShifts)
         {
-            (goodShiftCount, badShiftCount, averageShiftCount) = (0, 0, 0);
-            totalShiftCount = employeeShifts.Count;
+            //(goodShiftCount, badShiftCount, averageShiftCount) = (0, 0, 0);
+            //totalShiftCount = employeeShifts.Count;
             foreach (EmployeeShift employeeShift in employeeShifts)
             {
                 UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
-                if (employeeShift.ShiftRating <= 5.5)
-                {
-                    badShiftCount++;
-                }
-                if (employeeShift.ShiftRating >= 6.5)
-                {
-                    goodShiftCount++;
-                }
-                else
-                {
-                    averageShiftCount++;
-                }
+                //if (employeeShift.ShiftRating <= 5.5)
+                //{
+                //    badShiftCount++;
+                //}
+                //if (employeeShift.ShiftRating >= 6.5)
+                //{
+                //    goodShiftCount++;
+                //}
+                //else
+                //{
+                //    averageShiftCount++;
+                //}
             }
-            lblTotalShifts.Text = totalShiftCount.ToString();
-            lblGoodShifts.Text = goodShiftCount.ToString();
-            lblAverageShifts.Text = averageShiftCount.ToString();
-            lblPoorShifts.Text = badShiftCount.ToString();
-            double goodPercentage = (Double)goodShiftCount / totalShiftCount;
-            double averagePercentage = (Double)averageShiftCount / totalShiftCount;
-            double badPercentage = (Double)badShiftCount / totalShiftCount;
-            lblGoodShiftPercent.Text = goodPercentage.ToString("0.00" + "%");
-            lblAverageShiftPercent.Text = averagePercentage.ToString("0.00" + "%");
-            lblBadShiftPercent.Text = badPercentage.ToString("0.00" + "%");
+            lblTotalShifts.Text = employeeShifts.Count.ToString();
+            //lblGoodShifts.Text = goodShiftCount.ToString();
+            //lblAverageShifts.Text = averageShiftCount.ToString();
+            //lblPoorShifts.Text = badShiftCount.ToString();
+            //double goodPercentage = (Double)goodShiftCount / totalShiftCount;
+            //double averagePercentage = (Double)averageShiftCount / totalShiftCount;
+            //double badPercentage = (Double)badShiftCount / totalShiftCount;
+            //lblGoodShiftPercent.Text = goodPercentage.ToString("0.00" + "%");
+            //lblAverageShiftPercent.Text = averagePercentage.ToString("0.00" + "%");
+            //lblBadShiftPercent.Text = badPercentage.ToString("0.00" + "%");
+            lblGoodShifts.Text = ThisEmployee.TotalGoodShifts.ToString();
+            lblAverageShifts.Text = ThisEmployee.TotalAverageShifts.ToString();
+            lblPoorShifts.Text = ThisEmployee.TotalBadShifts.ToString();
+            lblGoodShiftPercent.Text = ThisEmployee.GoodShiftPercentage.ToString("0.00" + "%");
+            lblAverageShiftPercent.Text = ThisEmployee.AverageShiftPercentage.ToString("0.00" + "%");
+            lblBadShiftPercent.Text = ThisEmployee.BadShiftPercentage.ToString("0.00" + "%");
         }
         private void frmViewEmployee_Load(object sender, EventArgs e)
         {

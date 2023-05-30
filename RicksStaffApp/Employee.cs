@@ -41,6 +41,7 @@ namespace RicksStaffApp
         {
             return string.Equals(FirstName, name, StringComparison.OrdinalIgnoreCase);
         }
+        
 
         public override string ToString()
         {
@@ -95,6 +96,58 @@ namespace RicksStaffApp
                         LastName = nameParts[nameParts.Length - 1];
                     }
                 }
+            }
+        }
+        public float GoodShiftPercentage
+        {
+            get
+            {
+                if (EmployeeShifts.Count == 0) return 0;
+                var goodShifts = EmployeeShifts.Count(shift => shift.ShiftRating >= 6.5);
+                return (float)goodShifts / EmployeeShifts.Count;
+            }
+        }
+
+        public float AverageShiftPercentage
+        {
+            get
+            {
+                if (EmployeeShifts.Count == 0) return 0;
+                var averageShifts = EmployeeShifts.Count(shift => shift.ShiftRating > 5.5 && shift.ShiftRating < 6.5);
+                return (float)averageShifts / EmployeeShifts.Count;
+            }
+        }
+
+        public float BadShiftPercentage
+        {
+            get
+            {
+                if (EmployeeShifts.Count == 0) return 0;
+                var badShifts = EmployeeShifts.Count(shift => shift.ShiftRating <= 5.5);
+                return (float)badShifts / EmployeeShifts.Count;
+            }
+        }
+        public int TotalGoodShifts
+        {
+            get
+            {
+                return EmployeeShifts.Count(shift => shift.ShiftRating >= 6.5);
+            }
+        }
+
+        public int TotalAverageShifts
+        {
+            get
+            {
+                return EmployeeShifts.Count(shift => shift.ShiftRating > 5.5 && shift.ShiftRating < 6.5);
+            }
+        }
+
+        public int TotalBadShifts
+        {
+            get
+            {
+                return EmployeeShifts.Count(shift => shift.ShiftRating <= 5.5);
             }
         }
     }
