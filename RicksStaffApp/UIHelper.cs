@@ -193,11 +193,11 @@ namespace RicksStaffApp
             //Color starColor = Color.White;
             switch (rating)
             {
-                case float r when r >= 10:
+                case float r when r > 10:
                     starsImage = Properties.Resources.WayOverTenStarsThick;
                     //starColor = RatingTen;
                     break;
-                case float r when r < 10 && r >= 9.5:
+                case float r when r <= 10 && r >= 9.5:
                     starsImage = Properties.Resources.TenStars;
                     //starColor = RatingTen;
                     break;

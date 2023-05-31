@@ -34,6 +34,7 @@
             comboBox3 = new ComboBox();
             btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            cboViewType = new ComboBox();
             flowShiftRankings = new FlowLayoutPanel();
             flowGoodShiftRankings = new FlowLayoutPanel();
             label2 = new Label();
@@ -110,6 +111,7 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(cboViewType);
             pnlEmployeeStats.Controls.Add(flowShiftRankings);
             pnlEmployeeStats.Controls.Add(flowGoodShiftRankings);
             pnlEmployeeStats.Controls.Add(label2);
@@ -123,6 +125,19 @@
             pnlEmployeeStats.Size = new Size(800, 675);
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
+            // 
+            // cboViewType
+            // 
+            cboViewType.BackColor = Color.FromArgb(74, 79, 99);
+            cboViewType.FlatStyle = FlatStyle.Flat;
+            cboViewType.ForeColor = Color.White;
+            cboViewType.FormattingEnabled = true;
+            cboViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
+            cboViewType.Location = new Point(434, 12);
+            cboViewType.Name = "cboViewType";
+            cboViewType.Size = new Size(157, 23);
+            cboViewType.TabIndex = 12;
+            cboViewType.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
             // 
             // flowShiftRankings
             // 
@@ -148,7 +163,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(75, 317);
+            label2.Location = new Point(23, 317);
             label2.Name = "label2";
             label2.Size = new Size(87, 21);
             label2.TabIndex = 9;
@@ -159,7 +174,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(44, 14);
+            label1.Location = new Point(23, 18);
             label1.Name = "label1";
             label1.Size = new Size(158, 21);
             label1.TabIndex = 8;
@@ -181,9 +196,9 @@
             comboBox1.ForeColor = Color.White;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox1.Location = new Point(609, 12);
+            comboBox1.Location = new Point(598, 12);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(147, 23);
+            comboBox1.Size = new Size(157, 23);
             comboBox1.TabIndex = 1;
             // 
             // label7
@@ -191,7 +206,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(415, 13);
+            label7.Location = new Point(255, 15);
             label7.Name = "label7";
             label7.Size = new Size(136, 25);
             label7.TabIndex = 1;
@@ -202,11 +217,11 @@
             lblMainWindowDescription.AutoSize = true;
             lblMainWindowDescription.Font = new Font("Segoe UI", 18.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblMainWindowDescription.ForeColor = Color.White;
-            lblMainWindowDescription.Location = new Point(303, 26);
+            lblMainWindowDescription.Location = new Point(371, 19);
             lblMainWindowDescription.Name = "lblMainWindowDescription";
-            lblMainWindowDescription.Size = new Size(250, 35);
+            lblMainWindowDescription.Size = new Size(128, 35);
             lblMainWindowDescription.TabIndex = 0;
-            lblMainWindowDescription.Text = "Employee Overview";
+            lblMainWindowDescription.Text = "Overview";
             // 
             // label5
             // 
@@ -260,7 +275,7 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(559, 31);
+            btnReset.Location = new Point(740, 55);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(33, 23);
             btnReset.TabIndex = 3;
@@ -323,5 +338,6 @@
         private Label label2;
         private FlowLayoutPanel flowGoodShiftRankings;
         private FlowLayoutPanel flowShiftRankings;
+        private ComboBox cboViewType;
     }
 }

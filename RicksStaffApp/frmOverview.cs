@@ -37,7 +37,7 @@ namespace RicksStaffApp
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
-
+            cboViewType.SelectedIndex = 0;
             employeeList.Clear();
             employeeList = SqliteDataAccess.TestLoadEmployees();
             ShiftList.Clear();
@@ -150,6 +150,31 @@ namespace RicksStaffApp
 
             //var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
             //UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+        }
+
+        private void cboViewType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboViewType.SelectedIndex == 0)
+            {
+                flowEmployeeRankings.Controls.Clear();
+                var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+                UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            }
+            if (cboViewType.SelectedIndex == 1)
+            {
+                flowEmployeeRankings.Controls.Clear();
+                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+                foreach(Employee employee in employeeList)
+                {
+                    foreach(EmployeeShift employeeShift in employee.EmployeeShifts) { employeeShifts.Add(employeeShift);}
+                }
+                var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+                foreach (EmployeeShift employeeShift in employeeShiftRanking)
+                {
+                    UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeRankings);
+                }
+
+            }
         }
     }
 }
