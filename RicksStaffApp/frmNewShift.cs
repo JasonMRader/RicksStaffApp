@@ -35,6 +35,22 @@ namespace RicksStaffApp
             shifts = SqliteDataAccess.LoadShifts();
             //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
             UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            DateTime date = DateTime.Now.AddDays(-13);
+
+            for (int i = 0; i < 14; i++)
+            {
+                Panel panel = new Panel();
+                panel.Size = new Size(74, 65);
+                panel.Margin = new Padding(7, 5, 7, 5);
+                panel.BackColor = Color.White;
+                System.Windows.Forms.Label lbl = new System.Windows.Forms.Label();
+                lbl.Text = date.ToString("ddd") + ", " + date.ToString("M");
+                date = date.AddDays(1);
+                panel.Controls.Add(lbl);
+
+                flowShiftDates.Controls.Add(panel);
+
+            }
         }
 
 
