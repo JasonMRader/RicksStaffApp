@@ -30,6 +30,13 @@ namespace RicksStaffApp
                 return FirstName + " " + LastName;
             }
         }
+        public string FullNameAbbreviated
+        {
+            get
+            {
+                return FirstName + " " + LastName[0] + ".";
+            }
+        }
         //public string fullNameCleaned = Regex.Replace(this.FullName.ToLower().Trim(), @"\s+", " ");
 
         public float OverallRating { get; set; }

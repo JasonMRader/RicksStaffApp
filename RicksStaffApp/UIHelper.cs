@@ -79,8 +79,10 @@ namespace RicksStaffApp
             else
                 suffix = "th";
 
-            // Format the date.
-            return string.Format("{0} {1}{2}, {3}", date.ToString("MMM"), dayString, suffix, date.ToString("yy"));
+            // Format With Year.
+            //return string.Format("{0} {1}{2}, {3}", date.ToString("MMM"), dayString, suffix, date.ToString("yy"));
+            // Without Year.
+            return string.Format("{0} {1}{2}", date.ToString("MMM"), dayString, suffix);
         }
 
         //static Image StarsTest = Properties.Resources._2_5_StarsTest;
@@ -1103,7 +1105,7 @@ namespace RicksStaffApp
             empShiftContainer.MaximumSize = new Size(470, 1000);
             empShiftContainer.Margin = new Padding(15, 7, 15, 0);
 
-            Label lblEmpName = CreateLabel(85, 30, employeeShift.Employee.FullName);
+            Label lblEmpName = CreateLabel(85, 30, employeeShift.Employee.FullNameAbbreviated);
             //lblEmpName.Font = WeekDayDisplay;
             empShiftContainer.Controls.Add(lblEmpName);
 
