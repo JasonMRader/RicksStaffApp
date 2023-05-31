@@ -166,12 +166,16 @@ namespace RicksStaffApp
                 List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
                 foreach(Employee employee in employeeList)
                 {
-                    foreach(EmployeeShift employeeShift in employee.EmployeeShifts) { employeeShifts.Add(employeeShift);}
+                    foreach(EmployeeShift employeeShift in employee.EmployeeShifts)
+                    {
+                        employeeShift.Employee = employee;
+                        employeeShifts.Add(employeeShift);
+                    }
                 }
                 var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
                 foreach (EmployeeShift employeeShift in employeeShiftRanking)
                 {
-                    UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeRankings);
+                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
                 }
 
             }

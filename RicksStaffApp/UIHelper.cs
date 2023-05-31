@@ -1094,6 +1094,64 @@ namespace RicksStaffApp
 
             }
         }
+        public static void CreateEmployeeShiftRankingPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
+        {
+            employeeShift.UpdateShiftRating();
+            FlowLayoutPanel empShiftContainer = CreateFlowPanel(470, 30);
+
+            empShiftContainer.MinimumSize = new Size(470, 30);
+            empShiftContainer.MaximumSize = new Size(470, 1000);
+            empShiftContainer.Margin = new Padding(15, 7, 15, 0);
+
+            Label lblEmpName = CreateLabel(85, 30, employeeShift.Employee.FullName);
+            //lblEmpName.Font = WeekDayDisplay;
+            empShiftContainer.Controls.Add(lblEmpName);
+
+            Label lblName = CreateLabel(90, 30, employeeShift.Shift.DateAsDateTime.ToOrdinalString());
+            //lblName.Font = DateDisplay;
+            empShiftContainer.Controls.Add(lblName);
+
+            //Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
+            //empShiftContainer.Controls.Add(lblPos);
+            FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
+            Button btnIncidents = CreateButtonTemplate(100, 30, employeeShift.Incidents.Count.ToString() + " Incidents");
+            btnIncidents.Margin = new Padding(10, 0, 0, 0);
+            bool btnClicked = false;
+            btnIncidents.Font = ButtonDisplay;
+            btnIncidents.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+            };
+            empShiftContainer.Controls.Add(btnIncidents);
+
+
+            PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
+            pbRating.Margin = new Padding(10, 0, 0, 0);
+            empShiftContainer.Controls.Add(pbRating);
+
+
+
+
+            Label lblShiftRating = CreateLabel(40, 30, employeeShift.ShiftRating.ToString());
+            lblShiftRating.Margin = new Padding(5, 0, 0, 0);
+            lblShiftRating.Font = RatingDisplay;
+            empShiftContainer.Controls.Add(lblShiftRating);
+
+           
+
+            flowLayoutPanel.Controls.Add(empShiftContainer);
+        }
         public static void CreateEmployeeShiftOverviewPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
         {
 
