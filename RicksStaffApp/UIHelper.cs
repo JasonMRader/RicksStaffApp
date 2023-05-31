@@ -194,7 +194,7 @@ namespace RicksStaffApp
             switch (rating)
             {
                 case float r when r >= 10:
-                    starsImage = Properties.Resources.BrokenCharts;
+                    starsImage = Properties.Resources.WayOverTenStarsThick;
                     //starColor = RatingTen;
                     break;
                 case float r when r < 10 && r >= 9.5:
