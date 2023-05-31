@@ -193,7 +193,11 @@ namespace RicksStaffApp
             //Color starColor = Color.White;
             switch (rating)
             {
-                case float r when r >= 10 || r >= 9.5:
+                case float r when r >= 10:
+                    starsImage = Properties.Resources.BrokenCharts;
+                    //starColor = RatingTen;
+                    break;
+                case float r when r < 10 && r >= 9.5:
                     starsImage = Properties.Resources.TenStars;
                     //starColor = RatingTen;
                     break;
@@ -1355,10 +1359,11 @@ namespace RicksStaffApp
             }
         }
         public static List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-        public static void CreateShiftRankingPanel(List<Shift> shift, FlowLayoutPanel flowDisplay)
+        public static void CreateShiftRankingPanel(List<Shift> shifts, FlowLayoutPanel flowDisplay)
         {
+
             flowDisplay.Controls.Clear();
-            foreach (Shift s in shift)
+            foreach (Shift s in shifts)
             {
                 FlowLayoutPanel shiftPanelContainer = CreateFlowPanel(190, 30);
                 shiftPanelContainer.AutoSize = false;
@@ -1366,10 +1371,12 @@ namespace RicksStaffApp
                 shiftPanelContainer.MinimumSize = new Size(190, 30);
                 shiftPanelContainer.BackColor = MyColors.LightHighlight;
                 shiftPanelContainer.Margin = new Padding(10, 5, 10, 5);
-                Label shiftDate = CreateLabel(90, 30, s.DateAsDateTime.ToOrdinalString());
+                Label shiftDate = CreateLabel(120, 30, s.DateAsDateTime.ToOrdinalString());
+                shiftDate.Font = new Font("Segoe UI semibold", 10);
                 shiftDate.Margin = new Padding(0);
                 shiftPanelContainer.Controls.Add(shiftDate);
-                Label shiftAvg = CreateLabel(70, 30, s.AverageRating.ToString("0.00"));
+                Label shiftAvg = CreateLabel(55, 30, s.AverageRating.ToString("0.00"));
+                shiftAvg.Font = new Font("Segoe UI semibold", 10);
                 shiftAvg.Margin = new Padding(0);
                 //shiftAvg.Location = new Point(0, 75);
                 shiftPanelContainer.Controls.Add(shiftAvg);

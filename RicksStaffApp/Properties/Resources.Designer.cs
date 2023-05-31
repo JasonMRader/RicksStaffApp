@@ -173,6 +173,16 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BrokenCharts {
+            get {
+                object obj = ResourceManager.GetObject("BrokenCharts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DoNotUse {
             get {
                 object obj = ResourceManager.GetObject("DoNotUse", resourceCulture);
@@ -303,6 +313,16 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap OverTenStars {
+            get {
+                object obj = ResourceManager.GetObject("OverTenStars", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SevenStars {
             get {
                 object obj = ResourceManager.GetObject("SevenStars", resourceCulture);
@@ -386,6 +406,16 @@ namespace RicksStaffApp.Properties {
         internal static System.Drawing.Bitmap Up_Arrow1 {
             get {
                 object obj = ResourceManager.GetObject("Up Arrow1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WayOverTenStars {
+            get {
+                object obj = ResourceManager.GetObject("WayOverTenStars", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -34,6 +34,7 @@
             comboBox3 = new ComboBox();
             btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            flowShiftRankings = new FlowLayoutPanel();
             flowGoodShiftRankings = new FlowLayoutPanel();
             label2 = new Label();
             label1 = new Label();
@@ -46,7 +47,6 @@
             comboBox2 = new ComboBox();
             label3 = new Label();
             btnReset = new Button();
-            flowShiftRankings = new FlowLayoutPanel();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -124,12 +124,22 @@
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
             // 
+            // flowShiftRankings
+            // 
+            flowShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
+            flowShiftRankings.Location = new Point(23, 341);
+            flowShiftRankings.Name = "flowShiftRankings";
+            flowShiftRankings.Padding = new Padding(0, 10, 0, 0);
+            flowShiftRankings.Size = new Size(210, 300);
+            flowShiftRankings.TabIndex = 11;
+            // 
             // flowGoodShiftRankings
             // 
             flowGoodShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
             flowGoodShiftRankings.FlowDirection = FlowDirection.TopDown;
             flowGoodShiftRankings.Location = new Point(23, 44);
             flowGoodShiftRankings.Name = "flowGoodShiftRankings";
+            flowGoodShiftRankings.Padding = new Padding(0, 10, 0, 0);
             flowGoodShiftRankings.Size = new Size(210, 247);
             flowGoodShiftRankings.TabIndex = 10;
             // 
@@ -258,14 +268,6 @@
             btnReset.UseVisualStyleBackColor = false;
             btnReset.Visible = false;
             btnReset.Click += btnReset_Click;
-            // 
-            // flowShiftRankings
-            // 
-            flowShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftRankings.Location = new Point(23, 341);
-            flowShiftRankings.Name = "flowShiftRankings";
-            flowShiftRankings.Size = new Size(210, 300);
-            flowShiftRankings.TabIndex = 11;
             // 
             // frmOverview
             // 

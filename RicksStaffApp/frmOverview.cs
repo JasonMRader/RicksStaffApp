@@ -42,7 +42,8 @@ namespace RicksStaffApp
             employeeList = SqliteDataAccess.TestLoadEmployees();
             ShiftList.Clear();
             ShiftList = SqliteDataAccess.LoadShifts();
-            UIHelper.CreateShiftRankingPanel(ShiftList, flowShiftRankings);
+            var rankedShifts = ShiftList.OrderByDescending(shift => shift.AverageRating).Take(10).ToList();
+            UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
             string[] names = employeeList.Select(e => e.FullName).ToArray();
             AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
             autoComplete.AddRange(names);
