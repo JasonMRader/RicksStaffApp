@@ -58,7 +58,7 @@ namespace RicksStaffApp
                 btnAM.FlatAppearance.BorderSize = 0;
                 btnAM.BackColor = Color.FromArgb(250, 190, 243);
                 btnAM.Text = "Create AM";
-
+                btnAM.Click += btnGetExcelEmployees_Click;
 
                 System.Windows.Forms.Button btnPM = new System.Windows.Forms.Button();
                 btnPM.Size = new Size(74, 20);
@@ -67,7 +67,7 @@ namespace RicksStaffApp
                 btnPM.FlatAppearance.BorderSize = 0;
                 btnPM.BackColor = Color.FromArgb(250, 190, 243);
                 btnPM.Text = "Create PM";
-
+                btnPM.Click += btnGetExcelEmployees_Click;
                 // Find if there's a shift on this date
                 Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
                 if (shift != null)
@@ -76,24 +76,25 @@ namespace RicksStaffApp
                     {
                         btnAM.BackColor = UIHelper.DefaultButton;
                         btnAM.Text = "AM";
+                        btnAM.Click -= btnGetExcelEmployees_Click;
                     }
-                    //else
-                    //{
-                    //    btnAM.BackColor = Color.FromArgb(250, 190, 243);
-                    //    btnAM.Text = "Create AM";
-                    //}
+                    else
+                    {
+                        
+                    }
                     if (shift.IsPm == true)
                     {
                         btnPM.BackColor = UIHelper.DefaultButton;
                         btnPM.Text = "PM";
+                        btnPM.Click -= btnGetExcelEmployees_Click;
                     }
-                    //else
-                    //{
-                    //    btnPM.BackColor = Color.FromArgb(250, 190, 243);
-                    //    btnPM.Text = "Create PM";
-                    //}
+                    else
+                    {
+                        
+                    }
 
                 }
+               
                 
 
                 date = date.AddDays(1);
