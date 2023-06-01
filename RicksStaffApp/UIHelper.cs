@@ -61,7 +61,7 @@ namespace RicksStaffApp
         public static Font RatingDisplay = new Font("MS Reference Sans Serif", 12, FontStyle.Bold);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
-        private static bool btnClicked = false;
+        
         public static string ToOrdinalString(this DateTime date)
         {
             var day = date.Day;
@@ -1166,29 +1166,90 @@ namespace RicksStaffApp
             //btnGoodIncidents.TextImageRelation = TextImageRelation.TextBeforeImage;
 
             //btnGoodIncidents.Margin = new Padding(10, 0, 0, 0);
-            
+            bool btnClicked = false;
             //btnGoodIncidents.Font = ButtonDisplay;
             BtnIncidents.Click += (sender, e) =>
             {
-                IncidentViewToggle(btnClicked, empShiftContainer, incidentContainer, BtnIncidents, employeeShift.Incidents);
-                //btnClicked = !btnClicked;
 
-                //if (btnClicked == true)
-                //{
-                //    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
-                //    empShiftContainer.Controls.Add(incidentContainer);
-                //}
-                //else
-                //{
-                //    incidentContainer.Controls.Clear();
-                //    empShiftContainer.Controls.Remove(incidentContainer);
-                //}
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
             };
-            //BtnIncidents.Controls.Add(lblGoodIncidentCount);
-            //BtnIncidents.Controls.Add(upArrow);
+            BtnIncidents.Controls.Add(lblGoodIncidentCount);
+            BtnIncidents.Controls.Add(upArrow);
             BtnIncidents.Controls.Add(lblBadIncidentCount);
             BtnIncidents.Controls.Add(downArrow);
             empShiftContainer.Controls.Add(BtnIncidents);
+            lblGoodIncidentCount.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+            };
+            upArrow.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+            };
+            lblBadIncidentCount.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+            };
+
+            downArrow.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+            };
             //Button btnBadIncidents = CreateButtonTemplate(55, 30, employeeShift.GetBadIncidentCount().ToString());
             //btnBadIncidents.Image = Properties.Resources.Down_Arrow;
             //btnBadIncidents.TextImageRelation = TextImageRelation.TextBeforeImage;
