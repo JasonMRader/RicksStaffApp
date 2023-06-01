@@ -81,6 +81,30 @@ namespace RicksStaffApp
             Incidents.Add(incident);
             ShiftRating = _shiftRating;
         }
+        public int GetGoodIncidentCount()
+        {
+            int goodIncidentCount = 0;
+            foreach (Incident incident in Incidents)
+            {
+                if (incident.IncidentRatingChange > 0)
+                {
+                    goodIncidentCount++;
+                }
+            }
+            return goodIncidentCount;
+        }
+        public int GetBadIncidentCount()
+        {
+            int badIncidentCount = 0;
+            foreach (Incident incident in Incidents)
+            {
+                if (incident.IncidentRatingChange < 0)
+                {
+                    badIncidentCount++;
+                }
+            }
+            return badIncidentCount;
+        }
 
     }
     //public static void AssignShiftToEmployeeShifts(List<EmployeeShift> employeeShifts, List<Shift> shifts)

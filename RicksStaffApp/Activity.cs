@@ -69,7 +69,7 @@ namespace RicksStaffApp
 
 
             activityPanel.BackColor = UIHelper.GetBackColor(BaseRatingImpact);
-            picUpDown.Image = UIHelper.GetRatingImage(BaseRatingImpact);
+            picUpDown.Image = UIHelper.GetArrowImage(BaseRatingImpact);
 
             activityPanel.Margin = new Padding(1, 1, 1, 1);
 

@@ -61,6 +61,7 @@ namespace RicksStaffApp
         public static Font RatingDisplay = new Font("MS Reference Sans Serif", 12, FontStyle.Bold);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
+        private static bool btnClicked = false;
         public static string ToOrdinalString(this DateTime date)
         {
             var day = date.Day;
@@ -135,6 +136,7 @@ namespace RicksStaffApp
             label.Height = height;
             label.AutoSize = false;
             label.TextAlign = ContentAlignment.MiddleCenter;
+            label.Margin = new Padding(0);
             return label;
         }
         //public static Image AssignColor (Image starsImage, float rating)
@@ -375,7 +377,7 @@ namespace RicksStaffApp
             }
             return backcolor;
         }
-        public static Image GetRatingImage(int rating)
+        public static Image GetArrowImage(int rating)
         {
             if (rating > 0)
             {
@@ -1096,6 +1098,25 @@ namespace RicksStaffApp
 
             }
         }
+        public static bool IncidentViewToggle ( bool isClicked, FlowLayoutPanel mainContainer, FlowLayoutPanel incidentContainer, Control control, List<Incident> incidents)
+        {
+            control.Click += (sender, e) =>
+            {
+                isClicked = !isClicked;
+
+                if (isClicked == true)
+                {
+                    CreateIncidentPanels(incidents, incidentContainer);
+                    mainContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    mainContainer.Controls.Remove(incidentContainer);
+                }
+            };
+            return isClicked;
+        }
         public static void CreateEmployeeShiftRankingPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
         {
             employeeShift.UpdateShiftRating();
@@ -1116,26 +1137,79 @@ namespace RicksStaffApp
             //Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
             //empShiftContainer.Controls.Add(lblPos);
             FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
-            Button btnIncidents = CreateButtonTemplate(100, 30, employeeShift.Incidents.Count.ToString() + " Incidents");
-            btnIncidents.Margin = new Padding(10, 0, 0, 0);
-            bool btnClicked = false;
-            btnIncidents.Font = ButtonDisplay;
-            btnIncidents.Click += (sender, e) =>
-            {
-                btnClicked = !btnClicked;
+            Panel BtnIncidents = CreatePanel(110, 30);
+            BtnIncidents.Margin = new Padding(10, 0, 0, 0);
+            BtnIncidents.BackColor = DefaultButton;
+            Label lblGoodIncidentCount = CreateLabel(25, 30, employeeShift.GetGoodIncidentCount().ToString());
+            lblGoodIncidentCount.Font = ButtonDisplay;
+            lblGoodIncidentCount.Location = new Point(0, 0);
+            //lblGoodIncidentCount.Click +=
 
-                if (btnClicked == true)
-                {
-                    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
-                    empShiftContainer.Controls.Add(incidentContainer);
-                }
-                else
-                {
-                    incidentContainer.Controls.Clear();
-                    empShiftContainer.Controls.Remove(incidentContainer);
-                }
+            PictureBox upArrow = new PictureBox();
+            upArrow.Size = new Size(30, 30);
+            upArrow.Image = Properties.Resources.Up_Arrow1;
+            upArrow.SizeMode = PictureBoxSizeMode.Zoom;
+            upArrow.Location = new Point(25, 0);
+
+            Label lblBadIncidentCount = CreateLabel(25, 30, employeeShift.GetBadIncidentCount().ToString());
+            lblBadIncidentCount.Font = ButtonDisplay;
+            lblBadIncidentCount.Location= new Point(55, 0);
+
+            PictureBox downArrow = new PictureBox();
+            downArrow.Size = new Size(30, 30);
+            downArrow.Image = Properties.Resources.Down_Arrow;
+            downArrow.SizeMode = PictureBoxSizeMode.Zoom;
+            downArrow.Location = new Point(80, 0);
+
+            //Button btnGoodIncidents = CreateButtonTemplate(50, 30, employeeShift.GetGoodIncidentCount().ToString());
+            //btnGoodIncidents.Image = Properties.Resources.Up_Arrow1;
+            //btnGoodIncidents.TextImageRelation = TextImageRelation.TextBeforeImage;
+
+            //btnGoodIncidents.Margin = new Padding(10, 0, 0, 0);
+            
+            //btnGoodIncidents.Font = ButtonDisplay;
+            BtnIncidents.Click += (sender, e) =>
+            {
+                IncidentViewToggle(btnClicked, empShiftContainer, incidentContainer, BtnIncidents, employeeShift.Incidents);
+                //btnClicked = !btnClicked;
+
+                //if (btnClicked == true)
+                //{
+                //    CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                //    empShiftContainer.Controls.Add(incidentContainer);
+                //}
+                //else
+                //{
+                //    incidentContainer.Controls.Clear();
+                //    empShiftContainer.Controls.Remove(incidentContainer);
+                //}
             };
-            empShiftContainer.Controls.Add(btnIncidents);
+            //BtnIncidents.Controls.Add(lblGoodIncidentCount);
+            //BtnIncidents.Controls.Add(upArrow);
+            BtnIncidents.Controls.Add(lblBadIncidentCount);
+            BtnIncidents.Controls.Add(downArrow);
+            empShiftContainer.Controls.Add(BtnIncidents);
+            //Button btnBadIncidents = CreateButtonTemplate(55, 30, employeeShift.GetBadIncidentCount().ToString());
+            //btnBadIncidents.Image = Properties.Resources.Down_Arrow;
+            //btnBadIncidents.TextImageRelation = TextImageRelation.TextBeforeImage;
+            //btnBadIncidents.Margin = new Padding(0, 0, 0, 0);
+            //btnBadIncidents.Font = ButtonDisplay;
+            //btnBadIncidents.Click += (sender, e) =>
+            //{
+            //    btnClicked = !btnClicked;
+            //    if (btnClicked == true)
+            //    {
+            //        CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+            //        empShiftContainer.Controls.Add(incidentContainer);
+            //    }
+            //    else
+            //    {
+            //        incidentContainer.Controls.Clear();
+            //        empShiftContainer.Controls.Remove(incidentContainer);
+            //    }
+            //};
+            //empShiftContainer.Controls.Add(btnGoodIncidents);
+            //empShiftContainer.Controls.Add(btnBadIncidents);
 
 
             PictureBox pbRating = CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);

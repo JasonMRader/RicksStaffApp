@@ -224,7 +224,7 @@ namespace RicksStaffApp
             PictureBox picUpDown = new PictureBox();
             picUpDown.Size = new Size(30, 30);
             picUpDown.Margin = new Padding(15, 3, 0, 0);
-            picUpDown.Image = UIHelper.GetRatingImage(IncidentRatingChange);
+            picUpDown.Image = UIHelper.GetArrowImage(IncidentRatingChange);
             controls.Add(picUpDown);
 
             Label lblIncidentRating = new Label();
