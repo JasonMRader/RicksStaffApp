@@ -43,14 +43,61 @@ namespace RicksStaffApp
                 panel.Size = new Size(74, 65);
                 panel.Margin = new Padding(7, 5, 7, 5);
                 panel.BackColor = Color.White;
+
                 System.Windows.Forms.Label lbl = new System.Windows.Forms.Label();
                 lbl.Text = date.ToString("ddd") + ", " + date.ToString("M");
+                lbl.Size = new Size(74, 25);
+                lbl.Location = new System.Drawing.Point(0, 0);
+
+                System.Windows.Forms.Button btnAM = new System.Windows.Forms.Button();
+                btnAM.Size = new Size(74, 20);
+                btnAM.Location = new System.Drawing.Point(0, 25);
+                btnAM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnAM.FlatAppearance.BorderSize = 0;
+                
+
+                System.Windows.Forms.Button btnPM = new System.Windows.Forms.Button();
+                btnPM.Size = new Size(74, 20);
+                btnPM.Location = new System.Drawing.Point(0, 45);
+                btnPM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnPM.FlatAppearance.BorderSize = 0;
+
+                // Find if there's a shift on this date
+                Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
+                if (shift != null)
+                {
+                    if (shift.IsAm == true)
+                    {
+                        btnAM.BackColor = UIHelper.DefaultButton;
+                        btnAM.Text = "AM";
+                    }
+                    else
+                    {
+                        btnAM.BackColor = Color.FromArgb(128, 25, 128);
+                        btnAM.Text = "Create AM";
+                    }
+                    if (shift.IsPm == true)
+                    {
+                        btnPM.BackColor = UIHelper.DefaultButton;
+                        btnPM.Text = "PM";
+                    }
+                    else
+                    {
+                        btnPM.BackColor = Color.FromArgb(128, 25, 128);
+                        btnPM.Text = "Create PM";
+                    }
+
+                }
+                
+
                 date = date.AddDays(1);
                 panel.Controls.Add(lbl);
+                panel.Controls.Add(btnAM);
+                panel.Controls.Add(btnPM);
 
                 flowShiftDates.Controls.Add(panel);
-
             }
+
         }
 
 
