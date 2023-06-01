@@ -77,6 +77,7 @@ namespace RicksStaffApp
                         btnAM.BackColor = UIHelper.DefaultButton;
                         btnAM.Text = "AM";
                         btnAM.Click -= btnGetExcelEmployees_Click;
+                        btnAM.Click += CalendarShiftClicked;
                     }
                     else
                     {
@@ -87,6 +88,7 @@ namespace RicksStaffApp
                         btnPM.BackColor = UIHelper.DefaultButton;
                         btnPM.Text = "PM";
                         btnPM.Click -= btnGetExcelEmployees_Click;
+                        btnPM.Click += CalendarShiftClicked;
                     }
                     else
                     {
@@ -107,12 +109,16 @@ namespace RicksStaffApp
 
         }
 
-
+        private void CalendarShiftClicked(object sender, EventArgs e)
+        {
+            // Code to execute when the button is clicked
+            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+        }
 
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)
         {
             //List <EmployeeShift> employeeShifts = new List <EmployeeShift>();
-            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            //UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
             shifts = SqliteDataAccess.LoadShifts();
 
         }
