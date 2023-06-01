@@ -209,7 +209,7 @@ namespace RicksStaffApp
                 MessageBox.Show($"Whoops!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             this.Close();
-            this.Dispose();
+            this.Dispose(true);
 
 
 
@@ -224,6 +224,12 @@ namespace RicksStaffApp
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancelCreateShift_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose(true);
         }
         /*
 private void frmExcelDownload_Load(object sender, EventArgs e)
@@ -255,10 +261,10 @@ for (int i = 1; i <= range1.Rows.Count; i++)
 string name = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
 if (!string.IsNullOrWhiteSpace(name))
 {
- firstNames.Add(name);
+firstNames.Add(name);
 
 
- lbEmployees.Items.Add($"{name,-20} Server");
+lbEmployees.Items.Add($"{name,-20} Server");
 }
 }
 

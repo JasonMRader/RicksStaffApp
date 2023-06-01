@@ -36,6 +36,7 @@
             flowExistingStaff = new FlowLayoutPanel();
             flowNewStaff = new FlowLayoutPanel();
             label1 = new Label();
+            btnCancelCreateShift = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,6 +44,7 @@
             // 
             panel1.BackColor = Color.FromArgb(46, 51, 73);
             panel1.Controls.Add(dtpShiftDate);
+            panel1.Controls.Add(btnCancelCreateShift);
             panel1.Controls.Add(btnCreateShift);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
@@ -70,9 +72,9 @@
             btnCreateShift.BackColor = Color.FromArgb(167, 204, 237);
             btnCreateShift.FlatAppearance.BorderSize = 0;
             btnCreateShift.FlatStyle = FlatStyle.Flat;
-            btnCreateShift.Location = new Point(620, 17);
+            btnCreateShift.Location = new Point(494, 21);
             btnCreateShift.Name = "btnCreateShift";
-            btnCreateShift.Size = new Size(121, 36);
+            btnCreateShift.Size = new Size(121, 24);
             btnCreateShift.TabIndex = 5;
             btnCreateShift.Text = "Create Shift";
             btnCreateShift.UseVisualStyleBackColor = false;
@@ -126,6 +128,19 @@
             label1.TabIndex = 0;
             label1.Text = "Excel Data";
             // 
+            // btnCancelCreateShift
+            // 
+            btnCancelCreateShift.BackColor = Color.FromArgb(167, 204, 237);
+            btnCancelCreateShift.FlatAppearance.BorderSize = 0;
+            btnCancelCreateShift.FlatStyle = FlatStyle.Flat;
+            btnCancelCreateShift.Location = new Point(621, 21);
+            btnCancelCreateShift.Name = "btnCancelCreateShift";
+            btnCancelCreateShift.Size = new Size(121, 24);
+            btnCancelCreateShift.TabIndex = 5;
+            btnCancelCreateShift.Text = "Cancel";
+            btnCancelCreateShift.UseVisualStyleBackColor = false;
+            btnCancelCreateShift.Click += btnCancelCreateShift_Click;
+            // 
             // frmExcelDownload
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -153,5 +168,6 @@
         private Label label2;
         private Button btnCreateShift;
         private DateTimePicker dtpShiftDate;
+        private Button btnCancelCreateShift;
     }
 }
