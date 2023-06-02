@@ -15,8 +15,12 @@ namespace RicksStaffApp
 {
     public partial class frmExcelDownload : Form
     {
-        public frmExcelDownload()
+        private DateTime shiftDate;
+        private bool isAm;
+        public frmExcelDownload(DateTime shiftDate, bool isAm)
         {
+            this.shiftDate = shiftDate;
+            this.isAm = isAm;
             InitializeComponent();
 
         }
@@ -70,6 +74,7 @@ namespace RicksStaffApp
         {
             //newShift.DateString = DateTime.Now.ToString("MM/dd/yyyy");
             allEmployees = SqliteDataAccess.LoadEmployees();
+            dtpShiftDate.Value = shiftDate;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;

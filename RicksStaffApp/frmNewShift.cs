@@ -59,7 +59,7 @@ namespace RicksStaffApp
                 btnAM.FlatAppearance.BorderSize = 0;
                 btnAM.BackColor = Color.FromArgb(250, 190, 243);
                 btnAM.Text = "Create AM";
-                btnAM.Click += btnGetExcelEmployees_Click;
+                
 
                 System.Windows.Forms.Button btnPM = new System.Windows.Forms.Button();
                 btnPM.Tag = date;
@@ -69,7 +69,7 @@ namespace RicksStaffApp
                 btnPM.FlatAppearance.BorderSize = 0;
                 btnPM.BackColor = Color.FromArgb(250, 190, 243);
                 btnPM.Text = "Create PM";
-                btnPM.Click += btnGetExcelEmployees_Click;
+                
                 // Find if there's a shift on this date
                 Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
                 if (shift != null)
@@ -87,7 +87,14 @@ namespace RicksStaffApp
                     }
                     else
                     {
-                        
+                        btnAM.Click += (s, e) =>
+                        {
+                            var btn = (System.Windows.Forms.Button)s;
+                            DateTime shiftDate = (DateTime)btn.Tag;
+                            bool isAm = true; // AM shift
+
+                            OpenExcelDownloadForm(shiftDate, isAm);
+                        };
                     }
                     if (shift.IsPm == true)
                     {
@@ -102,9 +109,33 @@ namespace RicksStaffApp
                     }
                     else
                     {
-                        
+                        btnPM.Click += (s, e) =>
+                        {
+                            var btn = (System.Windows.Forms.Button)s;
+                            DateTime shiftDate = (DateTime)btn.Tag;
+                            bool isAm = false; // PM shift
+
+                            OpenExcelDownloadForm(shiftDate, isAm);
+                        };
                     }
 
+                }
+                else
+                {
+                    btnAM.Click += (s, e) =>
+                    {
+                        var btn = (System.Windows.Forms.Button)s;
+                        DateTime shiftDate = (DateTime)btn.Tag;
+                        bool isAm = true; // AM shift
+                        OpenExcelDownloadForm(shiftDate, isAm);
+                    };
+                    btnPM.Click += (s, e) =>
+                    {
+                        var btn = (System.Windows.Forms.Button)s;
+                        DateTime shiftDate = (DateTime)btn.Tag;
+                        bool isAm = false; // PM shift
+                        OpenExcelDownloadForm(shiftDate, isAm);
+                    };
                 }
                
                 
@@ -132,14 +163,21 @@ namespace RicksStaffApp
             shifts = SqliteDataAccess.LoadShifts();
 
         }
-
-        private void btnGetExcelEmployees_Click(object sender, EventArgs e)
+        private void OpenExcelDownloadForm(DateTime shiftDate, bool isAm)
         {
-            frmExcelDownload frmExcelDownload = new frmExcelDownload();
+            frmExcelDownload frmExcelDownload = new frmExcelDownload(shiftDate, isAm);
             pnlNewShiftDisplay.Controls.Clear();
             frmExcelDownload.TopLevel = false;
             pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
             frmExcelDownload.Show();
+        }
+        private void btnGetExcelEmployees_Click(object sender, EventArgs e)
+        {
+            //frmExcelDownload frmExcelDownload = new frmExcelDownload();
+            //pnlNewShiftDisplay.Controls.Clear();
+            //frmExcelDownload.TopLevel = false;
+            //pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
+            //frmExcelDownload.Show();
         }
     }
 }
