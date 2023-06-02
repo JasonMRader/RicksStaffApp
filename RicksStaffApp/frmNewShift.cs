@@ -52,6 +52,7 @@ namespace RicksStaffApp
                 lbl.Font = new System.Drawing.Font("Bahnschrift SemiLight SemiConde", 8);
 
                 System.Windows.Forms.Button btnAM = new System.Windows.Forms.Button();
+                btnAM.Tag = date;
                 btnAM.Size = new Size(74, 20);
                 btnAM.Location = new System.Drawing.Point(0, 25);
                 btnAM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -61,6 +62,7 @@ namespace RicksStaffApp
                 btnAM.Click += btnGetExcelEmployees_Click;
 
                 System.Windows.Forms.Button btnPM = new System.Windows.Forms.Button();
+                btnPM.Tag = date;
                 btnPM.Size = new Size(74, 20);
                 btnPM.Location = new System.Drawing.Point(0, 45);
                 btnPM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -77,7 +79,11 @@ namespace RicksStaffApp
                         btnAM.BackColor = UIHelper.DefaultButton;
                         btnAM.Text = "AM";
                         btnAM.Click -= btnGetExcelEmployees_Click;
-                        btnAM.Click += CalendarShiftClicked;
+                        btnAM.Click += (s, e) =>
+                        {
+                            var btn = (System.Windows.Forms.Button)s;
+                            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                        };
                     }
                     else
                     {
@@ -88,7 +94,11 @@ namespace RicksStaffApp
                         btnPM.BackColor = UIHelper.DefaultButton;
                         btnPM.Text = "PM";
                         btnPM.Click -= btnGetExcelEmployees_Click;
-                        btnPM.Click += CalendarShiftClicked;
+                        btnPM.Click += (s, e) =>
+                        {
+                            var btn = (System.Windows.Forms.Button)s;
+                            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                        };
                     }
                     else
                     {
