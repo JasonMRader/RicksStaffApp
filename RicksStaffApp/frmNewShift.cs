@@ -59,7 +59,7 @@ namespace RicksStaffApp
                 btnAM.FlatAppearance.BorderSize = 0;
                 btnAM.BackColor = Color.FromArgb(250, 190, 243);
                 btnAM.Text = "Create AM";
-                
+
 
                 System.Windows.Forms.Button btnPM = new System.Windows.Forms.Button();
                 btnPM.Tag = date;
@@ -69,7 +69,7 @@ namespace RicksStaffApp
                 btnPM.FlatAppearance.BorderSize = 0;
                 btnPM.BackColor = Color.FromArgb(250, 190, 243);
                 btnPM.Text = "Create PM";
-                
+
                 // Find if there's a shift on this date
                 Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
                 if (shift != null)
@@ -94,7 +94,7 @@ namespace RicksStaffApp
                             DateTime shiftDate = (DateTime)btn.Tag;
                             bool isAm = true; // AM shift
                             dtpShiftDate.Value = shiftDate;
-
+                            flowEmployeeShiftDisplay.Controls.Clear();
                             OpenExcelDownloadForm(shiftDate, isAm);
                         };
                     }
@@ -118,7 +118,7 @@ namespace RicksStaffApp
                             DateTime shiftDate = (DateTime)btn.Tag;
                             bool isAm = false; // PM shift
                             dtpShiftDate.Value = shiftDate;
-
+                            flowEmployeeShiftDisplay.Controls.Clear();
                             OpenExcelDownloadForm(shiftDate, isAm);
                         };
                     }
@@ -131,6 +131,7 @@ namespace RicksStaffApp
                         var btn = (System.Windows.Forms.Button)s;
                         DateTime shiftDate = (DateTime)btn.Tag;
                         bool isAm = true; // AM shift
+                        flowEmployeeShiftDisplay.Controls.Clear();
                         OpenExcelDownloadForm(shiftDate, isAm);
                         dtpShiftDate.Value = (DateTime)btn.Tag;
                     };
@@ -138,13 +139,14 @@ namespace RicksStaffApp
                     {
                         var btn = (System.Windows.Forms.Button)s;
                         DateTime shiftDate = (DateTime)btn.Tag;
+                        flowEmployeeShiftDisplay.Controls.Clear();
                         bool isAm = false; // PM shift
                         OpenExcelDownloadForm(shiftDate, isAm);
                         dtpShiftDate.Value = (DateTime)btn.Tag;
                     };
                 }
-               
-                
+
+
 
                 date = date.AddDays(1);
                 panel.Controls.Add(lbl);

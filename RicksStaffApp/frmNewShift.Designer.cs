@@ -82,6 +82,7 @@
             btnGetExcelEmployees.TabIndex = 8;
             btnGetExcelEmployees.Text = "Load Employees";
             btnGetExcelEmployees.UseVisualStyleBackColor = false;
+            btnGetExcelEmployees.Visible = false;
             btnGetExcelEmployees.Click += btnGetExcelEmployees_Click;
             // 
             // flowShiftDates

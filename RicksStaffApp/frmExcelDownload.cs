@@ -178,13 +178,13 @@ namespace RicksStaffApp
         {
             try
             {
-                foreach (Employee employee in employeesOnShift)
-                {
-                    if (SqliteDataAccess.IsDuplicateEmployee(employee.FirstName, employee.LastName) == false)
-                    {
-                        SqliteDataAccess.AddEmployee(employee);
-                    }
-                }
+                //foreach (Employee employee in employeesOnShift)
+                //{
+                //    if (SqliteDataAccess.IsDuplicateEmployee(employee.FirstName, employee.LastName) == false)
+                //    {
+                //        SqliteDataAccess.AddEmployee(employee);
+                //    }
+                //}
 
                 Shift s = new Shift();
                 s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
@@ -208,13 +208,18 @@ namespace RicksStaffApp
                     };
                     SqliteDataAccess.AddEmployeeShift(employeeShift);
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Whoops!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Close();
-            this.Dispose(true);
+            finally
+            {
+                this.Close();
+                this.Dispose(true);
+            }
+            
 
 
 
