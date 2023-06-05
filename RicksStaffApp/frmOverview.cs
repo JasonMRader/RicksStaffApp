@@ -47,7 +47,7 @@ namespace RicksStaffApp
             string[] names = employeeList.Select(e => e.FullName).ToArray();
             AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
             autoComplete.AddRange(names);
-            txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
+             txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
             txtBxEmployeeSearch.Validated += (sender, e) =>
             {
                 // This code will run when the TextBox loses focus.

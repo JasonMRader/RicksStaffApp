@@ -83,6 +83,7 @@ namespace RicksStaffApp
                         {
                             var btn = (System.Windows.Forms.Button)s;
                             UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            dtpShiftDate.Value = (DateTime)btn.Tag;
                         };
                     }
                     else
@@ -92,6 +93,7 @@ namespace RicksStaffApp
                             var btn = (System.Windows.Forms.Button)s;
                             DateTime shiftDate = (DateTime)btn.Tag;
                             bool isAm = true; // AM shift
+                            dtpShiftDate.Value = shiftDate;
 
                             OpenExcelDownloadForm(shiftDate, isAm);
                         };
@@ -105,6 +107,7 @@ namespace RicksStaffApp
                         {
                             var btn = (System.Windows.Forms.Button)s;
                             UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            dtpShiftDate.Value = (DateTime)btn.Tag;
                         };
                     }
                     else
@@ -114,6 +117,7 @@ namespace RicksStaffApp
                             var btn = (System.Windows.Forms.Button)s;
                             DateTime shiftDate = (DateTime)btn.Tag;
                             bool isAm = false; // PM shift
+                            dtpShiftDate.Value = shiftDate;
 
                             OpenExcelDownloadForm(shiftDate, isAm);
                         };
@@ -128,6 +132,7 @@ namespace RicksStaffApp
                         DateTime shiftDate = (DateTime)btn.Tag;
                         bool isAm = true; // AM shift
                         OpenExcelDownloadForm(shiftDate, isAm);
+                        dtpShiftDate.Value = (DateTime)btn.Tag;
                     };
                     btnPM.Click += (s, e) =>
                     {
@@ -135,6 +140,7 @@ namespace RicksStaffApp
                         DateTime shiftDate = (DateTime)btn.Tag;
                         bool isAm = false; // PM shift
                         OpenExcelDownloadForm(shiftDate, isAm);
+                        dtpShiftDate.Value = (DateTime)btn.Tag;
                     };
                 }
                
