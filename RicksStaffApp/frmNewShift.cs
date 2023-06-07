@@ -9,6 +9,7 @@ using Microsoft.Office.Interop.Excel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RicksStaffApp
 {
@@ -28,15 +29,9 @@ namespace RicksStaffApp
 
 
 
-
-
-        private void frmNewShift_Load(object sender, EventArgs e)
+        private void refreshShiftPanels()
         {
-            shifts = SqliteDataAccess.LoadShifts();
-            //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
-            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
             DateTime date = DateTime.Now.AddDays(-13);
-
             for (int i = 0; i < 14; i++)
             {
                 Panel panel = new Panel();
@@ -155,6 +150,16 @@ namespace RicksStaffApp
 
                 flowShiftDates.Controls.Add(panel);
             }
+        }
+
+        private void frmNewShift_Load(object sender, EventArgs e)
+        {
+            shifts = SqliteDataAccess.LoadShifts();
+            //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
+            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            
+            refreshShiftPanels();
+            
 
         }
 
@@ -174,10 +179,12 @@ namespace RicksStaffApp
         private void OpenExcelDownloadForm(DateTime shiftDate, bool isAm)
         {
             frmExcelDownload frmExcelDownload = new frmExcelDownload(shiftDate, isAm);
+            //frmExcelDownload.ShiftCreated += refreshShiftPanels;
             pnlNewShiftDisplay.Controls.Clear();
             frmExcelDownload.TopLevel = false;
             pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
             frmExcelDownload.Show();
+            //frmExcelDownload.ShiftCreated -= refreshShiftPanels;
         }
         private void btnGetExcelEmployees_Click(object sender, EventArgs e)
         {
