@@ -189,7 +189,7 @@ namespace RicksStaffApp
 
                 Shift s = new Shift();
                 s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
-                s.IsAm = false;
+                s.IsAm = isAm;
 
                 int shiftID = SqliteDataAccess.AddShift(s);
 
