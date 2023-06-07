@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblShiftDateDisplay = new Label();
             dtpShiftDate = new DateTimePicker();
             flowEmployeeShiftDisplay = new FlowLayoutPanel();
             pnlNewShiftDisplay = new Panel();
@@ -36,21 +35,13 @@
             flowShiftDates = new FlowLayoutPanel();
             SuspendLayout();
             // 
-            // lblShiftDateDisplay
-            // 
-            lblShiftDateDisplay.AutoSize = true;
-            lblShiftDateDisplay.ForeColor = Color.White;
-            lblShiftDateDisplay.Location = new Point(26, 97);
-            lblShiftDateDisplay.Name = "lblShiftDateDisplay";
-            lblShiftDateDisplay.Size = new Size(96, 15);
-            lblShiftDateDisplay.TabIndex = 1;
-            lblShiftDateDisplay.Text = "Shift On Date Of:";
-            // 
             // dtpShiftDate
             // 
-            dtpShiftDate.Location = new Point(128, 91);
+            dtpShiftDate.CalendarMonthBackground = SystemColors.ScrollBar;
+            dtpShiftDate.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            dtpShiftDate.Location = new Point(22, 79);
             dtpShiftDate.Name = "dtpShiftDate";
-            dtpShiftDate.Size = new Size(200, 23);
+            dtpShiftDate.Size = new Size(475, 36);
             dtpShiftDate.TabIndex = 5;
             dtpShiftDate.ValueChanged += dtpShiftDate_ValueChanged;
             // 
@@ -76,7 +67,7 @@
             btnGetExcelEmployees.BackColor = Color.FromArgb(167, 204, 237);
             btnGetExcelEmployees.FlatAppearance.BorderSize = 0;
             btnGetExcelEmployees.FlatStyle = FlatStyle.Flat;
-            btnGetExcelEmployees.Location = new Point(334, 91);
+            btnGetExcelEmployees.Location = new Point(1115, 91);
             btnGetExcelEmployees.Name = "btnGetExcelEmployees";
             btnGetExcelEmployees.Size = new Size(163, 23);
             btnGetExcelEmployees.TabIndex = 8;
@@ -88,7 +79,7 @@
             // flowShiftDates
             // 
             flowShiftDates.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftDates.Location = new Point(22, 12);
+            flowShiftDates.Location = new Point(22, 1);
             flowShiftDates.Name = "flowShiftDates";
             flowShiftDates.Padding = new Padding(13, 0, 0, 0);
             flowShiftDates.Size = new Size(1256, 75);
@@ -105,17 +96,14 @@
             Controls.Add(pnlNewShiftDisplay);
             Controls.Add(flowEmployeeShiftDisplay);
             Controls.Add(dtpShiftDate);
-            Controls.Add(lblShiftDateDisplay);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmNewShift";
             Text = "frmNewShift";
             Load += frmNewShift_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Label lblShiftDateDisplay;
         private DateTimePicker dtpShiftDate;
         private FlowLayoutPanel flowEmployeeShiftDisplay;
         private Panel pnlNewShiftDisplay;

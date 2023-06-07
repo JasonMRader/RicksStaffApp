@@ -77,7 +77,7 @@ namespace RicksStaffApp
                         btnAM.Click += (s, e) =>
                         {
                             var btn = (System.Windows.Forms.Button)s;
-                            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                         };
                     }
@@ -101,7 +101,7 @@ namespace RicksStaffApp
                         btnPM.Click += (s, e) =>
                         {
                             var btn = (System.Windows.Forms.Button)s;
-                            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                         };
                     }
@@ -155,18 +155,36 @@ namespace RicksStaffApp
         private void frmNewShift_Load(object sender, EventArgs e)
         {
             shifts = SqliteDataAccess.LoadShifts();
+            DateTime date = DateTime.Now;
+            Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
             //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
-            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
-            
+            if (shift != null)
+            {
+                UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            }
+            else
+            {
+                System.Windows.Forms.Label lblNoShifts = new System.Windows.Forms.Label();
+                lblNoShifts.Text = "No Shifts For This Day";
+                lblNoShifts.ForeColor = Color.White;
+                lblNoShifts.AutoSize = true;
+                lblNoShifts.Font = new System.Drawing.Font("Bahnschrift SemiBold", 20, FontStyle.Bold);
+                flowEmployeeShiftDisplay.Controls.Add((Control)lblNoShifts);
+
+            }
+
+
             refreshShiftPanels();
-            
+
 
         }
 
         private void CalendarShiftClicked(object sender, EventArgs e)
         {
+            DateTime date = dtpShiftDate.Value;
+            Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
             // Code to execute when the button is clicked
-            UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
 
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)

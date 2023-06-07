@@ -479,10 +479,10 @@ namespace RicksStaffApp
             }
         }
 
-        public static void CreateIncidentPanels_REPLACE(List<Incident> incidentList, FlowLayoutPanel flowDisplay, List<Shift> shifts)
-        {
+        public static void CreateIncidentPanels_REPLACE(List<Incident> incidentList, FlowLayoutPanel flowDisplay, Shift shift)
+        { 
             List<Activity> activities = SqliteDataAccess.LoadActivities();
-            Incident.AssignActivitiesToIncidents_REPLACE(shifts, activities);
+            Incident.AssignActivitiesToIncidents_SINGLESHIFT_REPLACE(shift, activities);
             // Clear existing panels
             //flowEmployeeDisplay.Controls.Clear();
 
@@ -1361,12 +1361,13 @@ namespace RicksStaffApp
 
             
         }
-        public static void CreateEmployeeShiftPanels(List<Shift> shiftList, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        public static void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
+            //TODO pass in one shift, not a list of shifts
             flowEmployeeDisplay.Controls.Clear();
-            foreach (Shift shift in shiftList)
-            {
-                //MessageBox.Show(shift.Date.ToString());
+            //foreach (Shift shift in shiftList)
+            //{
+            //    //MessageBox.Show(shift.Date.ToString());
                 if (shift.Date == shiftDate)
                 {
                     foreach (EmployeeShift es in shift.EmployeeShifts)
@@ -1398,7 +1399,7 @@ namespace RicksStaffApp
                             btnClicked = !btnClicked;
                             if (btnClicked)
                             {
-                                CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shiftList);
+                                CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
                                 empShiftContainer.Controls.Add(incidentContainer);
                             }
                             else
@@ -1427,7 +1428,7 @@ namespace RicksStaffApp
                     }
 
                 }
-            }
+            //}
             
 
         }
