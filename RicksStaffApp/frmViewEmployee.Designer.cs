@@ -281,6 +281,7 @@
             // 
             // flowEmployeeShifts
             // 
+            flowEmployeeShifts.AutoScroll = true;
             flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
             flowEmployeeShifts.Location = new Point(255, 43);
             flowEmployeeShifts.Name = "flowEmployeeShifts";

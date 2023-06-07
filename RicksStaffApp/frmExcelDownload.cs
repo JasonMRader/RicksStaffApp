@@ -17,7 +17,7 @@ namespace RicksStaffApp
     {
         private DateTime shiftDate;
         private bool isAm;
-        public event System.Action ShiftCreated;
+        //public event System.Action ShiftCreated;
         public frmExcelDownload(DateTime shiftDate, bool isAm)
         {
             this.shiftDate = shiftDate;
@@ -221,7 +221,7 @@ namespace RicksStaffApp
                 this.Dispose(true);
             }
 
-            ShiftCreated?.Invoke();
+            //ShiftCreated?.Invoke();
 
 
 

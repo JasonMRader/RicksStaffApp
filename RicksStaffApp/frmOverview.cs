@@ -47,7 +47,7 @@ namespace RicksStaffApp
             string[] names = employeeList.Select(e => e.FullName).ToArray();
             AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
             autoComplete.AddRange(names);
-             txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
+            txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
             txtBxEmployeeSearch.Validated += (sender, e) =>
             {
                 // This code will run when the TextBox loses focus.
@@ -164,9 +164,9 @@ namespace RicksStaffApp
             {
                 flowEmployeeRankings.Controls.Clear();
                 List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-                foreach(Employee employee in employeeList)
+                foreach (Employee employee in employeeList)
                 {
-                    foreach(EmployeeShift employeeShift in employee.EmployeeShifts)
+                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
                     {
                         employeeShift.Employee = employee;
                         employeeShifts.Add(employeeShift);

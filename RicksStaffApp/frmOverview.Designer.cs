@@ -182,6 +182,7 @@
             // 
             // flowEmployeeRankings
             // 
+            flowEmployeeRankings.AutoScroll = true;
             flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
             flowEmployeeRankings.Location = new Point(255, 43);
             flowEmployeeRankings.Name = "flowEmployeeRankings";

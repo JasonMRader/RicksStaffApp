@@ -15,7 +15,7 @@ namespace RicksStaffApp
     {
 
         Employee ThisEmployee = new Employee();
-        
+
         public frmViewEmployee(Employee employee)
         {
             ThisEmployee = employee;
@@ -27,13 +27,13 @@ namespace RicksStaffApp
         }
         private void GetEmployeeShiftGoodBadDistribution(List<EmployeeShift> employeeShifts)
         {
-           
+
             foreach (EmployeeShift employeeShift in employeeShifts)
             {
-                UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);                
+                UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
             }
             lblTotalShifts.Text = employeeShifts.Count.ToString();
-            
+
             lblGoodShifts.Text = ThisEmployee.TotalGoodShifts.ToString();
             lblAverageShifts.Text = ThisEmployee.TotalAverageShifts.ToString();
             lblPoorShifts.Text = ThisEmployee.TotalBadShifts.ToString();
