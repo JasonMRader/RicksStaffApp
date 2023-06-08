@@ -123,5 +123,26 @@ namespace RicksStaffApp
 
             SqliteDataAccess.AddEmployeeShift(empShift);
         }
+
+        private void rdoActivitiesView_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoActivitiesView.Checked)
+            {
+                activityList.Clear();
+                activityList = SqliteDataAccess.LoadActivities();
+                UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
+            }
+        }
+
+        private void rdoShifts_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoShifts.Checked)
+            {
+                shiftList.Clear();
+                shiftList = SqliteDataAccess.LoadShifts();
+                UIHelper.CreateShiftPanels(shiftList, flowSettingDisplay);
+            }
+
+        }
     }
 }
