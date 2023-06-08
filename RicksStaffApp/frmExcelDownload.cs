@@ -26,7 +26,7 @@ namespace RicksStaffApp
 
         }
         //Shift newShift = new Shift();
-        List<Employee> allEmployees = new List<Employee>();
+        //List<Employee> allEmployees = new List<Employee>();
         List<Employee> employeesOnShift = new List<Employee>();
         string ignoreHost = "Host Card";
         string ignoreBar = "PM BAR PM";
@@ -74,7 +74,7 @@ namespace RicksStaffApp
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
             //newShift.DateString = DateTime.Now.ToString("MM/dd/yyyy");
-            allEmployees = SqliteDataAccess.LoadEmployees();
+            List<Employee> allEmployees = DataSingleton.Instance.Employees;
             dtpShiftDate.Value = shiftDate;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*";
