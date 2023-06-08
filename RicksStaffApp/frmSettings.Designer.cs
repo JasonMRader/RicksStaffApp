@@ -47,6 +47,7 @@
             btnAddShift = new Button();
             rdoActivitiesView = new RadioButton();
             rdoShifts = new RadioButton();
+            rdoPositions = new RadioButton();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             SuspendLayout();
@@ -73,8 +74,8 @@
             flowSettingDisplay.Location = new Point(12, 69);
             flowSettingDisplay.Margin = new Padding(3, 0, 3, 3);
             flowSettingDisplay.Name = "flowSettingDisplay";
-            flowSettingDisplay.Padding = new Padding(0, 8, 0, 0);
-            flowSettingDisplay.Size = new Size(475, 674);
+            flowSettingDisplay.Padding = new Padding(10, 8, 0, 0);
+            flowSettingDisplay.Size = new Size(495, 674);
             flowSettingDisplay.TabIndex = 2;
             flowSettingDisplay.WrapContents = false;
             // 
@@ -177,7 +178,7 @@
             panel2.Controls.Add(label8);
             panel2.Controls.Add(txtActivityName);
             panel2.Controls.Add(txtActivityRating);
-            panel2.Location = new Point(502, 108);
+            panel2.Location = new Point(816, 108);
             panel2.Name = "panel2";
             panel2.Size = new Size(145, 400);
             panel2.TabIndex = 7;
@@ -272,12 +273,31 @@
             rdoShifts.UseVisualStyleBackColor = true;
             rdoShifts.CheckedChanged += rdoShifts_CheckedChanged;
             // 
+            // rdoPositions
+            // 
+            rdoPositions.Appearance = Appearance.Button;
+            rdoPositions.FlatAppearance.BorderSize = 0;
+            rdoPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(37, 42, 64);
+            rdoPositions.FlatStyle = FlatStyle.Flat;
+            rdoPositions.ForeColor = Color.FromArgb(0, 126, 249);
+            rdoPositions.Location = new Point(229, 45);
+            rdoPositions.Margin = new Padding(0, 3, 0, 0);
+            rdoPositions.Name = "rdoPositions";
+            rdoPositions.Size = new Size(104, 24);
+            rdoPositions.TabIndex = 10;
+            rdoPositions.TabStop = true;
+            rdoPositions.Text = "Positions";
+            rdoPositions.TextAlign = ContentAlignment.MiddleCenter;
+            rdoPositions.UseVisualStyleBackColor = true;
+            rdoPositions.CheckedChanged += rdoShifts_CheckedChanged;
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1290, 755);
+            Controls.Add(rdoPositions);
             Controls.Add(rdoShifts);
             Controls.Add(rdoActivitiesView);
             Controls.Add(flowSettingDisplay);
@@ -315,5 +335,6 @@
         private DateTimePicker dtpShiftDate;
         private RadioButton rdoActivitiesView;
         private RadioButton rdoShifts;
+        private RadioButton rdoPositions;
     }
 }

@@ -61,33 +61,14 @@ namespace RicksStaffApp
             UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
         }
         //TODO fix the create shift without activity problem
-        private void btnAddIncident_Click(object sender, EventArgs e)
-        {
-            Incident incident = new Incident();
-            incident.ActivityID = Int32.Parse(txtIncident_ActivityID.Text);
-            incident.DateString = dtpIncidentDate.Text;
-            incident.Note = txtIncidentNote.Text;
-            incident.EmployeeShiftID = Int32.Parse(txtIncident_EmployeeID.Text);
 
-            SqliteDataAccess.AddIncident(incident);
-
-
-        }
 
         private void btnLoadIncidents_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnAddActivityMod_Click(object sender, EventArgs e)
-        {
-            ActivityModifier modifier = new ActivityModifier();
-            modifier.Name = txtActivityModName.Text;
-            modifier.ActivityID = Int32.Parse(txtActivityMod_ActivityID.Text);
-            modifier.RatingAdjustment = Int32.Parse(txtActivityModRatingAdjustment.Text);
 
-            SqliteDataAccess.AddActivityModifier(modifier);
-        }
 
         private void btnAddShift_Click(object sender, EventArgs e)
         {
@@ -113,16 +94,7 @@ namespace RicksStaffApp
 
 
 
-        private void btnAddEmployeeShift_Click(object sender, EventArgs e)
-        {
-            EmployeeShift empShift = new EmployeeShift();
-            empShift.PositionID = Decimal.ToInt32(nudPositionID.Value);
-            empShift.Shift.ID = Int32.Parse(txtEmployeeShift_ShiftID.Text);
-            empShift.Employee.ID = Int32.Parse(txtEmployeeIDShiftEmployeeName.Text);
 
-
-            SqliteDataAccess.AddEmployeeShift(empShift);
-        }
 
         private void rdoActivitiesView_CheckedChanged(object sender, EventArgs e)
         {

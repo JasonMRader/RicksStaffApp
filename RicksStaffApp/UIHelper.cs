@@ -538,8 +538,8 @@ namespace RicksStaffApp
                 shiftPanel.FlowDirection = FlowDirection.LeftToRight;
                 shiftPanel.WrapContents = false;
                 shiftPanel.AutoSize = true;
-                shiftPanel.MaximumSize = new Size(200, 0);
-                shiftPanel.MinimumSize = new Size(200, 0);
+                shiftPanel.MaximumSize = new Size(300, 0);
+                shiftPanel.MinimumSize = new Size(300, 0);
                 shiftPanel.BackColor = MyColors.LightHighlight;
                 shiftPanel.Margin = new Padding(1, 1, 1, 1);
 
@@ -550,12 +550,6 @@ namespace RicksStaffApp
                 lblName.Size = new Size(125, 30);
                 lblName.TextAlign = ContentAlignment.MiddleCenter;
                 shiftPanel.Controls.Add(lblName);
-
-
-
-
-
-
 
 
                 activityPanelContainer.Controls.Add(shiftPanel);
@@ -601,16 +595,19 @@ namespace RicksStaffApp
                     }
                 };
                 btnDelete.Size = new Size(27, 27);
+                Label lblEmployeeCount = CreateLabel(175,30,shift.EmployeeShifts.Count.ToString());
+                lblEmployeeCount.TextAlign = ContentAlignment.MiddleCenter;
+                shiftPanel.Controls.Add(lblEmployeeCount);
                 shiftPanel.Parent.Controls.Add(btnDelete);
 
                 flowEmployeeDisplay.Controls.Add(activityPanelContainer);
-                foreach (EmployeeShift es in shift.EmployeeShifts)
-                {
-                    Label lbl = new Label();
-                    lbl.Size = new Size(50, 25);
-                    lbl.Text = es.Employee.FullName;
-                    activityPanelContainer.Controls.Add(lbl);
-                }
+                //foreach (EmployeeShift es in shift.EmployeeShifts)
+                //{
+                //    Label lbl = new Label();
+                //    lbl.Size = new Size(50, 25);
+                //    lbl.Text = es.Employee.FullName;
+                //    activityPanelContainer.Controls.Add(lbl);
+                //}
 
 
             }
@@ -619,7 +616,7 @@ namespace RicksStaffApp
         {
             // Clear existing panels
             flowFormDisplay.Controls.Clear();
-            int containerWidth = flowFormDisplay.Width;
+            int containerWidth = 475;
             int firstContainer = (int)(containerWidth / 1.1);
             int nameWidth = (int)containerWidth / 4;
             int ratingWidth = (int)containerWidth / 9;
