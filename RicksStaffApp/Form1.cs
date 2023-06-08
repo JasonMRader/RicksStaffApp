@@ -56,6 +56,8 @@ namespace RicksStaffApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            SqliteDataAccess.DeleteEmployeeShiftsByShiftId(1);
+            SqliteDataAccess.DeleteEmployeeShiftsByShiftId(2);
 
             foreach (Control ctl in this.Controls)
             {

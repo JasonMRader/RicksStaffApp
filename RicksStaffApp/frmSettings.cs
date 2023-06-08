@@ -111,7 +111,7 @@ namespace RicksStaffApp
             UIHelper.CreateShiftPanels(shiftList, flowSettingDisplay);
         }
 
-        
+
 
         private void btnAddEmployeeShift_Click(object sender, EventArgs e)
         {

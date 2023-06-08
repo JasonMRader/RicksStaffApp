@@ -119,6 +119,7 @@
             // 
             // flowSettingDisplay
             // 
+            flowSettingDisplay.AutoScroll = true;
             flowSettingDisplay.AutoSize = true;
             flowSettingDisplay.BackColor = Color.FromArgb(37, 42, 64);
             flowSettingDisplay.FlowDirection = FlowDirection.TopDown;
@@ -126,6 +127,7 @@
             flowSettingDisplay.Name = "flowSettingDisplay";
             flowSettingDisplay.Size = new Size(475, 674);
             flowSettingDisplay.TabIndex = 2;
+            flowSettingDisplay.WrapContents = false;
             // 
             // panel1
             // 

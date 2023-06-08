@@ -646,12 +646,20 @@ namespace RicksStaffApp
                 //PositionId = shift.Position.ID, 
             }
         }
-        public static void DeleteEmployeeShift(int shiftId)
+        public static void DeleteEmployeeShift(int EmployeeShiftId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("delete from EmployeeShift where ID = @ID", new { ID = shiftId });
+                cnn.Execute("delete from EmployeeShift where ID = @ID", new { ID = EmployeeShiftId });
             }
+        }
+        public static void DeleteEmployeeShiftsByShiftId(int shiftId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from EmployeeShift where ShiftID = @ShiftID", new { ShiftID = shiftId });
+            }
+
         }
         
     //write a method to load the employee shifts
