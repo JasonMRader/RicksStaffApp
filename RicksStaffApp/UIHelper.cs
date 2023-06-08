@@ -591,7 +591,7 @@ namespace RicksStaffApp
                     if (result == DialogResult.Yes)
                     {
                         // Delete employee from database
-                        SqliteDataAccess.DeleteShift(shift.ID);
+                        SqliteDataAccess.DeleteShiftAndChildren(shift.ID);
 
                         // Remove employee from list
                         shiftList.Remove(shift);

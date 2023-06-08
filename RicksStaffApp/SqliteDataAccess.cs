@@ -136,6 +136,21 @@ namespace RicksStaffApp
                 cnn.Execute("delete from Incident where EmployeeShiftID = @EmployeeShiftID", new { EmployeeShiftID = employeeShiftID });
             }
         }
+        public static void DeleteIncidentsByEmployeeShifts(int shiftID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                // Retrieve the employee shift IDs associated with the shift ID
+                List<int> employeeShiftIDs = cnn.Query<int>("SELECT ID FROM EmployeeShift WHERE ShiftID = @ShiftID", new { ShiftID = shiftID }).ToList();
+
+                // Delete the incidents associated with the employee shift IDs
+                foreach (int employeeShiftID in employeeShiftIDs)
+                {
+                    cnn.Execute("DELETE FROM Incident WHERE EmployeeShiftID = @EmployeeShiftID", new { EmployeeShiftID = employeeShiftID });
+                }
+            }
+        }
+
         public static void SaveEmployeeShiftIncidents(EmployeeShift employeeShift)
         {
             // First, delete all existing incidents associated with the employeeShift
@@ -575,6 +590,21 @@ namespace RicksStaffApp
                 //cnn.Execute("delete from Shift where ShiftID = @ShiftID", shift);
             }
         }
+        public static void DeleteShiftAndChildren(int shiftID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                // Delete the employee shifts associated with the shift
+                DeleteEmployeeShiftsByShiftId(shiftID);
+
+                // Delete the incidents associated with the deleted employee shifts
+                DeleteIncidentsByEmployeeShifts(shiftID);
+
+                // Delete the shift
+                cnn.Execute("DELETE FROM Shift WHERE ID = @ShiftID", new { ShiftId = shiftID });
+            }
+        }
+
 
         //EmployeeShift Methods
         public static List<EmployeeShift> LoadEmployeeShifts(Employee employee)

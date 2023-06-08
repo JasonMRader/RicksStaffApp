@@ -56,8 +56,7 @@ namespace RicksStaffApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqliteDataAccess.DeleteEmployeeShiftsByShiftId(1);
-            SqliteDataAccess.DeleteEmployeeShiftsByShiftId(2);
+            
 
             foreach (Control ctl in this.Controls)
             {
@@ -145,6 +144,7 @@ namespace RicksStaffApp
             pnlNav.Controls.Clear();
             if (rdoOverviewForm.Checked)
             {
+                pnlNav.Controls.Clear();
                 // Only create a new instance if it doesn't already exist
                 if (_frmOverview == null)
                 {
@@ -164,6 +164,7 @@ namespace RicksStaffApp
             pnlNav.Controls.Clear();
             if (rdoNewShiftForm.Checked)
             {
+                pnlNav.Controls.Clear();
                 if (_frmNewShift == null)
                 {
                     _frmNewShift = new frmNewShift { TopLevel = false, AutoScroll = true };
@@ -182,6 +183,7 @@ namespace RicksStaffApp
             pnlNav.Controls.Clear();
             if (rdoSettings.Checked)
             {
+                pnlNav.Controls.Clear();
                 if (_frmSettings == null)
                 {
                     _frmSettings = new frmSettings { TopLevel = false, AutoScroll = true };

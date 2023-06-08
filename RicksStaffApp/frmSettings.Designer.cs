@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             btnNewAction = new Button();
             flowSettingDisplay = new FlowLayoutPanel();
-            panel1 = new Panel();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -83,7 +81,7 @@
             btnLoadEmployeeShifts = new Button();
             label13 = new Label();
             btnAddEmployeeShift = new Button();
-            panel1.SuspendLayout();
+            rdoActivitiesView = new RadioButton();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -91,17 +89,6 @@
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudPositionID).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 21);
-            label1.Name = "label1";
-            label1.Size = new Size(82, 30);
-            label1.TabIndex = 0;
-            label1.Text = "Actions";
             // 
             // btnNewAction
             // 
@@ -120,23 +107,14 @@
             // flowSettingDisplay
             // 
             flowSettingDisplay.AutoScroll = true;
-            flowSettingDisplay.AutoSize = true;
             flowSettingDisplay.BackColor = Color.FromArgb(37, 42, 64);
             flowSettingDisplay.FlowDirection = FlowDirection.TopDown;
-            flowSettingDisplay.Location = new Point(3, 3);
+            flowSettingDisplay.Location = new Point(12, 69);
+            flowSettingDisplay.Margin = new Padding(3, 0, 3, 3);
             flowSettingDisplay.Name = "flowSettingDisplay";
             flowSettingDisplay.Size = new Size(475, 674);
             flowSettingDisplay.TabIndex = 2;
             flowSettingDisplay.WrapContents = false;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.White;
-            panel1.Controls.Add(flowSettingDisplay);
-            panel1.Location = new Point(12, 54);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(481, 680);
-            panel1.TabIndex = 3;
             // 
             // label2
             // 
@@ -661,15 +639,31 @@
             btnAddEmployeeShift.UseVisualStyleBackColor = true;
             btnAddEmployeeShift.Click += btnAddEmployeeShift_Click;
             // 
+            // rdoActivitiesView
+            // 
+            rdoActivitiesView.Appearance = Appearance.Button;
+            rdoActivitiesView.FlatAppearance.BorderSize = 0;
+            rdoActivitiesView.FlatStyle = FlatStyle.Flat;
+            rdoActivitiesView.ForeColor = Color.FromArgb(0, 126, 249);
+            rdoActivitiesView.Location = new Point(12, 45);
+            rdoActivitiesView.Margin = new Padding(3, 3, 3, 0);
+            rdoActivitiesView.Name = "rdoActivitiesView";
+            rdoActivitiesView.Size = new Size(104, 24);
+            rdoActivitiesView.TabIndex = 10;
+            rdoActivitiesView.TabStop = true;
+            rdoActivitiesView.Text = "Activities";
+            rdoActivitiesView.TextAlign = ContentAlignment.MiddleCenter;
+            rdoActivitiesView.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1290, 755);
-            Controls.Add(panel1);
+            Controls.Add(rdoActivitiesView);
+            Controls.Add(flowSettingDisplay);
             Controls.Add(btnNewAction);
-            Controls.Add(label1);
             Controls.Add(panel2);
             Controls.Add(panel6);
             Controls.Add(panel5);
@@ -679,8 +673,6 @@
             Name = "frmSettings";
             Text = "frmSettings";
             Load += frmSettings_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
@@ -693,15 +685,11 @@
             panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudPositionID).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
         private Button btnNewAction;
         private FlowLayoutPanel flowSettingDisplay;
-        private Panel panel1;
         private Label label2;
         private Label label3;
         private Label label4;
@@ -753,5 +741,6 @@
         private Label label11;
         private NumericUpDown nudPositionID;
         private Label label13;
+        private RadioButton rdoActivitiesView;
     }
 }
