@@ -38,10 +38,10 @@
             // dtpShiftDate
             // 
             dtpShiftDate.CalendarMonthBackground = SystemColors.ScrollBar;
-            dtpShiftDate.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            dtpShiftDate.Location = new Point(22, 79);
+            dtpShiftDate.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dtpShiftDate.Location = new Point(22, 10);
             dtpShiftDate.Name = "dtpShiftDate";
-            dtpShiftDate.Size = new Size(475, 36);
+            dtpShiftDate.Size = new Size(325, 33);
             dtpShiftDate.TabIndex = 5;
             dtpShiftDate.ValueChanged += dtpShiftDate_ValueChanged;
             // 
@@ -49,7 +49,7 @@
             // 
             flowEmployeeShiftDisplay.AutoScroll = true;
             flowEmployeeShiftDisplay.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeShiftDisplay.Location = new Point(22, 120);
+            flowEmployeeShiftDisplay.Location = new Point(22, 133);
             flowEmployeeShiftDisplay.Name = "flowEmployeeShiftDisplay";
             flowEmployeeShiftDisplay.Size = new Size(475, 630);
             flowEmployeeShiftDisplay.TabIndex = 6;
@@ -57,7 +57,7 @@
             // pnlNewShiftDisplay
             // 
             pnlNewShiftDisplay.BackColor = Color.FromArgb(37, 42, 64);
-            pnlNewShiftDisplay.Location = new Point(503, 120);
+            pnlNewShiftDisplay.Location = new Point(503, 133);
             pnlNewShiftDisplay.Name = "pnlNewShiftDisplay";
             pnlNewShiftDisplay.Size = new Size(775, 630);
             pnlNewShiftDisplay.TabIndex = 7;
@@ -67,7 +67,7 @@
             btnGetExcelEmployees.BackColor = Color.FromArgb(167, 204, 237);
             btnGetExcelEmployees.FlatAppearance.BorderSize = 0;
             btnGetExcelEmployees.FlatStyle = FlatStyle.Flat;
-            btnGetExcelEmployees.Location = new Point(1115, 91);
+            btnGetExcelEmployees.Location = new Point(1115, 10);
             btnGetExcelEmployees.Name = "btnGetExcelEmployees";
             btnGetExcelEmployees.Size = new Size(163, 23);
             btnGetExcelEmployees.TabIndex = 8;
@@ -79,7 +79,7 @@
             // flowShiftDates
             // 
             flowShiftDates.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftDates.Location = new Point(22, 1);
+            flowShiftDates.Location = new Point(22, 52);
             flowShiftDates.Name = "flowShiftDates";
             flowShiftDates.Padding = new Padding(13, 0, 0, 0);
             flowShiftDates.Size = new Size(1256, 75);
@@ -91,11 +91,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(dtpShiftDate);
             Controls.Add(flowShiftDates);
             Controls.Add(btnGetExcelEmployees);
             Controls.Add(pnlNewShiftDisplay);
             Controls.Add(flowEmployeeShiftDisplay);
-            Controls.Add(dtpShiftDate);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmNewShift";
             Text = "frmNewShift";
