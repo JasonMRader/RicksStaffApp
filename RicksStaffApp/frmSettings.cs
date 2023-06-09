@@ -116,5 +116,19 @@ namespace RicksStaffApp
             }
 
         }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            Activity activity = new Activity();
+
+            activity.Name = txtNewName.Text;
+            activity.BaseRatingImpact = Int32.Parse(txtNewRating.Text);
+
+
+            SqliteDataAccess.AddActivity(activity);
+            activityList.Clear();
+            activityList = SqliteDataAccess.LoadActivities();
+            UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
+        }
     }
 }

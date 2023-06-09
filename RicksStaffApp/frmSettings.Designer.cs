@@ -54,7 +54,7 @@
             txtNewName = new TextBox();
             label3 = new Label();
             txtNewRating = new TextBox();
-            button1 = new Button();
+            btnAddItem = new Button();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panel1.SuspendLayout();
@@ -307,7 +307,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btnAddItem);
             panel1.Controls.Add(txtNewRating);
             panel1.Controls.Add(txtNewName);
             panel1.Controls.Add(label3);
@@ -323,7 +323,7 @@
             lblCreateNew.AutoSize = true;
             lblCreateNew.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblCreateNew.ForeColor = Color.White;
-            lblCreateNew.Location = new Point(134, 12);
+            lblCreateNew.Location = new Point(155, 9);
             lblCreateNew.Name = "lblCreateNew";
             lblCreateNew.Size = new Size(195, 30);
             lblCreateNew.TabIndex = 0;
@@ -334,7 +334,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(91, 79);
+            label1.Location = new Point(107, 77);
             label1.Name = "label1";
             label1.Size = new Size(66, 25);
             label1.TabIndex = 0;
@@ -343,7 +343,7 @@
             // txtNewName
             // 
             txtNewName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNewName.Location = new Point(193, 79);
+            txtNewName.Location = new Point(209, 77);
             txtNewName.Name = "txtNewName";
             txtNewName.Size = new Size(229, 29);
             txtNewName.TabIndex = 1;
@@ -353,7 +353,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(25, 120);
+            label3.Location = new Point(41, 118);
             label3.Name = "label3";
             label3.Size = new Size(132, 25);
             label3.TabIndex = 0;
@@ -362,19 +362,23 @@
             // txtNewRating
             // 
             txtNewRating.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNewRating.Location = new Point(193, 120);
+            txtNewRating.Location = new Point(209, 118);
             txtNewRating.Name = "txtNewRating";
             txtNewRating.Size = new Size(229, 29);
             txtNewRating.TabIndex = 1;
             // 
-            // button1
+            // btnAddItem
             // 
-            button1.Location = new Point(25, 179);
-            button1.Name = "button1";
-            button1.Size = new Size(397, 43);
-            button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnAddItem.BackColor = Color.FromArgb(167, 204, 237);
+            btnAddItem.FlatAppearance.BorderSize = 0;
+            btnAddItem.FlatStyle = FlatStyle.Flat;
+            btnAddItem.Location = new Point(41, 177);
+            btnAddItem.Name = "btnAddItem";
+            btnAddItem.Size = new Size(397, 43);
+            btnAddItem.TabIndex = 2;
+            btnAddItem.Text = "Add";
+            btnAddItem.UseVisualStyleBackColor = false;
+            btnAddItem.Click += btnAddItem_Click;
             // 
             // frmSettings
             // 
@@ -426,7 +430,7 @@
         private RadioButton rdoPositions;
         private Panel panel1;
         private Label lblCreateNew;
-        private Button button1;
+        private Button btnAddItem;
         private TextBox txtNewRating;
         private TextBox txtNewName;
         private Label label3;
