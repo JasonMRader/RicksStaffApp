@@ -85,13 +85,14 @@
             // 
             label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
             label1.Location = new Point(788, -3);
             label1.Name = "label1";
-            label1.Size = new Size(219, 50);
+            label1.Size = new Size(218, 50);
             label1.TabIndex = 1;
             label1.Text = "Staff Rating";
+            label1.Visible = false;
             label1.MouseDown += Form1_MouseDown;
             label1.MouseMove += Form1_MouseMove;
             label1.MouseUp += Form1_MouseUp;
@@ -165,6 +166,7 @@
             btnOpenTestForm.TabIndex = 1;
             btnOpenTestForm.Text = "Test Form";
             btnOpenTestForm.UseVisualStyleBackColor = false;
+            btnOpenTestForm.Visible = false;
             btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // pnlNav

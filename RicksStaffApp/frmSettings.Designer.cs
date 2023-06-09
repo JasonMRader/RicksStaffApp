@@ -48,8 +48,16 @@
             rdoActivitiesView = new RadioButton();
             rdoShifts = new RadioButton();
             rdoPositions = new RadioButton();
+            panel1 = new Panel();
+            lblCreateNew = new Label();
+            label1 = new Label();
+            txtNewName = new TextBox();
+            label3 = new Label();
+            txtNewRating = new TextBox();
+            button1 = new Button();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnNewAction
@@ -64,6 +72,7 @@
             btnNewAction.TabIndex = 1;
             btnNewAction.Text = "Add New";
             btnNewAction.UseVisualStyleBackColor = false;
+            btnNewAction.Visible = false;
             btnNewAction.Click += btnNewAction_Click;
             // 
             // flowSettingDisplay
@@ -74,7 +83,7 @@
             flowSettingDisplay.Location = new Point(12, 69);
             flowSettingDisplay.Margin = new Padding(3, 0, 3, 3);
             flowSettingDisplay.Name = "flowSettingDisplay";
-            flowSettingDisplay.Padding = new Padding(10, 8, 0, 0);
+            flowSettingDisplay.Padding = new Padding(10, 15, 0, 0);
             flowSettingDisplay.Size = new Size(495, 674);
             flowSettingDisplay.TabIndex = 2;
             flowSettingDisplay.WrapContents = false;
@@ -103,14 +112,14 @@
             // 
             // txtActivityName
             // 
-            txtActivityName.Location = new Point(15, 104);
+            txtActivityName.Location = new Point(23, 45);
             txtActivityName.Name = "txtActivityName";
             txtActivityName.Size = new Size(100, 23);
             txtActivityName.TabIndex = 5;
             // 
             // txtActivityRating
             // 
-            txtActivityRating.Location = new Point(15, 152);
+            txtActivityRating.Location = new Point(23, 93);
             txtActivityRating.Name = "txtActivityRating";
             txtActivityRating.Size = new Size(100, 23);
             txtActivityRating.TabIndex = 5;
@@ -120,7 +129,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(13, 85);
+            label7.Location = new Point(21, 26);
             label7.Name = "label7";
             label7.Size = new Size(39, 15);
             label7.TabIndex = 4;
@@ -131,7 +140,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(13, 134);
+            label8.Location = new Point(21, 75);
             label8.Name = "label8";
             label8.Size = new Size(108, 15);
             label8.TabIndex = 4;
@@ -142,7 +151,7 @@
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label19.ForeColor = Color.White;
-            label19.Location = new Point(13, 85);
+            label19.Location = new Point(8, 22);
             label19.Name = "label19";
             label19.Size = new Size(31, 15);
             label19.TabIndex = 4;
@@ -150,7 +159,7 @@
             // 
             // btnAddActivity
             // 
-            btnAddActivity.Location = new Point(21, 306);
+            btnAddActivity.Location = new Point(21, 122);
             btnAddActivity.Name = "btnAddActivity";
             btnAddActivity.Size = new Size(100, 23);
             btnAddActivity.TabIndex = 6;
@@ -160,7 +169,7 @@
             // 
             // btnLoadActivities
             // 
-            btnLoadActivities.Location = new Point(21, 345);
+            btnLoadActivities.Location = new Point(21, 161);
             btnLoadActivities.Name = "btnLoadActivities";
             btnLoadActivities.Size = new Size(100, 23);
             btnLoadActivities.TabIndex = 6;
@@ -178,10 +187,11 @@
             panel2.Controls.Add(label8);
             panel2.Controls.Add(txtActivityName);
             panel2.Controls.Add(txtActivityRating);
-            panel2.Location = new Point(816, 108);
+            panel2.Location = new Point(1125, 325);
             panel2.Name = "panel2";
-            panel2.Size = new Size(145, 400);
+            panel2.Size = new Size(145, 206);
             panel2.TabIndex = 7;
+            panel2.Visible = false;
             // 
             // panel5
             // 
@@ -192,15 +202,16 @@
             panel5.Controls.Add(label5);
             panel5.Controls.Add(label19);
             panel5.Controls.Add(btnAddShift);
-            panel5.Location = new Point(967, 108);
+            panel5.Location = new Point(1132, 537);
             panel5.Name = "panel5";
-            panel5.Size = new Size(145, 400);
+            panel5.Size = new Size(145, 206);
             panel5.TabIndex = 9;
+            panel5.Visible = false;
             // 
             // dtpShiftDate
             // 
             dtpShiftDate.Format = DateTimePickerFormat.Short;
-            dtpShiftDate.Location = new Point(8, 108);
+            dtpShiftDate.Location = new Point(3, 45);
             dtpShiftDate.Name = "dtpShiftDate";
             dtpShiftDate.Size = new Size(98, 23);
             dtpShiftDate.TabIndex = 8;
@@ -210,7 +221,7 @@
             cbIsAmShift.AutoSize = true;
             cbIsAmShift.FlatStyle = FlatStyle.Flat;
             cbIsAmShift.ForeColor = Color.White;
-            cbIsAmShift.Location = new Point(13, 156);
+            cbIsAmShift.Location = new Point(8, 93);
             cbIsAmShift.Name = "cbIsAmShift";
             cbIsAmShift.Size = new Size(74, 19);
             cbIsAmShift.TabIndex = 7;
@@ -219,7 +230,7 @@
             // 
             // btnLoadShifts
             // 
-            btnLoadShifts.Location = new Point(24, 345);
+            btnLoadShifts.Location = new Point(22, 161);
             btnLoadShifts.Name = "btnLoadShifts";
             btnLoadShifts.Size = new Size(100, 23);
             btnLoadShifts.TabIndex = 6;
@@ -229,7 +240,7 @@
             // 
             // btnAddShift
             // 
-            btnAddShift.Location = new Point(24, 306);
+            btnAddShift.Location = new Point(22, 122);
             btnAddShift.Name = "btnAddShift";
             btnAddShift.Size = new Size(100, 23);
             btnAddShift.TabIndex = 6;
@@ -243,11 +254,12 @@
             rdoActivitiesView.FlatAppearance.BorderSize = 0;
             rdoActivitiesView.FlatAppearance.CheckedBackColor = Color.FromArgb(37, 42, 64);
             rdoActivitiesView.FlatStyle = FlatStyle.Flat;
+            rdoActivitiesView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rdoActivitiesView.ForeColor = Color.FromArgb(0, 126, 249);
-            rdoActivitiesView.Location = new Point(12, 45);
+            rdoActivitiesView.Location = new Point(12, 36);
             rdoActivitiesView.Margin = new Padding(3, 3, 0, 0);
             rdoActivitiesView.Name = "rdoActivitiesView";
-            rdoActivitiesView.Size = new Size(104, 24);
+            rdoActivitiesView.Size = new Size(104, 33);
             rdoActivitiesView.TabIndex = 10;
             rdoActivitiesView.TabStop = true;
             rdoActivitiesView.Text = "Activities";
@@ -261,11 +273,12 @@
             rdoShifts.FlatAppearance.BorderSize = 0;
             rdoShifts.FlatAppearance.CheckedBackColor = Color.FromArgb(37, 42, 64);
             rdoShifts.FlatStyle = FlatStyle.Flat;
+            rdoShifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rdoShifts.ForeColor = Color.FromArgb(0, 126, 249);
-            rdoShifts.Location = new Point(125, 45);
+            rdoShifts.Location = new Point(125, 36);
             rdoShifts.Margin = new Padding(0, 3, 0, 0);
             rdoShifts.Name = "rdoShifts";
-            rdoShifts.Size = new Size(104, 24);
+            rdoShifts.Size = new Size(104, 33);
             rdoShifts.TabIndex = 10;
             rdoShifts.TabStop = true;
             rdoShifts.Text = "Shifts";
@@ -279,11 +292,12 @@
             rdoPositions.FlatAppearance.BorderSize = 0;
             rdoPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(37, 42, 64);
             rdoPositions.FlatStyle = FlatStyle.Flat;
+            rdoPositions.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rdoPositions.ForeColor = Color.FromArgb(0, 126, 249);
-            rdoPositions.Location = new Point(229, 45);
+            rdoPositions.Location = new Point(229, 36);
             rdoPositions.Margin = new Padding(0, 3, 0, 0);
             rdoPositions.Name = "rdoPositions";
-            rdoPositions.Size = new Size(104, 24);
+            rdoPositions.Size = new Size(104, 33);
             rdoPositions.TabIndex = 10;
             rdoPositions.TabStop = true;
             rdoPositions.Text = "Positions";
@@ -291,12 +305,84 @@
             rdoPositions.UseVisualStyleBackColor = true;
             rdoPositions.CheckedChanged += rdoShifts_CheckedChanged;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(button1);
+            panel1.Controls.Add(txtNewRating);
+            panel1.Controls.Add(txtNewName);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblCreateNew);
+            panel1.Location = new Point(528, 69);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(495, 674);
+            panel1.TabIndex = 11;
+            // 
+            // lblCreateNew
+            // 
+            lblCreateNew.AutoSize = true;
+            lblCreateNew.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCreateNew.ForeColor = Color.White;
+            lblCreateNew.Location = new Point(134, 12);
+            lblCreateNew.Name = "lblCreateNew";
+            lblCreateNew.Size = new Size(195, 30);
+            lblCreateNew.TabIndex = 0;
+            lblCreateNew.Text = "Create New Activity";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(91, 79);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 25);
+            label1.TabIndex = 0;
+            label1.Text = "Name:";
+            // 
+            // txtNewName
+            // 
+            txtNewName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNewName.Location = new Point(193, 79);
+            txtNewName.Name = "txtNewName";
+            txtNewName.Size = new Size(229, 29);
+            txtNewName.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(25, 120);
+            label3.Name = "label3";
+            label3.Size = new Size(132, 25);
+            label3.TabIndex = 0;
+            label3.Text = "Rating Impact:";
+            // 
+            // txtNewRating
+            // 
+            txtNewRating.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNewRating.Location = new Point(193, 120);
+            txtNewRating.Name = "txtNewRating";
+            txtNewRating.Size = new Size(229, 29);
+            txtNewRating.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(25, 179);
+            button1.Name = "button1";
+            button1.Size = new Size(397, 43);
+            button1.TabIndex = 2;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1290, 755);
+            Controls.Add(panel1);
             Controls.Add(rdoPositions);
             Controls.Add(rdoShifts);
             Controls.Add(rdoActivitiesView);
@@ -312,6 +398,8 @@
             panel2.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -336,5 +424,12 @@
         private RadioButton rdoActivitiesView;
         private RadioButton rdoShifts;
         private RadioButton rdoPositions;
+        private Panel panel1;
+        private Label lblCreateNew;
+        private Button button1;
+        private TextBox txtNewRating;
+        private TextBox txtNewName;
+        private Label label3;
+        private Label label1;
     }
 }
