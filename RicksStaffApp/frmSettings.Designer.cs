@@ -49,12 +49,12 @@
             rdoShifts = new RadioButton();
             rdoPositions = new RadioButton();
             panel1 = new Panel();
-            lblCreateNew = new Label();
-            label1 = new Label();
+            btnAddItem = new Button();
+            txtNewRating = new TextBox();
             txtNewName = new TextBox();
             label3 = new Label();
-            txtNewRating = new TextBox();
-            btnAddItem = new Button();
+            label1 = new Label();
+            lblCreateNew = new Label();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panel1.SuspendLayout();
@@ -303,7 +303,7 @@
             rdoPositions.Text = "Positions";
             rdoPositions.TextAlign = ContentAlignment.MiddleCenter;
             rdoPositions.UseVisualStyleBackColor = true;
-            rdoPositions.CheckedChanged += rdoShifts_CheckedChanged;
+            rdoPositions.CheckedChanged += rdoPositions_CheckedChanged;
             // 
             // panel1
             // 
@@ -318,27 +318,26 @@
             panel1.Size = new Size(495, 674);
             panel1.TabIndex = 11;
             // 
-            // lblCreateNew
+            // btnAddItem
             // 
-            lblCreateNew.AutoSize = true;
-            lblCreateNew.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblCreateNew.ForeColor = Color.White;
-            lblCreateNew.Location = new Point(155, 9);
-            lblCreateNew.Name = "lblCreateNew";
-            lblCreateNew.Size = new Size(195, 30);
-            lblCreateNew.TabIndex = 0;
-            lblCreateNew.Text = "Create New Activity";
+            btnAddItem.BackColor = Color.FromArgb(167, 204, 237);
+            btnAddItem.FlatAppearance.BorderSize = 0;
+            btnAddItem.FlatStyle = FlatStyle.Flat;
+            btnAddItem.Location = new Point(41, 177);
+            btnAddItem.Name = "btnAddItem";
+            btnAddItem.Size = new Size(397, 43);
+            btnAddItem.TabIndex = 2;
+            btnAddItem.Text = "Add";
+            btnAddItem.UseVisualStyleBackColor = false;
+            btnAddItem.Click += btnAddItem_Click;
             // 
-            // label1
+            // txtNewRating
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(107, 77);
-            label1.Name = "label1";
-            label1.Size = new Size(66, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Name:";
+            txtNewRating.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNewRating.Location = new Point(209, 118);
+            txtNewRating.Name = "txtNewRating";
+            txtNewRating.Size = new Size(229, 29);
+            txtNewRating.TabIndex = 1;
             // 
             // txtNewName
             // 
@@ -359,26 +358,27 @@
             label3.TabIndex = 0;
             label3.Text = "Rating Impact:";
             // 
-            // txtNewRating
+            // label1
             // 
-            txtNewRating.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNewRating.Location = new Point(209, 118);
-            txtNewRating.Name = "txtNewRating";
-            txtNewRating.Size = new Size(229, 29);
-            txtNewRating.TabIndex = 1;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(107, 77);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 25);
+            label1.TabIndex = 0;
+            label1.Text = "Name:";
             // 
-            // btnAddItem
+            // lblCreateNew
             // 
-            btnAddItem.BackColor = Color.FromArgb(167, 204, 237);
-            btnAddItem.FlatAppearance.BorderSize = 0;
-            btnAddItem.FlatStyle = FlatStyle.Flat;
-            btnAddItem.Location = new Point(41, 177);
-            btnAddItem.Name = "btnAddItem";
-            btnAddItem.Size = new Size(397, 43);
-            btnAddItem.TabIndex = 2;
-            btnAddItem.Text = "Add";
-            btnAddItem.UseVisualStyleBackColor = false;
-            btnAddItem.Click += btnAddItem_Click;
+            lblCreateNew.AutoSize = true;
+            lblCreateNew.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCreateNew.ForeColor = Color.White;
+            lblCreateNew.Location = new Point(155, 9);
+            lblCreateNew.Name = "lblCreateNew";
+            lblCreateNew.Size = new Size(195, 30);
+            lblCreateNew.TabIndex = 0;
+            lblCreateNew.Text = "Create New Activity";
             // 
             // frmSettings
             // 

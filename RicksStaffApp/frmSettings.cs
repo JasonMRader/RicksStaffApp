@@ -130,5 +130,11 @@ namespace RicksStaffApp
             activityList = SqliteDataAccess.LoadActivities();
             UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
         }
+
+        private void rdoPositions_CheckedChanged(object sender, EventArgs e)
+        {
+            List<Position> positions = SqliteDataAccess.LoadPositions();
+            UIHelper.CreatePositionPanels(flowSettingDisplay, positions);
+        }
     }
 }
