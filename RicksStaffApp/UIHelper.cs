@@ -630,7 +630,7 @@ namespace RicksStaffApp
                 activityPanelContainer.AutoSize = true;
                 activityPanelContainer.MinimumSize = new Size(containerWidth, 30);
                 activityPanelContainer.MaximumSize = new Size(containerWidth, 200);
-                activityPanelContainer.BackColor = MyColors.LightHighlight;
+                activityPanelContainer.BackColor = GetBackColor(activity.BaseRatingImpact);
                 activityPanelContainer.Margin = new Padding(0, 0, 0, 5);
 
 
@@ -640,12 +640,12 @@ namespace RicksStaffApp
                 activityPanel.AutoSize = true;
                 activityPanel.MaximumSize = new Size(firstContainer, 30);
                 activityPanel.MinimumSize = new Size(firstContainer, 0);
-                activityPanel.BackColor = MyColors.LightHighlight;
+                activityPanel.BackColor = GetBackColor(activity.BaseRatingImpact);
                 activityPanel.Margin = new Padding(1, 1, 1, 1);
 
                 //// Create label for employee name
                 Label lblName = new Label();
-                lblName.Text = activity.Name + "  (ID " + activity.ID.ToString() + ")";
+                lblName.Text = activity.Name;// + "  (ID " + activity.ID.ToString() + ")";
                 lblName.AutoSize = false;
                 lblName.Size = new Size(nameWidth, 30);
                 lblName.TextAlign = ContentAlignment.MiddleCenter;
@@ -658,16 +658,16 @@ namespace RicksStaffApp
                 lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
                 activityPanel.Controls.Add(lblBaseRating);
 
-                Panel pnlModDisplay = new Panel();
-                pnlModDisplay.Size = new Size(modPanelWidth, 30);
-                pnlModDisplay.BackColor = MyColors.NeutralColor;
-                Label modNumber = new Label();
-                modNumber.Text = activity.ActivityModifiers.Count.ToString() + "  Mods";
-                modNumber.AutoSize = false;
-                modNumber.Size = new Size(((int)modPanelWidth / 3), 29);
-                modNumber.TextAlign = ContentAlignment.MiddleCenter;
-                pnlModDisplay.Controls.Add(modNumber);
-                activityPanel.Controls.Add(pnlModDisplay);
+                //Panel pnlModDisplay = new Panel();
+                //pnlModDisplay.Size = new Size(modPanelWidth, 30);
+                //pnlModDisplay.BackColor = MyColors.NeutralColor;
+                //Label modNumber = new Label();
+                //modNumber.Text = activity.ActivityModifiers.Count.ToString() + "  Mods";
+                //modNumber.AutoSize = false;
+                //modNumber.Size = new Size(((int)modPanelWidth / 3), 29);
+                //modNumber.TextAlign = ContentAlignment.MiddleCenter;
+                //pnlModDisplay.Controls.Add(modNumber);
+                //activityPanel.Controls.Add(pnlModDisplay);
                 activityPanelContainer.Controls.Add(activityPanel);
                 if (activity.ActivityModifiers.Count > 0)
                 {
@@ -694,7 +694,7 @@ namespace RicksStaffApp
                         }
                     };
                     btnViewMods.Size = new Size(modPanelWidth - (int)(modPanelWidth / 2.9), 27);
-                    pnlModDisplay.Controls.Add(btnViewMods);
+                    //pnlModDisplay.Controls.Add(btnViewMods);
                 }
 
 
