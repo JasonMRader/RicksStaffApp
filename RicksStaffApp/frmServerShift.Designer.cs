@@ -68,6 +68,7 @@
             // 
             // flowActivityDisplay
             // 
+            flowActivityDisplay.AutoScroll = true;
             flowActivityDisplay.BackColor = Color.FromArgb(37, 42, 64);
             flowActivityDisplay.FlowDirection = FlowDirection.TopDown;
             flowActivityDisplay.Location = new Point(17, 92);
