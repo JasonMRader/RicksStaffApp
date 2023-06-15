@@ -18,8 +18,9 @@ namespace RicksStaffApp
         }
         Panel pnlNewRating = new Panel();
         FlowLayoutPanel flpAdditionAction = new FlowLayoutPanel();
-        Label lblNewRating = new Label();
+        Label lblNewActivityRating = new Label();
         List<Activity> activityList = new List<Activity>();
+        List <Position> positionList = new List<Position>();
         List<Shift> shiftList = new List<Shift>();
 
 
@@ -32,7 +33,7 @@ namespace RicksStaffApp
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
-
+            rdoActivitiesView.Checked = true;
         }
 
         private void btnNewAction_Click(object sender, EventArgs e)
@@ -41,17 +42,7 @@ namespace RicksStaffApp
             frmNewActivity.ShowDialog();
         }
         //Testing Below Here
-        private void btnAddActivity_Click(object sender, EventArgs e)
-        {
-            Activity activity = new Activity();
 
-            activity.Name = txtActivityName.Text;
-            activity.BaseRatingImpact = Int32.Parse(txtActivityRating.Text);
-
-
-            SqliteDataAccess.AddActivity(activity);
-
-        }
 
         private void btnLoadActivities_Click(object sender, EventArgs e)
         {
@@ -70,20 +61,7 @@ namespace RicksStaffApp
 
 
 
-        private void btnAddShift_Click(object sender, EventArgs e)
-        {
-            Shift s = new Shift();
-            s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
-            if (cbIsAmShift.Checked)
-            {
-                s.IsAm = true;
-            }
-            else
-            {
-                s.IsAm = false;
-            }
-            SqliteDataAccess.AddShift(s);
-        }
+
 
         private void btnLoadShifts_Click(object sender, EventArgs e)
         {
@@ -104,8 +82,8 @@ namespace RicksStaffApp
                 activityList = SqliteDataAccess.LoadActivities();
                 UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
                 lblCreateNew.Text = "Create New Activity";
-                txtActivityRating.Visible = true;
-                lblNewRating.Visible = true;
+                txtNewRating.Visible = true;
+                lblNewBaseRating.Visible = true;
                 btnAddItem.Text = "Create Activity";
             }
         }
@@ -123,28 +101,38 @@ namespace RicksStaffApp
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            Activity activity = new Activity();
 
-            activity.Name = txtNewName.Text;
-            activity.BaseRatingImpact = Int32.Parse(txtNewRating.Text);
+            if (rdoActivitiesView.Checked)
+            {
+                Activity activity = new Activity();
+                activity.Name = txtNewName.Text;
+                activity.BaseRatingImpact = Int32.Parse(txtNewRating.Text);
+                SqliteDataAccess.AddActivity(activity);
+                activityList.Clear();
+                activityList = SqliteDataAccess.LoadActivities();
+                UIHelper.CreateActivityPanels(activityList, flowSettingDisplay); 
+            }
+            if (rdoPositions.Checked)
+            {
+                Position position = new Position();
+                position.Name = txtNewName.Text;
+                SqliteDataAccess.AddPosition(position);
+                List<Position> positions = SqliteDataAccess.LoadPositions();
+                UIHelper.CreatePositionPanels(flowSettingDisplay, positions);
 
-
-            SqliteDataAccess.AddActivity(activity);
-            activityList.Clear();
-            activityList = SqliteDataAccess.LoadActivities();
-            UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
+            }
         }
 
         private void rdoPositions_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoPositions.Checked== true)
+            if (rdoPositions.Checked == true)
             {
                 List<Position> positions = SqliteDataAccess.LoadPositions();
                 UIHelper.CreatePositionPanels(flowSettingDisplay, positions);
                 lblCreateNew.Text = "Create New Position";
-                txtActivityRating.Visible = false;
-                lblNewRating.Visible = false;
-                btnAddItem.Text = "Create Position"; 
+                txtNewRating.Visible = false;
+                lblNewBaseRating.Visible = false;
+                btnAddItem.Text = "Create Position";
             }
         }
     }

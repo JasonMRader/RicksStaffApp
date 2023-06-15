@@ -616,7 +616,7 @@ namespace RicksStaffApp
         {
             // Clear existing panels
             flowFormDisplay.Controls.Clear();
-            int containerWidth = 315;
+            int containerWidth = 305;
             int firstContainer = 250;//(int)(containerWidth / 1.17);
             int nameWidth = 170;//(int)containerWidth / 2;
             int ratingWidth = 30;// (int)containerWidth / 9;

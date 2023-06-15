@@ -108,7 +108,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Positions (Name) values (@Name)", position);
+                cnn.Execute("insert into Position (Name) values (@Name)", position);
             }
         }
 
