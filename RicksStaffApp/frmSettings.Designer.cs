@@ -37,10 +37,26 @@
             btnAddItem = new Button();
             txtNewRating = new TextBox();
             txtNewName = new TextBox();
+            lblNewBaseRating = new Label();
             label1 = new Label();
             lblCreateNew = new Label();
-            lblNewBaseRating = new Label();
+            panel2 = new Panel();
+            nudEndingNumber = new NumericUpDown();
+            nudStartingNumber = new NumericUpDown();
+            cboEndingLetter = new ComboBox();
+            cboStartingLetter = new ComboBox();
+            comboBox1 = new ComboBox();
+            label2 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            lblExcelRange = new Label();
+            label4 = new Label();
+            label3 = new Label();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudEndingNumber).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudStartingNumber).BeginInit();
             SuspendLayout();
             // 
             // btnNewAction
@@ -138,7 +154,7 @@
             panel1.Controls.Add(lblCreateNew);
             panel1.Location = new Point(366, 69);
             panel1.Name = "panel1";
-            panel1.Size = new Size(495, 674);
+            panel1.Size = new Size(431, 674);
             panel1.TabIndex = 11;
             // 
             // btnAddItem
@@ -146,7 +162,7 @@
             btnAddItem.BackColor = Color.FromArgb(167, 204, 237);
             btnAddItem.FlatAppearance.BorderSize = 0;
             btnAddItem.FlatStyle = FlatStyle.Flat;
-            btnAddItem.Location = new Point(41, 177);
+            btnAddItem.Location = new Point(12, 181);
             btnAddItem.Name = "btnAddItem";
             btnAddItem.Size = new Size(397, 43);
             btnAddItem.TabIndex = 2;
@@ -157,7 +173,7 @@
             // txtNewRating
             // 
             txtNewRating.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNewRating.Location = new Point(209, 118);
+            txtNewRating.Location = new Point(180, 122);
             txtNewRating.Name = "txtNewRating";
             txtNewRating.Size = new Size(229, 29);
             txtNewRating.TabIndex = 1;
@@ -165,17 +181,28 @@
             // txtNewName
             // 
             txtNewName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNewName.Location = new Point(209, 77);
+            txtNewName.Location = new Point(180, 81);
             txtNewName.Name = "txtNewName";
             txtNewName.Size = new Size(229, 29);
             txtNewName.TabIndex = 1;
+            // 
+            // lblNewBaseRating
+            // 
+            lblNewBaseRating.AutoSize = true;
+            lblNewBaseRating.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNewBaseRating.ForeColor = Color.White;
+            lblNewBaseRating.Location = new Point(16, 122);
+            lblNewBaseRating.Name = "lblNewBaseRating";
+            lblNewBaseRating.Size = new Size(128, 25);
+            lblNewBaseRating.TabIndex = 0;
+            lblNewBaseRating.Text = "Rating Impact";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(107, 77);
+            label1.Location = new Point(78, 81);
             label1.Name = "label1";
             label1.Size = new Size(66, 25);
             label1.TabIndex = 0;
@@ -186,22 +213,151 @@
             lblCreateNew.AutoSize = true;
             lblCreateNew.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblCreateNew.ForeColor = Color.White;
-            lblCreateNew.Location = new Point(155, 9);
+            lblCreateNew.Location = new Point(126, 13);
             lblCreateNew.Name = "lblCreateNew";
             lblCreateNew.Size = new Size(195, 30);
             lblCreateNew.TabIndex = 0;
             lblCreateNew.Text = "Create New Activity";
             // 
-            // lblNewBaseRating
+            // panel2
             // 
-            lblNewBaseRating.AutoSize = true;
-            lblNewBaseRating.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblNewBaseRating.ForeColor = Color.White;
-            lblNewBaseRating.Location = new Point(45, 118);
-            lblNewBaseRating.Name = "lblNewBaseRating";
-            lblNewBaseRating.Size = new Size(128, 25);
-            lblNewBaseRating.TabIndex = 0;
-            lblNewBaseRating.Text = "Rating Impact";
+            panel2.Controls.Add(nudEndingNumber);
+            panel2.Controls.Add(nudStartingNumber);
+            panel2.Controls.Add(cboEndingLetter);
+            panel2.Controls.Add(cboStartingLetter);
+            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(label7);
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(lblExcelRange);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(label3);
+            panel2.Location = new Point(822, 69);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(448, 674);
+            panel2.TabIndex = 12;
+            // 
+            // nudEndingNumber
+            // 
+            nudEndingNumber.Location = new Point(210, 276);
+            nudEndingNumber.Name = "nudEndingNumber";
+            nudEndingNumber.Size = new Size(49, 23);
+            nudEndingNumber.TabIndex = 3;
+            nudEndingNumber.ValueChanged += SetExcelRangeText;
+            // 
+            // nudStartingNumber
+            // 
+            nudStartingNumber.Location = new Point(210, 214);
+            nudStartingNumber.Name = "nudStartingNumber";
+            nudStartingNumber.Size = new Size(49, 23);
+            nudStartingNumber.TabIndex = 3;
+            nudStartingNumber.ValueChanged += SetExcelRangeText;
+            // 
+            // cboEndingLetter
+            // 
+            cboEndingLetter.FormattingEnabled = true;
+            cboEndingLetter.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
+            cboEndingLetter.Location = new Point(140, 276);
+            cboEndingLetter.Name = "cboEndingLetter";
+            cboEndingLetter.Size = new Size(64, 23);
+            cboEndingLetter.TabIndex = 2;
+            cboEndingLetter.SelectedIndexChanged += SetExcelRangeText;
+            // 
+            // cboStartingLetter
+            // 
+            cboStartingLetter.FormattingEnabled = true;
+            cboStartingLetter.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
+            cboStartingLetter.Location = new Point(140, 214);
+            cboStartingLetter.Name = "cboStartingLetter";
+            cboStartingLetter.Size = new Size(64, 23);
+            cboStartingLetter.TabIndex = 2;
+            cboStartingLetter.SelectedIndexChanged += SetExcelRangeText;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(140, 81);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(192, 23);
+            comboBox1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(140, 15);
+            label2.Name = "label2";
+            label2.Size = new Size(131, 28);
+            label2.TabIndex = 0;
+            label2.Text = "Excel Settings";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(22, 348);
+            label7.Name = "label7";
+            label7.Size = new Size(105, 25);
+            label7.TabIndex = 0;
+            label7.Text = "Worksheet:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(93, 276);
+            label6.Name = "label6";
+            label6.Size = new Size(35, 25);
+            label6.TabIndex = 0;
+            label6.Text = "To:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(69, 209);
+            label5.Name = "label5";
+            label5.Size = new Size(59, 25);
+            label5.TabIndex = 0;
+            label5.Text = "From:";
+            // 
+            // lblExcelRange
+            // 
+            lblExcelRange.AutoSize = true;
+            lblExcelRange.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblExcelRange.ForeColor = Color.White;
+            lblExcelRange.Location = new Point(140, 144);
+            lblExcelRange.Name = "lblExcelRange";
+            lblExcelRange.Size = new Size(163, 25);
+            lblExcelRange.TabIndex = 0;
+            lblExcelRange.Text = "Select Cells Below";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(22, 144);
+            label4.Name = "label4";
+            label4.Size = new Size(106, 25);
+            label4.TabIndex = 0;
+            label4.Text = "Cell Range:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(45, 81);
+            label3.Name = "label3";
+            label3.Size = new Size(83, 25);
+            label3.TabIndex = 0;
+            label3.Text = "Position:";
             // 
             // frmSettings
             // 
@@ -209,6 +365,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1290, 755);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(rdoPositions);
             Controls.Add(rdoShifts);
@@ -221,6 +378,10 @@
             Load += frmSettings_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudEndingNumber).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudStartingNumber).EndInit();
             ResumeLayout(false);
         }
 
@@ -238,5 +399,18 @@
         //private Label lblNewActivityRating;
         private Label label1;
         private Label lblNewBaseRating;
+        private Panel panel2;
+        private NumericUpDown nudEndingNumber;
+        private NumericUpDown nudStartingNumber;
+        private ComboBox cboEndingLetter;
+        private ComboBox cboStartingLetter;
+        private ComboBox comboBox1;
+        private Label label2;
+        private Label label6;
+        private Label label5;
+        private Label lblExcelRange;
+        private Label label4;
+        private Label label3;
+        private Label label7;
     }
 }

@@ -20,7 +20,7 @@ namespace RicksStaffApp
         FlowLayoutPanel flpAdditionAction = new FlowLayoutPanel();
         Label lblNewActivityRating = new Label();
         List<Activity> activityList = new List<Activity>();
-        List <Position> positionList = new List<Position>();
+        List<Position> positionList = new List<Position>();
         List<Shift> shiftList = new List<Shift>();
 
 
@@ -110,7 +110,7 @@ namespace RicksStaffApp
                 SqliteDataAccess.AddActivity(activity);
                 activityList.Clear();
                 activityList = SqliteDataAccess.LoadActivities();
-                UIHelper.CreateActivityPanels(activityList, flowSettingDisplay); 
+                UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
             }
             if (rdoPositions.Checked)
             {
@@ -134,6 +134,15 @@ namespace RicksStaffApp
                 lblNewBaseRating.Visible = false;
                 btnAddItem.Text = "Create Position";
             }
+        }
+        private void SetExcelRangeText(object sender, EventArgs e)
+        {
+            lblExcelRange.Text = cboStartingLetter.Text + nudStartingNumber.Value.ToString() + ":" + cboEndingLetter.Text + nudEndingNumber.Value.ToString();
+        }
+
+        private void cboStartingLetter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //SetExcelRangeText();
         }
     }
 }

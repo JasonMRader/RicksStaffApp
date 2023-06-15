@@ -38,6 +38,8 @@ namespace RicksStaffApp
         private void frmOverview_Load(object sender, EventArgs e)
         {
             cboViewType.SelectedIndex = 0;
+            cboSortBy.SelectedIndex = 0;
+            cboTimeFrame.SelectedIndex = 0;
             employeeList.Clear();
             employeeList = SqliteDataAccess.TestLoadEmployees();
             ShiftList.Clear();
@@ -180,5 +182,7 @@ namespace RicksStaffApp
 
             }
         }
+
+
     }
 }

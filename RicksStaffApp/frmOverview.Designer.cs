@@ -34,20 +34,18 @@
             comboBox3 = new ComboBox();
             btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            cboSortBy = new ComboBox();
             cboViewType = new ComboBox();
             flowShiftRankings = new FlowLayoutPanel();
             flowGoodShiftRankings = new FlowLayoutPanel();
             label2 = new Label();
             label1 = new Label();
             flowEmployeeRankings = new FlowLayoutPanel();
-            comboBox1 = new ComboBox();
-            label7 = new Label();
+            cboTimeFrame = new ComboBox();
             lblMainWindowDescription = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            comboBox2 = new ComboBox();
             label3 = new Label();
             btnReset = new Button();
+            cboPositions = new ComboBox();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -117,14 +115,26 @@
             pnlEmployeeStats.Controls.Add(label2);
             pnlEmployeeStats.Controls.Add(label1);
             pnlEmployeeStats.Controls.Add(flowEmployeeRankings);
-            pnlEmployeeStats.Controls.Add(comboBox1);
-            pnlEmployeeStats.Controls.Add(label7);
+            pnlEmployeeStats.Controls.Add(cboTimeFrame);
             pnlEmployeeStats.Location = new Point(17, 72);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
             pnlEmployeeStats.Size = new Size(800, 675);
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
+            // 
+            // cboSortBy
+            // 
+            cboSortBy.BackColor = Color.FromArgb(74, 79, 99);
+            cboSortBy.FlatStyle = FlatStyle.Flat;
+            cboSortBy.ForeColor = Color.White;
+            cboSortBy.FormattingEnabled = true;
+            cboSortBy.Items.AddRange(new object[] { "Highest Rated", "Lowest Rated", "Most Recent", "Alphabetical" });
+            cboSortBy.Location = new Point(272, 31);
+            cboSortBy.Name = "cboSortBy";
+            cboSortBy.Size = new Size(157, 23);
+            cboSortBy.TabIndex = 12;
+            cboSortBy.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
             // 
             // cboViewType
             // 
@@ -133,7 +143,7 @@
             cboViewType.ForeColor = Color.White;
             cboViewType.FormattingEnabled = true;
             cboViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
-            cboViewType.Location = new Point(434, 12);
+            cboViewType.Location = new Point(255, 0);
             cboViewType.Name = "cboViewType";
             cboViewType.Size = new Size(157, 23);
             cboViewType.TabIndex = 12;
@@ -190,75 +200,28 @@
             flowEmployeeRankings.Size = new Size(501, 598);
             flowEmployeeRankings.TabIndex = 2;
             // 
-            // comboBox1
+            // cboTimeFrame
             // 
-            comboBox1.BackColor = Color.FromArgb(74, 79, 99);
-            comboBox1.FlatStyle = FlatStyle.Flat;
-            comboBox1.ForeColor = Color.White;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox1.Location = new Point(598, 12);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(157, 23);
-            comboBox1.TabIndex = 1;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(255, 15);
-            label7.Name = "label7";
-            label7.Size = new Size(136, 25);
-            label7.TabIndex = 1;
-            label7.Text = "Highest Rated";
+            cboTimeFrame.BackColor = Color.FromArgb(74, 79, 99);
+            cboTimeFrame.FlatStyle = FlatStyle.Flat;
+            cboTimeFrame.ForeColor = Color.White;
+            cboTimeFrame.FormattingEnabled = true;
+            cboTimeFrame.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
+            cboTimeFrame.Location = new Point(441, 0);
+            cboTimeFrame.Name = "cboTimeFrame";
+            cboTimeFrame.Size = new Size(157, 23);
+            cboTimeFrame.TabIndex = 1;
             // 
             // lblMainWindowDescription
             // 
             lblMainWindowDescription.AutoSize = true;
             lblMainWindowDescription.Font = new Font("Segoe UI", 18.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblMainWindowDescription.ForeColor = Color.White;
-            lblMainWindowDescription.Location = new Point(371, 19);
+            lblMainWindowDescription.Location = new Point(17, 26);
             lblMainWindowDescription.Name = "lblMainWindowDescription";
             lblMainWindowDescription.Size = new Size(128, 35);
             lblMainWindowDescription.TabIndex = 0;
             lblMainWindowDescription.Text = "Overview";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Enabled = false;
-            label5.ForeColor = Color.DimGray;
-            label5.Location = new Point(144, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(50, 15);
-            label5.TabIndex = 2;
-            label5.Text = "Position";
-            label5.Visible = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Enabled = false;
-            label4.ForeColor = Color.DimGray;
-            label4.Location = new Point(17, 9);
-            label4.Name = "label4";
-            label4.Size = new Size(64, 15);
-            label4.TabIndex = 2;
-            label4.Text = "Timeframe";
-            label4.Visible = false;
-            // 
-            // comboBox2
-            // 
-            comboBox2.BackColor = SystemColors.ScrollBar;
-            comboBox2.Enabled = false;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            comboBox2.Location = new Point(144, 27);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 1;
-            comboBox2.Visible = false;
             // 
             // label3
             // 
@@ -276,7 +239,7 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(740, 55);
+            btnReset.Location = new Point(784, 27);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(33, 23);
             btnReset.TabIndex = 3;
@@ -284,6 +247,18 @@
             btnReset.UseVisualStyleBackColor = false;
             btnReset.Visible = false;
             btnReset.Click += btnReset_Click;
+            // 
+            // cboPositions
+            // 
+            cboPositions.BackColor = Color.FromArgb(74, 79, 99);
+            cboPositions.FlatStyle = FlatStyle.Flat;
+            cboPositions.ForeColor = Color.White;
+            cboPositions.FormattingEnabled = true;
+            cboPositions.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
+            cboPositions.Location = new Point(458, 31);
+            cboPositions.Name = "cboPositions";
+            cboPositions.Size = new Size(157, 23);
+            cboPositions.TabIndex = 1;
             // 
             // frmOverview
             // 
@@ -293,14 +268,13 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(cboSortBy);
             Controls.Add(btnReset);
             Controls.Add(btnAddEmployee);
-            Controls.Add(label5);
             Controls.Add(label3);
             Controls.Add(lblMainWindowDescription);
-            Controls.Add(label4);
-            Controls.Add(comboBox2);
             Controls.Add(pnlEmployeeStats);
+            Controls.Add(cboPositions);
             Controls.Add(pnlEmployeeDisplay);
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(1320, 820);
@@ -324,21 +298,19 @@
         private Panel panel4;
         private TextBox txtBxEmployeeSearch;
         private ComboBox comboBox3;
-        private Label label5;
-        private Label label4;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cboTimeFrame;
         private Label lblMainWindowDescription;
         private Label label3;
         private Button btnAddEmployee;
         private FlowLayoutPanel flowEmployeeDisplay;
         private FlowLayoutPanel flowEmployeeRankings;
-        private Label label7;
         private Button btnReset;
         private Label label1;
         private Label label2;
         private FlowLayoutPanel flowGoodShiftRankings;
         private FlowLayoutPanel flowShiftRankings;
         private ComboBox cboViewType;
+        private ComboBox cboSortBy;
+        private ComboBox cboPositions;
     }
 }
