@@ -98,11 +98,15 @@ namespace RicksStaffApp
 
         private void rdoActivitiesView_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoActivitiesView.Checked)
+            if (rdoActivitiesView.Checked == true)
             {
                 activityList.Clear();
                 activityList = SqliteDataAccess.LoadActivities();
                 UIHelper.CreateActivityPanels(activityList, flowSettingDisplay);
+                lblCreateNew.Text = "Create New Activity";
+                txtActivityRating.Visible = true;
+                lblNewRating.Visible = true;
+                btnAddItem.Text = "Create Activity";
             }
         }
 
@@ -133,8 +137,15 @@ namespace RicksStaffApp
 
         private void rdoPositions_CheckedChanged(object sender, EventArgs e)
         {
-            List<Position> positions = SqliteDataAccess.LoadPositions();
-            UIHelper.CreatePositionPanels(flowSettingDisplay, positions);
+            if (rdoPositions.Checked== true)
+            {
+                List<Position> positions = SqliteDataAccess.LoadPositions();
+                UIHelper.CreatePositionPanels(flowSettingDisplay, positions);
+                lblCreateNew.Text = "Create New Position";
+                txtActivityRating.Visible = false;
+                lblNewRating.Visible = false;
+                btnAddItem.Text = "Create Position"; 
+            }
         }
     }
 }

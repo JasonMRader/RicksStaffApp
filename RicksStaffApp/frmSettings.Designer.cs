@@ -327,7 +327,7 @@
             btnAddItem.Name = "btnAddItem";
             btnAddItem.Size = new Size(397, 43);
             btnAddItem.TabIndex = 2;
-            btnAddItem.Text = "Add";
+            btnAddItem.Text = "Create Activity";
             btnAddItem.UseVisualStyleBackColor = false;
             btnAddItem.Click += btnAddItem_Click;
             // 

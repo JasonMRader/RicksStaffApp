@@ -1296,11 +1296,11 @@ namespace RicksStaffApp
             
             foreach (Position position in positions)
             {
-                FlowLayoutPanel positionContainer = CreateFlowPanel(470, 30);
-                positionContainer.MinimumSize = new Size(470, 30);
-                positionContainer.MaximumSize = new Size(470, 1000);
-                positionContainer.Margin = new Padding(15, 7, 15, 0);
-                Label lblPosition = CreateLabel(100, 30, position.Name);                
+                FlowLayoutPanel positionContainer = CreateFlowPanel(295, 30);
+                positionContainer.MinimumSize = new Size(295, 30);
+                positionContainer.MaximumSize = new Size(295, 1000);
+                positionContainer.Margin = new Padding(7, 7, 7, 0);
+                Label lblPosition = CreateLabel(290, 30, position.Name);                
                 positionContainer.Controls.Add(lblPosition);
                 flowPanel.Controls.Add(positionContainer);
                 
