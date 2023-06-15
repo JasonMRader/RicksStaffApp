@@ -16,6 +16,7 @@ namespace RicksStaffApp
 
         List<Shift> ShiftList = new List<Shift>();
         List<Employee> employeeList = new List<Employee>();
+        List<Position> positionList = new List<Position>();
         private frmAddNewEmployee frmAddNewEmployee;
         int goodShiftCount = 0;
         int badShiftCount = 0;
@@ -40,6 +41,13 @@ namespace RicksStaffApp
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
+            positionList = SqliteDataAccess.LoadPositions();
+            cboPositions.Items.Add("All Positions");
+            foreach (Position position in positionList)
+            {
+                cboPositions.Items.Add(position.Name);
+            }
+            cboPositions.SelectedIndex = 0;
             employeeList.Clear();
             employeeList = SqliteDataAccess.TestLoadEmployees();
             ShiftList.Clear();
