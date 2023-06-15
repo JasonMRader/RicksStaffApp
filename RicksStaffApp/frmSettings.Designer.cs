@@ -72,7 +72,6 @@
             btnNewAction.TabIndex = 1;
             btnNewAction.Text = "Add New";
             btnNewAction.UseVisualStyleBackColor = false;
-            btnNewAction.Visible = false;
             btnNewAction.Click += btnNewAction_Click;
             // 
             // flowSettingDisplay
@@ -84,7 +83,7 @@
             flowSettingDisplay.Margin = new Padding(3, 0, 3, 3);
             flowSettingDisplay.Name = "flowSettingDisplay";
             flowSettingDisplay.Padding = new Padding(10, 15, 0, 0);
-            flowSettingDisplay.Size = new Size(495, 674);
+            flowSettingDisplay.Size = new Size(326, 674);
             flowSettingDisplay.TabIndex = 2;
             flowSettingDisplay.WrapContents = false;
             // 
@@ -259,7 +258,7 @@
             rdoActivitiesView.Location = new Point(12, 36);
             rdoActivitiesView.Margin = new Padding(3, 3, 0, 0);
             rdoActivitiesView.Name = "rdoActivitiesView";
-            rdoActivitiesView.Size = new Size(104, 33);
+            rdoActivitiesView.Size = new Size(163, 33);
             rdoActivitiesView.TabIndex = 10;
             rdoActivitiesView.TabStop = true;
             rdoActivitiesView.Text = "Activities";
@@ -275,7 +274,7 @@
             rdoShifts.FlatStyle = FlatStyle.Flat;
             rdoShifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rdoShifts.ForeColor = Color.FromArgb(0, 126, 249);
-            rdoShifts.Location = new Point(125, 36);
+            rdoShifts.Location = new Point(972, 13);
             rdoShifts.Margin = new Padding(0, 3, 0, 0);
             rdoShifts.Name = "rdoShifts";
             rdoShifts.Size = new Size(104, 33);
@@ -284,6 +283,7 @@
             rdoShifts.Text = "Shifts";
             rdoShifts.TextAlign = ContentAlignment.MiddleCenter;
             rdoShifts.UseVisualStyleBackColor = true;
+            rdoShifts.Visible = false;
             rdoShifts.CheckedChanged += rdoShifts_CheckedChanged;
             // 
             // rdoPositions
@@ -294,10 +294,10 @@
             rdoPositions.FlatStyle = FlatStyle.Flat;
             rdoPositions.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rdoPositions.ForeColor = Color.FromArgb(0, 126, 249);
-            rdoPositions.Location = new Point(229, 36);
+            rdoPositions.Location = new Point(175, 36);
             rdoPositions.Margin = new Padding(0, 3, 0, 0);
             rdoPositions.Name = "rdoPositions";
-            rdoPositions.Size = new Size(104, 33);
+            rdoPositions.Size = new Size(163, 33);
             rdoPositions.TabIndex = 10;
             rdoPositions.TabStop = true;
             rdoPositions.Text = "Positions";
@@ -313,7 +313,7 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(lblCreateNew);
-            panel1.Location = new Point(528, 69);
+            panel1.Location = new Point(366, 69);
             panel1.Name = "panel1";
             panel1.Size = new Size(495, 674);
             panel1.TabIndex = 11;

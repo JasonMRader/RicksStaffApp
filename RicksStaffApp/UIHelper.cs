@@ -616,10 +616,10 @@ namespace RicksStaffApp
         {
             // Clear existing panels
             flowFormDisplay.Controls.Clear();
-            int containerWidth = 475;
-            int firstContainer = (int)(containerWidth / 1.1);
-            int nameWidth = (int)containerWidth / 4;
-            int ratingWidth = (int)containerWidth / 9;
+            int containerWidth = 315;
+            int firstContainer = 250;//(int)(containerWidth / 1.17);
+            int nameWidth = 170;//(int)containerWidth / 2;
+            int ratingWidth = 30;// (int)containerWidth / 9;
             int modPanelWidth = (int)containerWidth / 3;
 
             // Loop through employee list and create a panel for each employee
@@ -652,11 +652,15 @@ namespace RicksStaffApp
                 activityPanel.Controls.Add(lblName);
 
                 Label lblBaseRating = new Label();
-                lblBaseRating.Text = activity.BaseRatingImpact.ToString();
+                lblBaseRating.Text = activity.BaseRatingDisplay;
                 lblBaseRating.AutoSize = false;
                 lblBaseRating.Size = new Size(ratingWidth, 30);
                 lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
                 activityPanel.Controls.Add(lblBaseRating);
+
+                PictureBox ratingPicBx = new PictureBox();
+                ratingPicBx.Image = GetArrowImage(activity.BaseRatingImpact);
+                activityPanel.Controls.Add((Control)ratingPicBx);
 
                 //Panel pnlModDisplay = new Panel();
                 //pnlModDisplay.Size = new Size(modPanelWidth, 30);
@@ -718,7 +722,7 @@ namespace RicksStaffApp
                 System.Windows.Forms.Button btnDelete = new System.Windows.Forms.Button();
                 btnDelete.Text = "X";
                 btnDelete.Margin = new Padding(0, 0, 0, 0);
-                btnDelete.Location = new Point(410, 0);
+                //btnDelete.Location = new Point(410, 0);
                 btnDelete.ForeColor = Color.Black;
                 btnDelete.Font = new Font(btnDelete.Font.FontFamily, 10);
                 btnDelete.TextAlign = ContentAlignment.MiddleCenter;
