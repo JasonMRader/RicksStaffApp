@@ -45,6 +45,10 @@
             lblMainWindowDescription = new Label();
             btnReset = new Button();
             cboPositions = new ComboBox();
+            lbTimeFrame = new ListBox();
+            lbSortBy = new ListBox();
+            lbViewType = new ListBox();
+            lbPositions = new ListBox();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -53,21 +57,21 @@
             // 
             pnlEmployeeDisplay.BackColor = Color.FromArgb(46, 51, 73);
             pnlEmployeeDisplay.Controls.Add(flowEmployeeRankings);
-            pnlEmployeeDisplay.Location = new Point(827, 72);
+            pnlEmployeeDisplay.Location = new Point(827, 90);
             pnlEmployeeDisplay.Margin = new Padding(8);
             pnlEmployeeDisplay.Name = "pnlEmployeeDisplay";
             pnlEmployeeDisplay.Padding = new Padding(8);
-            pnlEmployeeDisplay.Size = new Size(450, 675);
+            pnlEmployeeDisplay.Size = new Size(450, 657);
             pnlEmployeeDisplay.TabIndex = 0;
             // 
             // flowEmployeeRankings
             // 
             flowEmployeeRankings.AutoScroll = true;
             flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeRankings.Location = new Point(11, 36);
+            flowEmployeeRankings.Location = new Point(11, 26);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
             flowEmployeeRankings.Padding = new Padding(0, 10, 0, 0);
-            flowEmployeeRankings.Size = new Size(440, 628);
+            flowEmployeeRankings.Size = new Size(440, 638);
             flowEmployeeRankings.TabIndex = 2;
             // 
             // flowEmployeeDisplay
@@ -179,10 +183,11 @@
             cboViewType.ForeColor = Color.White;
             cboViewType.FormattingEnabled = true;
             cboViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
-            cboViewType.Location = new Point(1009, 42);
+            cboViewType.Location = new Point(579, 41);
             cboViewType.Name = "cboViewType";
             cboViewType.Size = new Size(157, 23);
             cboViewType.TabIndex = 12;
+            cboViewType.Visible = false;
             cboViewType.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
             // 
             // cboTimeFrame
@@ -192,10 +197,11 @@
             cboTimeFrame.ForeColor = Color.White;
             cboTimeFrame.FormattingEnabled = true;
             cboTimeFrame.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            cboTimeFrame.Location = new Point(846, 42);
+            cboTimeFrame.Location = new Point(416, 12);
             cboTimeFrame.Name = "cboTimeFrame";
             cboTimeFrame.Size = new Size(157, 23);
             cboTimeFrame.TabIndex = 1;
+            cboTimeFrame.Visible = false;
             // 
             // cboSortBy
             // 
@@ -204,10 +210,11 @@
             cboSortBy.ForeColor = Color.White;
             cboSortBy.FormattingEnabled = true;
             cboSortBy.Items.AddRange(new object[] { "Highest Rated", "Lowest Rated", "Most Recent", "Alphabetical" });
-            cboSortBy.Location = new Point(846, 13);
+            cboSortBy.Location = new Point(579, 12);
             cboSortBy.Name = "cboSortBy";
             cboSortBy.Size = new Size(157, 23);
             cboSortBy.TabIndex = 12;
+            cboSortBy.Visible = false;
             cboSortBy.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
             // 
             // lblMainWindowDescription
@@ -242,10 +249,62 @@
             cboPositions.FlatStyle = FlatStyle.Flat;
             cboPositions.ForeColor = Color.White;
             cboPositions.FormattingEnabled = true;
-            cboPositions.Location = new Point(1009, 12);
+            cboPositions.Location = new Point(253, 12);
             cboPositions.Name = "cboPositions";
             cboPositions.Size = new Size(157, 23);
             cboPositions.TabIndex = 1;
+            cboPositions.Visible = false;
+            // 
+            // lbTimeFrame
+            // 
+            lbTimeFrame.BackColor = Color.FromArgb(74, 79, 99);
+            lbTimeFrame.BorderStyle = BorderStyle.None;
+            lbTimeFrame.ForeColor = Color.White;
+            lbTimeFrame.FormattingEnabled = true;
+            lbTimeFrame.ItemHeight = 15;
+            lbTimeFrame.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
+            lbTimeFrame.Location = new Point(839, 4);
+            lbTimeFrame.Name = "lbTimeFrame";
+            lbTimeFrame.Size = new Size(105, 75);
+            lbTimeFrame.TabIndex = 13;
+            // 
+            // lbSortBy
+            // 
+            lbSortBy.BackColor = Color.FromArgb(74, 79, 99);
+            lbSortBy.BorderStyle = BorderStyle.None;
+            lbSortBy.ForeColor = Color.White;
+            lbSortBy.FormattingEnabled = true;
+            lbSortBy.ItemHeight = 15;
+            lbSortBy.Items.AddRange(new object[] { "Highest Rated", "Lowest Rated", "Most Recent", "Alphabetical" });
+            lbSortBy.Location = new Point(950, 4);
+            lbSortBy.Name = "lbSortBy";
+            lbSortBy.Size = new Size(105, 75);
+            lbSortBy.TabIndex = 14;
+            // 
+            // lbViewType
+            // 
+            lbViewType.BackColor = Color.FromArgb(74, 79, 99);
+            lbViewType.BorderStyle = BorderStyle.None;
+            lbViewType.ForeColor = Color.White;
+            lbViewType.FormattingEnabled = true;
+            lbViewType.ItemHeight = 15;
+            lbViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
+            lbViewType.Location = new Point(1061, 4);
+            lbViewType.Name = "lbViewType";
+            lbViewType.Size = new Size(105, 75);
+            lbViewType.TabIndex = 15;
+            // 
+            // lbPositions
+            // 
+            lbPositions.BackColor = Color.FromArgb(74, 79, 99);
+            lbPositions.BorderStyle = BorderStyle.None;
+            lbPositions.ForeColor = Color.White;
+            lbPositions.FormattingEnabled = true;
+            lbPositions.ItemHeight = 15;
+            lbPositions.Location = new Point(1172, 4);
+            lbPositions.Name = "lbPositions";
+            lbPositions.Size = new Size(105, 75);
+            lbPositions.TabIndex = 16;
             // 
             // frmOverview
             // 
@@ -255,6 +314,10 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(lbPositions);
+            Controls.Add(lbViewType);
+            Controls.Add(lbSortBy);
+            Controls.Add(lbTimeFrame);
             Controls.Add(comboBox3);
             Controls.Add(txtBxEmployeeSearch);
             Controls.Add(flowEmployeeDisplay);
@@ -301,5 +364,9 @@
         private ComboBox cboViewType;
         private ComboBox cboSortBy;
         private ComboBox cboPositions;
+        private ListBox lbTimeFrame;
+        private ListBox lbSortBy;
+        private ListBox lbViewType;
+        private ListBox lbPositions;
     }
 }

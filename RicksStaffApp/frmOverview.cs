@@ -42,10 +42,11 @@ namespace RicksStaffApp
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
             positionList = SqliteDataAccess.LoadPositions();
-            cboPositions.Items.Add("All Positions");
+            lbPositions.Items.Add("All Positions");
             foreach (Position position in positionList)
             {
                 cboPositions.Items.Add(position.Name);
+                lbPositions.Items.Add(position.Name);
             }
             cboPositions.SelectedIndex = 0;
             employeeList.Clear();
