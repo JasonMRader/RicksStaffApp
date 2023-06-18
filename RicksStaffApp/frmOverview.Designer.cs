@@ -35,9 +35,11 @@
             comboBox3 = new ComboBox();
             btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            flowMostFrequentIncidents = new FlowLayoutPanel();
             flowShiftRankings = new FlowLayoutPanel();
             flowGoodShiftRankings = new FlowLayoutPanel();
             label2 = new Label();
+            label3 = new Label();
             label1 = new Label();
             cboViewType = new ComboBox();
             cboTimeFrame = new ComboBox();
@@ -57,18 +59,18 @@
             // 
             pnlEmployeeDisplay.BackColor = Color.FromArgb(46, 51, 73);
             pnlEmployeeDisplay.Controls.Add(flowEmployeeRankings);
-            pnlEmployeeDisplay.Location = new Point(827, 90);
+            pnlEmployeeDisplay.Location = new Point(17, 119);
             pnlEmployeeDisplay.Margin = new Padding(8);
             pnlEmployeeDisplay.Name = "pnlEmployeeDisplay";
             pnlEmployeeDisplay.Padding = new Padding(8);
-            pnlEmployeeDisplay.Size = new Size(450, 657);
+            pnlEmployeeDisplay.Size = new Size(450, 639);
             pnlEmployeeDisplay.TabIndex = 0;
             // 
             // flowEmployeeRankings
             // 
             flowEmployeeRankings.AutoScroll = true;
             flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeRankings.Location = new Point(11, 26);
+            flowEmployeeRankings.Location = new Point(10, 3);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
             flowEmployeeRankings.Padding = new Padding(0, 10, 0, 0);
             flowEmployeeRankings.Size = new Size(440, 638);
@@ -124,34 +126,44 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(flowMostFrequentIncidents);
             pnlEmployeeStats.Controls.Add(flowShiftRankings);
             pnlEmployeeStats.Controls.Add(flowGoodShiftRankings);
             pnlEmployeeStats.Controls.Add(label2);
+            pnlEmployeeStats.Controls.Add(label3);
             pnlEmployeeStats.Controls.Add(label1);
-            pnlEmployeeStats.Location = new Point(17, 72);
+            pnlEmployeeStats.Location = new Point(483, 101);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
             pnlEmployeeStats.Size = new Size(800, 675);
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
             // 
+            // flowMostFrequentIncidents
+            // 
+            flowMostFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
+            flowMostFrequentIncidents.Location = new Point(13, 44);
+            flowMostFrequentIncidents.Name = "flowMostFrequentIncidents";
+            flowMostFrequentIncidents.Size = new Size(240, 600);
+            flowMostFrequentIncidents.TabIndex = 12;
+            // 
             // flowShiftRankings
             // 
             flowShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftRankings.Location = new Point(23, 341);
+            flowShiftRankings.Location = new Point(279, 42);
             flowShiftRankings.Name = "flowShiftRankings";
             flowShiftRankings.Padding = new Padding(0, 10, 0, 0);
-            flowShiftRankings.Size = new Size(210, 300);
+            flowShiftRankings.Size = new Size(240, 600);
             flowShiftRankings.TabIndex = 11;
             // 
             // flowGoodShiftRankings
             // 
             flowGoodShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
             flowGoodShiftRankings.FlowDirection = FlowDirection.TopDown;
-            flowGoodShiftRankings.Location = new Point(23, 44);
+            flowGoodShiftRankings.Location = new Point(548, 42);
             flowGoodShiftRankings.Name = "flowGoodShiftRankings";
             flowGoodShiftRankings.Padding = new Padding(0, 10, 0, 0);
-            flowGoodShiftRankings.Size = new Size(210, 247);
+            flowGoodShiftRankings.Size = new Size(240, 600);
             flowGoodShiftRankings.TabIndex = 10;
             // 
             // label2
@@ -159,18 +171,29 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(23, 317);
+            label2.Location = new Point(279, 18);
             label2.Name = "label2";
             label2.Size = new Size(87, 21);
             label2.TabIndex = 9;
             label2.Text = "Best Shifts";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(13, 18);
+            label3.Name = "label3";
+            label3.Size = new Size(190, 21);
+            label3.TabIndex = 8;
+            label3.Text = "Most Common Incidents";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(23, 18);
+            label1.Location = new Point(548, 18);
             label1.Name = "label1";
             label1.Size = new Size(158, 21);
             label1.TabIndex = 8;
@@ -183,7 +206,7 @@
             cboViewType.ForeColor = Color.White;
             cboViewType.FormattingEnabled = true;
             cboViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
-            cboViewType.Location = new Point(579, 41);
+            cboViewType.Location = new Point(742, 41);
             cboViewType.Name = "cboViewType";
             cboViewType.Size = new Size(157, 23);
             cboViewType.TabIndex = 12;
@@ -197,7 +220,7 @@
             cboTimeFrame.ForeColor = Color.White;
             cboTimeFrame.FormattingEnabled = true;
             cboTimeFrame.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            cboTimeFrame.Location = new Point(416, 12);
+            cboTimeFrame.Location = new Point(742, 12);
             cboTimeFrame.Name = "cboTimeFrame";
             cboTimeFrame.Size = new Size(157, 23);
             cboTimeFrame.TabIndex = 1;
@@ -222,7 +245,7 @@
             lblMainWindowDescription.AutoSize = true;
             lblMainWindowDescription.Font = new Font("Segoe UI", 18.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblMainWindowDescription.ForeColor = Color.White;
-            lblMainWindowDescription.Location = new Point(17, 26);
+            lblMainWindowDescription.Location = new Point(608, 38);
             lblMainWindowDescription.Name = "lblMainWindowDescription";
             lblMainWindowDescription.Size = new Size(128, 35);
             lblMainWindowDescription.TabIndex = 0;
@@ -233,7 +256,7 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(781, 59);
+            btnReset.Location = new Point(1250, 67);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(33, 23);
             btnReset.TabIndex = 3;
@@ -249,7 +272,7 @@
             cboPositions.FlatStyle = FlatStyle.Flat;
             cboPositions.ForeColor = Color.White;
             cboPositions.FormattingEnabled = true;
-            cboPositions.Location = new Point(253, 12);
+            cboPositions.Location = new Point(927, 12);
             cboPositions.Name = "cboPositions";
             cboPositions.Size = new Size(157, 23);
             cboPositions.TabIndex = 1;
@@ -263,7 +286,7 @@
             lbTimeFrame.FormattingEnabled = true;
             lbTimeFrame.ItemHeight = 15;
             lbTimeFrame.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
-            lbTimeFrame.Location = new Point(839, 4);
+            lbTimeFrame.Location = new Point(25, 41);
             lbTimeFrame.Name = "lbTimeFrame";
             lbTimeFrame.Size = new Size(105, 75);
             lbTimeFrame.TabIndex = 13;
@@ -276,7 +299,7 @@
             lbSortBy.FormattingEnabled = true;
             lbSortBy.ItemHeight = 15;
             lbSortBy.Items.AddRange(new object[] { "Highest Rated", "Lowest Rated", "Most Recent", "Alphabetical" });
-            lbSortBy.Location = new Point(950, 4);
+            lbSortBy.Location = new Point(139, 41);
             lbSortBy.Name = "lbSortBy";
             lbSortBy.Size = new Size(105, 75);
             lbSortBy.TabIndex = 14;
@@ -289,7 +312,7 @@
             lbViewType.FormattingEnabled = true;
             lbViewType.ItemHeight = 15;
             lbViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
-            lbViewType.Location = new Point(1061, 4);
+            lbViewType.Location = new Point(250, 41);
             lbViewType.Name = "lbViewType";
             lbViewType.Size = new Size(105, 75);
             lbViewType.TabIndex = 15;
@@ -301,7 +324,7 @@
             lbPositions.ForeColor = Color.White;
             lbPositions.FormattingEnabled = true;
             lbPositions.ItemHeight = 15;
-            lbPositions.Location = new Point(1172, 4);
+            lbPositions.Location = new Point(361, 41);
             lbPositions.Name = "lbPositions";
             lbPositions.Size = new Size(105, 75);
             lbPositions.TabIndex = 16;
@@ -318,12 +341,12 @@
             Controls.Add(lbViewType);
             Controls.Add(lbSortBy);
             Controls.Add(lbTimeFrame);
+            Controls.Add(btnReset);
             Controls.Add(comboBox3);
             Controls.Add(txtBxEmployeeSearch);
             Controls.Add(flowEmployeeDisplay);
             Controls.Add(cboViewType);
             Controls.Add(cboSortBy);
-            Controls.Add(btnReset);
             Controls.Add(btnAddEmployee);
             Controls.Add(cboTimeFrame);
             Controls.Add(lblMainWindowDescription);
@@ -368,5 +391,7 @@
         private ListBox lbSortBy;
         private ListBox lbViewType;
         private ListBox lbPositions;
+        private FlowLayoutPanel flowMostFrequentIncidents;
+        private Label label3;
     }
 }

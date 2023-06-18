@@ -17,6 +17,7 @@ namespace RicksStaffApp
         List<Shift> ShiftList = new List<Shift>();
         List<Employee> employeeList = new List<Employee>();
         List<Position> positionList = new List<Position>();
+        List<Incident> incidentList = new List<Incident>();
         private frmAddNewEmployee frmAddNewEmployee;
         int goodShiftCount = 0;
         int badShiftCount = 0;
@@ -89,9 +90,11 @@ namespace RicksStaffApp
             {
                 employee.AddIncidentsFromShifts();
                 employee.UpdateOverallRating();
+                incidentList.AddRange(employee.Incidents);
             }
             employeeList = employeeList.OrderBy(emp => emp.FullName).ToList();
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            UIHelper.CreateIncidentFrequencyPanels(incidentList, flowMostFrequentIncidents);
             var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
             var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(10).ToList();
             UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);

@@ -283,9 +283,9 @@
             // 
             flowEmployeeShifts.AutoScroll = true;
             flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeShifts.Location = new Point(255, 43);
+            flowEmployeeShifts.Location = new Point(255, 44);
             flowEmployeeShifts.Name = "flowEmployeeShifts";
-            flowEmployeeShifts.Size = new Size(501, 598);
+            flowEmployeeShifts.Size = new Size(533, 598);
             flowEmployeeShifts.TabIndex = 6;
             // 
             // label3
