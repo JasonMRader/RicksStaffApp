@@ -141,6 +141,7 @@
             // 
             // flowMostFrequentIncidents
             // 
+            flowMostFrequentIncidents.AutoScroll = true;
             flowMostFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
             flowMostFrequentIncidents.Location = new Point(13, 44);
             flowMostFrequentIncidents.Name = "flowMostFrequentIncidents";
@@ -149,6 +150,7 @@
             // 
             // flowShiftRankings
             // 
+            flowShiftRankings.AutoScroll = true;
             flowShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
             flowShiftRankings.Location = new Point(279, 42);
             flowShiftRankings.Name = "flowShiftRankings";
@@ -158,8 +160,8 @@
             // 
             // flowGoodShiftRankings
             // 
+            flowGoodShiftRankings.AutoScroll = true;
             flowGoodShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowGoodShiftRankings.FlowDirection = FlowDirection.TopDown;
             flowGoodShiftRankings.Location = new Point(548, 42);
             flowGoodShiftRankings.Name = "flowGoodShiftRankings";
             flowGoodShiftRankings.Padding = new Padding(0, 10, 0, 0);

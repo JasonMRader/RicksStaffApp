@@ -54,7 +54,7 @@ namespace RicksStaffApp
             employeeList = SqliteDataAccess.TestLoadEmployees();
             ShiftList.Clear();
             ShiftList = SqliteDataAccess.LoadShifts();
-            var rankedShifts = ShiftList.OrderByDescending(shift => shift.AverageRating).Take(10).ToList();
+            var rankedShifts = ShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
             UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
             string[] names = employeeList.Select(e => e.FullName).ToArray();
             AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
@@ -96,7 +96,7 @@ namespace RicksStaffApp
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateIncidentFrequencyPanels(incidentList, flowMostFrequentIncidents);
             var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-            var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(10).ToList();
+            var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
             //UIHelper.ConfigureFlowLayoutPanel(flowGoodShiftRankings);
