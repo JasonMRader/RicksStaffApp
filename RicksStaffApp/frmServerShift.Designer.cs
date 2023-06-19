@@ -61,19 +61,18 @@
             // 
             flowIncidentToAdd.BackColor = Color.FromArgb(37, 42, 64);
             flowIncidentToAdd.FlowDirection = FlowDirection.TopDown;
-            flowIncidentToAdd.Location = new Point(284, 92);
+            flowIncidentToAdd.Location = new Point(303, 92);
             flowIncidentToAdd.Name = "flowIncidentToAdd";
-            flowIncidentToAdd.Size = new Size(470, 460);
+            flowIncidentToAdd.Size = new Size(450, 460);
             flowIncidentToAdd.TabIndex = 6;
             // 
             // flowActivityDisplay
             // 
             flowActivityDisplay.AutoScroll = true;
             flowActivityDisplay.BackColor = Color.FromArgb(37, 42, 64);
-            flowActivityDisplay.FlowDirection = FlowDirection.TopDown;
             flowActivityDisplay.Location = new Point(17, 92);
             flowActivityDisplay.Name = "flowActivityDisplay";
-            flowActivityDisplay.Size = new Size(261, 460);
+            flowActivityDisplay.Size = new Size(280, 460);
             flowActivityDisplay.TabIndex = 5;
             // 
             // label2

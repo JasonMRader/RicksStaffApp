@@ -58,7 +58,7 @@ namespace RicksStaffApp
 
             foreach (Activity activity in activityList)
             {
-                FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowFormDisplay.Width, flowToAdd, employeeShift);
+                FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowFormDisplay.Width - 30, flowToAdd, employeeShift);
 
                 flowFormDisplay.Controls.Add(activityPanelContainer);
             }
