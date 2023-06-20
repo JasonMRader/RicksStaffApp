@@ -292,6 +292,7 @@
             lbTimeFrame.Name = "lbTimeFrame";
             lbTimeFrame.Size = new Size(105, 75);
             lbTimeFrame.TabIndex = 13;
+            lbTimeFrame.SelectedIndexChanged += lbTimeFrame_SelectedIndexChanged;
             // 
             // lbSortBy
             // 
