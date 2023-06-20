@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RicksStaffApp
@@ -39,7 +40,7 @@ namespace RicksStaffApp
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
-            
+
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
@@ -200,6 +201,22 @@ namespace RicksStaffApp
             }
         }
 
+        private void lbTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
 
+           
+            int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
+            DateTime thisWeekStart = today.AddDays(-daysUntilMonday);
+
+        }
+        public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)
+        {
+            // Get today's date
+            
+
+            // Filter data between this week's start and today
+            return allData.Where(data => data.Date >= thisWeekStart && data.Date <= today);
+        }
     }
 }
