@@ -29,6 +29,24 @@ namespace RicksStaffApp
             InitializeComponent();
 
         }
+        private IEnumerable<EmployeeShift> QueryEmployeeShift(IEnumerable<EmployeeShift> employeeShift, EmployeeShiftQueryParameters parameters)
+        {
+            var query = employeeShift.AsQueryable(); // Convert to IQueryable to enable LINQ-to-Objects
+
+            if (!string.IsNullOrEmpty(parameters.Position))
+            {
+                //query = query.Where(e => e.Position == parameters.Position);
+            }
+
+            if (parameters.StartDate.HasValue)
+            {
+                //query = query.Where(e => e.StartDate >= parameters.StartDate.Value);
+            }
+
+            // ... handle other parameters
+
+            return query; // Return the filtered/sorted data
+        }
 
         private void frmAddNewEmployee_FormClosed(object? sender, EventArgs e)
         {
@@ -205,18 +223,18 @@ namespace RicksStaffApp
         {
             DateTime today = DateTime.Today;
 
-           
+
             int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
             DateTime thisWeekStart = today.AddDays(-daysUntilMonday);
 
         }
-        public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)
-        {
-            // Get today's date
-            
+        //public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)
+        //{
+        //    // Get today's date
 
-            // Filter data between this week's start and today
-            return allData.Where(data => data.Date >= thisWeekStart && data.Date <= today);
-        }
+
+        //    // Filter data between this week's start and today
+        //    return allData.Where(data => data.Date >= thisWeekStart && data.Date <= today);
+        //}
     }
 }

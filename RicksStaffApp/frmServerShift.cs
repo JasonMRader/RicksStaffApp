@@ -107,6 +107,36 @@ namespace RicksStaffApp
                 lblBaseRating.TextAlign = ContentAlignment.MiddleCenter;
                 incidentPanel.Controls.Add(lblBaseRating);
 
+                Button btnNote = new Button();
+                btnNote.Text = "Add Note";
+                btnNote.Size = new Size(70,30);
+                btnNote.FlatStyle = FlatStyle.Flat;
+                btnNote.TextAlign = ContentAlignment.MiddleCenter;
+                btnNote.Margin = new Padding(0);
+                bool btnClicked = false;
+                FlowLayoutPanel flowNote = new FlowLayoutPanel();
+                flowNote.MinimumSize = new Size(containerWidth-30 , 90);
+                btnNote.Click += (sender, e) =>
+                {
+                    btnClicked = !btnClicked;
+                    if (btnClicked)
+                    {
+                        TextBox txt = new TextBox();
+                        txt.Multiline = true;
+                        txt.WordWrap = true;
+                        txt.Size = new Size(containerWidth - 30, 60);
+                        flowNote.Controls.Add(txt);
+                        pnlContainer.Controls.Add(flowNote);
+                    }
+                    else
+                    {
+                        flowNote.Controls.Clear();
+                        pnlContainer.Controls.Remove(flowNote);
+                    }
+
+                };
+                incidentPanel.Controls.Add(btnNote);
+
                 pnlContainer.Controls.Add(incidentPanel);
                 Button btnDelete = new Button();
                 btnDelete.Text = "X";

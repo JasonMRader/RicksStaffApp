@@ -51,6 +51,7 @@
             lbSortBy = new ListBox();
             lbViewType = new ListBox();
             lbPositions = new ListBox();
+            textBox1 = new TextBox();
             pnlEmployeeDisplay.SuspendLayout();
             pnlEmployeeStats.SuspendLayout();
             SuspendLayout();
@@ -210,7 +211,7 @@
             cboViewType.Items.AddRange(new object[] { "Employees", "Employee Shifts" });
             cboViewType.Location = new Point(742, 41);
             cboViewType.Name = "cboViewType";
-            cboViewType.Size = new Size(157, 23);
+            cboViewType.Size = new Size(60, 23);
             cboViewType.TabIndex = 12;
             cboViewType.Visible = false;
             cboViewType.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
@@ -224,7 +225,7 @@
             cboTimeFrame.Items.AddRange(new object[] { "All Time", "This Week", "Last Week", "This Month", "Last Month", "Other" });
             cboTimeFrame.Location = new Point(742, 12);
             cboTimeFrame.Name = "cboTimeFrame";
-            cboTimeFrame.Size = new Size(157, 23);
+            cboTimeFrame.Size = new Size(60, 23);
             cboTimeFrame.TabIndex = 1;
             cboTimeFrame.Visible = false;
             // 
@@ -274,9 +275,9 @@
             cboPositions.FlatStyle = FlatStyle.Flat;
             cboPositions.ForeColor = Color.White;
             cboPositions.FormattingEnabled = true;
-            cboPositions.Location = new Point(927, 12);
+            cboPositions.Location = new Point(808, 12);
             cboPositions.Name = "cboPositions";
-            cboPositions.Size = new Size(157, 23);
+            cboPositions.Size = new Size(71, 23);
             cboPositions.TabIndex = 1;
             cboPositions.Visible = false;
             // 
@@ -332,6 +333,14 @@
             lbPositions.Size = new Size(105, 75);
             lbPositions.TabIndex = 16;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(991, 12);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(114, 61);
+            textBox1.TabIndex = 17;
+            // 
             // frmOverview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -340,6 +349,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(textBox1);
             Controls.Add(lbPositions);
             Controls.Add(lbViewType);
             Controls.Add(lbSortBy);
@@ -396,5 +406,6 @@
         private ListBox lbPositions;
         private FlowLayoutPanel flowMostFrequentIncidents;
         private Label label3;
+        private TextBox textBox1;
     }
 }
