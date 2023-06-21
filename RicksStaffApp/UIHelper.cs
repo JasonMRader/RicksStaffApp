@@ -977,14 +977,14 @@ namespace RicksStaffApp
             // Loop through employee list and create a panel for each employee
             foreach (Employee emp in employeeList)
             {
-                Panel empPanelContainer = CreatePanel(410, 50);
+                Panel empPanelContainer = CreatePanel(410, 40);
                 empPanelContainer.Margin = new Padding(15, 7, 15, 0);
                 
 
-                FlowLayoutPanel empPanel = CreateFlowPanel(410, 50);
+                FlowLayoutPanel empPanel = CreateFlowPanel(410, 40);
                 empPanel.Margin = new Padding(1, 1, 1, 1);
 
-                Button btnName = CreateButtonTemplate(170, 50, emp.FullName);
+                Button btnName = CreateButtonTemplate(170, 40, emp.FullName);
                 btnName.Font = new Font("Arial", 12, FontStyle.Bold);
                 btnName.Click += (sender, e) =>
                 {
@@ -1016,7 +1016,7 @@ namespace RicksStaffApp
                 empPanel.Controls.Add(btnName);
                 // Create panels for employee positions
 
-                PictureBox pbRating = CreateRatingPictureBox(160, 50, emp.OverallRating);
+                PictureBox pbRating = CreateRatingPictureBox(160, 40, emp.OverallRating);
                 //pbRating.BorderStyle = BorderStyle.Fixed3D;
                 empPanel.Controls.Add(pbRating);
 
@@ -1027,7 +1027,7 @@ namespace RicksStaffApp
                 lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
                 lblRating.Margin = new Padding(0);
                 lblRating.Location = new Point(410, 0);
-                lblRating.Size = new Size(50, 50);
+                lblRating.Size = new Size(50, 40);
                 lblRating.TextAlign = ContentAlignment.MiddleCenter;
                 emp.UpdateOverallRating();
                 lblRating.Text = emp.OverallRating.ToString("F1");

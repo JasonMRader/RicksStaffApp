@@ -38,6 +38,8 @@
             flowShiftRankings = new FlowLayoutPanel();
             flowGoodShiftRankings = new FlowLayoutPanel();
             label2 = new Label();
+            label3 = new Label();
+            label1 = new Label();
             panel1 = new Panel();
             cboViewType = new ComboBox();
             cboSortBy = new ComboBox();
@@ -45,8 +47,6 @@
             lbTimeFrame = new ListBox();
             cboTimeFrame = new ComboBox();
             cboPositions = new ComboBox();
-            label3 = new Label();
-            label1 = new Label();
             lblMainWindowDescription = new Label();
             btnReset = new Button();
             rdoViewEmployees = new RadioButton();
@@ -57,6 +57,7 @@
             rdoAlphabeticalOrChronological = new RadioButton();
             rdoLowestRated = new RadioButton();
             panel5 = new Panel();
+            radioButton6 = new RadioButton();
             radioButton5 = new RadioButton();
             radioButton3 = new RadioButton();
             radioButton4 = new RadioButton();
@@ -64,6 +65,7 @@
             radioButton1 = new RadioButton();
             rdoAllTime = new RadioButton();
             flowPositions = new FlowLayoutPanel();
+            btnGoSearch = new Button();
             pnlEmployeeStats.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -75,9 +77,9 @@
             // 
             flowEmployeeRankings.AutoScroll = true;
             flowEmployeeRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeRankings.Location = new Point(26, 143);
+            flowEmployeeRankings.Location = new Point(26, 171);
             flowEmployeeRankings.Name = "flowEmployeeRankings";
-            flowEmployeeRankings.Size = new Size(440, 602);
+            flowEmployeeRankings.Size = new Size(440, 574);
             flowEmployeeRankings.TabIndex = 2;
             // 
             // flowEmployeeDisplay
@@ -99,10 +101,10 @@
             txtBxEmployeeSearch.BorderStyle = BorderStyle.None;
             txtBxEmployeeSearch.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             txtBxEmployeeSearch.ForeColor = Color.White;
-            txtBxEmployeeSearch.Location = new Point(1026, 66);
+            txtBxEmployeeSearch.Location = new Point(1042, 99);
             txtBxEmployeeSearch.Name = "txtBxEmployeeSearch";
             txtBxEmployeeSearch.PlaceholderText = "Search Employees";
-            txtBxEmployeeSearch.Size = new Size(240, 25);
+            txtBxEmployeeSearch.Size = new Size(195, 25);
             txtBxEmployeeSearch.TabIndex = 3;
             txtBxEmployeeSearch.TextChanged += txtBxEmployeeSearch_TextChanged;
             // 
@@ -137,13 +139,12 @@
             pnlEmployeeStats.Controls.Add(flowShiftRankings);
             pnlEmployeeStats.Controls.Add(flowGoodShiftRankings);
             pnlEmployeeStats.Controls.Add(label2);
-            pnlEmployeeStats.Controls.Add(panel1);
             pnlEmployeeStats.Controls.Add(label3);
             pnlEmployeeStats.Controls.Add(label1);
-            pnlEmployeeStats.Location = new Point(478, 101);
+            pnlEmployeeStats.Location = new Point(483, 145);
             pnlEmployeeStats.Margin = new Padding(8);
             pnlEmployeeStats.Name = "pnlEmployeeStats";
-            pnlEmployeeStats.Size = new Size(800, 675);
+            pnlEmployeeStats.Size = new Size(800, 600);
             pnlEmployeeStats.TabIndex = 0;
             pnlEmployeeStats.Paint += panel2_Paint;
             // 
@@ -151,29 +152,29 @@
             // 
             flowMostFrequentIncidents.AutoScroll = true;
             flowMostFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
-            flowMostFrequentIncidents.Location = new Point(13, 44);
+            flowMostFrequentIncidents.Location = new Point(13, 70);
             flowMostFrequentIncidents.Name = "flowMostFrequentIncidents";
-            flowMostFrequentIncidents.Size = new Size(240, 600);
+            flowMostFrequentIncidents.Size = new Size(240, 525);
             flowMostFrequentIncidents.TabIndex = 12;
             // 
             // flowShiftRankings
             // 
             flowShiftRankings.AutoScroll = true;
             flowShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftRankings.Location = new Point(279, 42);
+            flowShiftRankings.Location = new Point(279, 68);
             flowShiftRankings.Name = "flowShiftRankings";
             flowShiftRankings.Padding = new Padding(0, 10, 0, 0);
-            flowShiftRankings.Size = new Size(240, 600);
+            flowShiftRankings.Size = new Size(240, 527);
             flowShiftRankings.TabIndex = 11;
             // 
             // flowGoodShiftRankings
             // 
             flowGoodShiftRankings.AutoScroll = true;
             flowGoodShiftRankings.BackColor = Color.FromArgb(37, 42, 64);
-            flowGoodShiftRankings.Location = new Point(548, 42);
+            flowGoodShiftRankings.Location = new Point(548, 68);
             flowGoodShiftRankings.Name = "flowGoodShiftRankings";
             flowGoodShiftRankings.Padding = new Padding(0, 10, 0, 0);
-            flowGoodShiftRankings.Size = new Size(240, 600);
+            flowGoodShiftRankings.Size = new Size(240, 527);
             flowGoodShiftRankings.TabIndex = 10;
             // 
             // label2
@@ -181,11 +182,33 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(279, 18);
+            label2.Location = new Point(351, 34);
             label2.Name = "label2";
             label2.Size = new Size(87, 21);
             label2.TabIndex = 9;
             label2.Text = "Best Shifts";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(28, 34);
+            label3.Name = "label3";
+            label3.Size = new Size(190, 21);
+            label3.TabIndex = 8;
+            label3.Text = "Most Common Incidents";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(593, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(158, 21);
+            label1.TabIndex = 8;
+            label1.Text = "Good Shift Rankings";
             // 
             // panel1
             // 
@@ -198,9 +221,9 @@
             panel1.Controls.Add(cboPositions);
             panel1.Controls.Add(comboBox3);
             panel1.Controls.Add(flowEmployeeDisplay);
-            panel1.Location = new Point(100, 648);
+            panel1.Location = new Point(2, 90);
             panel1.Name = "panel1";
-            panel1.Size = new Size(697, 32);
+            panel1.Size = new Size(18, 32);
             panel1.TabIndex = 17;
             // 
             // cboViewType
@@ -270,6 +293,7 @@
             cboTimeFrame.Name = "cboTimeFrame";
             cboTimeFrame.Size = new Size(72, 23);
             cboTimeFrame.TabIndex = 1;
+            cboTimeFrame.Visible = false;
             // 
             // cboPositions
             // 
@@ -285,33 +309,11 @@
             cboPositions.TabIndex = 1;
             cboPositions.Visible = false;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(13, 18);
-            label3.Name = "label3";
-            label3.Size = new Size(190, 21);
-            label3.TabIndex = 8;
-            label3.Text = "Most Common Incidents";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(548, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(158, 21);
-            label1.TabIndex = 8;
-            label1.Text = "Good Shift Rankings";
-            // 
             // lblMainWindowDescription
             // 
             lblMainWindowDescription.Font = new Font("Segoe UI", 18.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblMainWindowDescription.ForeColor = Color.White;
-            lblMainWindowDescription.Location = new Point(621, 55);
+            lblMainWindowDescription.Location = new Point(629, 91);
             lblMainWindowDescription.Name = "lblMainWindowDescription";
             lblMainWindowDescription.Size = new Size(400, 35);
             lblMainWindowDescription.TabIndex = 0;
@@ -323,9 +325,9 @@
             btnReset.BackColor = Color.FromArgb(167, 204, 237);
             btnReset.FlatAppearance.BorderSize = 0;
             btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.Location = new Point(496, 55);
+            btnReset.Location = new Point(504, 99);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(119, 35);
+            btnReset.Size = new Size(119, 27);
             btnReset.TabIndex = 3;
             btnReset.Text = "Back to Overview";
             btnReset.UseVisualStyleBackColor = false;
@@ -373,7 +375,7 @@
             panel2.BackColor = Color.FromArgb(37, 42, 64);
             panel2.Controls.Add(rdoViewEmployees);
             panel2.Controls.Add(rdoViewEmployeeShifts);
-            panel2.Location = new Point(26, 66);
+            panel2.Location = new Point(26, 91);
             panel2.Name = "panel2";
             panel2.Size = new Size(440, 49);
             panel2.TabIndex = 19;
@@ -384,7 +386,7 @@
             panel3.Controls.Add(rdoHighestRated);
             panel3.Controls.Add(rdoAlphabeticalOrChronological);
             panel3.Controls.Add(rdoLowestRated);
-            panel3.Location = new Point(26, 110);
+            panel3.Location = new Point(26, 135);
             panel3.Name = "panel3";
             panel3.Size = new Size(440, 35);
             panel3.TabIndex = 20;
@@ -442,17 +444,35 @@
             // 
             // panel5
             // 
-            panel5.BackColor = Color.FromArgb(37, 42, 64);
+            panel5.BackColor = Color.FromArgb(84, 84, 120);
+            panel5.Controls.Add(radioButton6);
             panel5.Controls.Add(radioButton5);
             panel5.Controls.Add(radioButton3);
             panel5.Controls.Add(radioButton4);
             panel5.Controls.Add(radioButton2);
             panel5.Controls.Add(radioButton1);
             panel5.Controls.Add(rdoAllTime);
-            panel5.Location = new Point(26, 8);
+            panel5.Location = new Point(26, 25);
             panel5.Name = "panel5";
-            panel5.Size = new Size(696, 44);
+            panel5.Size = new Size(713, 41);
             panel5.TabIndex = 21;
+            // 
+            // radioButton6
+            // 
+            radioButton6.Appearance = Appearance.Button;
+            radioButton6.BackColor = Color.FromArgb(167, 204, 237);
+            radioButton6.FlatAppearance.BorderSize = 0;
+            radioButton6.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            radioButton6.FlatStyle = FlatStyle.Flat;
+            radioButton6.Location = new Point(603, 10);
+            radioButton6.Margin = new Padding(2, 10, 0, 0);
+            radioButton6.Name = "radioButton6";
+            radioButton6.Size = new Size(96, 24);
+            radioButton6.TabIndex = 27;
+            radioButton6.TabStop = true;
+            radioButton6.Text = "Custom";
+            radioButton6.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton6.UseVisualStyleBackColor = false;
             // 
             // radioButton5
             // 
@@ -461,13 +481,13 @@
             radioButton5.FlatAppearance.BorderSize = 0;
             radioButton5.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             radioButton5.FlatStyle = FlatStyle.Flat;
-            radioButton5.Location = new Point(425, 10);
+            radioButton5.Location = new Point(505, 10);
             radioButton5.Margin = new Padding(2, 10, 0, 0);
             radioButton5.Name = "radioButton5";
-            radioButton5.Size = new Size(80, 24);
+            radioButton5.Size = new Size(96, 24);
             radioButton5.TabIndex = 27;
             radioButton5.TabStop = true;
-            radioButton5.Text = "Custom";
+            radioButton5.Text = "Last 3 Months";
             radioButton5.TextAlign = ContentAlignment.MiddleCenter;
             radioButton5.UseVisualStyleBackColor = false;
             // 
@@ -478,10 +498,10 @@
             radioButton3.FlatAppearance.BorderSize = 0;
             radioButton3.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             radioButton3.FlatStyle = FlatStyle.Flat;
-            radioButton3.Location = new Point(261, 10);
+            radioButton3.Location = new Point(309, 10);
             radioButton3.Margin = new Padding(2, 5, 0, 0);
             radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(80, 24);
+            radioButton3.Size = new Size(96, 24);
             radioButton3.TabIndex = 25;
             radioButton3.TabStop = true;
             radioButton3.Text = "This Month";
@@ -495,10 +515,10 @@
             radioButton4.FlatAppearance.BorderSize = 0;
             radioButton4.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             radioButton4.FlatStyle = FlatStyle.Flat;
-            radioButton4.Location = new Point(343, 10);
+            radioButton4.Location = new Point(407, 10);
             radioButton4.Margin = new Padding(2, 5, 0, 0);
             radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(80, 24);
+            radioButton4.Size = new Size(96, 24);
             radioButton4.TabIndex = 26;
             radioButton4.TabStop = true;
             radioButton4.Text = "Last Month";
@@ -512,10 +532,10 @@
             radioButton2.FlatAppearance.BorderSize = 0;
             radioButton2.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             radioButton2.FlatStyle = FlatStyle.Flat;
-            radioButton2.Location = new Point(179, 10);
+            radioButton2.Location = new Point(211, 10);
             radioButton2.Margin = new Padding(2, 5, 0, 0);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(80, 24);
+            radioButton2.Size = new Size(96, 24);
             radioButton2.TabIndex = 28;
             radioButton2.TabStop = true;
             radioButton2.Text = "Last Week";
@@ -529,10 +549,10 @@
             radioButton1.FlatAppearance.BorderSize = 0;
             radioButton1.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             radioButton1.FlatStyle = FlatStyle.Flat;
-            radioButton1.Location = new Point(97, 10);
+            radioButton1.Location = new Point(113, 10);
             radioButton1.Margin = new Padding(2, 5, 0, 0);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(80, 24);
+            radioButton1.Size = new Size(96, 24);
             radioButton1.TabIndex = 23;
             radioButton1.TabStop = true;
             radioButton1.Text = "This Week";
@@ -549,7 +569,7 @@
             rdoAllTime.Location = new Point(15, 10);
             rdoAllTime.Margin = new Padding(0, 5, 0, 0);
             rdoAllTime.Name = "rdoAllTime";
-            rdoAllTime.Size = new Size(80, 24);
+            rdoAllTime.Size = new Size(96, 24);
             rdoAllTime.TabIndex = 22;
             rdoAllTime.TabStop = true;
             rdoAllTime.Text = "All Time";
@@ -558,12 +578,24 @@
             // 
             // flowPositions
             // 
-            flowPositions.BackColor = Color.FromArgb(37, 42, 64);
-            flowPositions.Location = new Point(728, 8);
+            flowPositions.BackColor = Color.FromArgb(84, 84, 120);
+            flowPositions.Location = new Point(739, 25);
             flowPositions.Name = "flowPositions";
             flowPositions.Padding = new Padding(15, 10, 0, 0);
-            flowPositions.Size = new Size(538, 44);
+            flowPositions.Size = new Size(527, 41);
             flowPositions.TabIndex = 22;
+            // 
+            // btnGoSearch
+            // 
+            btnGoSearch.BackColor = Color.FromArgb(167, 204, 237);
+            btnGoSearch.FlatAppearance.BorderSize = 0;
+            btnGoSearch.FlatStyle = FlatStyle.Flat;
+            btnGoSearch.Location = new Point(1246, 99);
+            btnGoSearch.Name = "btnGoSearch";
+            btnGoSearch.Size = new Size(40, 23);
+            btnGoSearch.TabIndex = 23;
+            btnGoSearch.Text = "Go";
+            btnGoSearch.UseVisualStyleBackColor = false;
             // 
             // frmOverview
             // 
@@ -573,9 +605,11 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(btnGoSearch);
             Controls.Add(flowPositions);
             Controls.Add(panel5);
             Controls.Add(flowEmployeeRankings);
+            Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(txtBxEmployeeSearch);
@@ -637,5 +671,7 @@
         private RadioButton rdoAllTime;
         private RadioButton radioButton2;
         private FlowLayoutPanel flowPositions;
+        private RadioButton radioButton6;
+        private Button btnGoSearch;
     }
 }

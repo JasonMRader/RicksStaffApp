@@ -50,7 +50,7 @@ namespace RicksStaffApp
 
             picBoxEmployeeRating.Image = UIHelper.GetStars(ThisEmployee.OverallRating);
             lblRating.Text = ThisEmployee.OverallRating.ToString("0.00");
-            cboSeondEmployeeTime.SelectedIndex = 0;
+
             UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents, flowFrequentIncidents);
 
         }

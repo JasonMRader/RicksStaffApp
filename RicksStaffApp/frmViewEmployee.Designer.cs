@@ -46,10 +46,7 @@
             picBoxEmployeeRating = new PictureBox();
             label2 = new Label();
             lblTotalShiftsLabelHeader = new Label();
-            cboSeondEmployeeTime = new ComboBox();
             flowEmployeeShifts = new FlowLayoutPanel();
-            label3 = new Label();
-            label4 = new Label();
             panel5.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
@@ -58,9 +55,9 @@
             // flowFrequentIncidents
             // 
             flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
-            flowFrequentIncidents.Location = new Point(23, 286);
+            flowFrequentIncidents.Location = new Point(23, 264);
             flowFrequentIncidents.Name = "flowFrequentIncidents";
-            flowFrequentIncidents.Size = new Size(210, 355);
+            flowFrequentIncidents.Size = new Size(210, 332);
             flowFrequentIncidents.TabIndex = 3;
             // 
             // panel5
@@ -77,7 +74,7 @@
             panel5.Controls.Add(label12);
             panel5.Controls.Add(label11);
             panel5.Controls.Add(label10);
-            panel5.Location = new Point(23, 136);
+            panel5.Location = new Point(23, 114);
             panel5.Name = "panel5";
             panel5.Size = new Size(210, 114);
             panel5.TabIndex = 2;
@@ -216,7 +213,7 @@
             panel2.BackColor = Color.FromArgb(37, 42, 64);
             panel2.Controls.Add(lblRating);
             panel2.Controls.Add(picBoxEmployeeRating);
-            panel2.Location = new Point(23, 43);
+            panel2.Location = new Point(23, 21);
             panel2.Name = "panel2";
             panel2.Size = new Size(210, 65);
             panel2.TabIndex = 1;
@@ -247,7 +244,7 @@
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(62, 268);
+            label2.Location = new Point(62, 246);
             label2.Name = "label2";
             label2.Size = new Size(132, 15);
             label2.TabIndex = 1;
@@ -260,70 +257,33 @@
             lblTotalShiftsLabelHeader.AutoSize = true;
             lblTotalShiftsLabelHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblTotalShiftsLabelHeader.ForeColor = Color.White;
-            lblTotalShiftsLabelHeader.Location = new Point(109, 116);
+            lblTotalShiftsLabelHeader.Location = new Point(109, 94);
             lblTotalShiftsLabelHeader.Name = "lblTotalShiftsLabelHeader";
             lblTotalShiftsLabelHeader.Size = new Size(39, 17);
             lblTotalShiftsLabelHeader.TabIndex = 3;
             lblTotalShiftsLabelHeader.Text = "Shifts";
             lblTotalShiftsLabelHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // cboSeondEmployeeTime
-            // 
-            cboSeondEmployeeTime.BackColor = Color.FromArgb(74, 79, 99);
-            cboSeondEmployeeTime.FlatStyle = FlatStyle.Flat;
-            cboSeondEmployeeTime.ForeColor = Color.White;
-            cboSeondEmployeeTime.FormattingEnabled = true;
-            cboSeondEmployeeTime.Items.AddRange(new object[] { "All Time", "Last 30 Days", "Last 3 Months", "Last 6 Months", "Last Year" });
-            cboSeondEmployeeTime.Location = new Point(609, 12);
-            cboSeondEmployeeTime.Name = "cboSeondEmployeeTime";
-            cboSeondEmployeeTime.Size = new Size(147, 23);
-            cboSeondEmployeeTime.TabIndex = 3;
-            // 
             // flowEmployeeShifts
             // 
             flowEmployeeShifts.AutoScroll = true;
             flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeShifts.Location = new Point(255, 44);
+            flowEmployeeShifts.Location = new Point(255, 22);
             flowEmployeeShifts.Name = "flowEmployeeShifts";
-            flowEmployeeShifts.Size = new Size(533, 598);
+            flowEmployeeShifts.Size = new Size(533, 575);
             flowEmployeeShifts.TabIndex = 6;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(101, 12);
-            label3.Name = "label3";
-            label3.Size = new Size(55, 25);
-            label3.TabIndex = 7;
-            label3.Text = "Stats";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(450, 12);
-            label4.Name = "label4";
-            label4.Size = new Size(61, 25);
-            label4.TabIndex = 7;
-            label4.Text = "Shifts";
             // 
             // frmViewEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            ClientSize = new Size(800, 675);
+            ClientSize = new Size(800, 600);
             Controls.Add(label2);
             Controls.Add(flowFrequentIncidents);
-            Controls.Add(label4);
             Controls.Add(panel5);
             Controls.Add(lblTotalShiftsLabelHeader);
-            Controls.Add(label3);
             Controls.Add(panel2);
-            Controls.Add(cboSeondEmployeeTime);
             Controls.Add(flowEmployeeShifts);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmViewEmployee";
@@ -350,7 +310,6 @@
         private Label label12;
         private Label label11;
         private Label label10;
-        private ComboBox cboSeondEmployeeTime;
         private FlowLayoutPanel flowEmployeeShifts;
         private Label lblRating;
         private Label lblBadShiftPercent;
@@ -360,7 +319,5 @@
         private Label lblTotalShiftsLabelHeader;
         private FlowLayoutPanel flowFrequentIncidents;
         private Label label1;
-        private Label label3;
-        private Label label4;
     }
 }
