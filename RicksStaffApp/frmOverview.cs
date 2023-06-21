@@ -50,21 +50,21 @@ namespace RicksStaffApp
 
         private void frmAddNewEmployee_FormClosed(object? sender, EventArgs e)
         {
-            foreach (Control control in pnlEmployeeDisplay.Controls)
-            {
-                control.Visible = true;
-            }
+            //foreach (Control control in pnlEmployeeDisplay.Controls)
+            //{
+            //    control.Visible = true;
+            //}
         }
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
             rdoViewEmployees.Checked = true;
-
+            rdoHighestRated.Checked = true;
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
             positionList = SqliteDataAccess.LoadPositions();
-            lbPositions.Items.Add("All Positions");
+            cboPositions.Items.Add("All Positions");
             foreach (Position position in positionList)
             {
                 cboPositions.Items.Add(position.Name);
@@ -138,16 +138,16 @@ namespace RicksStaffApp
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            //frmAddNewEmployee frmAddNewEmployee = new frmAddNewEmployee();
-            frmAddNewEmployee = new frmAddNewEmployee();
-            frmAddNewEmployee.FormClosed += frmAddNewEmployee_FormClosed;
-            foreach (Control control in pnlEmployeeDisplay.Controls)
-            {
-                control.Visible = false;
-            }
-            frmAddNewEmployee.TopLevel = false;
-            pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
-            frmAddNewEmployee.Show();
+            //    //frmAddNewEmployee frmAddNewEmployee = new frmAddNewEmployee();
+            //    frmAddNewEmployee = new frmAddNewEmployee();
+            //    frmAddNewEmployee.FormClosed += frmAddNewEmployee_FormClosed;
+            //    foreach (Control control in pnlEmployeeDisplay.Controls)
+            //    {
+            //        control.Visible = false;
+            //    }
+            //    frmAddNewEmployee.TopLevel = false;
+            //    pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
+            //    frmAddNewEmployee.Show();
 
         }
 
@@ -227,6 +227,42 @@ namespace RicksStaffApp
 
             int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
             DateTime thisWeekStart = today.AddDays(-daysUntilMonday);
+
+        }
+
+        private void rdoViewEmployees_CheckedChanged(object sender, EventArgs e)
+        {
+            rdoHighestRated.Checked = true;
+            if (rdoViewEmployees.Checked)
+            {
+                flowEmployeeRankings.Controls.Clear();
+                var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+                UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+                rdoAlphabeticalOrChronological.Text = "Alphabetical";
+            }
+            if (rdoViewEmployeeShifts.Checked)
+            {
+                flowEmployeeRankings.Controls.Clear();
+                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+                foreach (Employee employee in employeeList)
+                {
+                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+                    {
+                        employeeShift.Employee = employee;
+                        employeeShifts.Add(employeeShift);
+                    }
+                }
+                var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+                foreach (EmployeeShift employeeShift in employeeShiftRanking)
+                {
+                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+                }
+                rdoAlphabeticalOrChronological.Text = "Most Recent";
+            }
+        }
+
+        private void rdoViewEmployeeShifts_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
         //public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)

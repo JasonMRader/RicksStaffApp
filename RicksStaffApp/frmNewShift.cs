@@ -55,7 +55,7 @@ namespace RicksStaffApp
                 btnAM.Location = new System.Drawing.Point(0, 25);
                 btnAM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                 btnAM.FlatAppearance.BorderSize = 0;
-                btnAM.BackColor = Color.FromArgb(250, 190, 243);
+                btnAM.BackColor = Color.LightGray;
                 btnAM.Text = "Create AM";
 
 
@@ -65,7 +65,7 @@ namespace RicksStaffApp
                 btnPM.Location = new System.Drawing.Point(0, 45);
                 btnPM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                 btnPM.FlatAppearance.BorderSize = 0;
-                btnPM.BackColor = Color.FromArgb(250, 190, 243);
+                btnPM.BackColor = Color.LightGray;
                 btnPM.Text = "Create PM";
 
                 // Find if there's a shift on this date
