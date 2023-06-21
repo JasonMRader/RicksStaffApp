@@ -1307,6 +1307,37 @@ namespace RicksStaffApp
                 
             }
         }
+        public static void CreatePositionOverviewPanels(FlowLayoutPanel flowDisplay, List<Position> positions)
+        {
+            flowDisplay.Controls.Clear();
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count +1))-((positions.Count +1)+2);
+            RadioButton rdoAllPositions = new RadioButton();
+            rdoAllPositions.Appearance = Appearance.Button;
+            rdoAllPositions.FlatStyle = FlatStyle.Flat;
+            rdoAllPositions.Margin = new Padding(2,0,0,0);
+            rdoAllPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoAllPositions.TextAlign = ContentAlignment.MiddleCenter;
+            rdoAllPositions.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAllPositions.Size = new Size(buttonWidth,24);
+            rdoAllPositions.Text = "All Positions";
+            rdoAllPositions.Checked = true;
+            flowDisplay.Controls.Add(rdoAllPositions);
+            foreach (Position position in positions)
+            {
+                RadioButton radioButton = new RadioButton();
+                radioButton.Appearance = Appearance.Button;
+                radioButton.Margin = new Padding(2,0,0,0);
+                radioButton.BackColor = Color.FromArgb(167, 204, 237);
+
+                radioButton.TextAlign = ContentAlignment.MiddleCenter;
+                radioButton.FlatStyle = FlatStyle.Flat;
+                radioButton.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+                radioButton.Size = new Size(buttonWidth, 24);
+                radioButton.Text = position.Name;
+                flowDisplay.Controls.Add(radioButton);
+            }
+
+        }
         public static void CreateEmployeeShiftOverviewPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
         {
 

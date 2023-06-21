@@ -60,6 +60,7 @@ namespace RicksStaffApp
         {
             rdoViewEmployees.Checked = true;
             rdoHighestRated.Checked = true;
+            rdoAllTime.Checked = true;
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
@@ -120,6 +121,7 @@ namespace RicksStaffApp
             var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
+            UIHelper.CreatePositionOverviewPanels(flowPositions, positionList);
             //UIHelper.ConfigureFlowLayoutPanel(flowGoodShiftRankings);
             //UIHelper.ConfigureFlowLayoutPanel(flowEmployeeDisplay);
             lbPositions.SelectedIndex = 0;
