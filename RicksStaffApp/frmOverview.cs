@@ -58,6 +58,7 @@ namespace RicksStaffApp
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
+            rdoViewEmployees.Checked = true;
 
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
@@ -122,9 +123,9 @@ namespace RicksStaffApp
             //UIHelper.ConfigureFlowLayoutPanel(flowGoodShiftRankings);
             //UIHelper.ConfigureFlowLayoutPanel(flowEmployeeDisplay);
             lbPositions.SelectedIndex = 0;
-            lbSortBy.SelectedIndex = 0;
+            //lbSortBy.SelectedIndex = 0;
             lbTimeFrame.SelectedIndex = 0;
-            lbViewType.SelectedIndex = 0;
+            //lbViewType.SelectedIndex = 0;
 
         }
 
