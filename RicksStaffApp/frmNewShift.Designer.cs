@@ -33,6 +33,8 @@
             pnlNewShiftDisplay = new Panel();
             btnGetExcelEmployees = new Button();
             flowShiftDates = new FlowLayoutPanel();
+            btnForwardDate = new Button();
+            btnBackDate = new Button();
             SuspendLayout();
             // 
             // dtpShiftDate
@@ -79,11 +81,37 @@
             // flowShiftDates
             // 
             flowShiftDates.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftDates.Location = new Point(22, 52);
+            flowShiftDates.Location = new Point(62, 52);
             flowShiftDates.Name = "flowShiftDates";
             flowShiftDates.Padding = new Padding(13, 0, 0, 0);
-            flowShiftDates.Size = new Size(1256, 75);
+            flowShiftDates.Size = new Size(1176, 75);
             flowShiftDates.TabIndex = 9;
+            // 
+            // btnForwardDate
+            // 
+            btnForwardDate.BackColor = Color.FromArgb(37, 42, 64);
+            btnForwardDate.FlatAppearance.BorderSize = 0;
+            btnForwardDate.FlatStyle = FlatStyle.Flat;
+            btnForwardDate.Image = Properties.Resources.ForwardArrow;
+            btnForwardDate.Location = new Point(1238, 52);
+            btnForwardDate.Name = "btnForwardDate";
+            btnForwardDate.Size = new Size(40, 75);
+            btnForwardDate.TabIndex = 11;
+            btnForwardDate.UseVisualStyleBackColor = false;
+            btnForwardDate.Click += btnForwardDate_Click;
+            // 
+            // btnBackDate
+            // 
+            btnBackDate.BackColor = Color.FromArgb(37, 42, 64);
+            btnBackDate.FlatAppearance.BorderSize = 0;
+            btnBackDate.FlatStyle = FlatStyle.Flat;
+            btnBackDate.Image = Properties.Resources.BackArrow;
+            btnBackDate.Location = new Point(22, 52);
+            btnBackDate.Name = "btnBackDate";
+            btnBackDate.Size = new Size(40, 75);
+            btnBackDate.TabIndex = 12;
+            btnBackDate.UseVisualStyleBackColor = false;
+            btnBackDate.Click += btnBackDate_Click;
             // 
             // frmNewShift
             // 
@@ -91,6 +119,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(btnBackDate);
+            Controls.Add(btnForwardDate);
             Controls.Add(dtpShiftDate);
             Controls.Add(flowShiftDates);
             Controls.Add(btnGetExcelEmployees);
@@ -109,5 +139,7 @@
         private Panel pnlNewShiftDisplay;
         private Button btnGetExcelEmployees;
         private FlowLayoutPanel flowShiftDates;
+        private Button btnForwardDate;
+        private Button btnBackDate;
     }
 }

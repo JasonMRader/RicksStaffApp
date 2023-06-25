@@ -148,6 +148,12 @@
   <data name="5_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5 Stars5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Back.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BackArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BackArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Blank_Slate_Stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Blank Slate Stars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -165,6 +171,9 @@
   </data>
   <data name="FiveStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ForwardArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BackArrow1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FourStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

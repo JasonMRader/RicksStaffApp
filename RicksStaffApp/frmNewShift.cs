@@ -16,6 +16,7 @@ namespace RicksStaffApp
     public partial class frmNewShift : Form
     {
         List<Shift> shifts = new List<Shift>();
+        DateTime startDate = DateTime.Now;
         public frmNewShift()
         {
             InitializeComponent();
@@ -29,28 +30,29 @@ namespace RicksStaffApp
 
 
         private Panel currentHighlightedPanel = null;
-        private void refreshShiftPanels()
+        private void refreshShiftPanels(DateTime startDate)
         {
-            DateTime date = DateTime.Now.AddDays(-13);
+            flowShiftDates.Controls.Clear();
+
             for (int i = 0; i < 14; i++)
             {
 
                 Panel panel = new Panel();
                 panel.Size = new Size(74, 65);
-                panel.Margin = new Padding(7, 5, 7, 5);
+                panel.Margin = new Padding(4, 5, 4, 5);
                 panel.BackColor = MyColors.LightHighlight;
                 panel.BorderStyle = BorderStyle.FixedSingle;
                 //panel. = date;
 
                 System.Windows.Forms.Label lbl = new System.Windows.Forms.Label();
-                lbl.Text = date.ToString("ddd") + ", " + date.ToString("M");
+                lbl.Text = startDate.ToString("ddd") + ", " + startDate.ToString("M");
                 lbl.Size = new Size(74, 25);
                 lbl.Location = new System.Drawing.Point(0, 0);
                 lbl.TextAlign = ContentAlignment.MiddleCenter;
                 lbl.Font = new System.Drawing.Font("Bahnschrift SemiLight SemiConde", 8);
 
                 System.Windows.Forms.Button btnAM = new System.Windows.Forms.Button();
-                btnAM.Tag = date;
+                btnAM.Tag = startDate;
                 btnAM.Size = new Size(74, 20);
                 btnAM.Location = new System.Drawing.Point(0, 25);
                 btnAM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -60,7 +62,7 @@ namespace RicksStaffApp
 
 
                 System.Windows.Forms.Button btnPM = new System.Windows.Forms.Button();
-                btnPM.Tag = date;
+                btnPM.Tag = startDate;
                 btnPM.Size = new Size(74, 20);
                 btnPM.Location = new System.Drawing.Point(0, 45);
                 btnPM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -69,7 +71,7 @@ namespace RicksStaffApp
                 btnPM.Text = "Create PM";
 
                 // Find if there's a shift on this date
-                Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
+                Shift shift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
                 if (shift != null)
                 {
                     if (shift.IsAm == true)
@@ -194,7 +196,7 @@ namespace RicksStaffApp
 
 
 
-                date = date.AddDays(1);
+                startDate = startDate.AddDays(1);
                 panel.Controls.Add(lbl);
                 panel.Controls.Add(btnAM);
                 panel.Controls.Add(btnPM);
@@ -206,8 +208,9 @@ namespace RicksStaffApp
         private void frmNewShift_Load(object sender, EventArgs e)
         {
             shifts = SqliteDataAccess.LoadShifts();
-            DateTime date = DateTime.Now;
-            Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
+            //DateTime date = DateTime.Now;
+            startDate = DateTime.Now.AddDays(-13);
+            Shift shift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
             //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
             if (shift != null)
             {
@@ -225,7 +228,7 @@ namespace RicksStaffApp
             }
 
 
-            refreshShiftPanels();
+            refreshShiftPanels(startDate);
 
 
         }
@@ -262,6 +265,24 @@ namespace RicksStaffApp
             //frmExcelDownload.TopLevel = false;
             //pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
             //frmExcelDownload.Show();
+        }
+
+
+
+        private void btnForwardDate_Click(object sender, EventArgs e)
+        {
+            if (startDate < DateTime.Now.AddDays(-14))
+            {
+                startDate = startDate.AddDays(14);
+                refreshShiftPanels(startDate);
+            }
+
+        }
+
+        private void btnBackDate_Click(object sender, EventArgs e)
+        {
+            startDate = startDate.AddDays(-14);
+            refreshShiftPanels(startDate);
         }
     }
 }
