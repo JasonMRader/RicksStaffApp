@@ -119,20 +119,33 @@ namespace RicksStaffApp
                 btnNote.FlatStyle = FlatStyle.Flat;
                 btnNote.TextAlign = ContentAlignment.MiddleCenter;
                 btnNote.Margin = new Padding(0);
+
                 bool btnClicked = false;
+
                 FlowLayoutPanel flowNote = new FlowLayoutPanel();
                 flowNote.MinimumSize = new Size(containerWidth - 30, 90);
+
+                TextBox txt = new TextBox();
+                txt.Multiline = true;
+                txt.WordWrap = true;
+                txt.Size = new Size(containerWidth - 30, 60);
+
+                Button btnSaveNote = UIHelper.CreateButtonTemplate(150, 30, "Save Note");
+                btnSaveNote.Click += (sender, e) =>
+                {
+                    inc.Note = txt.Text;
+                };
+
                 btnNote.Click += (sender, e) =>
                 {
                     btnClicked = !btnClicked;
                     if (btnClicked)
                     {
-                        TextBox txt = new TextBox();
-                        txt.Multiline = true;
-                        txt.WordWrap = true;
-                        txt.Size = new Size(containerWidth - 30, 60);
+                        txt.Text = inc.Note;
                         flowNote.Controls.Add(txt);
                         pnlContainer.Controls.Add(flowNote);
+                        
+                        flowNote.Controls.Add(btnSaveNote);
                     }
                     else
                     {
@@ -142,6 +155,7 @@ namespace RicksStaffApp
 
                 };
                 incidentPanel.Controls.Add(btnNote);
+               
 
                 pnlContainer.Controls.Add(incidentPanel);
                 Button btnDelete = new Button();

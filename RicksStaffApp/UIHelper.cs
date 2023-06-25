@@ -116,7 +116,7 @@ namespace RicksStaffApp
 
             return panel;
         }
-        private static Button CreateButtonTemplate (int width, int height, string buttonText)
+        public static Button CreateButtonTemplate (int width, int height, string buttonText)
         {
             Button button = new Button();
             button.Text = buttonText;
