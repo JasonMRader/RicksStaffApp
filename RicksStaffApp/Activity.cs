@@ -45,7 +45,7 @@ namespace RicksStaffApp
         {
             int firstContainer = (int)(width - 35);
             int nameWidth = (int)width / 3;
-            int ratingWidth = (int)width / 12;
+            int ratingWidth = (int)width / 10;
             int modPanelWidth = (int)width / 3;
             FlowLayoutPanel activityPanelContainer = new FlowLayoutPanel();
             //activityPanelContainer.Size = new Size(430, 30);

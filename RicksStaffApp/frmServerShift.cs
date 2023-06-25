@@ -43,12 +43,18 @@ namespace RicksStaffApp
         {
             ActivityList.Clear();
             ActivityList = SqliteDataAccess.LoadActivities();
+            picShiftRating.Image = UIHelper.GetStars(EmployeeShiftToEdit.ShiftRating);
+            picShiftRating.SizeMode = PictureBoxSizeMode.Zoom;
             //UIHelper.CreateActivityPanelsForEmpShift(EmployeeShiftToEdit.Incidents, ActivityList, flowActivityDisplay, flowIncidentToAdd);
             CreateActivityPanelsForEmpShift(EmployeeShiftToEdit, ActivityList, flowActivityDisplay, flowIncidentToAdd);
             //UIHelper.CreateIncidentPanelForEmpShift(EmployeeShiftToEdit.Incidents, flowIncidentToAdd);
 
 
             lblEmpolyeeName.Text = EmployeeShiftToEdit.EmployeeName;
+        }
+        private void UpdateRatingPicture(object sender, EventArgs e)
+        {
+            
         }
         private static void CreateActivityPanelsForEmpShift(EmployeeShift employeeShift, List<Activity> activityList, FlowLayoutPanel flowFormDisplay, FlowLayoutPanel flowToAdd)
         {
@@ -109,13 +115,13 @@ namespace RicksStaffApp
 
                 Button btnNote = new Button();
                 btnNote.Text = "Add Note";
-                btnNote.Size = new Size(70,30);
+                btnNote.Size = new Size(70, 30);
                 btnNote.FlatStyle = FlatStyle.Flat;
                 btnNote.TextAlign = ContentAlignment.MiddleCenter;
                 btnNote.Margin = new Padding(0);
                 bool btnClicked = false;
                 FlowLayoutPanel flowNote = new FlowLayoutPanel();
-                flowNote.MinimumSize = new Size(containerWidth-30 , 90);
+                flowNote.MinimumSize = new Size(containerWidth - 30, 90);
                 btnNote.Click += (sender, e) =>
                 {
                     btnClicked = !btnClicked;
@@ -171,6 +177,11 @@ namespace RicksStaffApp
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void UpdateRatingPicture(object sender, ControlEventArgs e)
+        {
+            picShiftRating.Image = UIHelper.GetStars(EmployeeShiftToEdit.ShiftRating);
         }
     }
 

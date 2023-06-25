@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            picShiftRating = new PictureBox();
             flowIncidentToAdd = new FlowLayoutPanel();
             flowActivityDisplay = new FlowLayoutPanel();
             label2 = new Label();
@@ -36,6 +37,7 @@
             lblEmpolyeeName = new Label();
             btnDone = new Button();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picShiftRating).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -43,6 +45,7 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.FromArgb(46, 51, 73);
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(picShiftRating);
             panel1.Controls.Add(flowIncidentToAdd);
             panel1.Controls.Add(flowActivityDisplay);
             panel1.Controls.Add(label2);
@@ -57,6 +60,15 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
+            // picShiftRating
+            // 
+            picShiftRating.Location = new Point(323, 33);
+            picShiftRating.Name = "picShiftRating";
+            picShiftRating.Size = new Size(120, 40);
+            picShiftRating.SizeMode = PictureBoxSizeMode.CenterImage;
+            picShiftRating.TabIndex = 7;
+            picShiftRating.TabStop = false;
+            // 
             // flowIncidentToAdd
             // 
             flowIncidentToAdd.BackColor = Color.FromArgb(37, 42, 64);
@@ -65,6 +77,7 @@
             flowIncidentToAdd.Name = "flowIncidentToAdd";
             flowIncidentToAdd.Size = new Size(450, 460);
             flowIncidentToAdd.TabIndex = 6;
+            flowIncidentToAdd.ControlAdded += UpdateRatingPicture;
             // 
             // flowActivityDisplay
             // 
@@ -79,32 +92,32 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(284, 74);
+            label2.Location = new Point(486, 74);
             label2.Name = "label2";
-            label2.Size = new Size(76, 15);
+            label2.Size = new Size(73, 15);
             label2.TabIndex = 4;
-            label2.Text = "Edit Incident:";
+            label2.Text = "Edit Incident";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(17, 74);
+            label1.Location = new Point(97, 74);
             label1.Name = "label1";
-            label1.Size = new Size(93, 15);
+            label1.Size = new Size(90, 15);
             label1.TabIndex = 4;
-            label1.Text = "Choose Actions:";
+            label1.Text = "Choose Actions";
             // 
             // lblEmpolyeeName
             // 
-            lblEmpolyeeName.AutoSize = true;
-            lblEmpolyeeName.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEmpolyeeName.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblEmpolyeeName.ForeColor = Color.White;
-            lblEmpolyeeName.Location = new Point(254, -1);
+            lblEmpolyeeName.Location = new Point(2, 0);
             lblEmpolyeeName.Name = "lblEmpolyeeName";
-            lblEmpolyeeName.Size = new Size(263, 45);
+            lblEmpolyeeName.Size = new Size(763, 30);
             lblEmpolyeeName.TabIndex = 1;
             lblEmpolyeeName.Text = "Employee Name";
+            lblEmpolyeeName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnDone
             // 
@@ -132,6 +145,7 @@
             Load += frmServerShift_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picShiftRating).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +159,6 @@
         private Label label1;
         private FlowLayoutPanel flowActivityDisplay;
         private FlowLayoutPanel flowIncidentToAdd;
+        private PictureBox picShiftRating;
     }
 }

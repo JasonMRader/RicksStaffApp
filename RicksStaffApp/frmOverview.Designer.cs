@@ -452,9 +452,9 @@
             panel5.Controls.Add(radioButton2);
             panel5.Controls.Add(radioButton1);
             panel5.Controls.Add(rdoAllTime);
-            panel5.Location = new Point(26, 25);
+            panel5.Location = new Point(2, 25);
             panel5.Name = "panel5";
-            panel5.Size = new Size(713, 41);
+            panel5.Size = new Size(737, 41);
             panel5.TabIndex = 21;
             // 
             // radioButton6
@@ -582,7 +582,7 @@
             flowPositions.Location = new Point(739, 25);
             flowPositions.Name = "flowPositions";
             flowPositions.Padding = new Padding(15, 10, 0, 0);
-            flowPositions.Size = new Size(527, 41);
+            flowPositions.Size = new Size(559, 41);
             flowPositions.TabIndex = 22;
             // 
             // btnGoSearch
