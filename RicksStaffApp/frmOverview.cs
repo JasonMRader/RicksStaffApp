@@ -267,6 +267,11 @@ namespace RicksStaffApp
         {
 
         }
+
+        private void lblMainWindowDescription_Click(object sender, EventArgs e)
+        {
+
+        }
         //public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)
         //{
         //    // Get today's date

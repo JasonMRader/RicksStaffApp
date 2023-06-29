@@ -319,6 +319,7 @@
             lblMainWindowDescription.TabIndex = 0;
             lblMainWindowDescription.Text = "Overview";
             lblMainWindowDescription.TextAlign = ContentAlignment.MiddleCenter;
+            lblMainWindowDescription.Click += lblMainWindowDescription_Click;
             // 
             // btnReset
             // 

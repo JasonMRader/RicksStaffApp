@@ -15,7 +15,7 @@ namespace RicksStaffApp
     {
 
         Employee ThisEmployee = new Employee();
-
+        List<Position> AllPositions = new List<Position>();
         public frmViewEmployee(Employee employee)
         {
             ThisEmployee = employee;
@@ -45,6 +45,7 @@ namespace RicksStaffApp
         {
             //lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
+            AllPositions = SqliteDataAccess.LoadPositions();
 
             GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
 
@@ -52,6 +53,7 @@ namespace RicksStaffApp
             lblRating.Text = ThisEmployee.OverallRating.ToString("0.00");
 
             UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents, flowFrequentIncidents);
+            UIHelper.CreatePositionsForEmployee(flowEmployeePositions, ThisEmployee.Positions);
 
         }
 
@@ -63,6 +65,37 @@ namespace RicksStaffApp
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnAddPosition_Click(object sender, EventArgs e)
+        {
+            foreach (Position p in AllPositions)
+            {
+                lbAllPositions.Items.Add(p.Name);
+            }
+            lbAllPositions.Visible = true;
+        }
+
+        private void lbAllPositions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Add " + lbAllPositions.SelectedIndex + " to " + ThisEmployee.FullName + "'s Positions?");
+            DialogResult result = MessageBox.Show("Add " + lbAllPositions.SelectedItem + " to " + ThisEmployee.FullName + "'s Positions?","Add Position", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                // Delete employee from database
+                SqliteDataAccess.UpdateEmployee(ThisEmployee);
+
+                // Remove employee from list
+                //employeeList.Remove(emp);
+
+                // Update UI
+                lbAllPositions.Visible = false;
+                //CreateEmployeePanels();
+            }
+            if (result == DialogResult.No) 
+            {
+                lbAllPositions.Visible = false;
+            }
         }
     }
 }

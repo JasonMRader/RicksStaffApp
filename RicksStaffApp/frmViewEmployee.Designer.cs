@@ -47,6 +47,9 @@
             label2 = new Label();
             lblTotalShiftsLabelHeader = new Label();
             flowEmployeeShifts = new FlowLayoutPanel();
+            flowEmployeePositions = new FlowLayoutPanel();
+            btnAddPosition = new Button();
+            lbAllPositions = new ListBox();
             panel5.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxEmployeeRating).BeginInit();
@@ -55,9 +58,9 @@
             // flowFrequentIncidents
             // 
             flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
-            flowFrequentIncidents.Location = new Point(23, 264);
+            flowFrequentIncidents.Location = new Point(23, 289);
             flowFrequentIncidents.Name = "flowFrequentIncidents";
-            flowFrequentIncidents.Size = new Size(210, 332);
+            flowFrequentIncidents.Size = new Size(210, 307);
             flowFrequentIncidents.TabIndex = 3;
             // 
             // panel5
@@ -74,7 +77,7 @@
             panel5.Controls.Add(label12);
             panel5.Controls.Add(label11);
             panel5.Controls.Add(label10);
-            panel5.Location = new Point(23, 114);
+            panel5.Location = new Point(23, 137);
             panel5.Name = "panel5";
             panel5.Size = new Size(210, 114);
             panel5.TabIndex = 2;
@@ -213,7 +216,7 @@
             panel2.BackColor = Color.FromArgb(37, 42, 64);
             panel2.Controls.Add(lblRating);
             panel2.Controls.Add(picBoxEmployeeRating);
-            panel2.Location = new Point(23, 21);
+            panel2.Location = new Point(23, 44);
             panel2.Name = "panel2";
             panel2.Size = new Size(210, 65);
             panel2.TabIndex = 1;
@@ -244,7 +247,7 @@
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(62, 246);
+            label2.Location = new Point(60, 271);
             label2.Name = "label2";
             label2.Size = new Size(132, 15);
             label2.TabIndex = 1;
@@ -257,7 +260,7 @@
             lblTotalShiftsLabelHeader.AutoSize = true;
             lblTotalShiftsLabelHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblTotalShiftsLabelHeader.ForeColor = Color.White;
-            lblTotalShiftsLabelHeader.Location = new Point(109, 94);
+            lblTotalShiftsLabelHeader.Location = new Point(109, 117);
             lblTotalShiftsLabelHeader.Name = "lblTotalShiftsLabelHeader";
             lblTotalShiftsLabelHeader.Size = new Size(39, 17);
             lblTotalShiftsLabelHeader.TabIndex = 3;
@@ -268,10 +271,41 @@
             // 
             flowEmployeeShifts.AutoScroll = true;
             flowEmployeeShifts.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeShifts.Location = new Point(255, 22);
+            flowEmployeeShifts.Location = new Point(255, 44);
             flowEmployeeShifts.Name = "flowEmployeeShifts";
-            flowEmployeeShifts.Size = new Size(533, 575);
+            flowEmployeeShifts.Size = new Size(533, 553);
             flowEmployeeShifts.TabIndex = 6;
+            // 
+            // flowEmployeePositions
+            // 
+            flowEmployeePositions.Location = new Point(23, 5);
+            flowEmployeePositions.Name = "flowEmployeePositions";
+            flowEmployeePositions.Size = new Size(381, 33);
+            flowEmployeePositions.TabIndex = 7;
+            // 
+            // btnAddPosition
+            // 
+            btnAddPosition.BackColor = Color.FromArgb(167, 204, 237);
+            btnAddPosition.FlatAppearance.BorderSize = 0;
+            btnAddPosition.FlatStyle = FlatStyle.Flat;
+            btnAddPosition.Location = new Point(410, 5);
+            btnAddPosition.Name = "btnAddPosition";
+            btnAddPosition.Size = new Size(116, 33);
+            btnAddPosition.TabIndex = 8;
+            btnAddPosition.Text = "Add Position";
+            btnAddPosition.UseVisualStyleBackColor = false;
+            btnAddPosition.Click += btnAddPosition_Click;
+            // 
+            // lbAllPositions
+            // 
+            lbAllPositions.FormattingEnabled = true;
+            lbAllPositions.ItemHeight = 15;
+            lbAllPositions.Location = new Point(532, 5);
+            lbAllPositions.Name = "lbAllPositions";
+            lbAllPositions.Size = new Size(154, 244);
+            lbAllPositions.TabIndex = 9;
+            lbAllPositions.Visible = false;
+            lbAllPositions.SelectedIndexChanged += lbAllPositions_SelectedIndexChanged;
             // 
             // frmViewEmployee
             // 
@@ -279,6 +313,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(800, 600);
+            Controls.Add(lbAllPositions);
+            Controls.Add(btnAddPosition);
+            Controls.Add(flowEmployeePositions);
             Controls.Add(label2);
             Controls.Add(flowFrequentIncidents);
             Controls.Add(panel5);
@@ -319,5 +356,8 @@
         private Label lblTotalShiftsLabelHeader;
         private FlowLayoutPanel flowFrequentIncidents;
         private Label label1;
+        private FlowLayoutPanel flowEmployeePositions;
+        private Button btnAddPosition;
+        private ListBox lbAllPositions;
     }
 }

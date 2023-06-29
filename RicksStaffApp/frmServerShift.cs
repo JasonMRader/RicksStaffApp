@@ -51,10 +51,12 @@ namespace RicksStaffApp
 
 
             lblEmpolyeeName.Text = EmployeeShiftToEdit.EmployeeName;
+            UIHelper.CreatePositionsForEmployee(flowPositions, EmployeeShiftToEdit.Employee.Positions);
         }
+        
         private void UpdateRatingPicture(object sender, EventArgs e)
         {
-            
+
         }
         private static void CreateActivityPanelsForEmpShift(EmployeeShift employeeShift, List<Activity> activityList, FlowLayoutPanel flowFormDisplay, FlowLayoutPanel flowToAdd)
         {
@@ -144,7 +146,7 @@ namespace RicksStaffApp
                         txt.Text = inc.Note;
                         flowNote.Controls.Add(txt);
                         pnlContainer.Controls.Add(flowNote);
-                        
+
                         flowNote.Controls.Add(btnSaveNote);
                     }
                     else
@@ -155,7 +157,7 @@ namespace RicksStaffApp
 
                 };
                 incidentPanel.Controls.Add(btnNote);
-               
+
 
                 pnlContainer.Controls.Add(incidentPanel);
                 Button btnDelete = new Button();

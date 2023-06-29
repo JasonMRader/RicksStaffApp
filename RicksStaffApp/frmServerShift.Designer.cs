@@ -36,6 +36,7 @@
             label1 = new Label();
             lblEmpolyeeName = new Label();
             btnDone = new Button();
+            flowPositions = new FlowLayoutPanel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picShiftRating).BeginInit();
             SuspendLayout();
@@ -45,6 +46,7 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.FromArgb(46, 51, 73);
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(flowPositions);
             panel1.Controls.Add(picShiftRating);
             panel1.Controls.Add(flowIncidentToAdd);
             panel1.Controls.Add(flowActivityDisplay);
@@ -62,7 +64,7 @@
             // 
             // picShiftRating
             // 
-            picShiftRating.Location = new Point(323, 33);
+            picShiftRating.Location = new Point(142, 31);
             picShiftRating.Name = "picShiftRating";
             picShiftRating.Size = new Size(120, 40);
             picShiftRating.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -112,9 +114,9 @@
             // 
             lblEmpolyeeName.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblEmpolyeeName.ForeColor = Color.White;
-            lblEmpolyeeName.Location = new Point(2, 0);
+            lblEmpolyeeName.Location = new Point(3, 0);
             lblEmpolyeeName.Name = "lblEmpolyeeName";
-            lblEmpolyeeName.Size = new Size(763, 30);
+            lblEmpolyeeName.Size = new Size(381, 30);
             lblEmpolyeeName.TabIndex = 1;
             lblEmpolyeeName.Text = "Employee Name";
             lblEmpolyeeName.TextAlign = ContentAlignment.MiddleCenter;
@@ -130,6 +132,13 @@
             btnDone.Text = "Done";
             btnDone.UseVisualStyleBackColor = false;
             btnDone.Click += btnDone_Click;
+            // 
+            // flowPositions
+            // 
+            flowPositions.Location = new Point(394, 3);
+            flowPositions.Name = "flowPositions";
+            flowPositions.Size = new Size(370, 41);
+            flowPositions.TabIndex = 8;
             // 
             // frmServerShift
             // 
@@ -160,5 +169,6 @@
         private FlowLayoutPanel flowActivityDisplay;
         private FlowLayoutPanel flowIncidentToAdd;
         private PictureBox picShiftRating;
+        private FlowLayoutPanel flowPositions;
     }
 }
