@@ -64,7 +64,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //cnn.Open();
+                cnn.Open();
 
                 using (var transaction = cnn.BeginTransaction())
                 {
@@ -84,6 +84,7 @@ namespace RicksStaffApp
 
                     transaction.Commit();
                 }
+                cnn.Close();
             }
         }
         public static bool IsDuplicateEmployee(string firstName, string lastName)
@@ -436,6 +437,7 @@ namespace RicksStaffApp
                     INNER JOIN Position p ON es.PositionID = p.ID
                     LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.EmployeeID = @EmployeeID";
+                string positionQuery = "SELECT p.* FROM Position p INNER JOIN EmployeePosition ep ON p.ID = ep.PositionID WHERE ep.EmployeeID = @EmployeeID";
                 foreach (var employee in employees)
                 {
                     var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
@@ -476,6 +478,9 @@ namespace RicksStaffApp
 
 
                     employee.EmployeeShifts = employeeShifts;
+                    employee.Positions = cnn.Query<Position>(positionQuery, new { EmployeeID = employee.ID }).ToList();
+
+                    
                 }
                 //TODO: remove LoadActivities() from here
                 List<Activity> activities = LoadActivities();

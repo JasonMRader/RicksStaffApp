@@ -298,6 +298,7 @@
             // 
             // lbAllPositions
             // 
+            lbAllPositions.Enabled = false;
             lbAllPositions.FormattingEnabled = true;
             lbAllPositions.ItemHeight = 15;
             lbAllPositions.Location = new Point(532, 5);

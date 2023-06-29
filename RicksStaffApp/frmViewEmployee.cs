@@ -43,9 +43,13 @@ namespace RicksStaffApp
         }
         private void frmViewEmployee_Load(object sender, EventArgs e)
         {
+            AllPositions = SqliteDataAccess.LoadPositions();
+
+            //lbAllPositions.DisplayMember = Name;
+            //lbAllPositions.ValueMember = Name;
             //lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
-            AllPositions = SqliteDataAccess.LoadPositions();
+
 
             GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
 
@@ -54,7 +58,22 @@ namespace RicksStaffApp
 
             UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents, flowFrequentIncidents);
             UIHelper.CreatePositionsForEmployee(flowEmployeePositions, ThisEmployee.Positions);
+            //foreach (Position position in AllPositions)
+            //{
+            //    lbAllPositions.Items.Add(position);
+            //}
+            foreach (Position position in AllPositions)
+            {
+                if (!ThisEmployee.Positions.Any(p => p.ID == position.ID))
+                {
+                    lbAllPositions.Items.Add(position);
+                }
+            }
+            //lbAllPositions.SelectedIndexChanged -= lbAllPositions_SelectedIndexChanged;
+            //BindingList<Position> positionList = new BindingList<Position>(AllPositions);
 
+            //lbAllPositions.DataSource = positionList;
+            //lbAllPositions.SelectedIndexChanged += lbAllPositions_SelectedIndexChanged;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -69,32 +88,38 @@ namespace RicksStaffApp
 
         private void btnAddPosition_Click(object sender, EventArgs e)
         {
-            foreach (Position p in AllPositions)
-            {
-                lbAllPositions.Items.Add(p.Name);
-            }
+            //foreach (Position p in AllPositions)
+            //{
+            //    lbAllPositions.Items.Add(p.Name);
+
+
+            //}
+            lbAllPositions.Enabled = true;
             lbAllPositions.Visible = true;
         }
 
         private void lbAllPositions_SelectedIndexChanged(object sender, EventArgs e)
         {
             //MessageBox.Show("Add " + lbAllPositions.SelectedIndex + " to " + ThisEmployee.FullName + "'s Positions?");
-            DialogResult result = MessageBox.Show("Add " + lbAllPositions.SelectedItem + " to " + ThisEmployee.FullName + "'s Positions?","Add Position", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            Position selectedPosition = (Position)lbAllPositions.SelectedItem;
+            DialogResult result = MessageBox.Show("Add " + selectedPosition.Name + " to " + ThisEmployee.FullName + "'s Positions?", "Add Position", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                // Delete employee from database
+
+                ThisEmployee.Positions.Add(selectedPosition);
                 SqliteDataAccess.UpdateEmployee(ThisEmployee);
 
-                // Remove employee from list
-                //employeeList.Remove(emp);
+                
 
-                // Update UI
+                
                 lbAllPositions.Visible = false;
-                //CreateEmployeePanels();
+                //lbAllPositions.Items.Clear();
+                
             }
-            if (result == DialogResult.No) 
+            if (result == DialogResult.No)
             {
                 lbAllPositions.Visible = false;
+                //lbAllPositions.Items.Clear();
             }
         }
     }
