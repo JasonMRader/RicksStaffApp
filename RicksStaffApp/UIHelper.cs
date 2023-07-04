@@ -1124,44 +1124,45 @@ namespace RicksStaffApp
             employeeShift.UpdateShiftRating();
             FlowLayoutPanel empShiftContainer = CreateFlowPanel(470, 30);
 
-            empShiftContainer.MinimumSize = new Size(470, 30);
+            empShiftContainer.MinimumSize = new Size(410, 30);
             empShiftContainer.MaximumSize = new Size(470, 1000);
             empShiftContainer.Margin = new Padding(15, 7, 15, 0);
 
-            Label lblEmpName = CreateLabel(85, 30, employeeShift.Employee.FullNameAbbreviated);
+            Label lblEmpName = CreateLabel(80, 30, employeeShift.Employee.FullNameAbbreviated);
             //lblEmpName.Font = WeekDayDisplay;
             empShiftContainer.Controls.Add(lblEmpName);
 
-            Label lblName = CreateLabel(90, 30, employeeShift.Shift.DateAsDateTime.ToOrdinalString());
+            Label lblName = CreateLabel(80, 30, employeeShift.Shift.DateAsDateTime.ToString("d"));
             //lblName.Font = DateDisplay;
             empShiftContainer.Controls.Add(lblName);
 
             //Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
             //empShiftContainer.Controls.Add(lblPos);
             FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
-            Panel BtnIncidents = CreatePanel(110, 30);
-            BtnIncidents.Margin = new Padding(10, 0, 0, 0);
+            Panel BtnIncidents = CreatePanel(100, 30);
+            BtnIncidents.Margin = new Padding(5, 0, 0, 0);
             BtnIncidents.BackColor = DefaultButton;
             Label lblGoodIncidentCount = CreateLabel(25, 30, employeeShift.GetGoodIncidentCount().ToString());
             lblGoodIncidentCount.Font = ButtonDisplay;
+           
             lblGoodIncidentCount.Location = new Point(0, 0);
             //lblGoodIncidentCount.Click +=
 
             PictureBox upArrow = new PictureBox();
-            upArrow.Size = new Size(30, 30);
+            upArrow.Size = new Size(25, 30);
             upArrow.Image = Properties.Resources.Up_Arrow1;
             upArrow.SizeMode = PictureBoxSizeMode.Zoom;
             upArrow.Location = new Point(25, 0);
 
             Label lblBadIncidentCount = CreateLabel(25, 30, employeeShift.GetBadIncidentCount().ToString());
             lblBadIncidentCount.Font = ButtonDisplay;
-            lblBadIncidentCount.Location= new Point(55, 0);
+            lblBadIncidentCount.Location= new Point(50, 0);
 
             PictureBox downArrow = new PictureBox();
-            downArrow.Size = new Size(30, 30);
+            downArrow.Size = new Size(25, 30);
             downArrow.Image = Properties.Resources.Down_Arrow;
             downArrow.SizeMode = PictureBoxSizeMode.Zoom;
-            downArrow.Location = new Point(80, 0);
+            downArrow.Location = new Point(75, 0);
 
             //Button btnGoodIncidents = CreateButtonTemplate(50, 30, employeeShift.GetGoodIncidentCount().ToString());
             //btnGoodIncidents.Image = Properties.Resources.Up_Arrow1;
