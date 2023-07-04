@@ -62,7 +62,11 @@ namespace RicksStaffApp
         {
             // Clear existing panels
             flowFormDisplay.Controls.Clear();
-            CreateIncidentPanelForEmpShift(employeeShift, flowToAdd);
+            //CreateIncidentPanelForEmpShift(employeeShift, flowToAdd);
+            foreach (Incident inc in employeeShift.Incidents)
+            {
+                UIHelper.AddOneIncidentForEmpShift(inc, flowToAdd, employeeShift);
+            }
 
             foreach (Activity activity in activityList)
             {
@@ -116,7 +120,15 @@ namespace RicksStaffApp
                 incidentPanel.Controls.Add(lblBaseRating);
 
                 Button btnNote = new Button();
-                btnNote.Text = "Add Note";
+                if (inc.Note != null)
+                {
+                    btnNote.Text = "View Note";
+                }
+                else
+                {
+                    btnNote.Text = "Add Note";
+                }
+                
                 btnNote.Size = new Size(70, 30);
                 btnNote.FlatStyle = FlatStyle.Flat;
                 btnNote.TextAlign = ContentAlignment.MiddleCenter;
@@ -146,11 +158,19 @@ namespace RicksStaffApp
                         txt.Text = inc.Note;
                         flowNote.Controls.Add(txt);
                         pnlContainer.Controls.Add(flowNote);
-
+                        btnNote.Text = "Hide";
                         flowNote.Controls.Add(btnSaveNote);
                     }
                     else
                     {
+                        if (inc.Note != null)
+                        {
+                            btnNote.Text = "View Note";
+                        }
+                        else
+                        {
+                            btnNote.Text = "Add Note";
+                        }
                         flowNote.Controls.Clear();
                         pnlContainer.Controls.Remove(flowNote);
                     }

@@ -257,6 +257,15 @@ namespace RicksStaffApp
             lblIncidentRating.TextAlign = ContentAlignment.MiddleCenter;
             lblIncidentRating.Text = BaseRatingImpact.ToString();
             controls.Add(lblIncidentRating);
+
+            
+            if (Note != null)
+            {
+                Label note = new Label();
+                note.Text = Note.ToString();
+                note.Size = new Size(250, 30);
+                controls.Add(note);
+            }
             return controls;
         }
 

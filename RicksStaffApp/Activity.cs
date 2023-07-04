@@ -111,7 +111,7 @@ namespace RicksStaffApp
             btnAddToEmpShift.Click += (sender, e) =>
             {
                 Incident incident = new Incident(this);
-                UIHelper.AddOneIncidentForEmpShift(incident, flowToAddTo);
+                UIHelper.AddOneIncidentForEmpShift(incident, flowToAddTo, employeeShift);
                 employeeShift.AddIncident(incident);
                 //incident.ActivityID = ID;
                 //incident.DateString = 
