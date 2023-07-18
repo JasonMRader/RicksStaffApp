@@ -57,12 +57,12 @@
             rdoAlphabeticalOrChronological = new RadioButton();
             rdoLowestRated = new RadioButton();
             panel5 = new Panel();
-            radioButton6 = new RadioButton();
-            radioButton5 = new RadioButton();
-            radioButton3 = new RadioButton();
-            radioButton4 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
+            rdoCustomTime = new RadioButton();
+            rdoLastThreeMonths = new RadioButton();
+            rdoThisMonth = new RadioButton();
+            rdoLastMonth = new RadioButton();
+            rdoLastWeek = new RadioButton();
+            rdoThisWeek = new RadioButton();
             rdoAllTime = new RadioButton();
             flowPositions = new FlowLayoutPanel();
             btnGoSearch = new Button();
@@ -446,119 +446,125 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(84, 84, 120);
-            panel5.Controls.Add(radioButton6);
-            panel5.Controls.Add(radioButton5);
-            panel5.Controls.Add(radioButton3);
-            panel5.Controls.Add(radioButton4);
-            panel5.Controls.Add(radioButton2);
-            panel5.Controls.Add(radioButton1);
+            panel5.Controls.Add(rdoCustomTime);
+            panel5.Controls.Add(rdoLastThreeMonths);
+            panel5.Controls.Add(rdoThisMonth);
+            panel5.Controls.Add(rdoLastMonth);
+            panel5.Controls.Add(rdoLastWeek);
+            panel5.Controls.Add(rdoThisWeek);
             panel5.Controls.Add(rdoAllTime);
             panel5.Location = new Point(2, 25);
             panel5.Name = "panel5";
             panel5.Size = new Size(737, 41);
             panel5.TabIndex = 21;
             // 
-            // radioButton6
+            // rdoCustomTime
             // 
-            radioButton6.Appearance = Appearance.Button;
-            radioButton6.BackColor = Color.FromArgb(167, 204, 237);
-            radioButton6.FlatAppearance.BorderSize = 0;
-            radioButton6.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-            radioButton6.FlatStyle = FlatStyle.Flat;
-            radioButton6.Location = new Point(603, 10);
-            radioButton6.Margin = new Padding(2, 10, 0, 0);
-            radioButton6.Name = "radioButton6";
-            radioButton6.Size = new Size(96, 24);
-            radioButton6.TabIndex = 27;
-            radioButton6.TabStop = true;
-            radioButton6.Text = "Custom";
-            radioButton6.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton6.UseVisualStyleBackColor = false;
+            rdoCustomTime.Appearance = Appearance.Button;
+            rdoCustomTime.BackColor = Color.FromArgb(167, 204, 237);
+            rdoCustomTime.FlatAppearance.BorderSize = 0;
+            rdoCustomTime.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoCustomTime.FlatStyle = FlatStyle.Flat;
+            rdoCustomTime.Location = new Point(603, 10);
+            rdoCustomTime.Margin = new Padding(2, 10, 0, 0);
+            rdoCustomTime.Name = "rdoCustomTime";
+            rdoCustomTime.Size = new Size(96, 24);
+            rdoCustomTime.TabIndex = 27;
+            rdoCustomTime.TabStop = true;
+            rdoCustomTime.Text = "Custom";
+            rdoCustomTime.TextAlign = ContentAlignment.MiddleCenter;
+            rdoCustomTime.UseVisualStyleBackColor = false;
+            rdoCustomTime.CheckedChanged += rdoCustomTime_CheckedChanged;
             // 
-            // radioButton5
+            // rdoLastThreeMonths
             // 
-            radioButton5.Appearance = Appearance.Button;
-            radioButton5.BackColor = Color.FromArgb(167, 204, 237);
-            radioButton5.FlatAppearance.BorderSize = 0;
-            radioButton5.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-            radioButton5.FlatStyle = FlatStyle.Flat;
-            radioButton5.Location = new Point(505, 10);
-            radioButton5.Margin = new Padding(2, 10, 0, 0);
-            radioButton5.Name = "radioButton5";
-            radioButton5.Size = new Size(96, 24);
-            radioButton5.TabIndex = 27;
-            radioButton5.TabStop = true;
-            radioButton5.Text = "Last 3 Months";
-            radioButton5.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton5.UseVisualStyleBackColor = false;
+            rdoLastThreeMonths.Appearance = Appearance.Button;
+            rdoLastThreeMonths.BackColor = Color.FromArgb(167, 204, 237);
+            rdoLastThreeMonths.FlatAppearance.BorderSize = 0;
+            rdoLastThreeMonths.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoLastThreeMonths.FlatStyle = FlatStyle.Flat;
+            rdoLastThreeMonths.Location = new Point(505, 10);
+            rdoLastThreeMonths.Margin = new Padding(2, 10, 0, 0);
+            rdoLastThreeMonths.Name = "rdoLastThreeMonths";
+            rdoLastThreeMonths.Size = new Size(96, 24);
+            rdoLastThreeMonths.TabIndex = 27;
+            rdoLastThreeMonths.TabStop = true;
+            rdoLastThreeMonths.Text = "Last 3 Months";
+            rdoLastThreeMonths.TextAlign = ContentAlignment.MiddleCenter;
+            rdoLastThreeMonths.UseVisualStyleBackColor = false;
+            rdoLastThreeMonths.CheckedChanged += rdoLastThreeMonths_CheckedChanged;
             // 
-            // radioButton3
+            // rdoThisMonth
             // 
-            radioButton3.Appearance = Appearance.Button;
-            radioButton3.BackColor = Color.FromArgb(167, 204, 237);
-            radioButton3.FlatAppearance.BorderSize = 0;
-            radioButton3.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-            radioButton3.FlatStyle = FlatStyle.Flat;
-            radioButton3.Location = new Point(309, 10);
-            radioButton3.Margin = new Padding(2, 5, 0, 0);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(96, 24);
-            radioButton3.TabIndex = 25;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "This Month";
-            radioButton3.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton3.UseVisualStyleBackColor = false;
+            rdoThisMonth.Appearance = Appearance.Button;
+            rdoThisMonth.BackColor = Color.FromArgb(167, 204, 237);
+            rdoThisMonth.FlatAppearance.BorderSize = 0;
+            rdoThisMonth.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoThisMonth.FlatStyle = FlatStyle.Flat;
+            rdoThisMonth.Location = new Point(309, 10);
+            rdoThisMonth.Margin = new Padding(2, 5, 0, 0);
+            rdoThisMonth.Name = "rdoThisMonth";
+            rdoThisMonth.Size = new Size(96, 24);
+            rdoThisMonth.TabIndex = 25;
+            rdoThisMonth.TabStop = true;
+            rdoThisMonth.Text = "This Month";
+            rdoThisMonth.TextAlign = ContentAlignment.MiddleCenter;
+            rdoThisMonth.UseVisualStyleBackColor = false;
+            rdoThisMonth.CheckedChanged += rdoThisMonth_CheckedChanged;
             // 
-            // radioButton4
+            // rdoLastMonth
             // 
-            radioButton4.Appearance = Appearance.Button;
-            radioButton4.BackColor = Color.FromArgb(167, 204, 237);
-            radioButton4.FlatAppearance.BorderSize = 0;
-            radioButton4.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-            radioButton4.FlatStyle = FlatStyle.Flat;
-            radioButton4.Location = new Point(407, 10);
-            radioButton4.Margin = new Padding(2, 5, 0, 0);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(96, 24);
-            radioButton4.TabIndex = 26;
-            radioButton4.TabStop = true;
-            radioButton4.Text = "Last Month";
-            radioButton4.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton4.UseVisualStyleBackColor = false;
+            rdoLastMonth.Appearance = Appearance.Button;
+            rdoLastMonth.BackColor = Color.FromArgb(167, 204, 237);
+            rdoLastMonth.FlatAppearance.BorderSize = 0;
+            rdoLastMonth.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoLastMonth.FlatStyle = FlatStyle.Flat;
+            rdoLastMonth.Location = new Point(407, 10);
+            rdoLastMonth.Margin = new Padding(2, 5, 0, 0);
+            rdoLastMonth.Name = "rdoLastMonth";
+            rdoLastMonth.Size = new Size(96, 24);
+            rdoLastMonth.TabIndex = 26;
+            rdoLastMonth.TabStop = true;
+            rdoLastMonth.Text = "Last Month";
+            rdoLastMonth.TextAlign = ContentAlignment.MiddleCenter;
+            rdoLastMonth.UseVisualStyleBackColor = false;
+            rdoLastMonth.CheckedChanged += rdoLastMonth_CheckedChanged;
             // 
-            // radioButton2
+            // rdoLastWeek
             // 
-            radioButton2.Appearance = Appearance.Button;
-            radioButton2.BackColor = Color.FromArgb(167, 204, 237);
-            radioButton2.FlatAppearance.BorderSize = 0;
-            radioButton2.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-            radioButton2.FlatStyle = FlatStyle.Flat;
-            radioButton2.Location = new Point(211, 10);
-            radioButton2.Margin = new Padding(2, 5, 0, 0);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(96, 24);
-            radioButton2.TabIndex = 28;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Last Week";
-            radioButton2.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton2.UseVisualStyleBackColor = false;
+            rdoLastWeek.Appearance = Appearance.Button;
+            rdoLastWeek.BackColor = Color.FromArgb(167, 204, 237);
+            rdoLastWeek.FlatAppearance.BorderSize = 0;
+            rdoLastWeek.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoLastWeek.FlatStyle = FlatStyle.Flat;
+            rdoLastWeek.Location = new Point(211, 10);
+            rdoLastWeek.Margin = new Padding(2, 5, 0, 0);
+            rdoLastWeek.Name = "rdoLastWeek";
+            rdoLastWeek.Size = new Size(96, 24);
+            rdoLastWeek.TabIndex = 28;
+            rdoLastWeek.TabStop = true;
+            rdoLastWeek.Text = "Last Week";
+            rdoLastWeek.TextAlign = ContentAlignment.MiddleCenter;
+            rdoLastWeek.UseVisualStyleBackColor = false;
+            rdoLastWeek.CheckedChanged += rdoLastWeek_CheckedChanged;
             // 
-            // radioButton1
+            // rdoThisWeek
             // 
-            radioButton1.Appearance = Appearance.Button;
-            radioButton1.BackColor = Color.FromArgb(167, 204, 237);
-            radioButton1.FlatAppearance.BorderSize = 0;
-            radioButton1.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-            radioButton1.FlatStyle = FlatStyle.Flat;
-            radioButton1.Location = new Point(113, 10);
-            radioButton1.Margin = new Padding(2, 5, 0, 0);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(96, 24);
-            radioButton1.TabIndex = 23;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "This Week";
-            radioButton1.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton1.UseVisualStyleBackColor = false;
+            rdoThisWeek.Appearance = Appearance.Button;
+            rdoThisWeek.BackColor = Color.FromArgb(167, 204, 237);
+            rdoThisWeek.FlatAppearance.BorderSize = 0;
+            rdoThisWeek.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoThisWeek.FlatStyle = FlatStyle.Flat;
+            rdoThisWeek.Location = new Point(113, 10);
+            rdoThisWeek.Margin = new Padding(2, 5, 0, 0);
+            rdoThisWeek.Name = "rdoThisWeek";
+            rdoThisWeek.Size = new Size(96, 24);
+            rdoThisWeek.TabIndex = 23;
+            rdoThisWeek.TabStop = true;
+            rdoThisWeek.Text = "This Week";
+            rdoThisWeek.TextAlign = ContentAlignment.MiddleCenter;
+            rdoThisWeek.UseVisualStyleBackColor = false;
+            rdoThisWeek.CheckedChanged += rdoThisWeek_CheckedChanged;
             // 
             // rdoAllTime
             // 
@@ -576,6 +582,7 @@
             rdoAllTime.Text = "All Time";
             rdoAllTime.TextAlign = ContentAlignment.MiddleCenter;
             rdoAllTime.UseVisualStyleBackColor = false;
+            rdoAllTime.CheckedChanged += rdoAllTime_CheckedChanged;
             // 
             // flowPositions
             // 
@@ -665,14 +672,14 @@
         private RadioButton rdoAlphabeticalOrChronological;
         private RadioButton rdoLowestRated;
         private Panel panel5;
-        private RadioButton radioButton5;
-        private RadioButton radioButton4;
-        private RadioButton radioButton3;
-        private RadioButton radioButton1;
+        private RadioButton rdoLastThreeMonths;
+        private RadioButton rdoLastMonth;
+        private RadioButton rdoThisMonth;
+        private RadioButton rdoThisWeek;
         private RadioButton rdoAllTime;
-        private RadioButton radioButton2;
+        private RadioButton rdoLastWeek;
         private FlowLayoutPanel flowPositions;
-        private RadioButton radioButton6;
+        private RadioButton rdoCustomTime;
         private Button btnGoSearch;
     }
 }

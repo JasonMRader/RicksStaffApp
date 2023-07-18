@@ -44,6 +44,7 @@ namespace RicksStaffApp
 
         public List<EmployeeShift> EmployeeShifts { get; set; }
         public List<Incident> Incidents { get; set; }
+        private float _timespanRating;
         public bool MatchesFirstName(string name)
         {
             return string.Equals(FirstName, name, StringComparison.OrdinalIgnoreCase);
@@ -87,6 +88,24 @@ namespace RicksStaffApp
             }
 
             OverallRating = totalRating / (EmployeeShifts.Count); // divide total rating by number of shifts plus default value to get average
+        }
+
+        public float GetRatingForPeriod(DateTime startDate, DateTime endDate)
+        {
+            // Filter shifts for the given period
+            var shiftsForPeriod = EmployeeShifts
+                .Where(s => s.Shift.DateAsDateTime >= startDate && s.Shift.DateAsDateTime <= endDate)
+                .ToList();
+
+            // If there are no shifts for the given period, return 0 or throw an exception
+            if (!shiftsForPeriod.Any())
+            {
+                throw new Exception("No shifts for the given period.");
+                // or return 0;
+            }
+
+            // Calculate and return the average rating for the given period
+            return shiftsForPeriod.Average(s => s.ShiftRating);
         }
         public void SetNamesFromFullName(string fullName)
         {

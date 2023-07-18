@@ -1164,6 +1164,74 @@ namespace RicksStaffApp
                 flowEmployeeDisplay.Controls.Add(empPanelContainer);
             }
         }
+        public static void CreateEmployeeOverviewPanels(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, Button btnReset, DateTime startDate, DateTime endDate)
+        {
+            // Clear existing panels
+            flowEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Employee emp in employeeList)
+            {
+                Panel empPanelContainer = CreatePanel(410, 40);
+                empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+
+
+                FlowLayoutPanel empPanel = CreateFlowPanel(410, 40);
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+                Button btnName = CreateButtonTemplate(170, 40, emp.FullName);
+                btnName.Font = new Font("Arial", 12, FontStyle.Bold);
+                btnName.Click += (sender, e) =>
+                {
+                    foreach (Control control in parentPanel.Controls)
+                    {
+                        if (control is Form form)
+                        {
+                            parentPanel.Controls.Remove(form);
+                            form.Dispose();
+                        }
+                        else
+                        {
+                            control.Visible = false;
+                        }
+
+
+                    }
+                    //parentPanel.Controls.Clear();
+                    lblMain.Text = emp.FullName;
+                    btnReset.Visible = true;
+                    frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
+                    viewEmployeeForm.TopLevel = false;
+                    viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+                    viewEmployeeForm.Dock = DockStyle.Fill;
+                    parentPanel.Controls.Add(viewEmployeeForm);
+                    viewEmployeeForm.Show();
+                };
+
+                empPanel.Controls.Add(btnName);
+                // Create panels for employee positions
+
+                PictureBox pbRating = CreateRatingPictureBox(160, 40, emp.OverallRating);
+                //pbRating.BorderStyle = BorderStyle.Fixed3D;
+                empPanel.Controls.Add(pbRating);
+
+                empPanelContainer.Controls.Add(empPanel);
+
+                Label lblRating = new Label();
+                //lblRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
+                lblRating.Margin = new Padding(0);
+                lblRating.Location = new Point(410, 0);
+                lblRating.Size = new Size(50, 40);
+                lblRating.TextAlign = ContentAlignment.MiddleCenter;
+                emp.UpdateOverallRating();
+                lblRating.Text = emp.GetRatingForPeriod(startDate, endDate).ToString("F1");
+
+                empPanel.Controls.Add(lblRating);
+
+                flowEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
         public static void CreateSingleEmployeeShiftPanel(FlowLayoutPanel flowLayoutPanel, List<EmployeeShift> empShifts)
         {
             foreach (EmployeeShift es in empShifts)

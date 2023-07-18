@@ -55,6 +55,10 @@ namespace RicksStaffApp
             //    control.Visible = true;
             //}
         }
+        private void refreshView(DateTime StartDate, DateTime EndDate)
+        {
+            UIHelper.CreateEmployeeOverviewPanels(employeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset, StartDate, EndDate);
+        }
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
@@ -272,6 +276,53 @@ namespace RicksStaffApp
         {
 
         }
+
+        private void rdoThisWeek_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Now;
+
+            // Calculate the start of the week (Monday at 12:00 AM)
+            int daysSinceMonday = today.DayOfWeek - DayOfWeek.Monday;
+            DateTime startDate = today.AddDays(-daysSinceMonday).Date;
+
+            // Calculate the end of the week (Sunday at 11:59 PM)
+            int daysUntilSunday = DayOfWeek.Sunday - today.DayOfWeek;
+            DateTime endDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+            refreshView(startDate, endDate);
+        }
+
+        private void rdoLastWeek_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdoThisMonth_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdoLastMonth_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdoLastThreeMonths_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdoCustomTime_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdoAllTime_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
         //public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)
         //{
         //    // Get today's date
