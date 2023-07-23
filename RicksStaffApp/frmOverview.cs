@@ -57,7 +57,19 @@ namespace RicksStaffApp
         }
         private void refreshView(DateTime StartDate, DateTime EndDate)
         {
-            UIHelper.CreateEmployeeOverviewPanels(employeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset, StartDate, EndDate);
+            HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
+            foreach (var shift in ShiftList)
+            {
+                if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
+                {
+                    foreach (var employeeShift in shift.EmployeeShifts)
+                    {
+                        employeesInTimePeriod.Add(employeeShift.Employee);
+                    }
+                }
+            }
+            List<Employee> employeeThatWorkedInTimeframe = employeesInTimePeriod.ToList();
+            UIHelper.CreateEmployeeOverviewPanels(employeeThatWorkedInTimeframe, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset, StartDate, EndDate);
         }
 
         private void frmOverview_Load(object sender, EventArgs e)
@@ -282,12 +294,17 @@ namespace RicksStaffApp
             DateTime today = DateTime.Now;
 
             // Calculate the start of the week (Monday at 12:00 AM)
-            int daysSinceMonday = today.DayOfWeek - DayOfWeek.Monday;
+            int daysSinceMonday = (int)today.DayOfWeek - (int)DayOfWeek.Monday;
+            if (daysSinceMonday < 0)
+            {
+                daysSinceMonday += 7;
+            }
             DateTime startDate = today.AddDays(-daysSinceMonday).Date;
 
             // Calculate the end of the week (Sunday at 11:59 PM)
-            int daysUntilSunday = DayOfWeek.Sunday - today.DayOfWeek;
+            int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)today.DayOfWeek + 7) % 7;
             DateTime endDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
 
             refreshView(startDate, endDate);
         }

@@ -55,6 +55,18 @@ namespace RicksStaffApp
         {
             return FullName;
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Employee))
+                return false;
+
+            return ((Employee)obj).ID == ID;
+        }
+
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
+        }
         //TODO fix the create shift without activity problem
         public void AddIncidentsFromShifts()
         {
@@ -100,8 +112,8 @@ namespace RicksStaffApp
             // If there are no shifts for the given period, return 0 or throw an exception
             if (!shiftsForPeriod.Any())
             {
-                throw new Exception("No shifts for the given period.");
-                // or return 0;
+                //throw new Exception("No shifts for the given period.");
+                return 0;
             }
 
             // Calculate and return the average rating for the given period
