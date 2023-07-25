@@ -9,6 +9,7 @@ namespace RicksStaffApp
             Incidents = new List<Incident>();
             //Start at 6?
             //ShiftRating = 6;
+// THIS MAY NEED UNCOMMENTED!!!!!!!!!!!!!!!*****************
             Shift = new Shift();
             Employee = new Employee();
             ShiftRating = _shiftRating;

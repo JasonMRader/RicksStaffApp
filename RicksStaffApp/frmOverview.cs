@@ -64,12 +64,14 @@ namespace RicksStaffApp
                 {
                     foreach (var employeeShift in shift.EmployeeShifts)
                     {
+                        employeeShift.Employee.EmployeeShifts.Add(employeeShift);
                         employeesInTimePeriod.Add(employeeShift.Employee);
+
                     }
                 }
             }
             List<Employee> employeeThatWorkedInTimeframe = employeesInTimePeriod.ToList();
-            UIHelper.CreateEmployeeOverviewPanels(employeeThatWorkedInTimeframe, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset, StartDate, EndDate);
+            UIHelper.CreateEmployeeOverviewPanels(employeeThatWorkedInTimeframe, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
         private void frmOverview_Load(object sender, EventArgs e)
@@ -133,7 +135,7 @@ namespace RicksStaffApp
             employeeList = employeeList.OrderBy(emp => emp.FullName).ToList();
             UIHelper.CreateEmployeePanels(employeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateIncidentFrequencyPanels(incidentList, flowMostFrequentIncidents);
-            var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+            var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).ToList();
             var EmployeesByGoodShiftRatio = employeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
@@ -291,27 +293,49 @@ namespace RicksStaffApp
 
         private void rdoThisWeek_CheckedChanged(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Now;
-
-            // Calculate the start of the week (Monday at 12:00 AM)
-            int daysSinceMonday = (int)today.DayOfWeek - (int)DayOfWeek.Monday;
-            if (daysSinceMonday < 0)
+            if (rdoThisWeek.Checked)
             {
-                daysSinceMonday += 7;
+                DateTime today = DateTime.Now;
+
+                // Calculate the start of the week (Monday at 12:00 AM)
+                int daysSinceMonday = (int)today.DayOfWeek - (int)DayOfWeek.Monday;
+                if (daysSinceMonday < 0)
+                {
+                    daysSinceMonday += 7;
+                }
+                DateTime startDate = today.AddDays(-daysSinceMonday).Date;
+
+                // Calculate the end of the week (Sunday at 11:59 PM)
+                int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)today.DayOfWeek + 7) % 7;
+                DateTime endDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+
+                refreshView(startDate, endDate);
             }
-            DateTime startDate = today.AddDays(-daysSinceMonday).Date;
-
-            // Calculate the end of the week (Sunday at 11:59 PM)
-            int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)today.DayOfWeek + 7) % 7;
-            DateTime endDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
-
-
-            refreshView(startDate, endDate);
+            
         }
 
         private void rdoLastWeek_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdoLastWeek.Checked)
+            {
+                DateTime todayMinusSeven = DateTime.Now.AddDays(-7);
 
+                // Calculate the start of the week (Monday at 12:00 AM)
+                int daysSinceMonday = (int)todayMinusSeven.DayOfWeek - (int)DayOfWeek.Monday;
+                if (daysSinceMonday < 0)
+                {
+                    daysSinceMonday += 7;
+                }
+                DateTime startDate = todayMinusSeven.AddDays(-daysSinceMonday).Date;
+
+                // Calculate the end of the week (Sunday at 11:59 PM)
+                int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)todayMinusSeven.DayOfWeek + 7) % 7;
+                DateTime endDate = todayMinusSeven.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+
+                refreshView(startDate, endDate);
+            }
         }
 
         private void rdoThisMonth_CheckedChanged(object sender, EventArgs e)
@@ -336,7 +360,15 @@ namespace RicksStaffApp
 
         private void rdoAllTime_CheckedChanged(object sender, EventArgs e)
         {
-
+            foreach (Employee employee in employeeList)
+            {
+                employee.AddIncidentsFromShifts();
+                employee.UpdateOverallRating();
+                incidentList.AddRange(employee.Incidents);
+            }
+            employeeList = employeeList.OrderBy(emp => emp.FullName).ToList();
+            var EmployeesByRating = employeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
 
