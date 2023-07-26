@@ -19,6 +19,15 @@ namespace RicksStaffApp
         List<Employee> AllEmployeeList = new List<Employee>();
         List<Position> AllPositionList = new List<Position>();
         List<Incident> AllIncidentList = new List<Incident>();
+
+        List<Shift> FilteredShiftList = new List<Shift>();
+        List<Employee> FilteredEmployeeList = new List<Employee>();
+        List<Position> FilteredPositionList = new List<Position>();
+        List <Incident> FilteredIncidentList = new List<Incident>();
+
+        DateTime StartDate;
+        DateTime EndDate;
+
         private frmAddNewEmployee frmAddNewEmployee;
         int goodShiftCount = 0;
         int badShiftCount = 0;
@@ -67,7 +76,7 @@ namespace RicksStaffApp
             var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
             UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
-        private void refreshView(DateTime StartDate, DateTime EndDate)
+        private void refreshView()
         {
             HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
             foreach (var shift in AllShiftList)
@@ -84,9 +93,9 @@ namespace RicksStaffApp
                     }
                 }
             }
-            List<Employee> employeeThatWorkedInTimeframe = employeesInTimePeriod.ToList();
-            employeeThatWorkedInTimeframe = employeeThatWorkedInTimeframe.OrderByDescending(emp => emp.OverallRating).ToList();
-            UIHelper.CreateEmployeeOverviewPanels(employeeThatWorkedInTimeframe, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            FilteredEmployeeList = employeesInTimePeriod.ToList();
+            FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
 
@@ -112,31 +121,32 @@ namespace RicksStaffApp
             AllShiftList = SqliteDataAccess.LoadShifts();
             var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
             UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
-            string[] names = AllEmployeeList.Select(e => e.FullName).ToArray();
-            AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
-            autoComplete.AddRange(names);
-            txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
-            txtBxEmployeeSearch.Validated += (sender, e) =>
-            {
-                // This code will run when the TextBox loses focus.
-                // The user's input can be retrieved with textBox1.Text.
-                string selectedName = txtBxEmployeeSearch.Text;
+            //AUTO COMPLETE MAKING IT CRASH? Got stack overflow error when adding a shift
+            //string[] names = AllEmployeeList.Select(e => e.FullName).ToArray();
+            //AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
+            //autoComplete.AddRange(names);
+            //txtBxEmployeeSearch.AutoCompleteCustomSource = autoComplete;
+            //txtBxEmployeeSearch.Validated += (sender, e) =>
+            //{
+            //    // This code will run when the TextBox loses focus.
+            //    // The user's input can be retrieved with textBox1.Text.
+            //    string selectedName = txtBxEmployeeSearch.Text;
 
-                // Find the employee with the matching name.
-                Employee selectedEmployee = AllEmployeeList.FirstOrDefault(emp => emp.FullName == selectedName);
+            //    // Find the employee with the matching name.
+            //    Employee selectedEmployee = AllEmployeeList.FirstOrDefault(emp => emp.FullName == selectedName);
 
-                if (selectedEmployee != null)
-                {
-                    pnlEmployeeStats.Controls.Clear();
+            //    if (selectedEmployee != null)
+            //    {
+            //        pnlEmployeeStats.Controls.Clear();
 
-                    frmViewEmployee viewEmployeeForm = new frmViewEmployee();
-                    viewEmployeeForm.TopLevel = false;
-                    viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
-                    viewEmployeeForm.Dock = DockStyle.Fill;
-                    pnlEmployeeStats.Controls.Add(viewEmployeeForm);
-                    viewEmployeeForm.Show();
-                }
-            };
+            //        frmViewEmployee viewEmployeeForm = new frmViewEmployee();
+            //        viewEmployeeForm.TopLevel = false;
+            //        viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+            //        viewEmployeeForm.Dock = DockStyle.Fill;
+            //        pnlEmployeeStats.Controls.Add(viewEmployeeForm);
+            //        viewEmployeeForm.Show();
+            //    }
+            //};
             //foreach (Employee employee in employeeList)
             //{
             //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
@@ -162,10 +172,7 @@ namespace RicksStaffApp
 
 
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
@@ -222,34 +229,34 @@ namespace RicksStaffApp
             //UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
-        private void cboViewType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboViewType.SelectedIndex == 0)
-            {
-                flowEmployeeRankings.Controls.Clear();
-                var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-                UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            }
-            if (cboViewType.SelectedIndex == 1)
-            {
-                flowEmployeeRankings.Controls.Clear();
-                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-                foreach (Employee employee in AllEmployeeList)
-                {
-                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
-                    {
-                        employeeShift.Employee = employee;
-                        employeeShifts.Add(employeeShift);
-                    }
-                }
-                var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
-                foreach (EmployeeShift employeeShift in employeeShiftRanking)
-                {
-                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
-                }
+        //private void cboViewType_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (cboViewType.SelectedIndex == 0)
+        //    {
+        //        flowEmployeeRankings.Controls.Clear();
+        //        var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+        //        UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+        //    }
+        //    if (cboViewType.SelectedIndex == 1)
+        //    {
+        //        flowEmployeeRankings.Controls.Clear();
+        //        List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        //        foreach (Employee employee in AllEmployeeList)
+        //        {
+        //            foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+        //            {
+        //                employeeShift.Employee = employee;
+        //                employeeShifts.Add(employeeShift);
+        //            }
+        //        }
+        //        var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+        //        foreach (EmployeeShift employeeShift in employeeShiftRanking)
+        //        {
+        //            UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         private void lbTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -291,16 +298,8 @@ namespace RicksStaffApp
                 rdoAlphabeticalOrChronological.Text = "Most Recent";
             }
         }
-
-        private void rdoViewEmployeeShifts_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMainWindowDescription_Click(object sender, EventArgs e)
-        {
-
-        }
+              
+                
 
         private void rdoThisWeek_CheckedChanged(object sender, EventArgs e)
         {
@@ -314,14 +313,14 @@ namespace RicksStaffApp
                 {
                     daysSinceMonday += 7;
                 }
-                DateTime startDate = today.AddDays(-daysSinceMonday).Date;
+                StartDate = today.AddDays(-daysSinceMonday).Date;
 
                 // Calculate the end of the week (Sunday at 11:59 PM)
                 int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)today.DayOfWeek + 7) % 7;
-                DateTime endDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                EndDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
 
-                refreshView(startDate, endDate);
+                refreshView();
             }
             
         }
@@ -338,14 +337,14 @@ namespace RicksStaffApp
                 {
                     daysSinceMonday += 7;
                 }
-                DateTime startDate = todayMinusSeven.AddDays(-daysSinceMonday).Date;
+                StartDate = todayMinusSeven.AddDays(-daysSinceMonday).Date;
 
                 // Calculate the end of the week (Sunday at 11:59 PM)
                 int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)todayMinusSeven.DayOfWeek + 7) % 7;
-                DateTime endDate = todayMinusSeven.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                EndDate = todayMinusSeven.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
 
-                refreshView(startDate, endDate);
+                refreshView();
             }
         }
 
@@ -371,6 +370,8 @@ namespace RicksStaffApp
 
         private void rdoAllTime_CheckedChanged(object sender, EventArgs e)
         {
+            FilteredEmployeeList.Clear();
+            FilteredEmployeeList = AllEmployeeList;
             refreshViewAllTime();
         }
 

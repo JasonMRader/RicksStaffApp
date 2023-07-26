@@ -238,7 +238,7 @@
             cboViewType.Size = new Size(60, 23);
             cboViewType.TabIndex = 12;
             cboViewType.Visible = false;
-            cboViewType.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
+            
             // 
             // cboSortBy
             // 
@@ -252,7 +252,7 @@
             cboSortBy.Size = new Size(50, 23);
             cboSortBy.TabIndex = 12;
             cboSortBy.Visible = false;
-            cboSortBy.SelectedIndexChanged += cboViewType_SelectedIndexChanged;
+            
             // 
             // lbPositions
             // 
