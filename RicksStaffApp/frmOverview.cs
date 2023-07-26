@@ -23,11 +23,11 @@ namespace RicksStaffApp
         List<Shift> FilteredShiftList = new List<Shift>();
         List<Employee> FilteredEmployeeList = new List<Employee>();
         List<Position> FilteredPositionList = new List<Position>();
-        List <Incident> FilteredIncidentList = new List<Incident>();
+        List<Incident> FilteredIncidentList = new List<Incident>();
 
         DateTime StartDate;
         DateTime EndDate;
-
+        private frmViewEmployee frmViewEmployee;
         private frmAddNewEmployee frmAddNewEmployee;
         int goodShiftCount = 0;
         int badShiftCount = 0;
@@ -85,14 +85,20 @@ namespace RicksStaffApp
                 {
                     foreach (var employeeShift in shift.EmployeeShifts)
                     {
-                        employeeShift.Employee.EmployeeShifts.Add(employeeShift);
-                        employeesInTimePeriod.Add(employeeShift.Employee);
-                        employeeShift.Employee.UpdateOverallRating();
-                        
+                        if (!employeeShift.Employee.EmployeeShifts.Any(es => es.ID == employeeShift.ID))
+                        {
+                            employeeShift.Employee.EmployeeShifts.Add(employeeShift);
+                            employeesInTimePeriod.Add(employeeShift.Employee);
+                        }
+                        //employeeShift.Employee.EmployeeShifts.Add(employeeShift);
+                        //employeesInTimePeriod.Add(employeeShift.Employee);
+                        //employeeShift.Employee.UpdateOverallRating();
+
 
                     }
                 }
             }
+            FilteredEmployeeList.Clear();
             FilteredEmployeeList = employeesInTimePeriod.ToList();
             FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
             UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
@@ -101,6 +107,8 @@ namespace RicksStaffApp
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
+            frmViewEmployee = new frmViewEmployee();
+
             rdoViewEmployees.Checked = true;
             rdoHighestRated.Checked = true;
             rdoAllTime.Checked = true;
@@ -152,12 +160,12 @@ namespace RicksStaffApp
             //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
             //}
             List<Employee> HighestGoodShiftRation = new List<Employee>();
-            
+
             UIHelper.CreateEmployeePanels(AllEmployeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateIncidentFrequencyPanels(AllIncidentList, flowMostFrequentIncidents);
-            
+
             var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
-           
+
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
             UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositionList);
             //UIHelper.ConfigureFlowLayoutPanel(flowGoodShiftRankings);
@@ -172,7 +180,7 @@ namespace RicksStaffApp
 
 
 
-       
+
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
@@ -298,8 +306,8 @@ namespace RicksStaffApp
                 rdoAlphabeticalOrChronological.Text = "Most Recent";
             }
         }
-              
-                
+
+
 
         private void rdoThisWeek_CheckedChanged(object sender, EventArgs e)
         {
@@ -322,7 +330,9 @@ namespace RicksStaffApp
 
                 refreshView();
             }
-            
+            lblTest1.Text = StartDate.ToString("d");
+            lblTest2.Text = EndDate.ToString("d");
+
         }
 
         private void rdoLastWeek_CheckedChanged(object sender, EventArgs e)
@@ -346,6 +356,8 @@ namespace RicksStaffApp
 
                 refreshView();
             }
+            lblTest1.Text = StartDate.ToString("d");
+            lblTest2.Text = EndDate.ToString("d");
         }
 
         private void rdoThisMonth_CheckedChanged(object sender, EventArgs e)

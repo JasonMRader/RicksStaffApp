@@ -66,6 +66,8 @@
             rdoAllTime = new RadioButton();
             flowPositions = new FlowLayoutPanel();
             btnGoSearch = new Button();
+            lblTest1 = new Label();
+            lblTest2 = new Label();
             pnlEmployeeStats.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -146,7 +148,6 @@
             pnlEmployeeStats.Name = "pnlEmployeeStats";
             pnlEmployeeStats.Size = new Size(800, 600);
             pnlEmployeeStats.TabIndex = 0;
-            
             // 
             // flowMostFrequentIncidents
             // 
@@ -238,7 +239,6 @@
             cboViewType.Size = new Size(60, 23);
             cboViewType.TabIndex = 12;
             cboViewType.Visible = false;
-            
             // 
             // cboSortBy
             // 
@@ -252,7 +252,6 @@
             cboSortBy.Size = new Size(50, 23);
             cboSortBy.TabIndex = 12;
             cboSortBy.Visible = false;
-            
             // 
             // lbPositions
             // 
@@ -319,7 +318,6 @@
             lblMainWindowDescription.TabIndex = 0;
             lblMainWindowDescription.Text = "Overview";
             lblMainWindowDescription.TextAlign = ContentAlignment.MiddleCenter;
-            
             // 
             // btnReset
             // 
@@ -369,7 +367,6 @@
             rdoViewEmployeeShifts.Text = "Employee Shifts";
             rdoViewEmployeeShifts.TextAlign = ContentAlignment.MiddleCenter;
             rdoViewEmployeeShifts.UseVisualStyleBackColor = false;
-            
             // 
             // panel2
             // 
@@ -605,6 +602,26 @@
             btnGoSearch.Text = "Go";
             btnGoSearch.UseVisualStyleBackColor = false;
             // 
+            // lblTest1
+            // 
+            lblTest1.AutoSize = true;
+            lblTest1.ForeColor = Color.White;
+            lblTest1.Location = new Point(138, 69);
+            lblTest1.Name = "lblTest1";
+            lblTest1.Size = new Size(38, 15);
+            lblTest1.TabIndex = 24;
+            lblTest1.Text = "label4";
+            // 
+            // lblTest2
+            // 
+            lblTest2.AutoSize = true;
+            lblTest2.ForeColor = Color.White;
+            lblTest2.Location = new Point(204, 69);
+            lblTest2.Name = "lblTest2";
+            lblTest2.Size = new Size(38, 15);
+            lblTest2.TabIndex = 24;
+            lblTest2.Text = "label4";
+            // 
             // frmOverview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -613,6 +630,8 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(lblTest2);
+            Controls.Add(lblTest1);
             Controls.Add(btnGoSearch);
             Controls.Add(flowPositions);
             Controls.Add(panel5);
@@ -681,5 +700,7 @@
         private FlowLayoutPanel flowPositions;
         private RadioButton rdoCustomTime;
         private Button btnGoSearch;
+        private Label lblTest1;
+        private Label lblTest2;
     }
 }
