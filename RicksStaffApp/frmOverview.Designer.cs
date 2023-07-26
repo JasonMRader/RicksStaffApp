@@ -146,7 +146,7 @@
             pnlEmployeeStats.Name = "pnlEmployeeStats";
             pnlEmployeeStats.Size = new Size(800, 600);
             pnlEmployeeStats.TabIndex = 0;
-            pnlEmployeeStats.Paint += panel2_Paint;
+            
             // 
             // flowMostFrequentIncidents
             // 
@@ -319,7 +319,7 @@
             lblMainWindowDescription.TabIndex = 0;
             lblMainWindowDescription.Text = "Overview";
             lblMainWindowDescription.TextAlign = ContentAlignment.MiddleCenter;
-            lblMainWindowDescription.Click += lblMainWindowDescription_Click;
+            
             // 
             // btnReset
             // 
@@ -369,7 +369,7 @@
             rdoViewEmployeeShifts.Text = "Employee Shifts";
             rdoViewEmployeeShifts.TextAlign = ContentAlignment.MiddleCenter;
             rdoViewEmployeeShifts.UseVisualStyleBackColor = false;
-            rdoViewEmployeeShifts.CheckedChanged += rdoViewEmployeeShifts_CheckedChanged;
+            
             // 
             // panel2
             // 
