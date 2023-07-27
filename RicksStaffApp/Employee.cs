@@ -43,6 +43,13 @@ namespace RicksStaffApp
         public List<Position> Positions { get; set; }
 
         public List<EmployeeShift> EmployeeShifts { get; set; }
+        public void AddEmployeeShift(EmployeeShift newShift)
+        {
+            if (!EmployeeShifts.Any(shift => shift.ID == newShift.ID))
+            {
+                EmployeeShifts.Add(newShift);
+            }
+        }
         public List<Incident> Incidents { get; set; }
         private float _timespanRating;
         public bool MatchesFirstName(string name)

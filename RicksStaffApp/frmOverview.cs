@@ -19,11 +19,13 @@ namespace RicksStaffApp
         List<Employee> AllEmployeeList = new List<Employee>();
         List<Position> AllPositionList = new List<Position>();
         List<Incident> AllIncidentList = new List<Incident>();
+        List<EmployeeShift> AllEmployeeShiftList = new List<EmployeeShift>();
 
         List<Shift> FilteredShiftList = new List<Shift>();
         List<Employee> FilteredEmployeeList = new List<Employee>();
         List<Position> FilteredPositionList = new List<Position>();
         List<Incident> FilteredIncidentList = new List<Incident>();
+        List<EmployeeShift> FilteredEmployeeShiftList =new List<EmployeeShift>();
 
         DateTime StartDate;
         DateTime EndDate;
@@ -78,28 +80,37 @@ namespace RicksStaffApp
         }
         private void refreshView()
         {
+            FilteredEmployeeList.Clear();
+            FilteredEmployeeShiftList.Clear();
+
             HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
+            employeesInTimePeriod.Clear();
+            
             foreach (var shift in AllShiftList)
             {
                 if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
                 {
                     foreach (var employeeShift in shift.EmployeeShifts)
-                    {
-                        if (!employeeShift.Employee.EmployeeShifts.Any(es => es.ID == employeeShift.ID))
-                        {
-                            employeeShift.Employee.EmployeeShifts.Add(employeeShift);
-                            employeesInTimePeriod.Add(employeeShift.Employee);
-                        }
-                        //employeeShift.Employee.EmployeeShifts.Add(employeeShift);
-                        //employeesInTimePeriod.Add(employeeShift.Employee);
-                        //employeeShift.Employee.UpdateOverallRating();
-
-
+                    {                        
+                        employeesInTimePeriod.Add(employeeShift.Employee);
+                        FilteredEmployeeShiftList.Add(employeeShift);
+                        //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
+                       
                     }
                 }
             }
-            FilteredEmployeeList.Clear();
+            
             FilteredEmployeeList = employeesInTimePeriod.ToList();
+            foreach (var employeeShift in FilteredEmployeeShiftList)
+            {
+                // Find the corresponding Employee in FilteredEmployeeList
+                var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
+                if (employee != null)
+                {
+                    // Add the EmployeeShift to the Employee
+                    employee.AddEmployeeShift(employeeShift);
+                }
+            }
             FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
             UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
