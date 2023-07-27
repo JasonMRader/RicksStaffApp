@@ -25,7 +25,7 @@ namespace RicksStaffApp
         List<Employee> FilteredEmployeeList = new List<Employee>();
         List<Position> FilteredPositionList = new List<Position>();
         List<Incident> FilteredIncidentList = new List<Incident>();
-        List<EmployeeShift> FilteredEmployeeShiftList =new List<EmployeeShift>();
+        List<EmployeeShift> FilteredEmployeeShiftList = new List<EmployeeShift>();
 
         DateTime StartDate;
         DateTime EndDate;
@@ -85,21 +85,21 @@ namespace RicksStaffApp
 
             HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
             employeesInTimePeriod.Clear();
-            
+
             foreach (var shift in AllShiftList)
             {
                 if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
                 {
                     foreach (var employeeShift in shift.EmployeeShifts)
-                    {                        
+                    {
                         employeesInTimePeriod.Add(employeeShift.Employee);
                         FilteredEmployeeShiftList.Add(employeeShift);
                         //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
-                       
+
                     }
                 }
             }
-            
+
             FilteredEmployeeList = employeesInTimePeriod.ToList();
             foreach (var employeeShift in FilteredEmployeeShiftList)
             {
@@ -373,17 +373,56 @@ namespace RicksStaffApp
 
         private void rdoThisMonth_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdoThisMonth.Checked)
+            {
+                DateTime today = DateTime.Now;
 
+
+                StartDate = new DateTime(today.Year, today.Month, 1);
+
+
+                EndDate = StartDate.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
+
+                refreshView();
+            }
+            lblTest1.Text = StartDate.ToString("d");
+            lblTest2.Text = EndDate.ToString("d");
         }
 
         private void rdoLastMonth_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdoLastMonth.Checked)
+            {
+                DateTime todayLastMonth = DateTime.Now.AddMonths(-1);
 
+
+                StartDate = new DateTime(todayLastMonth.Year, todayLastMonth.Month, 1);
+
+
+                EndDate = StartDate.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
+
+                refreshView();
+            }
+            lblTest1.Text = StartDate.ToString("d");
+            lblTest2.Text = EndDate.ToString("d");
         }
 
         private void rdoLastThreeMonths_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdoLastThreeMonths.Checked)
+            {
+                DateTime todayLastMonth = DateTime.Now.AddMonths(-3);
 
+
+                StartDate = DateTime.Today.AddDays(-90);
+
+
+                EndDate = DateTime.Today;
+
+                refreshView();
+            }
+            lblTest1.Text = StartDate.ToString("d");
+            lblTest2.Text = EndDate.ToString("d");
         }
 
         private void rdoCustomTime_CheckedChanged(object sender, EventArgs e)

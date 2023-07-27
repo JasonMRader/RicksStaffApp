@@ -486,7 +486,7 @@
             rdoLastThreeMonths.Size = new Size(96, 24);
             rdoLastThreeMonths.TabIndex = 27;
             rdoLastThreeMonths.TabStop = true;
-            rdoLastThreeMonths.Text = "Last 3 Months";
+            rdoLastThreeMonths.Text = "Last 90 Days";
             rdoLastThreeMonths.TextAlign = ContentAlignment.MiddleCenter;
             rdoLastThreeMonths.UseVisualStyleBackColor = false;
             rdoLastThreeMonths.CheckedChanged += rdoLastThreeMonths_CheckedChanged;

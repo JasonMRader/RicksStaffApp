@@ -34,6 +34,14 @@ namespace RicksStaffApp
             }
         }
         public List<EmployeeShift> EmployeeShifts { get; set; }
+        public void AddEmployeeShift(EmployeeShift employeeShift)
+        {
+            // Set the Shift property of the EmployeeShift to this Shift
+            employeeShift.Shift = this;
+
+            // Add the EmployeeShift to the Shift's EmployeeShifts list
+            EmployeeShifts.Add(employeeShift);
+        }
         public float AverageRating
         {
             get

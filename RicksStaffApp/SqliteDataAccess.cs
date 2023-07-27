@@ -369,6 +369,7 @@ namespace RicksStaffApp
                                 currentEmployeeShift.Employee = employee;
                                 currentEmployeeShift.Position = position;
                                 currentEmployeeShift.Incidents = new List<Incident>();
+                                currentEmployeeShift.Shift = shift;
                                 employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
                             }
 

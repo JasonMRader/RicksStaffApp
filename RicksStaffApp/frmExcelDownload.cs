@@ -201,7 +201,7 @@ namespace RicksStaffApp
                     //employeeShift.PositionID = 1;
                     //employeeShift.Shift.ID = s.ID;
                     //employeeShift.Employee.ID = emp.ID;
-                    EmployeeShift employeeShift = new EmployeeShift
+                    EmployeeShift employeeShift = new EmployeeShift(emp,s)
                     {
                         PositionID = 1,
                         Shift = newShift,

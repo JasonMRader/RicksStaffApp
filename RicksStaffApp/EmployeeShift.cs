@@ -10,8 +10,8 @@ namespace RicksStaffApp
             //Start at 6?
             //ShiftRating = 6;
 // THIS MAY NEED UNCOMMENTED!!!!!!!!!!!!!!!*****************
-            Shift = new Shift();
-            Employee = new Employee();
+            //Shift = new Shift();
+            //Employee = new Employee();
             ShiftRating = _shiftRating;
         }
         public EmployeeShift(Employee employee, Shift shift) : this()
