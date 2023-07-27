@@ -74,9 +74,21 @@ namespace RicksStaffApp
                 employee.UpdateOverallRating();
                 AllIncidentList.AddRange(employee.Incidents);
             }
-            AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).ToList();
-            var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
-            UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            if (rdoHighestRated.Checked == true)
+            {
+                AllEmployeeList = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            }
+            if (rdoLowestRated.Checked == true)
+            {
+                AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
+            }
+            if (rdoAlphabeticalOrChronological.Checked == true)
+            {
+                AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).ToList();
+            }
+            
+            //var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            UIHelper.CreateEmployeeOverviewPanels(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
         private void refreshView()
         {
@@ -451,17 +463,34 @@ namespace RicksStaffApp
 
         private void rdoHighestRated_CheckedChanged(object sender, EventArgs e)
         {
-            refreshView();
+            
+            
         }
 
         private void rdoLowestRated_CheckedChanged(object sender, EventArgs e)
         {
-            refreshView();
+            if (rdoAllTime.Checked == true)
+            {
+                refreshViewAllTime();
+
+            }
+            else
+            {
+                refreshView();
+            }
         }
 
         private void rdoAlphabeticalOrChronological_CheckedChanged(object sender, EventArgs e)
         {
-            refreshView();
+            if (rdoAllTime.Checked == true)
+            {
+                refreshViewAllTime();
+
+            }
+            else
+            {
+                refreshView();
+            }
         }
 
 
