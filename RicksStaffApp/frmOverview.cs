@@ -109,9 +109,21 @@ namespace RicksStaffApp
                 {
                     // Add the EmployeeShift to the Employee
                     employee.AddEmployeeShift(employeeShift);
+                    employee.UpdateOverallRating();
                 }
             }
-            FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            if (rdoHighestRated.Checked == true)
+            {
+                FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            }
+            if (rdoLowestRated.Checked == true)
+            {
+                FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
+            }
+            if (rdoAlphabeticalOrChronological.Checked == true)
+            {
+                FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
+            }
             UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
@@ -435,6 +447,21 @@ namespace RicksStaffApp
             FilteredEmployeeList.Clear();
             FilteredEmployeeList = AllEmployeeList;
             refreshViewAllTime();
+        }
+
+        private void rdoHighestRated_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshView();
+        }
+
+        private void rdoLowestRated_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshView();
+        }
+
+        private void rdoAlphabeticalOrChronological_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshView();
         }
 
 

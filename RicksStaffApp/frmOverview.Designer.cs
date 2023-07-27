@@ -405,6 +405,7 @@
             rdoHighestRated.Text = "Highest Rated";
             rdoHighestRated.TextAlign = ContentAlignment.MiddleCenter;
             rdoHighestRated.UseVisualStyleBackColor = false;
+            rdoHighestRated.CheckedChanged += rdoHighestRated_CheckedChanged;
             // 
             // rdoAlphabeticalOrChronological
             // 
@@ -422,6 +423,7 @@
             rdoAlphabeticalOrChronological.Text = "Alphabetical";
             rdoAlphabeticalOrChronological.TextAlign = ContentAlignment.MiddleCenter;
             rdoAlphabeticalOrChronological.UseVisualStyleBackColor = false;
+            rdoAlphabeticalOrChronological.CheckedChanged += rdoAlphabeticalOrChronological_CheckedChanged;
             // 
             // rdoLowestRated
             // 
@@ -439,6 +441,7 @@
             rdoLowestRated.Text = "Lowest Rated";
             rdoLowestRated.TextAlign = ContentAlignment.MiddleCenter;
             rdoLowestRated.UseVisualStyleBackColor = false;
+            rdoLowestRated.CheckedChanged += rdoLowestRated_CheckedChanged;
             // 
             // panel5
             // 
