@@ -92,7 +92,7 @@ namespace RicksStaffApp
             {
                 AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).ToList();
             }
-            
+
             //var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
             UIHelper.CreateEmployeeOverviewPanels(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             UIHelper.CreateIncidentFrequencyPanels(AllIncidentList, flowMostFrequentIncidents);
@@ -152,8 +152,8 @@ namespace RicksStaffApp
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
-           
-            
+
+
             frmViewEmployee = new frmViewEmployee();
 
             rdoViewEmployees.Checked = true;
@@ -162,7 +162,7 @@ namespace RicksStaffApp
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
-            
+
             cboPositions.Items.Add("All Positions");
             foreach (Position position in AllPositionList)
             {
@@ -206,18 +206,18 @@ namespace RicksStaffApp
             List<Employee> HighestGoodShiftRation = new List<Employee>();
 
             UIHelper.CreateEmployeePanels(AllEmployeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            
+
 
             var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
 
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
             UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositionList);
-            
+
             lbPositions.SelectedIndex = 0;
-            
+
             lbTimeFrame.SelectedIndex = 0;
-           
-            
+
+
             var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
             UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
 
@@ -461,6 +461,26 @@ namespace RicksStaffApp
 
         private void rdoCustomTime_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdoCustomTime.Checked)
+            {
+                using (var datePickerForm = new frmDatePicker())
+                {
+                    var result = datePickerForm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        StartDate = datePickerForm.DatePickerStartDate;
+                        EndDate = datePickerForm.DatePickerEndDate;
+                    }
+                    refreshView();
+                    //lblTest1.Text = StartDate.ToString("d");
+                    //lblTest2.Text = EndDate.ToString("d");
+                    rdoCustomTime.Text = StartDate.ToString("d") + " - " + EndDate.ToString("d");
+                }
+            }
+            else
+            {
+                rdoCustomTime.Text = "Custom";
+            }
 
         }
 
@@ -473,8 +493,8 @@ namespace RicksStaffApp
 
         private void rdoHighestRated_CheckedChanged(object sender, EventArgs e)
         {
-            
-            
+
+
         }
 
         private void rdoLowestRated_CheckedChanged(object sender, EventArgs e)

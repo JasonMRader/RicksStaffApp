@@ -101,6 +101,7 @@
             txtBxEmployeeSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtBxEmployeeSearch.BackColor = Color.FromArgb(74, 79, 99);
             txtBxEmployeeSearch.BorderStyle = BorderStyle.None;
+            txtBxEmployeeSearch.Enabled = false;
             txtBxEmployeeSearch.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             txtBxEmployeeSearch.ForeColor = Color.White;
             txtBxEmployeeSearch.Location = new Point(1042, 99);
@@ -465,16 +466,17 @@
             rdoCustomTime.FlatAppearance.BorderSize = 0;
             rdoCustomTime.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoCustomTime.FlatStyle = FlatStyle.Flat;
-            rdoCustomTime.Location = new Point(603, 10);
+            rdoCustomTime.Location = new Point(568, 10);
             rdoCustomTime.Margin = new Padding(2, 10, 0, 0);
             rdoCustomTime.Name = "rdoCustomTime";
-            rdoCustomTime.Size = new Size(96, 24);
+            rdoCustomTime.Size = new Size(131, 24);
             rdoCustomTime.TabIndex = 27;
             rdoCustomTime.TabStop = true;
             rdoCustomTime.Text = "Custom";
             rdoCustomTime.TextAlign = ContentAlignment.MiddleCenter;
             rdoCustomTime.UseVisualStyleBackColor = false;
             rdoCustomTime.CheckedChanged += rdoCustomTime_CheckedChanged;
+            rdoCustomTime.Click += rdoCustomTime_CheckedChanged;
             // 
             // rdoLastThreeMonths
             // 
@@ -483,10 +485,10 @@
             rdoLastThreeMonths.FlatAppearance.BorderSize = 0;
             rdoLastThreeMonths.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLastThreeMonths.FlatStyle = FlatStyle.Flat;
-            rdoLastThreeMonths.Location = new Point(505, 10);
+            rdoLastThreeMonths.Location = new Point(476, 10);
             rdoLastThreeMonths.Margin = new Padding(2, 10, 0, 0);
             rdoLastThreeMonths.Name = "rdoLastThreeMonths";
-            rdoLastThreeMonths.Size = new Size(96, 24);
+            rdoLastThreeMonths.Size = new Size(90, 24);
             rdoLastThreeMonths.TabIndex = 27;
             rdoLastThreeMonths.TabStop = true;
             rdoLastThreeMonths.Text = "Last 90 Days";
@@ -501,10 +503,10 @@
             rdoThisMonth.FlatAppearance.BorderSize = 0;
             rdoThisMonth.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoThisMonth.FlatStyle = FlatStyle.Flat;
-            rdoThisMonth.Location = new Point(309, 10);
+            rdoThisMonth.Location = new Point(292, 10);
             rdoThisMonth.Margin = new Padding(2, 5, 0, 0);
             rdoThisMonth.Name = "rdoThisMonth";
-            rdoThisMonth.Size = new Size(96, 24);
+            rdoThisMonth.Size = new Size(90, 24);
             rdoThisMonth.TabIndex = 25;
             rdoThisMonth.TabStop = true;
             rdoThisMonth.Text = "This Month";
@@ -519,10 +521,10 @@
             rdoLastMonth.FlatAppearance.BorderSize = 0;
             rdoLastMonth.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLastMonth.FlatStyle = FlatStyle.Flat;
-            rdoLastMonth.Location = new Point(407, 10);
+            rdoLastMonth.Location = new Point(384, 10);
             rdoLastMonth.Margin = new Padding(2, 5, 0, 0);
             rdoLastMonth.Name = "rdoLastMonth";
-            rdoLastMonth.Size = new Size(96, 24);
+            rdoLastMonth.Size = new Size(90, 24);
             rdoLastMonth.TabIndex = 26;
             rdoLastMonth.TabStop = true;
             rdoLastMonth.Text = "Last Month";
@@ -537,10 +539,10 @@
             rdoLastWeek.FlatAppearance.BorderSize = 0;
             rdoLastWeek.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLastWeek.FlatStyle = FlatStyle.Flat;
-            rdoLastWeek.Location = new Point(211, 10);
+            rdoLastWeek.Location = new Point(199, 10);
             rdoLastWeek.Margin = new Padding(2, 5, 0, 0);
             rdoLastWeek.Name = "rdoLastWeek";
-            rdoLastWeek.Size = new Size(96, 24);
+            rdoLastWeek.Size = new Size(90, 24);
             rdoLastWeek.TabIndex = 28;
             rdoLastWeek.TabStop = true;
             rdoLastWeek.Text = "Last Week";
@@ -555,10 +557,10 @@
             rdoThisWeek.FlatAppearance.BorderSize = 0;
             rdoThisWeek.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoThisWeek.FlatStyle = FlatStyle.Flat;
-            rdoThisWeek.Location = new Point(113, 10);
+            rdoThisWeek.Location = new Point(107, 10);
             rdoThisWeek.Margin = new Padding(2, 5, 0, 0);
             rdoThisWeek.Name = "rdoThisWeek";
-            rdoThisWeek.Size = new Size(96, 24);
+            rdoThisWeek.Size = new Size(90, 24);
             rdoThisWeek.TabIndex = 23;
             rdoThisWeek.TabStop = true;
             rdoThisWeek.Text = "This Week";
@@ -576,7 +578,7 @@
             rdoAllTime.Location = new Point(15, 10);
             rdoAllTime.Margin = new Padding(0, 5, 0, 0);
             rdoAllTime.Name = "rdoAllTime";
-            rdoAllTime.Size = new Size(96, 24);
+            rdoAllTime.Size = new Size(90, 24);
             rdoAllTime.TabIndex = 22;
             rdoAllTime.TabStop = true;
             rdoAllTime.Text = "All Time";
@@ -596,6 +598,7 @@
             // btnGoSearch
             // 
             btnGoSearch.BackColor = Color.FromArgb(167, 204, 237);
+            btnGoSearch.Enabled = false;
             btnGoSearch.FlatAppearance.BorderSize = 0;
             btnGoSearch.FlatStyle = FlatStyle.Flat;
             btnGoSearch.Location = new Point(1246, 99);
@@ -614,6 +617,7 @@
             lblTest1.Size = new Size(38, 15);
             lblTest1.TabIndex = 24;
             lblTest1.Text = "label4";
+            lblTest1.Visible = false;
             // 
             // lblTest2
             // 
@@ -624,6 +628,7 @@
             lblTest2.Size = new Size(38, 15);
             lblTest2.TabIndex = 24;
             lblTest2.Text = "label4";
+            lblTest2.Visible = false;
             // 
             // frmOverview
             // 
