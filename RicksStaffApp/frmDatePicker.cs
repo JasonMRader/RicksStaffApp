@@ -57,7 +57,7 @@ namespace RicksStaffApp
 
         private void calStart_DateChanged(object sender, DateRangeEventArgs e)
         {
-
+            calEnd.SelectionStart = calStart.SelectionStart;
         }
 
         private void calEnd_DateChanged(object sender, DateRangeEventArgs e)
