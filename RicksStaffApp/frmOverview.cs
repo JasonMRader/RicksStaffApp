@@ -68,6 +68,12 @@ namespace RicksStaffApp
         }
         private void refreshViewAllTime()
         {
+            AllPositionList = SqliteDataAccess.LoadPositions();
+            AllEmployeeList.Clear();
+            AllEmployeeList = SqliteDataAccess.TestLoadEmployees();
+            AllShiftList.Clear();
+            AllShiftList = SqliteDataAccess.LoadShifts();
+            AllIncidentList.Clear();
             foreach (Employee employee in AllEmployeeList)
             {
                 employee.AddIncidentsFromShifts();
@@ -89,11 +95,13 @@ namespace RicksStaffApp
             
             //var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
             UIHelper.CreateEmployeeOverviewPanels(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            UIHelper.CreateIncidentFrequencyPanels(AllIncidentList, flowMostFrequentIncidents);
         }
         private void refreshView()
         {
             FilteredEmployeeList.Clear();
             FilteredEmployeeShiftList.Clear();
+            FilteredIncidentList.Clear();
 
             HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
             employeesInTimePeriod.Clear();
@@ -106,6 +114,7 @@ namespace RicksStaffApp
                     {
                         employeesInTimePeriod.Add(employeeShift.Employee);
                         FilteredEmployeeShiftList.Add(employeeShift);
+                        FilteredIncidentList.AddRange(employeeShift.Incidents);
                         //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
 
                     }
@@ -137,11 +146,14 @@ namespace RicksStaffApp
                 FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
             }
             UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList, flowMostFrequentIncidents);
         }
 
 
         private void frmOverview_Load(object sender, EventArgs e)
         {
+           
+            
             frmViewEmployee = new frmViewEmployee();
 
             rdoViewEmployees.Checked = true;
@@ -150,7 +162,7 @@ namespace RicksStaffApp
             cboViewType.SelectedIndex = 0;
             cboSortBy.SelectedIndex = 0;
             cboTimeFrame.SelectedIndex = 0;
-            AllPositionList = SqliteDataAccess.LoadPositions();
+            
             cboPositions.Items.Add("All Positions");
             foreach (Position position in AllPositionList)
             {
@@ -158,12 +170,8 @@ namespace RicksStaffApp
                 lbPositions.Items.Add(position.Name);
             }
             cboPositions.SelectedIndex = 0;
-            AllEmployeeList.Clear();
-            AllEmployeeList = SqliteDataAccess.TestLoadEmployees();
-            AllShiftList.Clear();
-            AllShiftList = SqliteDataAccess.LoadShifts();
-            var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
-            UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
+
+
             //AUTO COMPLETE MAKING IT CRASH? Got stack overflow error when adding a shift
             //string[] names = AllEmployeeList.Select(e => e.FullName).ToArray();
             //AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
@@ -194,22 +202,24 @@ namespace RicksStaffApp
             //{
             //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
             //}
+            refreshViewAllTime();
             List<Employee> HighestGoodShiftRation = new List<Employee>();
 
             UIHelper.CreateEmployeePanels(AllEmployeeList, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            UIHelper.CreateIncidentFrequencyPanels(AllIncidentList, flowMostFrequentIncidents);
+            
 
             var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
 
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
             UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositionList);
-            //UIHelper.ConfigureFlowLayoutPanel(flowGoodShiftRankings);
-            //UIHelper.ConfigureFlowLayoutPanel(flowEmployeeDisplay);
+            
             lbPositions.SelectedIndex = 0;
-            //lbSortBy.SelectedIndex = 0;
+            
             lbTimeFrame.SelectedIndex = 0;
-            //lbViewType.SelectedIndex = 0;
-            refreshViewAllTime();
+           
+            
+            var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
+            UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
 
         }
 
@@ -317,7 +327,7 @@ namespace RicksStaffApp
             if (rdoViewEmployees.Checked)
             {
                 flowEmployeeRankings.Controls.Clear();
-                var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
+                var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
                 UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
                 rdoAlphabeticalOrChronological.Text = "Alphabetical";
             }

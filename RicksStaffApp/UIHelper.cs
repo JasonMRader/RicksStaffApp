@@ -432,6 +432,7 @@ namespace RicksStaffApp
         {
             var groupedIncidents = incidentList.GroupBy(i => i.Name);
             var sortedIncidents = groupedIncidents.OrderByDescending(g => g.Count());
+            flowDisplay.Controls.Clear();
             
 
             foreach (var group in sortedIncidents)
