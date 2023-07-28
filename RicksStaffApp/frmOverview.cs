@@ -58,14 +58,6 @@ namespace RicksStaffApp
 
             return query; // Return the filtered/sorted data
         }
-
-        private void frmAddNewEmployee_FormClosed(object? sender, EventArgs e)
-        {
-            //foreach (Control control in pnlEmployeeDisplay.Controls)
-            //{
-            //    control.Visible = true;
-            //}
-        }
         private void refreshViewAllTime()
         {
             AllPositionList = SqliteDataAccess.LoadPositions();
@@ -463,19 +455,20 @@ namespace RicksStaffApp
         {
             if (rdoCustomTime.Checked)
             {
-                using (var datePickerForm = new frmDatePicker())
-                {
-                    var result = datePickerForm.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        StartDate = datePickerForm.DatePickerStartDate;
-                        EndDate = datePickerForm.DatePickerEndDate;
-                    }
-                    refreshView();
-                    //lblTest1.Text = StartDate.ToString("d");
-                    //lblTest2.Text = EndDate.ToString("d");
-                    rdoCustomTime.Text = StartDate.ToString("d") + " - " + EndDate.ToString("d");
-                }
+                
+                //using (var datePickerForm = new frmDatePicker())
+                //{
+                //    var result = datePickerForm.ShowDialog();
+                //    if (result == DialogResult.OK)
+                //    {
+                //        StartDate = datePickerForm.DatePickerStartDate;
+                //        EndDate = datePickerForm.DatePickerEndDate;
+                //    }
+                //    refreshView();
+                //    //lblTest1.Text = StartDate.ToString("d");
+                //    //lblTest2.Text = EndDate.ToString("d");
+
+                //}
             }
             else
             {
@@ -522,6 +515,32 @@ namespace RicksStaffApp
                 refreshView();
             }
         }
+
+        private void rdoCustomTimeMouseClick(object sender, MouseEventArgs e)
+        {
+            if (rdoCustomTime.Checked)
+            {
+                using (var datePickerForm = new frmDatePicker())
+                {
+                    var result = datePickerForm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        StartDate = datePickerForm.DatePickerStartDate;
+                        EndDate = datePickerForm.DatePickerEndDate;
+                    }
+                    refreshView();
+                    //lblTest1.Text = StartDate.ToString("d");
+                    //lblTest2.Text = EndDate.ToString("d");
+                    rdoCustomTime.Text = StartDate.ToString("d") + " - " + EndDate.ToString("d");
+                }
+            }
+            else
+            {
+                //rdoCustomTime.Text = "Custom";
+            }
+        }
+
+
 
 
         //public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)

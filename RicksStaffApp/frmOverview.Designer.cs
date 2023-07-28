@@ -476,7 +476,7 @@
             rdoCustomTime.TextAlign = ContentAlignment.MiddleCenter;
             rdoCustomTime.UseVisualStyleBackColor = false;
             rdoCustomTime.CheckedChanged += rdoCustomTime_CheckedChanged;
-            rdoCustomTime.Click += rdoCustomTime_CheckedChanged;
+            rdoCustomTime.MouseClick += rdoCustomTimeMouseClick;
             // 
             // rdoLastThreeMonths
             // 
