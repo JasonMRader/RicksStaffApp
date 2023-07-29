@@ -49,7 +49,7 @@ namespace RicksStaffApp
             //lbAllPositions.ValueMember = Name;
             //lblEmployeeName.Text = ThisEmployee.FullName;
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
-
+            ThisEmployee.AddIncidentsFromShifts();
 
             GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
 
@@ -94,8 +94,19 @@ namespace RicksStaffApp
 
 
             //}
-            lbAllPositions.Enabled = true;
-            lbAllPositions.Visible = true;
+            if (lbAllPositions.Visible == false) 
+            {
+                lbAllPositions.Enabled = true;
+                lbAllPositions.Visible = true;
+                btnAddPosition.Text = "Cancel";
+            }
+            else
+            {
+                lbAllPositions.Enabled = false;
+                lbAllPositions.Visible = false;
+                btnAddPosition.Text = "Add Position";
+            }
+            
         }
 
         private void lbAllPositions_SelectedIndexChanged(object sender, EventArgs e)

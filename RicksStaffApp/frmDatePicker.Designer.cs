@@ -129,6 +129,9 @@
             label3.Size = new Size(246, 25);
             label3.TabIndex = 1;
             label3.Text = "Choose Custom Date Range";
+            label3.MouseDown += Form1_MouseDown;
+            label3.MouseMove += Form1_MouseMove;
+            label3.MouseUp += Form1_MouseUp;
             // 
             // frmDatePicker
             // 
@@ -145,6 +148,7 @@
             Name = "frmDatePicker";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmDatePicker";
+            Load += frmDatePicker_Load;
             MouseDown += Form1_MouseDown;
             MouseMove += Form1_MouseMove;
             MouseUp += Form1_MouseUp;

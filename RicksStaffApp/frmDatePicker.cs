@@ -64,5 +64,10 @@ namespace RicksStaffApp
         {
 
         }
+
+        private void frmDatePicker_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
