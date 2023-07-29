@@ -404,7 +404,7 @@ namespace RicksStaffApp
         //public static void UpdateIncidentList()
         public static void CreateEmployeeGoodShiftRatioPanels(List<Employee> employeeList, FlowLayoutPanel flowDisplay)
         {
-            
+            flowDisplay.Controls.Clear();
             foreach (var employee in employeeList)
             {
                 Panel employeePanel = CreateFlowPanel(190, 30);

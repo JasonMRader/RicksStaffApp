@@ -30,19 +30,21 @@
         {
             panel1 = new Panel();
             dtpShiftDate = new DateTimePicker();
+            btnCancelCreateShift = new Button();
             btnCreateShift = new Button();
             label3 = new Label();
             label2 = new Label();
             flowExistingStaff = new FlowLayoutPanel();
             flowNewStaff = new FlowLayoutPanel();
             label1 = new Label();
-            btnCancelCreateShift = new Button();
+            btnTestLoad = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(46, 51, 73);
+            panel1.Controls.Add(btnTestLoad);
             panel1.Controls.Add(dtpShiftDate);
             panel1.Controls.Add(btnCancelCreateShift);
             panel1.Controls.Add(btnCreateShift);
@@ -66,6 +68,19 @@
             dtpShiftDate.Size = new Size(200, 23);
             dtpShiftDate.TabIndex = 6;
             dtpShiftDate.ValueChanged += dtpShiftDate_ValueChanged;
+            // 
+            // btnCancelCreateShift
+            // 
+            btnCancelCreateShift.BackColor = Color.FromArgb(167, 204, 237);
+            btnCancelCreateShift.FlatAppearance.BorderSize = 0;
+            btnCancelCreateShift.FlatStyle = FlatStyle.Flat;
+            btnCancelCreateShift.Location = new Point(621, 21);
+            btnCancelCreateShift.Name = "btnCancelCreateShift";
+            btnCancelCreateShift.Size = new Size(121, 24);
+            btnCancelCreateShift.TabIndex = 5;
+            btnCancelCreateShift.Text = "Cancel";
+            btnCancelCreateShift.UseVisualStyleBackColor = false;
+            btnCancelCreateShift.Click += btnCancelCreateShift_Click;
             // 
             // btnCreateShift
             // 
@@ -128,18 +143,15 @@
             label1.TabIndex = 0;
             label1.Text = "Excel Data";
             // 
-            // btnCancelCreateShift
+            // btnTestLoad
             // 
-            btnCancelCreateShift.BackColor = Color.FromArgb(167, 204, 237);
-            btnCancelCreateShift.FlatAppearance.BorderSize = 0;
-            btnCancelCreateShift.FlatStyle = FlatStyle.Flat;
-            btnCancelCreateShift.Location = new Point(621, 21);
-            btnCancelCreateShift.Name = "btnCancelCreateShift";
-            btnCancelCreateShift.Size = new Size(121, 24);
-            btnCancelCreateShift.TabIndex = 5;
-            btnCancelCreateShift.Text = "Cancel";
-            btnCancelCreateShift.UseVisualStyleBackColor = false;
-            btnCancelCreateShift.Click += btnCancelCreateShift_Click;
+            btnTestLoad.Location = new Point(494, 51);
+            btnTestLoad.Name = "btnTestLoad";
+            btnTestLoad.Size = new Size(121, 23);
+            btnTestLoad.TabIndex = 7;
+            btnTestLoad.Text = "Load";
+            btnTestLoad.UseVisualStyleBackColor = true;
+            btnTestLoad.Click += btnTestLoad_Click;
             // 
             // frmExcelDownload
             // 
@@ -169,5 +181,6 @@
         private Button btnCreateShift;
         private DateTimePicker dtpShiftDate;
         private Button btnCancelCreateShift;
+        private Button btnTestLoad;
     }
 }

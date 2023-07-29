@@ -201,7 +201,7 @@ namespace RicksStaffApp
                     //employeeShift.PositionID = 1;
                     //employeeShift.Shift.ID = s.ID;
                     //employeeShift.Employee.ID = emp.ID;
-                    EmployeeShift employeeShift = new EmployeeShift(emp,s)
+                    EmployeeShift employeeShift = new EmployeeShift(emp, s)
                     {
                         PositionID = 1,
                         Shift = newShift,
@@ -241,6 +241,11 @@ namespace RicksStaffApp
         {
             this.Close();
             this.Dispose(true);
+        }
+
+        private void btnTestLoad_Click(object sender, EventArgs e)
+        {
+            //UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
         }
         /*
 private void frmExcelDownload_Load(object sender, EventArgs e)
