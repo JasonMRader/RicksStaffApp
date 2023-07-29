@@ -1646,7 +1646,9 @@ namespace RicksStaffApp
             //{
             //    //MessageBox.Show(shift.Date.ToString());
                 if (shift.Date == shiftDate)
-                {
+                {   
+                    shift.EmployeeShifts = shift.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
+                
                     foreach (EmployeeShift es in shift.EmployeeShifts)
                     {
                         es.UpdateShiftRating();

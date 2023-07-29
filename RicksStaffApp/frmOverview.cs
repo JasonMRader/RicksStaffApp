@@ -92,7 +92,7 @@ namespace RicksStaffApp
         private void refreshView()
         {
             FilteredEmployeeList.Clear();
-            FilteredEmployeeShiftList.Clear();
+            FilteredEmployeeShiftList.Clear(); 
             FilteredIncidentList.Clear();
 
             HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
