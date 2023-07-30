@@ -1136,6 +1136,7 @@ namespace RicksStaffApp
                 emp.UpdateOverallRating();
                 Panel empPanelContainer = CreatePanel(410, 40);
                 empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+                empPanelContainer.Location = new Point(15, 7);
                 
 
                 FlowLayoutPanel empPanel = CreateFlowPanel(410, 40);

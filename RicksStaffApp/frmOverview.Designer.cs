@@ -34,8 +34,11 @@
             comboBox3 = new ComboBox();
             btnAddEmployee = new Button();
             pnlEmployeeStats = new Panel();
+            pnlRatioLoadScreen = new Panel();
             flowMostFrequentIncidents = new FlowLayoutPanel();
+            pnlShiftLoadScreen = new Panel();
             flowShiftRankings = new FlowLayoutPanel();
+            pnlIncidentLoadScreen = new Panel();
             flowGoodShiftRankings = new FlowLayoutPanel();
             label2 = new Label();
             label3 = new Label();
@@ -69,9 +72,6 @@
             lblTest1 = new Label();
             lblTest2 = new Label();
             pnlEmployeeLoadScreen = new Panel();
-            pnlIncidentLoadScreen = new Panel();
-            pnlShiftLoadScreen = new Panel();
-            pnlRatioLoadScreen = new Panel();
             pnlEmployeeStats.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -157,6 +157,13 @@
             pnlEmployeeStats.Size = new Size(800, 600);
             pnlEmployeeStats.TabIndex = 0;
             // 
+            // pnlRatioLoadScreen
+            // 
+            pnlRatioLoadScreen.Location = new Point(303, 11);
+            pnlRatioLoadScreen.Name = "pnlRatioLoadScreen";
+            pnlRatioLoadScreen.Size = new Size(18, 44);
+            pnlRatioLoadScreen.TabIndex = 25;
+            // 
             // flowMostFrequentIncidents
             // 
             flowMostFrequentIncidents.AutoScroll = true;
@@ -165,6 +172,13 @@
             flowMostFrequentIncidents.Name = "flowMostFrequentIncidents";
             flowMostFrequentIncidents.Size = new Size(240, 525);
             flowMostFrequentIncidents.TabIndex = 12;
+            // 
+            // pnlShiftLoadScreen
+            // 
+            pnlShiftLoadScreen.Location = new Point(279, 11);
+            pnlShiftLoadScreen.Name = "pnlShiftLoadScreen";
+            pnlShiftLoadScreen.Size = new Size(18, 44);
+            pnlShiftLoadScreen.TabIndex = 25;
             // 
             // flowShiftRankings
             // 
@@ -175,6 +189,13 @@
             flowShiftRankings.Padding = new Padding(0, 10, 0, 0);
             flowShiftRankings.Size = new Size(240, 527);
             flowShiftRankings.TabIndex = 11;
+            // 
+            // pnlIncidentLoadScreen
+            // 
+            pnlIncidentLoadScreen.Location = new Point(238, 11);
+            pnlIncidentLoadScreen.Name = "pnlIncidentLoadScreen";
+            pnlIncidentLoadScreen.Size = new Size(18, 44);
+            pnlIncidentLoadScreen.TabIndex = 25;
             // 
             // flowGoodShiftRankings
             // 
@@ -375,6 +396,7 @@
             rdoViewEmployeeShifts.Text = "Employee Shifts";
             rdoViewEmployeeShifts.TextAlign = ContentAlignment.MiddleCenter;
             rdoViewEmployeeShifts.UseVisualStyleBackColor = false;
+            rdoViewEmployeeShifts.CheckedChanged += rdoViewEmployeeShifts_CheckedChanged;
             // 
             // panel2
             // 
@@ -643,27 +665,6 @@
             pnlEmployeeLoadScreen.Name = "pnlEmployeeLoadScreen";
             pnlEmployeeLoadScreen.Size = new Size(18, 44);
             pnlEmployeeLoadScreen.TabIndex = 25;
-            // 
-            // pnlIncidentLoadScreen
-            // 
-            pnlIncidentLoadScreen.Location = new Point(238, 11);
-            pnlIncidentLoadScreen.Name = "pnlIncidentLoadScreen";
-            pnlIncidentLoadScreen.Size = new Size(18, 44);
-            pnlIncidentLoadScreen.TabIndex = 25;
-            // 
-            // pnlShiftLoadScreen
-            // 
-            pnlShiftLoadScreen.Location = new Point(279, 11);
-            pnlShiftLoadScreen.Name = "pnlShiftLoadScreen";
-            pnlShiftLoadScreen.Size = new Size(18, 44);
-            pnlShiftLoadScreen.TabIndex = 25;
-            // 
-            // pnlRatioLoadScreen
-            // 
-            pnlRatioLoadScreen.Location = new Point(303, 11);
-            pnlRatioLoadScreen.Name = "pnlRatioLoadScreen";
-            pnlRatioLoadScreen.Size = new Size(18, 44);
-            pnlRatioLoadScreen.TabIndex = 25;
             // 
             // frmOverview
             // 

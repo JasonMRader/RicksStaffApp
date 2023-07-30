@@ -144,10 +144,10 @@ namespace RicksStaffApp
         //    }
         //    flowEmployeeDisplay.ResumeLayout();
         //}
-        private async static Task<List<Panel>> CreateEmployeeOverviewPanelsTest(List<Employee> employeeList)
+        private async static Task<List<Panel>> CreateEmployeeOverviewPanelsTest(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, System.Windows.Forms.Button btnReset)
         {
-            // Clear existing panels
 
+            flowEmployeeDisplay.Controls.Clear();
             List<Panel> panelsAdded = new List<Panel>();
 
             // Loop through employee list and create a panel for each employee
@@ -165,8 +165,32 @@ namespace RicksStaffApp
 
                 System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
                 btnName.Font = new Font("Arial", 12, FontStyle.Bold);
+                btnName.Click += (sender, e) =>
+                {
+                    foreach (Control control in parentPanel.Controls)
+                    {
+                        if (control is Form form)
+                        {
+                            parentPanel.Controls.Remove(form);
+                            form.Dispose();
+                        }
+                        else
+                        {
+                            control.Visible = false;
+                        }
 
 
+                    }
+                    //parentPanel.Controls.Clear();
+                    lblMain.Text = emp.FullName;
+                    btnReset.Visible = true;
+                    frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
+                    viewEmployeeForm.TopLevel = false;
+                    viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+                    viewEmployeeForm.Dock = DockStyle.Fill;
+                    parentPanel.Controls.Add(viewEmployeeForm);
+                    viewEmployeeForm.Show();
+                };
                 empPanel.Controls.Add(btnName);
 
 
@@ -198,7 +222,7 @@ namespace RicksStaffApp
         }
 
         private frmViewEmployee frmViewEmployee;
-        
+
         public frmOverview()
         {
             InitializeComponent();
@@ -228,7 +252,7 @@ namespace RicksStaffApp
 
 
 
-            
+
         }
         private async Task GetData()
         {
@@ -260,7 +284,7 @@ namespace RicksStaffApp
 
             await RefreshDataAndView();
 
-            List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList);
+            List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
             List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(AllIncidentList);
             var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
@@ -288,15 +312,16 @@ namespace RicksStaffApp
             flowMostFrequentIncidents.Visible = true;
             flowEmployeeRankings.Visible = true;
 
-            
+
 
         }
-        private void refreshView()
+        private async Task refreshView()
         {
             FilteredEmployeeList.Clear();
             FilteredEmployeeShiftList.Clear();
             FilteredIncidentList.Clear();
             FilteredShiftList.Clear();
+            flowMostFrequentIncidents.Controls.Clear();
 
             HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
             employeesInTimePeriod.Clear();
@@ -329,26 +354,55 @@ namespace RicksStaffApp
                     employee.UpdateOverallRating();
                 }
             }
-            if (rdoHighestRated.Checked == true)
+            
+            
+            List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList);
+            foreach (var panel in IncidentPanelsToAdd)
             {
-                FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+                flowMostFrequentIncidents.Controls.Add(panel);
             }
-            if (rdoLowestRated.Checked == true)
-            {
-                FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
-            }
-            if (rdoAlphabeticalOrChronological.Checked == true)
-            {
-                FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
-            }
-            UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            //UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList, flowMostFrequentIncidents);
 
             var EmployeesByGoodShiftRatio = FilteredEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
 
             var rankedShifts = FilteredShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
             UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
+            if (rdoViewEmployees.Checked == true)
+            {
+                if (rdoHighestRated.Checked == true)
+                {
+                    FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+                }
+                if (rdoLowestRated.Checked == true)
+                {
+                    FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
+                }
+                if (rdoAlphabeticalOrChronological.Checked == true)
+                {
+                    FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
+                }
+                UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+            }
+            if (!rdoViewEmployees.Checked)
+            {
+                flowEmployeeRankings.Controls.Clear();
+                //List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+                //foreach (Employee employee in AllEmployeeList)
+                //{
+                //    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+                //    {
+                //        employeeShift.Employee = employee;
+                //        employeeShifts.Add(employeeShift);
+                //    }
+                //}
+                var employeeShiftRanking = FilteredEmployeeShiftList.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+                foreach (EmployeeShift employeeShift in employeeShiftRanking)
+                {
+                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+                }
+                rdoAlphabeticalOrChronological.Text = "Most Recent";
+            }
+            
         }
 
 
@@ -358,7 +412,7 @@ namespace RicksStaffApp
             CreateLoadingScreen(flowMostFrequentIncidents, pnlIncidentLoadScreen);
             CreateLoadingScreen(flowShiftRankings, pnlShiftLoadScreen);
             CreateLoadingScreen(flowGoodShiftRankings, pnlRatioLoadScreen);
-            
+
 
             frmViewEmployee = new frmViewEmployee();
 
@@ -423,7 +477,7 @@ namespace RicksStaffApp
 
 
 
-       
+
 
         private void txtBxEmployeeSearch_TextChanged(object sender, EventArgs e)
         {
@@ -465,7 +519,7 @@ namespace RicksStaffApp
             //UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
-        
+
 
         private void lbTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -656,7 +710,7 @@ namespace RicksStaffApp
 
             }
 
-            
+
         }
 
         private void rdoHighestRated_CheckedChanged(object sender, EventArgs e)
@@ -727,6 +781,11 @@ namespace RicksStaffApp
             //    frmAddNewEmployee.TopLevel = false;
             //    pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
             //    frmAddNewEmployee.Show();
+
+        }
+
+        private void rdoViewEmployeeShifts_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
 
