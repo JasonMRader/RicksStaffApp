@@ -33,14 +33,17 @@
             btnLoadEmployeeShifts = new Button();
             btnLoadIncidents = new Button();
             btnLoadActivities = new Button();
-            panel1 = new Panel();
+            pnlEmployeeStatsTest = new Panel();
             panel2 = new Panel();
             button1 = new Button();
             pictureBox1 = new PictureBox();
             label2 = new Label();
             label3 = new Label();
             label1 = new Label();
-            panel1.SuspendLayout();
+            flowEmployeeRankingsTest = new FlowLayoutPanel();
+            lblMainWindowDescriptionTest = new Label();
+            btnResetTest = new Button();
+            pnlEmployeeStatsTest.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -95,14 +98,14 @@
             btnLoadActivities.UseVisualStyleBackColor = true;
             btnLoadActivities.Click += btnLoadActivities_Click;
             // 
-            // panel1
+            // pnlEmployeeStatsTest
             // 
-            panel1.BackColor = Color.FromArgb(37, 42, 64);
-            panel1.Controls.Add(panel2);
-            panel1.Location = new Point(288, 157);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(475, 507);
-            panel1.TabIndex = 2;
+            pnlEmployeeStatsTest.BackColor = Color.FromArgb(37, 42, 64);
+            pnlEmployeeStatsTest.Controls.Add(panel2);
+            pnlEmployeeStatsTest.Location = new Point(29, 145);
+            pnlEmployeeStatsTest.Name = "pnlEmployeeStatsTest";
+            pnlEmployeeStatsTest.Size = new Size(475, 507);
+            pnlEmployeeStatsTest.TabIndex = 2;
             // 
             // panel2
             // 
@@ -173,13 +176,43 @@
             label1.Text = "May 1st, 23";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // flowEmployeeRankingsTest
+            // 
+            flowEmployeeRankingsTest.BackColor = Color.FromArgb(37, 42, 64);
+            flowEmployeeRankingsTest.Location = new Point(545, 132);
+            flowEmployeeRankingsTest.Name = "flowEmployeeRankingsTest";
+            flowEmployeeRankingsTest.Size = new Size(440, 574);
+            flowEmployeeRankingsTest.TabIndex = 3;
+            // 
+            // lblMainWindowDescriptionTest
+            // 
+            lblMainWindowDescriptionTest.AutoSize = true;
+            lblMainWindowDescriptionTest.ForeColor = Color.White;
+            lblMainWindowDescriptionTest.Location = new Point(678, 99);
+            lblMainWindowDescriptionTest.Name = "lblMainWindowDescriptionTest";
+            lblMainWindowDescriptionTest.Size = new Size(38, 15);
+            lblMainWindowDescriptionTest.TabIndex = 4;
+            lblMainWindowDescriptionTest.Text = "label4";
+            // 
+            // btnResetTest
+            // 
+            btnResetTest.Location = new Point(910, 91);
+            btnResetTest.Name = "btnResetTest";
+            btnResetTest.Size = new Size(75, 23);
+            btnResetTest.TabIndex = 5;
+            btnResetTest.Text = "Reset";
+            btnResetTest.UseVisualStyleBackColor = true;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1110, 740);
-            Controls.Add(panel1);
+            Controls.Add(btnResetTest);
+            Controls.Add(lblMainWindowDescriptionTest);
+            Controls.Add(flowEmployeeRankingsTest);
+            Controls.Add(pnlEmployeeStatsTest);
             Controls.Add(btnLoadActivities);
             Controls.Add(btnLoadIncidents);
             Controls.Add(btnLoadEmployeeShifts);
@@ -187,10 +220,11 @@
             Controls.Add(btnLoadEmployees);
             Name = "frmTest";
             Text = "frmTest";
-            panel1.ResumeLayout(false);
+            pnlEmployeeStatsTest.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -200,12 +234,15 @@
         private Button btnLoadEmployeeShifts;
         private Button btnLoadIncidents;
         private Button btnLoadActivities;
-        private Panel panel1;
+        private Panel pnlEmployeeStatsTest;
         private Panel panel2;
         private Label label1;
         private Button button1;
         private PictureBox pictureBox1;
         private Label label2;
         private Label label3;
+        private FlowLayoutPanel flowEmployeeRankingsTest;
+        private Label lblMainWindowDescriptionTest;
+        private Button btnResetTest;
     }
 }

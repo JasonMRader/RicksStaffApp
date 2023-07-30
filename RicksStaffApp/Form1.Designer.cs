@@ -107,7 +107,6 @@
             btnOpenTestForm.TabIndex = 1;
             btnOpenTestForm.Text = "Test Form";
             btnOpenTestForm.UseVisualStyleBackColor = false;
-            btnOpenTestForm.Visible = false;
             btnOpenTestForm.Click += btnOpenTestForm_Click;
             // 
             // rdoSettings

@@ -68,6 +68,10 @@
             btnGoSearch = new Button();
             lblTest1 = new Label();
             lblTest2 = new Label();
+            pnlEmployeeLoadScreen = new Panel();
+            pnlIncidentLoadScreen = new Panel();
+            pnlShiftLoadScreen = new Panel();
+            pnlRatioLoadScreen = new Panel();
             pnlEmployeeStats.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -138,8 +142,11 @@
             // pnlEmployeeStats
             // 
             pnlEmployeeStats.BackColor = Color.FromArgb(46, 51, 73);
+            pnlEmployeeStats.Controls.Add(pnlRatioLoadScreen);
             pnlEmployeeStats.Controls.Add(flowMostFrequentIncidents);
+            pnlEmployeeStats.Controls.Add(pnlShiftLoadScreen);
             pnlEmployeeStats.Controls.Add(flowShiftRankings);
+            pnlEmployeeStats.Controls.Add(pnlIncidentLoadScreen);
             pnlEmployeeStats.Controls.Add(flowGoodShiftRankings);
             pnlEmployeeStats.Controls.Add(label2);
             pnlEmployeeStats.Controls.Add(label3);
@@ -630,6 +637,34 @@
             lblTest2.Text = "label4";
             lblTest2.Visible = false;
             // 
+            // pnlEmployeeLoadScreen
+            // 
+            pnlEmployeeLoadScreen.Location = new Point(2, 173);
+            pnlEmployeeLoadScreen.Name = "pnlEmployeeLoadScreen";
+            pnlEmployeeLoadScreen.Size = new Size(18, 44);
+            pnlEmployeeLoadScreen.TabIndex = 25;
+            // 
+            // pnlIncidentLoadScreen
+            // 
+            pnlIncidentLoadScreen.Location = new Point(238, 11);
+            pnlIncidentLoadScreen.Name = "pnlIncidentLoadScreen";
+            pnlIncidentLoadScreen.Size = new Size(18, 44);
+            pnlIncidentLoadScreen.TabIndex = 25;
+            // 
+            // pnlShiftLoadScreen
+            // 
+            pnlShiftLoadScreen.Location = new Point(279, 11);
+            pnlShiftLoadScreen.Name = "pnlShiftLoadScreen";
+            pnlShiftLoadScreen.Size = new Size(18, 44);
+            pnlShiftLoadScreen.TabIndex = 25;
+            // 
+            // pnlRatioLoadScreen
+            // 
+            pnlRatioLoadScreen.Location = new Point(303, 11);
+            pnlRatioLoadScreen.Name = "pnlRatioLoadScreen";
+            pnlRatioLoadScreen.Size = new Size(18, 44);
+            pnlRatioLoadScreen.TabIndex = 25;
+            // 
             // frmOverview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -638,6 +673,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(pnlEmployeeLoadScreen);
             Controls.Add(lblTest2);
             Controls.Add(lblTest1);
             Controls.Add(btnGoSearch);
@@ -710,5 +746,9 @@
         private Button btnGoSearch;
         private Label lblTest1;
         private Label lblTest2;
+        private Panel pnlEmployeeLoadScreen;
+        private Panel pnlIncidentLoadScreen;
+        private Panel pnlShiftLoadScreen;
+        private Panel pnlRatioLoadScreen;
     }
 }

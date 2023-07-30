@@ -88,7 +88,7 @@ namespace RicksStaffApp
 
         //static Image StarsTest = Properties.Resources._2_5_StarsTest;
         //static Image StarsDisplayed = Properties.Resources._5_Stars;
-        private static Panel CreatePanel(int width, int height)
+        public static Panel CreatePanel(int width, int height)
         {
             Panel panel = new Panel();
             panel.Width = width;
@@ -100,7 +100,7 @@ namespace RicksStaffApp
 
             return panel;
         }
-        private static FlowLayoutPanel CreateFlowPanel(int width, int height)
+        public static FlowLayoutPanel CreateFlowPanel(int width, int height)
         {
             FlowLayoutPanel panel = new FlowLayoutPanel();
             //panel.Width = width;
@@ -349,7 +349,7 @@ namespace RicksStaffApp
 
             //    //return StarsDisplayed;
         }
-        private static PictureBox CreateRatingPictureBox (int width, int height, float rating)
+        public static PictureBox CreateRatingPictureBox (int width, int height, float rating)
         {
             PictureBox pictureBox = new PictureBox ();
             pictureBox.Width = width; 
@@ -402,9 +402,9 @@ namespace RicksStaffApp
             return lblLable;
         }
         //public static void UpdateIncidentList()
-        public static void CreateEmployeeGoodShiftRatioPanels(List<Employee> employeeList, FlowLayoutPanel flowDisplay)
+        public static async Task<List<Panel>> CreateEmployeeGoodShiftRatioPanelsAsync(List<Employee> employeeList)
         {
-            flowDisplay.Controls.Clear();
+            List<Panel> panels = new List<Panel>();
             foreach (var employee in employeeList)
             {
                 Panel employeePanel = CreateFlowPanel(190, 30);
@@ -421,19 +421,46 @@ namespace RicksStaffApp
                 
                 employeePanel.Controls.Add(employeeLabel);
                 employeePanel.Controls.Add(employeeGoodShiftRatio);
-                flowDisplay.Controls.Add(employeePanel);
+                panels.Add(employeePanel);
                 
                 
             }
+            return panels;
+            //flowDisplay.MouseWheel += FlowLayoutPanel_MouseWheel;
+        }
+        public static void CreateEmployeeGoodShiftRatioPanels(List<Employee> employeeList, FlowLayoutPanel flowDisplay)
+        {
+            flowDisplay.Controls.Clear();
+            foreach (var employee in employeeList)
+            {
+                Panel employeePanel = CreateFlowPanel(190, 30);
+                employeePanel.MinimumSize = new Size(190, 30);
+                employeePanel.Margin = new Padding(10, 5, 10, 5);
+                employeePanel.Padding = new Padding(0, 0, 0, 0);
+                Label employeeLabel = CreateLabel(120, 30, employee.FullName);
+                Label employeeGoodShiftRatio = CreateLabel(55, 30, employee.GoodShiftPercentage.ToString("0.0" + "%"));
+                employeeLabel.Font = new Font("Segoe UI Semibold", 10);
+                employeeLabel.Margin = new Padding(0, 0, 0, 0);
+                employeeGoodShiftRatio.Font = new Font("Segoe UI Semibold", 10);
+                employeeGoodShiftRatio.Margin = new Padding(0, 0, 0, 0);
+                employeeGoodShiftRatio.AutoSize = false;
+
+                employeePanel.Controls.Add(employeeLabel);
+                employeePanel.Controls.Add(employeeGoodShiftRatio);
+                flowDisplay.Controls.Add(employeePanel);
+
+
+            }
+            
             //flowDisplay.MouseWheel += FlowLayoutPanel_MouseWheel;
         }
 
-        public static void CreateIncidentFrequencyPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay)
+        public static async Task<List<Panel>> CreateIncidentFrequencyPanels(List<Incident> incidentList)
         {
             var groupedIncidents = incidentList.GroupBy(i => i.Name);
             var sortedIncidents = groupedIncidents.OrderByDescending(g => g.Count());
-            flowDisplay.Controls.Clear();
-            
+
+            List<Panel> panelsAdded = new List<Panel>();
 
             foreach (var group in sortedIncidents)
             {
@@ -476,8 +503,9 @@ namespace RicksStaffApp
                 
                 incidentPanel.Controls.Add(incidentLabel);
                 incidentPanel.Controls.Add(incidentFrequency);
-                flowDisplay.Controls.Add(incidentPanel);
+                panelsAdded.Add(incidentPanel);
             }
+            return panelsAdded;
         }
 
         public static void CreateIncidentPanels_REPLACE(List<Incident> incidentList, FlowLayoutPanel flowDisplay, Shift shift)
@@ -1834,6 +1862,31 @@ namespace RicksStaffApp
             }
         }
         public static List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        public static async Task<List<Panel>> CreateShiftRankingPanelAsync(List<Shift> shifts)
+        {
+
+            List<Panel> panels = new List<Panel>();  
+            foreach (Shift s in shifts)
+            {
+                FlowLayoutPanel shiftPanelContainer = CreateFlowPanel(190, 30);
+                shiftPanelContainer.AutoSize = false;
+                shiftPanelContainer.Size = new Size(200, 30);
+                shiftPanelContainer.MinimumSize = new Size(190, 30);
+                shiftPanelContainer.BackColor = MyColors.LightHighlight;
+                shiftPanelContainer.Margin = new Padding(10, 5, 10, 5);
+                Label shiftDate = CreateLabel(120, 30, s.DateAsDateTime.ToOrdinalString());
+                shiftDate.Font = new Font("Segoe UI semibold", 10);
+                shiftDate.Margin = new Padding(0);
+                shiftPanelContainer.Controls.Add(shiftDate);
+                Label shiftAvg = CreateLabel(55, 30, s.AverageRating.ToString("0.00"));
+                shiftAvg.Font = new Font("Segoe UI semibold", 10);
+                shiftAvg.Margin = new Padding(0);
+                //shiftAvg.Location = new Point(0, 75);
+                shiftPanelContainer.Controls.Add(shiftAvg);
+                panels.Add(shiftPanelContainer);
+            }
+            return panels;  
+        }
         public static void CreateShiftRankingPanel(List<Shift> shifts, FlowLayoutPanel flowDisplay)
         {
 
@@ -1857,6 +1910,7 @@ namespace RicksStaffApp
                 shiftPanelContainer.Controls.Add(shiftAvg);
                 flowDisplay.Controls.Add(shiftPanelContainer);
             }
+           
         }
 
     }

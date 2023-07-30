@@ -29,12 +29,176 @@ namespace RicksStaffApp
 
         DateTime StartDate;
         DateTime EndDate;
+
+        bool isLoadScreen = true;
+
+        private async Task UpdateAllLists()
+        {
+            AllPositionList = SqliteDataAccess.LoadPositions();
+            AllEmployeeList.Clear();
+            AllEmployeeList = SqliteDataAccess.TestLoadEmployees();
+            AllShiftList.Clear();
+            AllShiftList = SqliteDataAccess.LoadShifts();
+            AllIncidentList.Clear();
+            foreach (Employee employee in AllEmployeeList)
+            {
+                employee.AddIncidentsFromShifts();
+                employee.UpdateOverallRating();
+                AllIncidentList.AddRange(employee.Incidents);
+            }
+        }
+        private static void CreateLoadingScreen(FlowLayoutPanel flowDisplay, Panel LoadScreen)
+        {
+
+            LoadScreen.Size = flowDisplay.Size;
+            LoadScreen.BackColor = flowDisplay.BackColor;
+            LoadScreen.Location = flowDisplay.Location;
+            LoadScreen.Visible = true;
+
+
+        }
+        private static void RemoveLoadScreens(Panel LoadScreen, Panel LoadScreenTwo, Panel LoadScreenThree, Panel LoadScreenFour)
+        {
+            LoadScreen.Visible = false;
+            LoadScreenTwo.Visible = false;
+            LoadScreenThree.Visible = false;
+            LoadScreenFour.Visible = false;
+        }
+        //private async static Task CreateEmployeeOverviewPanelsTest(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, System.Windows.Forms.Button btnReset)
+        //{
+        //    // Clear existing panels
+        //    flowEmployeeDisplay.SuspendLayout();
+        //    flowEmployeeDisplay.Controls.Clear();
+        //    List<Panel> panelsAdded = new List<Panel>();
+
+        //    // Loop through employee list and create a panel for each employee
+        //    foreach (Employee emp in employeeList)
+        //    {
+        //        emp.UpdateOverallRating();
+        //        Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
+        //        empPanelContainer.Visible = false;
+        //        empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+
+
+        //        FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(410, 40);
+        //        empPanel.Margin = new Padding(1, 1, 1, 1);
+
+        //        System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
+        //        btnName.Font = new Font("Arial", 12, FontStyle.Bold);
+        //        btnName.Click += (sender, e) =>
+        //        {
+        //            foreach (Control control in parentPanel.Controls)
+        //            {
+        //                if (control is Form form)
+        //                {
+        //                    parentPanel.Controls.Remove(form);
+        //                    form.Dispose();
+        //                }
+        //                else
+        //                {
+        //                    control.Visible = false;
+        //                }
+
+
+        //            }
+        //            //parentPanel.Controls.Clear();
+        //            lblMain.Text = emp.FullName;
+        //            btnReset.Visible = true;
+        //            frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
+        //            viewEmployeeForm.TopLevel = false;
+        //            viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+        //            viewEmployeeForm.Dock = DockStyle.Fill;
+        //            parentPanel.Controls.Add(viewEmployeeForm);
+        //            viewEmployeeForm.Show();
+        //        };
+
+        //        empPanel.Controls.Add(btnName);
+        //        // Create panels for employee positions
+
+        //        PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
+        //        //pbRating.BorderStyle = BorderStyle.Fixed3D;
+        //        empPanel.Controls.Add(pbRating);
+
+        //        empPanelContainer.Controls.Add(empPanel);
+
+        //        Label lblRating = new Label();
+        //        //lblRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+        //        lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
+        //        lblRating.Margin = new Padding(0);
+        //        lblRating.Location = new Point(410, 0);
+        //        lblRating.Size = new Size(50, 40);
+        //        lblRating.TextAlign = ContentAlignment.MiddleCenter;
+
+        //        lblRating.Text = emp.OverallRating.ToString("F1");
+
+        //        empPanel.Controls.Add(lblRating);
+
+        //        //flowEmployeeDisplay.Controls.Add(empPanelContainer);
+        //        panelsAdded.Add(empPanelContainer);
+        //    }
+
+        //    foreach (Panel panel in panelsAdded)
+        //    {
+        //        flowEmployeeDisplay.Controls.Add((Panel)panel);
+        //        panel.Visible = true;
+        //    }
+        //    flowEmployeeDisplay.ResumeLayout();
+        //}
+        private async static Task<List<Panel>> CreateEmployeeOverviewPanelsTest(List<Employee> employeeList)
+        {
+            // Clear existing panels
+
+            List<Panel> panelsAdded = new List<Panel>();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Employee emp in employeeList)
+            {
+                emp.UpdateOverallRating();
+                Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
+
+                empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+                empPanelContainer.Location = new Point(15, 7);
+
+
+                FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(410, 40);
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+                System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
+                btnName.Font = new Font("Arial", 12, FontStyle.Bold);
+
+
+                empPanel.Controls.Add(btnName);
+
+
+                PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
+
+                empPanel.Controls.Add(pbRating);
+
+                empPanelContainer.Controls.Add(empPanel);
+
+                Label lblRating = new Label();
+
+                lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
+                lblRating.Margin = new Padding(0);
+                lblRating.Location = new Point(410, 0);
+                lblRating.Size = new Size(50, 40);
+                lblRating.TextAlign = ContentAlignment.MiddleCenter;
+
+                lblRating.Text = emp.OverallRating.ToString("F1");
+
+                empPanel.Controls.Add(lblRating);
+
+
+                panelsAdded.Add(empPanelContainer);
+            }
+
+
+
+            return panelsAdded;
+        }
+
         private frmViewEmployee frmViewEmployee;
-        private frmAddNewEmployee frmAddNewEmployee;
-        int goodShiftCount = 0;
-        int badShiftCount = 0;
-        int averageShiftCount = 0;
-        int totalShiftCount = 0;
+        
         public frmOverview()
         {
             InitializeComponent();
@@ -58,20 +222,18 @@ namespace RicksStaffApp
 
             return query; // Return the filtered/sorted data
         }
+        private async Task RefreshDataAndView()
+        {
+            await GetData();
+
+
+
+            
+        }
         private async Task GetData()
         {
-            AllPositionList = SqliteDataAccess.LoadPositions();
-            AllEmployeeList.Clear();
-            AllEmployeeList = SqliteDataAccess.TestLoadEmployees();
-            AllShiftList.Clear();
-            AllShiftList = SqliteDataAccess.LoadShifts();
-            AllIncidentList.Clear();
-            foreach (Employee employee in AllEmployeeList)
-            {
-                employee.AddIncidentsFromShifts();
-                employee.UpdateOverallRating();
-                AllIncidentList.AddRange(employee.Incidents);
-            }
+            await UpdateAllLists();
+
             if (rdoHighestRated.Checked == true)
             {
                 AllEmployeeList = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
@@ -84,53 +246,55 @@ namespace RicksStaffApp
             {
                 AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).ToList();
             }
-            
+
         }
         private async void refreshViewAllTime()
         {
-            //AllPositionList = SqliteDataAccess.LoadPositions();
-            //AllEmployeeList.Clear();
-            //AllEmployeeList = SqliteDataAccess.TestLoadEmployees();
-            //AllShiftList.Clear();
-            //AllShiftList = SqliteDataAccess.LoadShifts();
-            //AllIncidentList.Clear();
-            //foreach (Employee employee in AllEmployeeList)
-            //{
-            //    employee.AddIncidentsFromShifts();
-            //    employee.UpdateOverallRating();
-            //    AllIncidentList.AddRange(employee.Incidents);
-            //}
-            //if (rdoHighestRated.Checked == true)
-            //{
-            //    AllEmployeeList = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
-            //}
-            //if (rdoLowestRated.Checked == true)
-            //{
-            //    AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
-            //}
-            //if (rdoAlphabeticalOrChronological.Checked == true)
-            //{
-            //    AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).ToList();
-            //}
-            //var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
-            //var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
 
-            //var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
-            await GetData();
+            flowEmployeeRankings.Controls.Clear();
+            flowMostFrequentIncidents.Controls.Clear();
+            flowShiftRankings.Controls.Clear();
+            flowGoodShiftRankings.Controls.Clear();
+            flowEmployeeRankings.Visible = false;
+            flowMostFrequentIncidents.Visible = false;
 
-            UIHelper.CreateEmployeeOverviewPanels(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            UIHelper.CreateIncidentFrequencyPanels(AllIncidentList, flowMostFrequentIncidents);
+            await RefreshDataAndView();
+
+            List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList);
+            List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(AllIncidentList);
             var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
+            List<Panel> RatioPanelsToAdd = await UIHelper.CreateEmployeeGoodShiftRatioPanelsAsync(EmployeesByGoodShiftRatio);
+            List<Panel> ShiftRankingPanelsToAdd = await UIHelper.CreateShiftRankingPanelAsync(rankedShifts);
 
-            UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
+            foreach (var panel in EmployeePanelsToAdd)
+            {
+                flowEmployeeRankings.Controls.Add(panel);
+            }
+
+            foreach (var panel in IncidentPanelsToAdd)
+            {
+                flowMostFrequentIncidents.Controls.Add(panel);
+            }
+            foreach (var panel in RatioPanelsToAdd)
+            {
+                flowGoodShiftRankings.Controls.Add(panel);
+            }
+            foreach (var panel in ShiftRankingPanelsToAdd)
+            {
+                flowShiftRankings.Controls.Add(panel);
+            }
+
+            flowMostFrequentIncidents.Visible = true;
+            flowEmployeeRankings.Visible = true;
+
             
-            UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
+
         }
         private void refreshView()
         {
             FilteredEmployeeList.Clear();
-            FilteredEmployeeShiftList.Clear(); 
+            FilteredEmployeeShiftList.Clear();
             FilteredIncidentList.Clear();
             FilteredShiftList.Clear();
 
@@ -178,9 +342,9 @@ namespace RicksStaffApp
                 FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
             }
             UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList, flowMostFrequentIncidents);
+            //UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList, flowMostFrequentIncidents);
 
-            var EmployeesByGoodShiftRatio = FilteredEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();            
+            var EmployeesByGoodShiftRatio = FilteredEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
 
             var rankedShifts = FilteredShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
@@ -188,9 +352,13 @@ namespace RicksStaffApp
         }
 
 
-        private void frmOverview_Load(object sender, EventArgs e)
+        private async void frmOverview_Load(object sender, EventArgs e)
         {
-
+            CreateLoadingScreen(flowEmployeeRankings, pnlEmployeeLoadScreen);
+            CreateLoadingScreen(flowMostFrequentIncidents, pnlIncidentLoadScreen);
+            CreateLoadingScreen(flowShiftRankings, pnlShiftLoadScreen);
+            CreateLoadingScreen(flowGoodShiftRankings, pnlRatioLoadScreen);
+            
 
             frmViewEmployee = new frmViewEmployee();
 
@@ -213,10 +381,10 @@ namespace RicksStaffApp
 
             UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositionList);
 
-            
 
 
-            
+
+
             //AUTO COMPLETE MAKING IT CRASH? Got stack overflow error when adding a shift
             //string[] names = AllEmployeeList.Select(e => e.FullName).ToArray();
             //AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
@@ -255,20 +423,7 @@ namespace RicksStaffApp
 
 
 
-        private void btnAddEmployee_Click(object sender, EventArgs e)
-        {
-            //    //frmAddNewEmployee frmAddNewEmployee = new frmAddNewEmployee();
-            //    frmAddNewEmployee = new frmAddNewEmployee();
-            //    frmAddNewEmployee.FormClosed += frmAddNewEmployee_FormClosed;
-            //    foreach (Control control in pnlEmployeeDisplay.Controls)
-            //    {
-            //        control.Visible = false;
-            //    }
-            //    frmAddNewEmployee.TopLevel = false;
-            //    pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
-            //    frmAddNewEmployee.Show();
-
-        }
+       
 
         private void txtBxEmployeeSearch_TextChanged(object sender, EventArgs e)
         {
@@ -310,34 +465,7 @@ namespace RicksStaffApp
             //UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
 
-        //private void cboViewType_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if (cboViewType.SelectedIndex == 0)
-        //    {
-        //        flowEmployeeRankings.Controls.Clear();
-        //        var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
-        //        UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-        //    }
-        //    if (cboViewType.SelectedIndex == 1)
-        //    {
-        //        flowEmployeeRankings.Controls.Clear();
-        //        List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-        //        foreach (Employee employee in AllEmployeeList)
-        //        {
-        //            foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
-        //            {
-        //                employeeShift.Employee = employee;
-        //                employeeShifts.Add(employeeShift);
-        //            }
-        //        }
-        //        var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
-        //        foreach (EmployeeShift employeeShift in employeeShiftRanking)
-        //        {
-        //            UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
-        //        }
-
-        //    }
-        //}
+        
 
         private void lbTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -491,7 +619,7 @@ namespace RicksStaffApp
         {
             if (rdoCustomTime.Checked)
             {
-                
+
                 //using (var datePickerForm = new frmDatePicker())
                 //{
                 //    var result = datePickerForm.ShowDialog();
@@ -515,9 +643,20 @@ namespace RicksStaffApp
 
         private void rdoAllTime_CheckedChanged(object sender, EventArgs e)
         {
-            FilteredEmployeeList.Clear();
-            FilteredEmployeeList = AllEmployeeList;
-            refreshViewAllTime();
+            if (rdoAllTime.Checked)
+            {
+                pnlShiftLoadScreen.Visible = true;
+                pnlEmployeeLoadScreen.Visible = true;
+                pnlIncidentLoadScreen.Visible = true;
+                pnlRatioLoadScreen.Visible = true;
+                FilteredEmployeeList.Clear();
+                FilteredEmployeeList = AllEmployeeList;
+                refreshViewAllTime();
+                RemoveLoadScreens(pnlEmployeeLoadScreen, pnlIncidentLoadScreen, pnlRatioLoadScreen, pnlShiftLoadScreen);
+
+            }
+
+            
         }
 
         private void rdoHighestRated_CheckedChanged(object sender, EventArgs e)
@@ -576,7 +715,20 @@ namespace RicksStaffApp
             }
         }
 
+        private void btnAddEmployee_Click(object sender, EventArgs e)
+        {
+            //    //frmAddNewEmployee frmAddNewEmployee = new frmAddNewEmployee();
+            //    frmAddNewEmployee = new frmAddNewEmployee();
+            //    frmAddNewEmployee.FormClosed += frmAddNewEmployee_FormClosed;
+            //    foreach (Control control in pnlEmployeeDisplay.Controls)
+            //    {
+            //        control.Visible = false;
+            //    }
+            //    frmAddNewEmployee.TopLevel = false;
+            //    pnlEmployeeDisplay.Controls.Add(frmAddNewEmployee);
+            //    frmAddNewEmployee.Show();
 
+        }
 
 
         //public IEnumerable<Data> FilterDataThisWeek(IEnumerable<Data> allData)
