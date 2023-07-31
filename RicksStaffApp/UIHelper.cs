@@ -191,6 +191,27 @@ namespace RicksStaffApp
         //    }
         //    return resultImage;
         //}
+        public static Image GetPositionImage(Position position)
+        {
+            Image PositionImage = Properties.Resources.noPosition;
+            
+            switch (position.Name)
+            {
+                case "Server":
+                    PositionImage = Properties.Resources.Server;
+                    break;
+                case "Runner":
+                    PositionImage = Properties.Resources.FoodRunner; 
+                    break;
+                case "Busser":
+                    PositionImage = Properties.Resources.Busser;
+                    break;
+                case "Host":
+                    PositionImage = Properties.Resources.Host;
+                    break;
+            }
+            return PositionImage;
+        }
         public static Image GetStars(float rating)
         {
             Image starsImage;
@@ -356,6 +377,17 @@ namespace RicksStaffApp
             pictureBox.Height = height;
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.Image = GetStars(rating);
+            pictureBox.Margin = new Padding(0, 0, 0, 0);
+            pictureBox.Padding = new Padding(0, 0, 0, 0);
+            return pictureBox;
+        }
+        public static PictureBox CreatePositionPictureBox(int width, int height, Position position)
+        {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Width = width;
+            pictureBox.Height = height;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox.Image = GetPositionImage(position);
             pictureBox.Margin = new Padding(0, 0, 0, 0);
             pictureBox.Padding = new Padding(0, 0, 0, 0);
             return pictureBox;
@@ -1690,8 +1722,10 @@ namespace RicksStaffApp
                         Label lblName = CreateLabel(100, 30, es.Employee.FullName);                       
                         empShiftContainer.Controls.Add(lblName);
 
-                        Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
-                        empShiftContainer.Controls.Add(lblPos);
+                    //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
+                    //empShiftContainer.Controls.Add(lblPos);
+                        PictureBox pbPosition = CreatePositionPictureBox(30,30,es.Position);
+                    empShiftContainer.Controls.Add(pbPosition);
 
                         Label lblShiftRating = CreateLabel(25, 30, es.ShiftRating.ToString());                 
                         empShiftContainer.Controls.Add(lblShiftRating);

@@ -203,6 +203,16 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Busser {
+            get {
+                object obj = ResourceManager.GetObject("Busser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DoNotUse {
             get {
                 object obj = ResourceManager.GetObject("DoNotUse", resourceCulture);
@@ -236,6 +246,16 @@ namespace RicksStaffApp.Properties {
         internal static System.Drawing.Bitmap FiveStars {
             get {
                 object obj = ResourceManager.GetObject("FiveStars", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FoodRunner {
+            get {
+                object obj = ResourceManager.GetObject("FoodRunner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -283,6 +303,16 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Host {
+            get {
+                object obj = ResourceManager.GetObject("Host", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Image1 {
             get {
                 object obj = ResourceManager.GetObject("Image1", resourceCulture);
@@ -306,6 +336,16 @@ namespace RicksStaffApp.Properties {
         internal static System.Drawing.Bitmap No_Stars {
             get {
                 object obj = ResourceManager.GetObject("No_Stars", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap noPosition {
+            get {
+                object obj = ResourceManager.GetObject("noPosition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -346,6 +386,16 @@ namespace RicksStaffApp.Properties {
         internal static System.Drawing.Bitmap OverTenStars {
             get {
                 object obj = ResourceManager.GetObject("OverTenStars", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Server {
+            get {
+                object obj = ResourceManager.GetObject("Server", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

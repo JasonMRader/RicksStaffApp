@@ -160,6 +160,9 @@
   <data name="BrokenCharts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight4111.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Busser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Busser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DoNotUse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5 Stars132.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -171,6 +174,9 @@
   </data>
   <data name="FiveStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FoodRunner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FoodRunner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ForwardArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BackArrow1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,11 +190,17 @@
   <data name="Home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Host" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Host.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Image1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NineStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noPosition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\noPosition.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NoStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image21.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -204,6 +216,9 @@
   </data>
   <data name="OverTenStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Server" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Server.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SevenStars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twoPointWeight2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
