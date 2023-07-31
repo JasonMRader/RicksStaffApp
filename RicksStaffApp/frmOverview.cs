@@ -304,11 +304,11 @@ namespace RicksStaffApp
 
             if (rdoViewEmployees.Checked)
             {
-                
+
                 flowMostFrequentIncidents.Controls.Clear();
                 flowShiftRankings.Controls.Clear();
                 flowGoodShiftRankings.Controls.Clear();
-                
+
 
                 await RefreshDataAndView();
 
@@ -337,7 +337,7 @@ namespace RicksStaffApp
                     flowShiftRankings.Controls.Add(panel);
                 }
 
-                
+
             }
             if (rdoViewEmployeeShifts.Checked)
             {
@@ -401,8 +401,8 @@ namespace RicksStaffApp
                     employee.UpdateOverallRating();
                 }
             }
-            
-            
+
+
             List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList);
             foreach (var panel in IncidentPanelsToAdd)
             {
@@ -449,7 +449,7 @@ namespace RicksStaffApp
                 }
                 rdoAlphabeticalOrChronological.Text = "Most Recent";
             }
-            
+
         }
         private List<EmployeeShift> SortEmployeeShifts(List<EmployeeShift> employeeShifts)
         {
@@ -484,9 +484,9 @@ namespace RicksStaffApp
             rdoViewEmployees.Checked = true;
             rdoHighestRated.Checked = true;
             rdoAllTime.Checked = true;
-            cboViewType.SelectedIndex = 0;
-            cboSortBy.SelectedIndex = 0;
-            cboTimeFrame.SelectedIndex = 0;
+            //cboViewType.SelectedIndex = 0;
+            //cboSortBy.SelectedIndex = 0;
+            //cboTimeFrame.SelectedIndex = 0;
 
             cboPositions.Items.Add("All Positions");
             foreach (Position position in AllPositionList)

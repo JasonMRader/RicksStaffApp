@@ -485,7 +485,7 @@
             panel5.Controls.Add(rdoAllTime);
             panel5.Location = new Point(2, 25);
             panel5.Name = "panel5";
-            panel5.Size = new Size(737, 41);
+            panel5.Size = new Size(737, 49);
             panel5.TabIndex = 21;
             // 
             // rdoCustomTime
@@ -620,8 +620,8 @@
             flowPositions.BackColor = Color.FromArgb(84, 84, 120);
             flowPositions.Location = new Point(739, 25);
             flowPositions.Name = "flowPositions";
-            flowPositions.Padding = new Padding(15, 10, 0, 0);
-            flowPositions.Size = new Size(559, 41);
+            flowPositions.Padding = new Padding(15, 7, 0, 0);
+            flowPositions.Size = new Size(559, 49);
             flowPositions.TabIndex = 22;
             // 
             // btnGoSearch

@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Data;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Excel;
 
@@ -61,7 +62,31 @@ namespace RicksStaffApp
         public static Font RatingDisplay = new Font("MS Reference Sans Serif", 12, FontStyle.Bold);
         //replace image method
         static Image stars = Image.FromFile("C:\\Users\\Jason\\OneDrive\\Source\\Repos\\RicksStaffApp\\RicksStaffApp\\Resources\\5 Stars.png");
-        
+        private static Image ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+
         public static string ToOrdinalString(this DateTime date)
         {
             var day = date.Day;
@@ -1601,28 +1626,39 @@ namespace RicksStaffApp
             flowDisplay.Controls.Clear();
             int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count +1))-((positions.Count +1)+2);
             RadioButton rdoAllPositions = new RadioButton();
+            
             rdoAllPositions.Appearance = Appearance.Button;
             rdoAllPositions.FlatStyle = FlatStyle.Flat;
             rdoAllPositions.Margin = new Padding(2,0,0,0);
             rdoAllPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoAllPositions.TextAlign = ContentAlignment.MiddleCenter;
             rdoAllPositions.BackColor = Color.FromArgb(167, 204, 237);
-            rdoAllPositions.Size = new Size(buttonWidth,24);
+            rdoAllPositions.Size = new Size(buttonWidth,30);
             rdoAllPositions.Text = "All Positions";
             rdoAllPositions.Checked = true;
             flowDisplay.Controls.Add(rdoAllPositions);
             foreach (Position position in positions)
             {
                 RadioButton radioButton = new RadioButton();
+                Image positionImage = GetPositionImage(position);
+                Image resizedPositionImage = ResizeImage(positionImage, 24, radioButton.Height);
+                
+                radioButton.Padding = new Padding(0,0,0,0);
+                radioButton.Margin = new Padding(0,0,0,0);
                 radioButton.Appearance = Appearance.Button;
+                //radioButton.ImageAlign = ContentAlignment.M;
+                radioButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+                
                 radioButton.Margin = new Padding(2,0,0,0);
                 radioButton.BackColor = Color.FromArgb(167, 204, 237);
 
                 radioButton.TextAlign = ContentAlignment.MiddleCenter;
                 radioButton.FlatStyle = FlatStyle.Flat;
                 radioButton.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-                radioButton.Size = new Size(buttonWidth, 24);
+                radioButton.Size = new Size(buttonWidth, 30);
                 radioButton.Text = position.Name;
+                radioButton.Image = resizedPositionImage;
+                
                 flowDisplay.Controls.Add(radioButton);
             }
 
