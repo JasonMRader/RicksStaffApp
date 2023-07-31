@@ -248,13 +248,20 @@ namespace RicksStaffApp
         }
         private async Task RefreshDataAndView()
         {
-            await GetData();
+            if (rdoViewEmployees.Checked)
+            {
+                await GetEmployeeData();
+            }
+            if (rdoViewEmployeeShifts.Checked)
+            {
+                GetEmployeeShiftData();
+            }
 
 
 
 
         }
-        private async Task GetData()
+        private async Task GetEmployeeData()
         {
             await UpdateAllLists();
 
@@ -272,45 +279,84 @@ namespace RicksStaffApp
             }
 
         }
+        private async Task GetEmployeeShiftData()
+        {
+            await UpdateAllLists();
+
+            if (rdoHighestRated.Checked == true)
+            {
+                AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.ShiftRating).ToList();
+            }
+            if (rdoLowestRated.Checked == true)
+            {
+                AllEmployeeShiftList = AllEmployeeShiftList.OrderBy(emp => emp.ShiftRating).ToList();
+            }
+            if (rdoAlphabeticalOrChronological.Checked == true)
+            {
+                AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.Shift.DateAsDateTime).ToList();
+            }
+
+        }
         private async void refreshViewAllTime()
         {
-
             flowEmployeeRankings.Controls.Clear();
-            flowMostFrequentIncidents.Controls.Clear();
-            flowShiftRankings.Controls.Clear();
-            flowGoodShiftRankings.Controls.Clear();
-            flowEmployeeRankings.Visible = false;
-            flowMostFrequentIncidents.Visible = false;
 
-            await RefreshDataAndView();
-
-            List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-            List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(AllIncidentList);
-            var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
-            var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
-            List<Panel> RatioPanelsToAdd = await UIHelper.CreateEmployeeGoodShiftRatioPanelsAsync(EmployeesByGoodShiftRatio);
-            List<Panel> ShiftRankingPanelsToAdd = await UIHelper.CreateShiftRankingPanelAsync(rankedShifts);
-
-            foreach (var panel in EmployeePanelsToAdd)
+            if (rdoViewEmployees.Checked)
             {
-                flowEmployeeRankings.Controls.Add(panel);
-            }
+                
+                flowMostFrequentIncidents.Controls.Clear();
+                flowShiftRankings.Controls.Clear();
+                flowGoodShiftRankings.Controls.Clear();
+                
 
-            foreach (var panel in IncidentPanelsToAdd)
-            {
-                flowMostFrequentIncidents.Controls.Add(panel);
-            }
-            foreach (var panel in RatioPanelsToAdd)
-            {
-                flowGoodShiftRankings.Controls.Add(panel);
-            }
-            foreach (var panel in ShiftRankingPanelsToAdd)
-            {
-                flowShiftRankings.Controls.Add(panel);
-            }
+                await RefreshDataAndView();
 
-            flowMostFrequentIncidents.Visible = true;
-            flowEmployeeRankings.Visible = true;
+                List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+                List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(AllIncidentList);
+                var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
+                var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
+                List<Panel> RatioPanelsToAdd = await UIHelper.CreateEmployeeGoodShiftRatioPanelsAsync(EmployeesByGoodShiftRatio);
+                List<Panel> ShiftRankingPanelsToAdd = await UIHelper.CreateShiftRankingPanelAsync(rankedShifts);
+
+                foreach (var panel in EmployeePanelsToAdd)
+                {
+                    flowEmployeeRankings.Controls.Add(panel);
+                }
+
+                foreach (var panel in IncidentPanelsToAdd)
+                {
+                    flowMostFrequentIncidents.Controls.Add(panel);
+                }
+                foreach (var panel in RatioPanelsToAdd)
+                {
+                    flowGoodShiftRankings.Controls.Add(panel);
+                }
+                foreach (var panel in ShiftRankingPanelsToAdd)
+                {
+                    flowShiftRankings.Controls.Add(panel);
+                }
+
+                
+            }
+            if (rdoViewEmployeeShifts.Checked)
+            {
+                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+                await RefreshDataAndView();
+                foreach (Employee employee in AllEmployeeList)
+                {
+                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+                    {
+                        employeeShift.Employee = employee;
+                        employeeShifts.Add(employeeShift);
+                    }
+                }
+                //var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+                foreach (EmployeeShift employeeShift in AllEmployeeShiftList)
+                {
+                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+                }
+                rdoAlphabeticalOrChronological.Text = "Most Recent";
+            }
 
 
 

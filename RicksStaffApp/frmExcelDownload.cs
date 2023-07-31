@@ -32,6 +32,7 @@ namespace RicksStaffApp
         string ignoreBar = "PM BAR PM";
         string ignoreBanquet = "Banquet Bartender 1";
         string ignoreBanquetBar = "Banquet Server 1";
+        List<string> newEmployeeNamesStrings = new List<string>();
         public static int LevenshteinDistance(string s, string t)
         {
             if (string.IsNullOrEmpty(s))
@@ -71,95 +72,203 @@ namespace RicksStaffApp
             return v1[t.Length];
         }
 
+        //private void frmExcelDownload_Load(object sender, EventArgs e)
+        //{
+        //    //newShift.DateString = DateTime.Now.ToString("MM/dd/yyyy");
+        //    List<Employee> allEmployees = DataSingleton.Instance.Employees;
+        //    dtpShiftDate.Value = shiftDate;
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*";
+        //    openFileDialog.RestoreDirectory = true;
+        //    //List<Employee> allEmployees = SqliteDataAccess.LoadEmployees(); // Assuming you have a method to get all employees from the database
+        //    //List<Employee> employeesOnShift = new List<Employee>();
+        //    List<string> newEmployeeNamesStrings = new List<string>();
+
+
+        //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+        //    {
+        //        string filePath = openFileDialog.FileName;
+
+        //        // Load the Excel file into a new Application instance
+        //        Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+        //        Workbook workbook = null;
+
+        //        try
+        //        {
+        //            workbook = excelApp.Workbooks.Open(filePath);
+
+        //            // Get the names from the first worksheet (A5:A24) with the "Server" column
+        //            Worksheet worksheet1 = workbook.Sheets[1];
+        //            Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+
+
+        //            for (int i = 1; i <= range1.Rows.Count; i++)
+        //            {
+        //                string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+        //                if (!string.IsNullOrWhiteSpace(fullName))
+        //                {
+        //                    string fullNameCleaned = Regex.Replace(fullName.ToLower().Trim(), @"\s+", " ");
+        //                    int threshold = 2;
+
+        //                    //Employee matchedEmployee = allEmployees.FirstOrDefault(e => e.FullName == fullName);
+        //                    Employee matchedEmployee = allEmployees.FirstOrDefault(e =>
+        //                    {
+        //                        string dbFullNameCleaned = Regex.Replace(e.FullName.ToLower().Trim(), @"\s+", " ");
+        //                        int distance = LevenshteinDistance(fullNameCleaned, dbFullNameCleaned);
+        //                        return distance <= threshold;
+        //                    });
+
+        //                    if (matchedEmployee != null)
+        //                    {
+        //                        employeesOnShift.Add(matchedEmployee);
+        //                        //lbEmployees.Items.Add($"{fullName,-20} Server");
+        //                    }
+        //                    else
+        //                    {
+        //                        if (fullName != ignoreBanquet)
+        //                        {
+        //                            newEmployeeNamesStrings.Add(fullName);
+        //                            //lbEmployees.Items.Add($"{fullName,-20} Server (New)");
+        //                        }
+
+        //                    }
+        //                }
+        //            }
+
+        //            // ... Repeat this process for other worksheets and columns if needed
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("An error occurred while loading the Excel file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //        finally
+        //        {
+        //            // Close the workbook and release the Excel Application object
+        //            //if (workbook != null)
+        //            //{
+        //            //    workbook.Close(false);
+        //            //}
+        //            if (workbook != null)
+        //            {
+        //                workbook.Close(false);
+        //                Marshal.ReleaseComObject(workbook);
+        //            }
+
+        //            excelApp.Quit();
+        //            Marshal.ReleaseComObject(excelApp);
+        //        }
+        //    }
+        //    //UIHelper.CreateEmployeePanels(existingEmployees, flowExistingStaff);
+        //    UIHelper.CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
+        //    List<Employee> newEmployees = new List<Employee>();
+        //    foreach (string fullName in newEmployeeNamesStrings)
+        //    {
+        //        if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
+        //        {
+        //            Employee newEmp = new Employee(fullName);
+        //            newEmployees.Add(newEmp);
+        //        }
+
+        //    }
+        //    //UIHelper.CreateEmployeePanels(newEmployees, flowNewStaff);
+        //    UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
+
+
+        //}
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
-            //newShift.DateString = DateTime.Now.ToString("MM/dd/yyyy");
             List<Employee> allEmployees = DataSingleton.Instance.Employees;
             dtpShiftDate.Value = shiftDate;
+
+            var filePath = GetFilePathFromUser();
+            if (!string.IsNullOrWhiteSpace(filePath))
+            {
+                ProcessExcelFile(allEmployees, filePath);
+                UpdateUI();
+            }
+        }
+
+        private string GetFilePathFromUser()
+        {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
-            //List<Employee> allEmployees = SqliteDataAccess.LoadEmployees(); // Assuming you have a method to get all employees from the database
-            //List<Employee> employeesOnShift = new List<Employee>();
-            List<string> newEmployeeNamesStrings = new List<string>();
 
+            return (openFileDialog.ShowDialog() == DialogResult.OK) ? openFileDialog.FileName : string.Empty;
+        }
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+        private void ProcessExcelFile(List<Employee> allEmployees, string filePath)
+        {
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Workbook workbook = null;
+
+            try
             {
-                string filePath = openFileDialog.FileName;
-
-                // Load the Excel file into a new Application instance
-                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-                Workbook workbook = null;
-
-                try
+                workbook = excelApp.Workbooks.Open(filePath);
+                GetEmployeeDataFromExcel(allEmployees, workbook);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while loading the Excel file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (workbook != null)
                 {
-                    workbook = excelApp.Workbooks.Open(filePath);
-
-                    // Get the names from the first worksheet (A5:A24) with the "Server" column
-                    Worksheet worksheet1 = workbook.Sheets[1];
-                    Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
-
-
-                    for (int i = 1; i <= range1.Rows.Count; i++)
-                    {
-                        string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
-                        if (!string.IsNullOrWhiteSpace(fullName))
-                        {
-                            string fullNameCleaned = Regex.Replace(fullName.ToLower().Trim(), @"\s+", " ");
-                            int threshold = 2;
-
-                            //Employee matchedEmployee = allEmployees.FirstOrDefault(e => e.FullName == fullName);
-                            Employee matchedEmployee = allEmployees.FirstOrDefault(e =>
-                            {
-                                string dbFullNameCleaned = Regex.Replace(e.FullName.ToLower().Trim(), @"\s+", " ");
-                                int distance = LevenshteinDistance(fullNameCleaned, dbFullNameCleaned);
-                                return distance <= threshold;
-                            });
-
-                            if (matchedEmployee != null)
-                            {
-                                employeesOnShift.Add(matchedEmployee);
-                                //lbEmployees.Items.Add($"{fullName,-20} Server");
-                            }
-                            else
-                            {
-                                if (fullName != ignoreBanquet)
-                                {
-                                    newEmployeeNamesStrings.Add(fullName);
-                                    //lbEmployees.Items.Add($"{fullName,-20} Server (New)");
-                                }
-
-                            }
-                        }
-                    }
-
-                    // ... Repeat this process for other worksheets and columns if needed
+                    workbook.Close(false);
+                    Marshal.ReleaseComObject(workbook);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while loading the Excel file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    // Close the workbook and release the Excel Application object
-                    //if (workbook != null)
-                    //{
-                    //    workbook.Close(false);
-                    //}
-                    if (workbook != null)
-                    {
-                        workbook.Close(false);
-                        Marshal.ReleaseComObject(workbook);
-                    }
 
-                    excelApp.Quit();
-                    Marshal.ReleaseComObject(excelApp);
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+            }
+        }
+
+        private void GetEmployeeDataFromExcel(List<Employee> allEmployees, Workbook workbook)
+        {
+            Worksheet worksheet1 = workbook.Sheets[1];
+            Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+            //List<string> newEmployeeNamesStrings = new List<string>();
+
+            for (int i = 1; i <= range1.Rows.Count; i++)
+            {
+                string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+                ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings);
+            }
+        }
+
+        private void ProcessSingleEmployee(string fullName, List<Employee> allEmployees, List<string> newEmployeeNamesStrings)
+        {
+            if (!string.IsNullOrWhiteSpace(fullName))
+            {
+                string fullNameCleaned = Regex.Replace(fullName.ToLower().Trim(), @"\s+", " ");
+                int threshold = 2;
+                Employee matchedEmployee = allEmployees.FirstOrDefault(e =>
+                {
+                    string dbFullNameCleaned = Regex.Replace(e.FullName.ToLower().Trim(), @"\s+", " ");
+                    int distance = LevenshteinDistance(fullNameCleaned, dbFullNameCleaned);
+                    return distance <= threshold;
+                });
+
+                if (matchedEmployee != null)
+                {
+                    employeesOnShift.Add(matchedEmployee);
+                }
+                else
+                {
+                    if (fullName != ignoreBanquet)
+                    {
+                        newEmployeeNamesStrings.Add(fullName);
+                    }
                 }
             }
-            //UIHelper.CreateEmployeePanels(existingEmployees, flowExistingStaff);
+        }
+
+        private void UpdateUI()
+        {
             UIHelper.CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
             List<Employee> newEmployees = new List<Employee>();
+
             foreach (string fullName in newEmployeeNamesStrings)
             {
                 if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
@@ -167,12 +276,9 @@ namespace RicksStaffApp
                     Employee newEmp = new Employee(fullName);
                     newEmployees.Add(newEmp);
                 }
-
             }
-            //UIHelper.CreateEmployeePanels(newEmployees, flowNewStaff);
+
             UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
-
-
         }
 
         private void btnCreateShift_Click(object sender, EventArgs e)
