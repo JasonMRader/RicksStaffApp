@@ -499,14 +499,14 @@ namespace RicksStaffApp
                 var positiveIncident = group.Where(i => i.IncidentRatingChange > 0);
                 var negativeIncident = group.Where(i => i.IncidentRatingChange < 0);
 
-                Panel incidentPanel = CreateFlowPanel(190, 50);
-                incidentPanel.MinimumSize = new Size(190, 50);
+                Panel incidentPanel = CreateFlowPanel(175, 50);
+                incidentPanel.MinimumSize = new Size(175, 50);
                 incidentPanel.Margin = new Padding(10, 5, 10, 5);
                 
                 Label incidentLabel = CreateLabel(130, 50, group.Key);
                 Label incidentFrequency = CreateLabel(45, 50, group.Count().ToString() + "X");
-                incidentLabel.Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold); 
-                incidentFrequency.Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold);
+                incidentLabel.Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold); 
+                incidentFrequency.Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold);
                 if (group.FirstOrDefault().IncidentRatingChange > 0)
                 {
                     incidentPanel.BackColor = GoodColor;

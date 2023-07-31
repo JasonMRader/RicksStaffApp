@@ -235,6 +235,10 @@ namespace RicksStaffApp
                 string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
                 ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings);
             }
+            Worksheet worksheet2 = workbook.Sheets[2];
+            Microsoft.Office.Interop.Excel.Range rangeBusser = worksheet2.Range["A2:A10"];
+            Microsoft.Office.Interop.Excel.Range rangeHost = worksheet2.Range["D2:D10"];
+            Microsoft.Office.Interop.Excel.Range rangeRunner = worksheet2.Range["G2:G10"];
         }
 
         private void ProcessSingleEmployee(string fullName, List<Employee> allEmployees, List<string> newEmployeeNamesStrings)

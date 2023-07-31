@@ -57,6 +57,7 @@
             // 
             // flowFrequentIncidents
             // 
+            flowFrequentIncidents.AutoScroll = true;
             flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
             flowFrequentIncidents.Location = new Point(23, 289);
             flowFrequentIncidents.Name = "flowFrequentIncidents";

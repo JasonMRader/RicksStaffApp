@@ -56,7 +56,8 @@ namespace RicksStaffApp
             picBoxEmployeeRating.Image = UIHelper.GetStars(ThisEmployee.OverallRating);
             lblRating.Text = ThisEmployee.OverallRating.ToString("0.00");
 
-            //UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents, flowFrequentIncidents);
+            loadIncidentPanels();
+
             UIHelper.CreatePositionsForEmployee(flowEmployeePositions, ThisEmployee.Positions);
             //foreach (Position position in AllPositions)
             //{
@@ -80,6 +81,14 @@ namespace RicksStaffApp
         {
             this.Close();
         }
+        private async Task loadIncidentPanels()
+        {
+            List<Panel> employeeIncidentPanels = await UIHelper.CreateIncidentFrequencyPanels(ThisEmployee.Incidents);
+            foreach (Panel panel in employeeIncidentPanels)
+            {
+                flowFrequentIncidents.Controls.Add(panel);
+            }
+        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -94,7 +103,7 @@ namespace RicksStaffApp
 
 
             //}
-            if (lbAllPositions.Visible == false) 
+            if (lbAllPositions.Visible == false)
             {
                 lbAllPositions.Enabled = true;
                 lbAllPositions.Visible = true;
@@ -106,7 +115,7 @@ namespace RicksStaffApp
                 lbAllPositions.Visible = false;
                 btnAddPosition.Text = "Add Position";
             }
-            
+
         }
 
         private void lbAllPositions_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,12 +129,12 @@ namespace RicksStaffApp
                 ThisEmployee.Positions.Add(selectedPosition);
                 SqliteDataAccess.UpdateEmployee(ThisEmployee);
 
-                
 
-                
+
+
                 lbAllPositions.Visible = false;
                 //lbAllPositions.Items.Clear();
-                
+
             }
             if (result == DialogResult.No)
             {
