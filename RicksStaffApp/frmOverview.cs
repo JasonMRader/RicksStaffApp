@@ -254,7 +254,8 @@ namespace RicksStaffApp
             }
             if (rdoViewEmployeeShifts.Checked)
             {
-                GetEmployeeShiftData();
+                refreshAllEmployeeShiftList();
+                await GetEmployeeShiftData();
             }
 
 
@@ -267,15 +268,15 @@ namespace RicksStaffApp
 
             if (rdoHighestRated.Checked == true)
             {
-                AllEmployeeList = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+                AllEmployeeList = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).Take(100).ToList();
             }
             if (rdoLowestRated.Checked == true)
             {
-                AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
+                AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.OverallRating).Take(100).ToList();
             }
             if (rdoAlphabeticalOrChronological.Checked == true)
             {
-                AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).ToList();
+                AllEmployeeList = AllEmployeeList.OrderBy(emp => emp.FullName).Take(100).ToList();
             }
 
         }
@@ -285,15 +286,15 @@ namespace RicksStaffApp
 
             if (rdoHighestRated.Checked == true)
             {
-                AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.ShiftRating).ToList();
+                AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.ShiftRating).Take(100).ToList();
             }
             if (rdoLowestRated.Checked == true)
             {
-                AllEmployeeShiftList = AllEmployeeShiftList.OrderBy(emp => emp.ShiftRating).ToList();
+                AllEmployeeShiftList = AllEmployeeShiftList.OrderBy(emp => emp.ShiftRating).Take(100).ToList();
             }
             if (rdoAlphabeticalOrChronological.Checked == true)
             {
-                AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.Shift.DateAsDateTime).ToList();
+                AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.Shift.DateAsDateTime).Take(100).ToList();
             }
 
         }
@@ -361,7 +362,7 @@ namespace RicksStaffApp
 
 
         }
-        private async Task refreshView()
+        private async Task refreshViewFiltered()
         {
             FilteredEmployeeList.Clear();
             FilteredEmployeeShiftList.Clear();
@@ -432,16 +433,16 @@ namespace RicksStaffApp
             if (!rdoViewEmployees.Checked)
             {
                 flowEmployeeRankings.Controls.Clear();
-                //List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-                //foreach (Employee employee in AllEmployeeList)
-                //{
-                //    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
-                //    {
-                //        employeeShift.Employee = employee;
-                //        employeeShifts.Add(employeeShift);
-                //    }
-                //}
-                var employeeShiftRanking = FilteredEmployeeShiftList.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+                foreach (Employee employee in FilteredEmployeeList)
+                {
+                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+                    {
+                        employeeShift.Employee = employee;
+                        employeeShifts.Add(employeeShift);
+                    }
+                }
+                var employeeShiftRanking = SortEmployeeShifts(FilteredEmployeeShiftList);
                 foreach (EmployeeShift employeeShift in employeeShiftRanking)
                 {
                     UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
@@ -449,6 +450,24 @@ namespace RicksStaffApp
                 rdoAlphabeticalOrChronological.Text = "Most Recent";
             }
             
+        }
+        private List<EmployeeShift> SortEmployeeShifts(List<EmployeeShift> employeeShifts)
+        {
+            List<EmployeeShift> SortedEmployeeShifts = new List<EmployeeShift>();
+            if (rdoHighestRated.Checked == true)
+            {
+                SortedEmployeeShifts = employeeShifts.OrderByDescending(emp => emp.ShiftRating).Take(100).ToList();
+            }
+            if (rdoLowestRated.Checked == true)
+            {
+                SortedEmployeeShifts = employeeShifts.OrderBy(emp => emp.ShiftRating).Take(100).ToList();
+            }
+            if (rdoAlphabeticalOrChronological.Checked == true)
+            {
+                SortedEmployeeShifts = employeeShifts.OrderByDescending(emp => emp.Shift.DateAsDateTime).Take(100).ToList();
+            }
+            return SortedEmployeeShifts;
+
         }
 
 
@@ -582,29 +601,51 @@ namespace RicksStaffApp
             rdoHighestRated.Checked = true;
             if (rdoViewEmployees.Checked)
             {
-                flowEmployeeRankings.Controls.Clear();
-                var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
-                UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+                if (rdoAllTime.Checked)
+                {
+                    refreshViewAllTime();
+                }
+                else
+                {
+                    refreshViewFiltered();
+                }
+
+                //flowEmployeeRankings.Controls.Clear();
+                //var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+                //UIHelper.CreateEmployeeOverviewPanels(EmployeesByRating, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
                 rdoAlphabeticalOrChronological.Text = "Alphabetical";
             }
             if (rdoViewEmployeeShifts.Checked)
             {
-                flowEmployeeRankings.Controls.Clear();
-                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-                foreach (Employee employee in AllEmployeeList)
+                //flowEmployeeRankings.Controls.Clear();
+                refreshAllEmployeeShiftList();
+                if (rdoAllTime.Checked)
                 {
-                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
-                    {
-                        employeeShift.Employee = employee;
-                        employeeShifts.Add(employeeShift);
-                    }
+                    refreshViewAllTime();
                 }
-                var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
-                foreach (EmployeeShift employeeShift in employeeShiftRanking)
+                else
                 {
-                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+                    refreshViewFiltered();
                 }
+
+
+                //var employeeShiftRanking = AllEmployeeShiftList.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+                //foreach (EmployeeShift employeeShift in employeeShiftRanking)
+                //{
+                //    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+                //}
                 rdoAlphabeticalOrChronological.Text = "Most Recent";
+            }
+        }
+        private void refreshAllEmployeeShiftList()
+        {
+            foreach (Employee employee in AllEmployeeList)
+            {
+                foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+                {
+                    employeeShift.Employee = employee;
+                    AllEmployeeShiftList.Add(employeeShift);
+                }
             }
         }
 
@@ -629,7 +670,7 @@ namespace RicksStaffApp
                 EndDate = today.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
 
-                refreshView();
+                refreshViewFiltered();
             }
             lblTest1.Text = StartDate.ToString("d");
             lblTest2.Text = EndDate.ToString("d");
@@ -655,7 +696,7 @@ namespace RicksStaffApp
                 EndDate = todayMinusSeven.AddDays(daysUntilSunday).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
 
-                refreshView();
+                refreshViewFiltered();
             }
             lblTest1.Text = StartDate.ToString("d");
             lblTest2.Text = EndDate.ToString("d");
@@ -673,7 +714,7 @@ namespace RicksStaffApp
 
                 EndDate = StartDate.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
 
-                refreshView();
+                refreshViewFiltered();
             }
             lblTest1.Text = StartDate.ToString("d");
             lblTest2.Text = EndDate.ToString("d");
@@ -691,7 +732,7 @@ namespace RicksStaffApp
 
                 EndDate = StartDate.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
 
-                refreshView();
+                refreshViewFiltered();
             }
             lblTest1.Text = StartDate.ToString("d");
             lblTest2.Text = EndDate.ToString("d");
@@ -709,7 +750,7 @@ namespace RicksStaffApp
 
                 EndDate = DateTime.Today;
 
-                refreshView();
+                refreshViewFiltered();
             }
             lblTest1.Text = StartDate.ToString("d");
             lblTest2.Text = EndDate.ToString("d");
@@ -774,7 +815,7 @@ namespace RicksStaffApp
             }
             else
             {
-                refreshView();
+                refreshViewFiltered();
             }
         }
 
@@ -787,7 +828,7 @@ namespace RicksStaffApp
             }
             else
             {
-                refreshView();
+                refreshViewFiltered();
             }
         }
 
@@ -803,7 +844,7 @@ namespace RicksStaffApp
                         StartDate = datePickerForm.DatePickerStartDate;
                         EndDate = datePickerForm.DatePickerEndDate;
                     }
-                    refreshView();
+                    refreshViewFiltered();
                     //lblTest1.Text = StartDate.ToString("d");
                     //lblTest2.Text = EndDate.ToString("d");
                     rdoCustomTime.Text = StartDate.ToString("d") + " - " + EndDate.ToString("d");
