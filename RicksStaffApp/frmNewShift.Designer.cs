@@ -35,13 +35,14 @@
             flowShiftDates = new FlowLayoutPanel();
             btnForwardDate = new Button();
             btnBackDate = new Button();
+            flowPositions = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // dtpShiftDate
             // 
             dtpShiftDate.CalendarMonthBackground = SystemColors.ScrollBar;
             dtpShiftDate.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dtpShiftDate.Location = new Point(22, 10);
+            dtpShiftDate.Location = new Point(953, 94);
             dtpShiftDate.Name = "dtpShiftDate";
             dtpShiftDate.Size = new Size(325, 33);
             dtpShiftDate.TabIndex = 5;
@@ -69,9 +70,9 @@
             btnGetExcelEmployees.BackColor = Color.FromArgb(167, 204, 237);
             btnGetExcelEmployees.FlatAppearance.BorderSize = 0;
             btnGetExcelEmployees.FlatStyle = FlatStyle.Flat;
-            btnGetExcelEmployees.Location = new Point(1115, 10);
+            btnGetExcelEmployees.Location = new Point(1284, 742);
             btnGetExcelEmployees.Name = "btnGetExcelEmployees";
-            btnGetExcelEmployees.Size = new Size(163, 23);
+            btnGetExcelEmployees.Size = new Size(18, 11);
             btnGetExcelEmployees.TabIndex = 8;
             btnGetExcelEmployees.Text = "Load Employees";
             btnGetExcelEmployees.UseVisualStyleBackColor = false;
@@ -81,7 +82,7 @@
             // flowShiftDates
             // 
             flowShiftDates.BackColor = Color.FromArgb(37, 42, 64);
-            flowShiftDates.Location = new Point(62, 52);
+            flowShiftDates.Location = new Point(62, 12);
             flowShiftDates.Name = "flowShiftDates";
             flowShiftDates.Padding = new Padding(13, 0, 0, 0);
             flowShiftDates.Size = new Size(1176, 75);
@@ -93,7 +94,7 @@
             btnForwardDate.FlatAppearance.BorderSize = 0;
             btnForwardDate.FlatStyle = FlatStyle.Flat;
             btnForwardDate.Image = Properties.Resources.ForwardArrow;
-            btnForwardDate.Location = new Point(1238, 52);
+            btnForwardDate.Location = new Point(1238, 12);
             btnForwardDate.Name = "btnForwardDate";
             btnForwardDate.Size = new Size(40, 75);
             btnForwardDate.TabIndex = 11;
@@ -106,12 +107,21 @@
             btnBackDate.FlatAppearance.BorderSize = 0;
             btnBackDate.FlatStyle = FlatStyle.Flat;
             btnBackDate.Image = Properties.Resources.BackArrow;
-            btnBackDate.Location = new Point(22, 52);
+            btnBackDate.Location = new Point(22, 12);
             btnBackDate.Name = "btnBackDate";
             btnBackDate.Size = new Size(40, 75);
             btnBackDate.TabIndex = 12;
             btnBackDate.UseVisualStyleBackColor = false;
             btnBackDate.Click += btnBackDate_Click;
+            // 
+            // flowPositions
+            // 
+            flowPositions.BackColor = Color.FromArgb(37, 42, 64);
+            flowPositions.Location = new Point(22, 93);
+            flowPositions.Name = "flowPositions";
+            flowPositions.Padding = new Padding(15, 3, 0, 0);
+            flowPositions.Size = new Size(925, 34);
+            flowPositions.TabIndex = 13;
             // 
             // frmNewShift
             // 
@@ -119,9 +129,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(flowPositions);
+            Controls.Add(dtpShiftDate);
             Controls.Add(btnBackDate);
             Controls.Add(btnForwardDate);
-            Controls.Add(dtpShiftDate);
             Controls.Add(flowShiftDates);
             Controls.Add(btnGetExcelEmployees);
             Controls.Add(pnlNewShiftDisplay);
@@ -141,5 +152,6 @@
         private FlowLayoutPanel flowShiftDates;
         private Button btnForwardDate;
         private Button btnBackDate;
+        private FlowLayoutPanel flowPositions;
     }
 }

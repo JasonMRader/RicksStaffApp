@@ -524,9 +524,9 @@ namespace RicksStaffApp
                 var positiveIncident = group.Where(i => i.IncidentRatingChange > 0);
                 var negativeIncident = group.Where(i => i.IncidentRatingChange < 0);
 
-                Panel incidentPanel = CreateFlowPanel(175, 50);
-                incidentPanel.MinimumSize = new Size(175, 50);
-                incidentPanel.Margin = new Padding(10, 5, 10, 5);
+                Panel incidentPanel = CreateFlowPanel(175, 30);
+                incidentPanel.MinimumSize = new Size(175, 30);
+                incidentPanel.Margin = new Padding(20, 5, 10, 5);
                 
                 Label incidentLabel = CreateLabel(130, 50, group.Key);
                 Label incidentFrequency = CreateLabel(45, 50, group.Count().ToString() + "X");
@@ -1594,7 +1594,7 @@ namespace RicksStaffApp
         public static void CreatePositionsForEmployee(FlowLayoutPanel flowDisplay, List<Position> positions)
         {
             flowDisplay.Controls.Clear();
-            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) + 2);
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) +2);
             //RadioButton rdoAllPositions = new RadioButton();
             //rdoAllPositions.Appearance = Appearance.Button;
             //rdoAllPositions.FlatStyle = FlatStyle.Flat;
@@ -1624,41 +1624,42 @@ namespace RicksStaffApp
         public static void CreatePositionOverviewPanels(FlowLayoutPanel flowDisplay, List<Position> positions)
         {
             flowDisplay.Controls.Clear();
-            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count +1))-((positions.Count +1)+2);
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count +1))-((positions.Count +1)+2) - (25);
             RadioButton rdoAllPositions = new RadioButton();
             
             rdoAllPositions.Appearance = Appearance.Button;
             rdoAllPositions.FlatStyle = FlatStyle.Flat;
-            rdoAllPositions.Margin = new Padding(2,0,0,0);
+            rdoAllPositions.Margin = new Padding(0,0,5,0);
             rdoAllPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoAllPositions.TextAlign = ContentAlignment.MiddleCenter;
             rdoAllPositions.BackColor = Color.FromArgb(167, 204, 237);
-            rdoAllPositions.Size = new Size(buttonWidth,30);
+            rdoAllPositions.Size = new Size(buttonWidth,27);
             rdoAllPositions.Text = "All Positions";
             rdoAllPositions.Checked = true;
             flowDisplay.Controls.Add(rdoAllPositions);
             foreach (Position position in positions)
             {
+                PictureBox positionPB = CreatePositionPictureBox(25, 25, position);
                 RadioButton radioButton = new RadioButton();
-                Image positionImage = GetPositionImage(position);
-                Image resizedPositionImage = ResizeImage(positionImage, 24, radioButton.Height);
+                //Image positionImage = GetPositionImage(position);
+                //Image resizedPositionImage = ResizeImage(positionImage, 24, radioButton.Height);
                 
                 radioButton.Padding = new Padding(0,0,0,0);
                 radioButton.Margin = new Padding(0,0,0,0);
                 radioButton.Appearance = Appearance.Button;
                 //radioButton.ImageAlign = ContentAlignment.M;
-                radioButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+                //radioButton.TextImageRelation = TextImageRelation.ImageBeforeText;
                 
-                radioButton.Margin = new Padding(2,0,0,0);
+                radioButton.Margin = new Padding(0,0,5,0);
                 radioButton.BackColor = Color.FromArgb(167, 204, 237);
 
                 radioButton.TextAlign = ContentAlignment.MiddleCenter;
                 radioButton.FlatStyle = FlatStyle.Flat;
                 radioButton.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
-                radioButton.Size = new Size(buttonWidth, 30);
+                radioButton.Size = new Size(buttonWidth, 27);
                 radioButton.Text = position.Name;
-                radioButton.Image = resizedPositionImage;
-                
+                //radioButton.Image = resizedPositionImage;
+                flowDisplay.Controls.Add(positionPB);
                 flowDisplay.Controls.Add(radioButton);
             }
 

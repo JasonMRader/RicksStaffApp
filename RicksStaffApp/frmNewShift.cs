@@ -17,6 +17,7 @@ namespace RicksStaffApp
     {
         List<Shift> shifts = new List<Shift>();
         DateTime startDate = DateTime.Now;
+        List<Position> AllPositions = new List<Position>();
         public frmNewShift()
         {
             InitializeComponent();
@@ -208,6 +209,7 @@ namespace RicksStaffApp
         private void frmNewShift_Load(object sender, EventArgs e)
         {
             shifts = SqliteDataAccess.LoadShifts();
+            AllPositions = SqliteDataAccess.LoadPositions();
             //DateTime date = DateTime.Now;
             startDate = DateTime.Now.AddDays(-13);
             Shift shift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
@@ -227,7 +229,7 @@ namespace RicksStaffApp
 
             }
 
-
+            UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositions);
             refreshShiftPanels(startDate);
 
 
