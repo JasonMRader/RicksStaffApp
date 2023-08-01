@@ -83,7 +83,7 @@ namespace RicksStaffApp
                         btnAM.Click += (s, e) =>
                         {
                             var btn = (System.Windows.Forms.Button)s;
-                            UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                             if (currentHighlightedPanel != null)
                             {
@@ -123,7 +123,7 @@ namespace RicksStaffApp
                         btnPM.Click += (s, e) =>
                         {
                             var btn = (System.Windows.Forms.Button)s;
-                            UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                             if (currentHighlightedPanel != null)
                             {
@@ -216,7 +216,7 @@ namespace RicksStaffApp
             //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
             if (shift != null)
             {
-                UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+                CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
             }
             else
             {
@@ -234,13 +234,88 @@ namespace RicksStaffApp
 
 
         }
+        private static void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        {
+            //TODO pass in one shift, not a list of shifts
+            flowEmployeeDisplay.Controls.Clear();
+            //foreach (Shift shift in shiftList)
+            //{
+            //    //MessageBox.Show(shift.Date.ToString());
+            if (shift.Date == shiftDate)
+            {
+                shift.EmployeeShifts = shift.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
+
+                foreach (EmployeeShift es in shift.EmployeeShifts)
+                {
+                    es.UpdateShiftRating();
+                    FlowLayoutPanel empShiftContainer = UIHelper.CreateFlowPanel(470, 30);
+
+                    empShiftContainer.MinimumSize = new Size(470, 30);
+                    empShiftContainer.MaximumSize = new Size(470, 1000);
+                    empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+
+                    System.Windows.Forms.Label lblName = UIHelper.CreateLabel(100, 30, es.Employee.FullName);
+                    empShiftContainer.Controls.Add(lblName);
+
+                    //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
+                    //empShiftContainer.Controls.Add(lblPos);
+                    PictureBox pbPosition = UIHelper.CreatePositionPictureBox(30, 30, es.Position);
+                    empShiftContainer.Controls.Add(pbPosition);
+
+                    System.Windows.Forms.Label lblShiftRating = UIHelper.CreateLabel(25, 30, es.ShiftRating.ToString());
+                    empShiftContainer.Controls.Add(lblShiftRating);
+
+                    PictureBox pbRating = UIHelper.CreateRatingPictureBox(90, 30, es.ShiftRating);
+                    empShiftContainer.Controls.Add(pbRating);
+
+                    System.Windows.Forms.Button btnIncidents = UIHelper.CreateButtonTemplate(65, 30, "Incidents");
+                    FlowLayoutPanel incidentContainer = UIHelper.CreateFlowPanel(470, 30);
+                    bool btnClicked = false;
+                    btnIncidents.Click += (sender, e) =>
+                    {
+                        btnClicked = !btnClicked;
+                        if (btnClicked)
+                        {
+                            UIHelper.CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
+                            empShiftContainer.Controls.Add(incidentContainer);
+                        }
+                        else
+                        {
+                            incidentContainer.Controls.Clear();
+                            empShiftContainer.Controls.Remove(incidentContainer);
+                        }
+
+                    };
+                    empShiftContainer.Controls.Add(btnIncidents);
+
+                    System.Windows.Forms.Button btnAddIncidents = UIHelper.CreateButtonTemplate(65, 30, "Add/Edit");
+                    btnAddIncidents.Click += (sender, e) =>
+                    {
+                        secondPanel.Controls.Clear();
+                        frmServerShift frmServerShift = new frmServerShift(es);
+                        //frmServerShift.EmployeeShiftToEdit = es;
+                        frmServerShift.TopLevel = false;
+                        secondPanel.Controls.Add(frmServerShift);
+                        frmServerShift.Show();
+                    };
+                    empShiftContainer.Controls.Add(btnAddIncidents);
+
+                    flowEmployeeDisplay.Controls.Add(empShiftContainer);
+
+                }
+
+            }
+            //}
+
+
+        }
 
         private void CalendarShiftClicked(object sender, EventArgs e)
         {
             DateTime date = dtpShiftDate.Value;
             Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
             // Code to execute when the button is clicked
-            UIHelper.CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
 
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)

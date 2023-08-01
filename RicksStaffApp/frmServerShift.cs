@@ -23,6 +23,11 @@ namespace RicksStaffApp
         {
             InitializeComponent();
         }
+        public frmServerShift(EmployeeShift employeeShift)
+        {
+            EmployeeShiftToEdit = employeeShift;
+            InitializeComponent();
+        }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
@@ -41,6 +46,7 @@ namespace RicksStaffApp
 
         private void frmServerShift_Load(object sender, EventArgs e)
         {
+
             ActivityList.Clear();
             ActivityList = SqliteDataAccess.LoadActivities();
             picShiftRating.Image = UIHelper.GetStars(EmployeeShiftToEdit.ShiftRating);
@@ -49,11 +55,48 @@ namespace RicksStaffApp
             CreateActivityPanelsForEmpShift(EmployeeShiftToEdit, ActivityList, flowActivityDisplay, flowIncidentToAdd);
             //UIHelper.CreateIncidentPanelForEmpShift(EmployeeShiftToEdit.Incidents, flowIncidentToAdd);
 
-
+            EmployeeShiftToEdit.Employee.Positions = SqliteDataAccess.AssignPositionsToEmployee(EmployeeShiftToEdit.Employee);
             lblEmpolyeeName.Text = EmployeeShiftToEdit.EmployeeName;
-            UIHelper.CreatePositionsForEmployee(flowPositions, EmployeeShiftToEdit.Employee.Positions);
+            CreatePositionsForEmployeeShift(flowPositions, EmployeeShiftToEdit.Employee.Positions);
         }
-        
+        private void CreatePositionsForEmployeeShift(FlowLayoutPanel flowDisplay, List<Position> positions)
+        {
+            flowDisplay.Controls.Clear();
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) + 2);
+            
+            foreach (Position position in positions)
+            {
+                RadioButton radioButton = new RadioButton();
+                radioButton.Appearance = Appearance.Button;
+                radioButton.Margin = new Padding(2, 0, 0, 0);
+                radioButton.BackColor = Color.FromArgb(167, 204, 237);
+
+                radioButton.TextAlign = ContentAlignment.MiddleCenter;
+                radioButton.FlatStyle = FlatStyle.Flat;
+                radioButton.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+                radioButton.Size = new Size(buttonWidth, 24);
+                radioButton.Text = position.Name;
+                radioButton.Tag = position;
+                if (EmployeeShiftToEdit.Position.ID == position.ID)
+                {
+                    radioButton.Checked = true;
+                }
+                
+                radioButton.CheckedChanged += (sender, e) =>
+                {
+                    RadioButton rb = sender as RadioButton;
+                    if (rb!= null && rb.Checked)
+                    {
+                        Position pos = rb.Tag as Position;
+                        if (pos != null)
+                        {
+                            EmployeeShiftToEdit.Position = pos;
+                        }
+                    }
+                };
+                flowDisplay.Controls.Add(radioButton);
+            }
+        }
         private void UpdateRatingPicture(object sender, EventArgs e)
         {
 
@@ -128,7 +171,7 @@ namespace RicksStaffApp
                 {
                     btnNote.Text = "Add Note";
                 }
-                
+
                 btnNote.Size = new Size(70, 30);
                 btnNote.FlatStyle = FlatStyle.Flat;
                 btnNote.TextAlign = ContentAlignment.MiddleCenter;

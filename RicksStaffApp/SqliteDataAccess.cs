@@ -414,6 +414,18 @@ namespace RicksStaffApp
                 return result;
             }
         }
+        public static List<Position> AssignPositionsToEmployee(Employee employee)
+        {
+            List<Position> positions = new List<Position>();
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                
+                string positionQuery = "SELECT p.* FROM Position p INNER JOIN EmployeePosition ep ON p.ID = ep.PositionID WHERE ep.EmployeeID = @EmployeeID";
+                positions = cnn.Query<Position>(positionQuery, new { EmployeeID = employee.ID }).ToList();
+            }
+            return positions;
+                
+        }
 
         public static List<Employee> TestLoadEmployees()
         {

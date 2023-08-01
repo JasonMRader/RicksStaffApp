@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            flowPositions = new FlowLayoutPanel();
             picShiftRating = new PictureBox();
             flowIncidentToAdd = new FlowLayoutPanel();
             flowActivityDisplay = new FlowLayoutPanel();
@@ -36,7 +37,6 @@
             label1 = new Label();
             lblEmpolyeeName = new Label();
             btnDone = new Button();
-            flowPositions = new FlowLayoutPanel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picShiftRating).BeginInit();
             SuspendLayout();
@@ -61,6 +61,13 @@
             panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
+            // 
+            // flowPositions
+            // 
+            flowPositions.Location = new Point(303, 3);
+            flowPositions.Name = "flowPositions";
+            flowPositions.Size = new Size(461, 41);
+            flowPositions.TabIndex = 8;
             // 
             // picShiftRating
             // 
@@ -132,13 +139,6 @@
             btnDone.Text = "Done";
             btnDone.UseVisualStyleBackColor = false;
             btnDone.Click += btnDone_Click;
-            // 
-            // flowPositions
-            // 
-            flowPositions.Location = new Point(394, 3);
-            flowPositions.Name = "flowPositions";
-            flowPositions.Size = new Size(370, 41);
-            flowPositions.TabIndex = 8;
             // 
             // frmServerShift
             // 

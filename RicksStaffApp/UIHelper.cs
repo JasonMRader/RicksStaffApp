@@ -153,7 +153,7 @@ namespace RicksStaffApp
             button.Margin = new Padding(0, 0, 0, 0);
             return button;
         }
-        private static Label CreateLabel (int width, int height, string text)
+        public static Label CreateLabel (int width, int height, string text)
         {
             Label label = new Label();
             label.Text = text;
@@ -1591,10 +1591,11 @@ namespace RicksStaffApp
                 
             }
         }
+        
         public static void CreatePositionsForEmployee(FlowLayoutPanel flowDisplay, List<Position> positions)
         {
             flowDisplay.Controls.Clear();
-            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) +2);
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) + 2);
             //RadioButton rdoAllPositions = new RadioButton();
             //rdoAllPositions.Appearance = Appearance.Button;
             //rdoAllPositions.FlatStyle = FlatStyle.Flat;
@@ -1736,81 +1737,81 @@ namespace RicksStaffApp
 
             
         }
-        public static void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
-        {
-            //TODO pass in one shift, not a list of shifts
-            flowEmployeeDisplay.Controls.Clear();
-            //foreach (Shift shift in shiftList)
-            //{
-            //    //MessageBox.Show(shift.Date.ToString());
-                if (shift.Date == shiftDate)
-                {   
-                    shift.EmployeeShifts = shift.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
+        //public static void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        //{
+        //    //TODO pass in one shift, not a list of shifts
+        //    flowEmployeeDisplay.Controls.Clear();
+        //    //foreach (Shift shift in shiftList)
+        //    //{
+        //    //    //MessageBox.Show(shift.Date.ToString());
+        //        if (shift.Date == shiftDate)
+        //        {   
+        //            shift.EmployeeShifts = shift.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
                 
-                    foreach (EmployeeShift es in shift.EmployeeShifts)
-                    {
-                        es.UpdateShiftRating();
-                        FlowLayoutPanel empShiftContainer = CreateFlowPanel(470,30);                       
+        //            foreach (EmployeeShift es in shift.EmployeeShifts)
+        //            {
+        //                es.UpdateShiftRating();
+        //                FlowLayoutPanel empShiftContainer = CreateFlowPanel(470,30);                       
                       
-                        empShiftContainer.MinimumSize = new Size(470, 30);
-                        empShiftContainer.MaximumSize = new Size(470, 1000);
-                        empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+        //                empShiftContainer.MinimumSize = new Size(470, 30);
+        //                empShiftContainer.MaximumSize = new Size(470, 1000);
+        //                empShiftContainer.Margin = new Padding(0, 0, 0, 5);
 
-                        Label lblName = CreateLabel(100, 30, es.Employee.FullName);                       
-                        empShiftContainer.Controls.Add(lblName);
+        //                Label lblName = CreateLabel(100, 30, es.Employee.FullName);                       
+        //                empShiftContainer.Controls.Add(lblName);
 
-                    //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
-                    //empShiftContainer.Controls.Add(lblPos);
-                        PictureBox pbPosition = CreatePositionPictureBox(30,30,es.Position);
-                    empShiftContainer.Controls.Add(pbPosition);
+        //            //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
+        //            //empShiftContainer.Controls.Add(lblPos);
+        //                PictureBox pbPosition = CreatePositionPictureBox(30,30,es.Position);
+        //            empShiftContainer.Controls.Add(pbPosition);
 
-                        Label lblShiftRating = CreateLabel(25, 30, es.ShiftRating.ToString());                 
-                        empShiftContainer.Controls.Add(lblShiftRating);
+        //                Label lblShiftRating = CreateLabel(25, 30, es.ShiftRating.ToString());                 
+        //                empShiftContainer.Controls.Add(lblShiftRating);
 
-                        PictureBox pbRating = CreateRatingPictureBox(90, 30, es.ShiftRating);
-                        empShiftContainer.Controls.Add(pbRating);
+        //                PictureBox pbRating = CreateRatingPictureBox(90, 30, es.ShiftRating);
+        //                empShiftContainer.Controls.Add(pbRating);
 
-                        Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");
-                        FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
-                        bool btnClicked = false;
-                        btnIncidents.Click += (sender, e) =>
-                        {
-                            btnClicked = !btnClicked;
-                            if (btnClicked)
-                            {
-                                CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
-                                empShiftContainer.Controls.Add(incidentContainer);
-                            }
-                            else
-                            {
-                                incidentContainer.Controls.Clear();
-                                empShiftContainer.Controls.Remove(incidentContainer);
-                            }
+        //                Button btnIncidents = CreateButtonTemplate(65,30,"Incidents");
+        //                FlowLayoutPanel incidentContainer = CreateFlowPanel(470, 30);
+        //                bool btnClicked = false;
+        //                btnIncidents.Click += (sender, e) =>
+        //                {
+        //                    btnClicked = !btnClicked;
+        //                    if (btnClicked)
+        //                    {
+        //                        CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
+        //                        empShiftContainer.Controls.Add(incidentContainer);
+        //                    }
+        //                    else
+        //                    {
+        //                        incidentContainer.Controls.Clear();
+        //                        empShiftContainer.Controls.Remove(incidentContainer);
+        //                    }
                             
-                        };
-                        empShiftContainer.Controls.Add(btnIncidents);
+        //                };
+        //                empShiftContainer.Controls.Add(btnIncidents);
 
-                        Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");                     
-                        btnAddIncidents.Click += (sender, e) =>
-                        {
-                            secondPanel.Controls.Clear();
-                            frmServerShift frmServerShift = new frmServerShift();
-                            frmServerShift.EmployeeShiftToEdit = es;
-                            frmServerShift.TopLevel = false;
-                            secondPanel.Controls.Add(frmServerShift);
-                            frmServerShift.Show();
-                        };
-                        empShiftContainer.Controls.Add(btnAddIncidents);
+        //                Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");                     
+        //                btnAddIncidents.Click += (sender, e) =>
+        //                {
+        //                    secondPanel.Controls.Clear();
+        //                    frmServerShift frmServerShift = new frmServerShift();
+        //                    frmServerShift.EmployeeShiftToEdit = es;
+        //                    frmServerShift.TopLevel = false;
+        //                    secondPanel.Controls.Add(frmServerShift);
+        //                    frmServerShift.Show();
+        //                };
+        //                empShiftContainer.Controls.Add(btnAddIncidents);
 
-                        flowEmployeeDisplay.Controls.Add(empShiftContainer);
+        //                flowEmployeeDisplay.Controls.Add(empShiftContainer);
                         
-                    }
+        //            }
 
-                }
-            //}
+        //        }
+        //    //}
             
 
-        }
+        //}
         public static void CreateExcelLoadDisplay()
         {
 
