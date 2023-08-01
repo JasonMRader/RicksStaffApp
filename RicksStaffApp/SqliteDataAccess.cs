@@ -112,6 +112,15 @@ namespace RicksStaffApp
                 cnn.Execute("insert into Position (Name) values (@Name)", position);
             }
         }
+        public static void UpdatePositionFromEmployeeShift(EmployeeShift employeeShift)
+        {
+            
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update EmployeeShift set EmployeeID = @EmployeeID, ShiftID = @ShiftID, PositionID = @PositionID where ID = @ID",
+                    new {EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, PositionID = employeeShift.Position.ID, ID = employeeShift.ID});
+            }
+        }
 
         //Incident Methods
         public static void AddIncident(Incident incident)
@@ -179,15 +188,7 @@ namespace RicksStaffApp
                 cnn.Execute("update Incident set ActivityID = @ActivityID, Note = @Note, DateString = @DateString where Id = @IncidentId",
             new { ActivityID = incident.ID, Note = incident.Note, DateString = incident.DateString, Id = incident.ID });
 
-                // Delete all existing activity modifiers for this incident
-                //cnn.Execute("delete from ActivityModifier where IncidentID = @IncidentID", new { IncidentID = incident.ID });
-
-                // Insert the incident's activity modifiers into the ActivityModifiers table
-                //foreach (ActivityModifier modifier in incident.ActivityModifiers)
-                //{
-                //    cnn.Execute("insert into ActivityModifier (IncidentID, Name, RatingAdjustment) values (@IncidentID, @Name, @RatingAdjustment)",
-                //        new { IncidentID = incident.ID, Name = modifier.Name, RatingAdjustment = modifier.RatingAdjustment });
-                //}
+                
             }
         }
 

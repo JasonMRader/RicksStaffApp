@@ -31,7 +31,9 @@ namespace RicksStaffApp
 
         private void btnDone_Click(object sender, EventArgs e)
         {
+            SqliteDataAccess.UpdatePositionFromEmployeeShift(EmployeeShiftToEdit);
             SqliteDataAccess.SaveEmployeeShiftIncidents(EmployeeShiftToEdit);
+            
             this.Close();
             this.Dispose();
             //string s = "";
