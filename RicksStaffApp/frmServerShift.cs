@@ -28,12 +28,15 @@ namespace RicksStaffApp
             EmployeeShiftToEdit = employeeShift;
             InitializeComponent();
         }
+        public delegate void EmployeeShiftUpdatedEventHandler(EmployeeShift employeeShift);
 
+        
+        public event EmployeeShiftUpdatedEventHandler EmployeeShiftUpdated;
         private void btnDone_Click(object sender, EventArgs e)
         {
             SqliteDataAccess.UpdatePositionFromEmployeeShift(EmployeeShiftToEdit);
             SqliteDataAccess.SaveEmployeeShiftIncidents(EmployeeShiftToEdit);
-            
+            EmployeeShiftUpdated?.Invoke(EmployeeShiftToEdit);
             this.Close();
             this.Dispose();
             //string s = "";

@@ -205,9 +205,10 @@ namespace RicksStaffApp
                 flowShiftDates.Controls.Add(panel);
             }
         }
-
+       
         private void frmNewShift_Load(object sender, EventArgs e)
         {
+            
             shifts = SqliteDataAccess.LoadShifts();
             AllPositions = SqliteDataAccess.LoadPositions();
             //DateTime date = DateTime.Now;
@@ -234,7 +235,17 @@ namespace RicksStaffApp
 
 
         }
-        private static void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        private static void UpdateEmployeeShiftPanel (EmployeeShift employeeShift, FlowLayoutPanel flowDisplay)
+        {
+            foreach (Control c in flowDisplay.Controls)
+            {
+                if (c.Tag == employeeShift)
+                {
+                    c.BackColor = Color.White;
+                }
+            }
+        }
+        private void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
             //TODO pass in one shift, not a list of shifts
             flowEmployeeDisplay.Controls.Clear();
@@ -249,7 +260,7 @@ namespace RicksStaffApp
                 {
                     es.UpdateShiftRating();
                     FlowLayoutPanel empShiftContainer = UIHelper.CreateFlowPanel(470, 30);
-
+                    empShiftContainer.Tag = es;
                     empShiftContainer.MinimumSize = new Size(470, 30);
                     empShiftContainer.MaximumSize = new Size(470, 1000);
                     empShiftContainer.Margin = new Padding(0, 0, 0, 5);
@@ -293,9 +304,11 @@ namespace RicksStaffApp
                     {
                         secondPanel.Controls.Clear();
                         frmServerShift frmServerShift = new frmServerShift(es);
+                        frmServerShift.EmployeeShiftUpdated += FrmServerShift_EmployeeShiftUpdated;
                         //frmServerShift.EmployeeShiftToEdit = es;
                         frmServerShift.TopLevel = false;
                         secondPanel.Controls.Add(frmServerShift);
+                        
                         frmServerShift.Show();
                     };
                     empShiftContainer.Controls.Add(btnAddIncidents);
@@ -308,6 +321,10 @@ namespace RicksStaffApp
             //}
 
 
+        }
+        private void FrmServerShift_EmployeeShiftUpdated(EmployeeShift employeeShift)
+        {
+            UpdateEmployeeShiftPanel(employeeShift, flowEmployeeShiftDisplay);
         }
 
         private void CalendarShiftClicked(object sender, EventArgs e)
