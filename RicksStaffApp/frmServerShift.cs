@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace RicksStaffApp
         }
         public delegate void EmployeeShiftUpdatedEventHandler(EmployeeShift employeeShift);
 
-        
+
         public event EmployeeShiftUpdatedEventHandler EmployeeShiftUpdated;
         private void btnDone_Click(object sender, EventArgs e)
         {
@@ -68,7 +69,7 @@ namespace RicksStaffApp
         {
             flowDisplay.Controls.Clear();
             int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) + 2);
-            
+
             foreach (Position position in positions)
             {
                 RadioButton radioButton = new RadioButton();
@@ -86,11 +87,11 @@ namespace RicksStaffApp
                 {
                     radioButton.Checked = true;
                 }
-                
+
                 radioButton.CheckedChanged += (sender, e) =>
                 {
                     RadioButton rb = sender as RadioButton;
-                    if (rb!= null && rb.Checked)
+                    if (rb != null && rb.Checked)
                     {
                         Position pos = rb.Tag as Position;
                         if (pos != null)
@@ -266,6 +267,59 @@ namespace RicksStaffApp
         private void UpdateRatingPicture(object sender, ControlEventArgs e)
         {
             picShiftRating.Image = UIHelper.GetStars(EmployeeShiftToEdit.ShiftRating);
+        }
+        private void refreshActivityList(List<Activity> activities)
+        {
+            flowActivityDisplay.Controls.Clear();
+            foreach (Activity activity in activities)
+            {
+                FlowLayoutPanel activityPanelContainer = activity.CreateFlowLayoutPanel(flowActivityDisplay.Width - 30, flowIncidentToAdd, EmployeeShiftToEdit);
+
+                flowActivityDisplay.Controls.Add(activityPanelContainer);
+            }
+        }
+
+        private void rdoAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoAll.Checked)
+            {
+                refreshActivityList(ActivityList);
+            }
+           
+        }
+
+        private void rdoGood_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoGood.Checked)
+            {
+                List<Activity> goodActivities = new List<Activity>();
+                foreach (Activity activity in ActivityList)
+                {
+                    if (activity.BaseRatingImpact > 0)
+                    {
+                        goodActivities.Add(activity);
+                    }
+                }
+                refreshActivityList(goodActivities);
+            }
+            
+        }
+
+        private void rdoBad_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoBad.Checked)
+            {
+                List<Activity> badActivities = new List<Activity>();
+                foreach (Activity activity in ActivityList)
+                {
+                    if (activity.BaseRatingImpact < 0)
+                    {
+                        badActivities.Add(activity);
+                    }
+                }
+                refreshActivityList(badActivities);
+            }
+            
         }
     }
 
