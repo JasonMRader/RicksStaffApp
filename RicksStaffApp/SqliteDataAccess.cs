@@ -123,6 +123,28 @@ namespace RicksStaffApp
         }
 
         //Incident Methods
+        public static List<Incident> LoadIncidentsForEmployeeShift(EmployeeShift employeeShift)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var parameters = new { EmployeeShiftID = employeeShift.ID };
+                var query = @"
+            SELECT Incident.*, Activity.Name, Activity.BaseRatingImpact
+            FROM Incident 
+            INNER JOIN Activity ON Incident.ActivityID = Activity.ID
+            WHERE Incident.EmployeeShiftID = @EmployeeShiftID";
+                var incidents = cnn.Query<Incident, Activity, Incident>(query,
+                    (incident, activity) =>
+                    {
+                        incident.Name = activity.Name;
+                        incident.BaseRatingImpact = activity.BaseRatingImpact;
+                        return incident;
+                    }, parameters, splitOn: "Name");
+
+
+                return incidents.ToList();
+            }
+        }
         public static void AddIncident(Incident incident)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -667,6 +689,10 @@ namespace RicksStaffApp
                 return employeeShifts;
             }
         }
+        //private static EmployeeShift LoadSingleEmployeeShift (int EmployeeShiftID)
+        //{
+
+        //}
         public static void AddEmployeeShift(EmployeeShift employeeShift)
         {
 
