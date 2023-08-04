@@ -80,7 +80,15 @@ namespace RicksStaffApp
         {
             incident.EmployeeShiftID = this.ID;
             Incidents.Add(incident);
-            ShiftRating = _shiftRating;
+            UpdateShiftRating();
+            //ShiftRating = _shiftRating;
+        }
+        public void RemoveIncident(Incident incident)
+        {
+            incident.EmployeeShiftID = this.ID;
+            Incidents.Remove(incident);
+            UpdateShiftRating();
+            //ShiftRating = _shiftRating;
         }
         public int GetGoodIncidentCount()
         {

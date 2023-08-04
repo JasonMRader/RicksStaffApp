@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RicksStaffApp
 {
-    public class Incident : Activity, IDisplayable
+    public class Incident : Activity//, IDisplayable
     {
         //TODO add modifier ID to Incident in DB
         public Incident(Activity activity)

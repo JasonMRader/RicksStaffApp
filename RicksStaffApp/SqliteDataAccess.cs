@@ -135,8 +135,8 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("DELETE FROM Incidents WHERE ID = @IncidentId", new { IncidentId = incidentId });
-                cnn.Execute("DELETE FROM ActivityModifiers WHERE IncidentID = @IncidentId", new { IncidentId = incidentId });
+                cnn.Execute("DELETE FROM Incident WHERE ID = @IncidentId", new { IncidentId = incidentId });
+                //cnn.Execute("DELETE FROM ActivityModifiers WHERE IncidentID = @IncidentId", new { IncidentId = incidentId });
             }
         }
         public static void DeleteIncidentsByEmployeeShiftID(int employeeShiftID)

@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            lbIncidents = new ListBox();
+            rdoBad = new RadioButton();
+            rdoGood = new RadioButton();
+            rdoAll = new RadioButton();
             flowPositions = new FlowLayoutPanel();
             picShiftRating = new PictureBox();
             flowIncidentToAdd = new FlowLayoutPanel();
@@ -37,9 +41,6 @@
             label1 = new Label();
             lblEmpolyeeName = new Label();
             btnDone = new Button();
-            rdoAll = new RadioButton();
-            rdoGood = new RadioButton();
-            rdoBad = new RadioButton();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picShiftRating).BeginInit();
             SuspendLayout();
@@ -49,6 +50,7 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.FromArgb(46, 51, 73);
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(lbIncidents);
             panel1.Controls.Add(rdoBad);
             panel1.Controls.Add(rdoGood);
             panel1.Controls.Add(rdoAll);
@@ -68,18 +70,75 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
+            // lbIncidents
+            // 
+            lbIncidents.FormattingEnabled = true;
+            lbIncidents.ItemHeight = 15;
+            lbIncidents.Location = new Point(579, 3);
+            lbIncidents.Name = "lbIncidents";
+            lbIncidents.Size = new Size(185, 139);
+            lbIncidents.TabIndex = 0;
+            // 
+            // rdoBad
+            // 
+            rdoBad.Appearance = Appearance.Button;
+            rdoBad.BackColor = Color.FromArgb(167, 204, 237);
+            rdoBad.FlatAppearance.BorderSize = 0;
+            rdoBad.FlatStyle = FlatStyle.Flat;
+            rdoBad.Location = new Point(228, 118);
+            rdoBad.Name = "rdoBad";
+            rdoBad.Size = new Size(69, 24);
+            rdoBad.TabIndex = 9;
+            rdoBad.TabStop = true;
+            rdoBad.Text = "Bad";
+            rdoBad.TextAlign = ContentAlignment.MiddleCenter;
+            rdoBad.UseVisualStyleBackColor = false;
+            rdoBad.CheckedChanged += rdoBad_CheckedChanged;
+            // 
+            // rdoGood
+            // 
+            rdoGood.Appearance = Appearance.Button;
+            rdoGood.BackColor = Color.FromArgb(167, 204, 237);
+            rdoGood.FlatAppearance.BorderSize = 0;
+            rdoGood.FlatStyle = FlatStyle.Flat;
+            rdoGood.Location = new Point(153, 118);
+            rdoGood.Name = "rdoGood";
+            rdoGood.Size = new Size(69, 24);
+            rdoGood.TabIndex = 9;
+            rdoGood.TabStop = true;
+            rdoGood.Text = "Good";
+            rdoGood.TextAlign = ContentAlignment.MiddleCenter;
+            rdoGood.UseVisualStyleBackColor = false;
+            rdoGood.CheckedChanged += rdoGood_CheckedChanged;
+            // 
+            // rdoAll
+            // 
+            rdoAll.Appearance = Appearance.Button;
+            rdoAll.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAll.FlatAppearance.BorderSize = 0;
+            rdoAll.FlatStyle = FlatStyle.Flat;
+            rdoAll.Location = new Point(78, 118);
+            rdoAll.Name = "rdoAll";
+            rdoAll.Size = new Size(69, 24);
+            rdoAll.TabIndex = 9;
+            rdoAll.TabStop = true;
+            rdoAll.Text = "All";
+            rdoAll.TextAlign = ContentAlignment.MiddleCenter;
+            rdoAll.UseVisualStyleBackColor = false;
+            rdoAll.CheckedChanged += rdoAll_CheckedChanged;
+            // 
             // flowPositions
             // 
-            flowPositions.Location = new Point(303, 3);
+            flowPositions.Location = new Point(304, 32);
             flowPositions.Name = "flowPositions";
-            flowPositions.Size = new Size(461, 41);
+            flowPositions.Size = new Size(449, 41);
             flowPositions.TabIndex = 8;
             // 
             // picShiftRating
             // 
-            picShiftRating.Location = new Point(113, 33);
+            picShiftRating.Location = new Point(78, 32);
             picShiftRating.Name = "picShiftRating";
-            picShiftRating.Size = new Size(120, 40);
+            picShiftRating.Size = new Size(188, 40);
             picShiftRating.SizeMode = PictureBoxSizeMode.CenterImage;
             picShiftRating.TabIndex = 7;
             picShiftRating.TabStop = false;
@@ -92,7 +151,6 @@
             flowIncidentToAdd.Name = "flowIncidentToAdd";
             flowIncidentToAdd.Size = new Size(450, 406);
             flowIncidentToAdd.TabIndex = 6;
-            flowIncidentToAdd.ControlAdded += UpdateRatingPicture;
             // 
             // flowActivityDisplay
             // 
@@ -129,9 +187,9 @@
             // 
             lblEmpolyeeName.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblEmpolyeeName.ForeColor = Color.White;
-            lblEmpolyeeName.Location = new Point(-1, 0);
+            lblEmpolyeeName.Location = new Point(2, -1);
             lblEmpolyeeName.Name = "lblEmpolyeeName";
-            lblEmpolyeeName.Size = new Size(381, 30);
+            lblEmpolyeeName.Size = new Size(763, 30);
             lblEmpolyeeName.TabIndex = 1;
             lblEmpolyeeName.Text = "Employee Name";
             lblEmpolyeeName.TextAlign = ContentAlignment.MiddleCenter;
@@ -147,54 +205,6 @@
             btnDone.Text = "Done";
             btnDone.UseVisualStyleBackColor = false;
             btnDone.Click += btnDone_Click;
-            // 
-            // rdoAll
-            // 
-            rdoAll.Appearance = Appearance.Button;
-            rdoAll.BackColor = Color.FromArgb(167, 204, 237);
-            rdoAll.FlatAppearance.BorderSize = 0;
-            rdoAll.FlatStyle = FlatStyle.Flat;
-            rdoAll.Location = new Point(78, 118);
-            rdoAll.Name = "rdoAll";
-            rdoAll.Size = new Size(69, 24);
-            rdoAll.TabIndex = 9;
-            rdoAll.TabStop = true;
-            rdoAll.Text = "All";
-            rdoAll.TextAlign = ContentAlignment.MiddleCenter;
-            rdoAll.UseVisualStyleBackColor = false;
-            rdoAll.CheckedChanged += rdoAll_CheckedChanged;
-            // 
-            // rdoGood
-            // 
-            rdoGood.Appearance = Appearance.Button;
-            rdoGood.BackColor = Color.FromArgb(167, 204, 237);
-            rdoGood.FlatAppearance.BorderSize = 0;
-            rdoGood.FlatStyle = FlatStyle.Flat;
-            rdoGood.Location = new Point(153, 118);
-            rdoGood.Name = "rdoGood";
-            rdoGood.Size = new Size(69, 24);
-            rdoGood.TabIndex = 9;
-            rdoGood.TabStop = true;
-            rdoGood.Text = "Good";
-            rdoGood.TextAlign = ContentAlignment.MiddleCenter;
-            rdoGood.UseVisualStyleBackColor = false;
-            rdoGood.CheckedChanged += rdoGood_CheckedChanged;
-            // 
-            // rdoBad
-            // 
-            rdoBad.Appearance = Appearance.Button;
-            rdoBad.BackColor = Color.FromArgb(167, 204, 237);
-            rdoBad.FlatAppearance.BorderSize = 0;
-            rdoBad.FlatStyle = FlatStyle.Flat;
-            rdoBad.Location = new Point(228, 118);
-            rdoBad.Name = "rdoBad";
-            rdoBad.Size = new Size(69, 24);
-            rdoBad.TabIndex = 9;
-            rdoBad.TabStop = true;
-            rdoBad.Text = "Bad";
-            rdoBad.TextAlign = ContentAlignment.MiddleCenter;
-            rdoBad.UseVisualStyleBackColor = false;
-            rdoBad.CheckedChanged += rdoBad_CheckedChanged;
             // 
             // frmServerShift
             // 
@@ -229,5 +239,6 @@
         private RadioButton rdoBad;
         private RadioButton rdoGood;
         private RadioButton rdoAll;
+        private ListBox lbIncidents;
     }
 }

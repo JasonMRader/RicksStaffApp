@@ -239,10 +239,47 @@ namespace RicksStaffApp
         {
             foreach (Control c in flowDisplay.Controls)
             {
-                if (c.Tag == employeeShift)
-                {
-                    c.BackColor = Color.White;
-                }
+                
+                    if (c.Tag == employeeShift && c is FlowLayoutPanel empShiftContainer)
+                    {
+                        // Update employee shift rating
+                        employeeShift.UpdateShiftRating();
+
+                        foreach (Control control in empShiftContainer.Controls)
+                        {
+                            // Update rating picture box image
+                            if (control is PictureBox pb)  // assuming the PictureBox's name is pbRating
+                            {
+                                pb.Image = UIHelper.GetStars(employeeShift.ShiftRating); // GetRatingImage is your own method to get image based on rating
+                            }
+
+                            // Update incidents button click handler
+                            if (control is System.Windows.Forms.Button btn && btn.Name == "btnIncidents") // assuming the Button's name is btnIncidents
+                            {
+                                control.Dispose();
+
+                                //// remove all handlers attached to the Click event
+                                //btn.Click -= btn_Click;  // assuming that btn_Click is the current method attached to the Click event
+
+                                //// add new handler
+                                //bool btnClicked = false;
+                                //btn.Click += (sender, e) =>
+                                //{
+                                //    btnClicked = !btnClicked;
+                                //    if (btnClicked)
+                                //    {
+                                //        // replace the 'shift' variable with the new updated employee shift 
+                                //        UIHelper.CreateIncidentPanels_REPLACE(employeeShift.Incidents, empShiftContainer, employeeShift);
+                                //    }
+                                //    else
+                                //    {
+                                //        empShiftContainer.Controls.Clear();
+                                //    }
+                                //};
+                            }
+                        }
+                    }
+                
             }
         }
         private void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
@@ -320,6 +357,10 @@ namespace RicksStaffApp
             }
             //}
 
+
+        }
+        private void UpdateOneEmployeeShift()
+        {
 
         }
         private void FrmServerShift_EmployeeShiftUpdated(EmployeeShift employeeShift)
