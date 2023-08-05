@@ -18,6 +18,10 @@ namespace RicksStaffApp
         List<Shift> shifts = new List<Shift>();
         DateTime startDate = DateTime.Now;
         List<Position> AllPositions = new List<Position>();
+        List<EmployeeShift> AllEmployeeshifts = new List<EmployeeShift>();
+        //List<EmployeeShift> FilteredEmployeeShifts = new List<EmployeeShift>();
+        bool IsFilteredByPosition = false;
+        string FilteredPositionName = "All";
         public frmNewShift()
         {
             InitializeComponent();
@@ -230,10 +234,75 @@ namespace RicksStaffApp
 
             }
 
-            UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositions);
+            CreatePositionFilterPanels(flowPositions, AllPositions);
             refreshShiftPanels(startDate);
 
 
+        }
+        private void CreatePositionFilterPanels(FlowLayoutPanel flowDisplay, List<Position> positions)
+        {
+            flowDisplay.Controls.Clear();
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) + 2) - (25);
+            RadioButton rdoAllPositions = new RadioButton();
+
+            rdoAllPositions.Appearance = Appearance.Button;
+            rdoAllPositions.FlatStyle = FlatStyle.Flat;
+            rdoAllPositions.Margin = new Padding(0, 0, 5, 0);
+            rdoAllPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoAllPositions.TextAlign = ContentAlignment.MiddleCenter;
+            rdoAllPositions.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAllPositions.Size = new Size(buttonWidth, 27);
+            rdoAllPositions.Text = "All Positions";
+            rdoAllPositions.Checked = true;
+            flowDisplay.Controls.Add(rdoAllPositions);
+            foreach (Position position in positions)
+            {
+                PictureBox positionPB = UIHelper.CreatePositionPictureBox(25, 25, position);
+                RadioButton radioButton = new RadioButton();
+                //Image positionImage = GetPositionImage(position);
+                //Image resizedPositionImage = ResizeImage(positionImage, 24, radioButton.Height);
+
+                radioButton.Padding = new Padding(0, 0, 0, 0);
+                radioButton.Margin = new Padding(0, 0, 0, 0);
+                radioButton.Appearance = Appearance.Button;
+                //radioButton.ImageAlign = ContentAlignment.M;
+                //radioButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+                radioButton.Margin = new Padding(0, 0, 5, 0);
+                radioButton.BackColor = Color.FromArgb(167, 204, 237);
+
+                radioButton.TextAlign = ContentAlignment.MiddleCenter;
+                radioButton.FlatStyle = FlatStyle.Flat;
+                radioButton.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+                radioButton.Size = new Size(buttonWidth, 27);
+                radioButton.Text = position.Name;
+                radioButton.CheckedChanged += new EventHandler(rbPositionSelected_CheckedChanged);
+                //radioButton.Image = resizedPositionImage;
+                flowDisplay.Controls.Add(positionPB);
+                flowDisplay.Controls.Add(radioButton);
+            }
+
+        }
+       
+        private void rbPositionSelected_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
+
+            if (radioButton != null && radioButton.Checked && radioButton.Text != "All")
+            {
+                // Assuming PositionList is a List<Employee> 
+                // and Position represents the Employee's position
+                FilteredPositionName = radioButton.Text;
+                //var filteredList = PositionList
+                //    .Where(employee => employee.Position.Name == selectedPosition)
+                //    .ToList();
+
+                //// Now do something with the filteredList
+            }
+            else
+            {
+                FilteredPositionName = "All";
+            }
         }
         private static void UpdateEmployeeShiftPanel (EmployeeShift employeeShift, FlowLayoutPanel flowDisplay)
         {
@@ -282,6 +351,65 @@ namespace RicksStaffApp
                 
             }
         }
+        private void CreateOneEmployeeShiftPanel(Shift shift, EmployeeShift es, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        {
+            es.UpdateShiftRating();
+            FlowLayoutPanel empShiftContainer = UIHelper.CreateFlowPanel(470, 30);
+            empShiftContainer.Tag = es;
+            empShiftContainer.MinimumSize = new Size(470, 30);
+            empShiftContainer.MaximumSize = new Size(470, 1000);
+            empShiftContainer.Margin = new Padding(0, 0, 0, 5);
+
+            System.Windows.Forms.Label lblName = UIHelper.CreateLabel(100, 30, es.Employee.FullName);
+            empShiftContainer.Controls.Add(lblName);
+
+            //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
+            //empShiftContainer.Controls.Add(lblPos);
+            PictureBox pbPosition = UIHelper.CreatePositionPictureBox(30, 30, es.Position);
+            empShiftContainer.Controls.Add(pbPosition);
+
+            System.Windows.Forms.Label lblShiftRating = UIHelper.CreateLabel(25, 30, es.ShiftRating.ToString());
+            empShiftContainer.Controls.Add(lblShiftRating);
+
+            PictureBox pbRating = UIHelper.CreateRatingPictureBox(90, 30, es.ShiftRating);
+            empShiftContainer.Controls.Add(pbRating);
+
+            System.Windows.Forms.Button btnIncidents = UIHelper.CreateButtonTemplate(65, 30, "Incidents");
+            FlowLayoutPanel incidentContainer = UIHelper.CreateFlowPanel(470, 30);
+            bool btnClicked = false;
+            btnIncidents.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+                if (btnClicked)
+                {
+                    UIHelper.CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+
+            };
+            empShiftContainer.Controls.Add(btnIncidents);
+
+            System.Windows.Forms.Button btnAddIncidents = UIHelper.CreateButtonTemplate(65, 30, "Add/Edit");
+            btnAddIncidents.Click += (sender, e) =>
+            {
+                secondPanel.Controls.Clear();
+                frmServerShift frmServerShift = new frmServerShift(es);
+                frmServerShift.EmployeeShiftUpdated += FrmServerShift_EmployeeShiftUpdated;
+                //frmServerShift.EmployeeShiftToEdit = es;
+                frmServerShift.TopLevel = false;
+                secondPanel.Controls.Add(frmServerShift);
+
+                frmServerShift.Show();
+            };
+            empShiftContainer.Controls.Add(btnAddIncidents);
+
+            flowEmployeeDisplay.Controls.Add(empShiftContainer);
+        }
         private void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
             //TODO pass in one shift, not a list of shifts
@@ -292,67 +420,27 @@ namespace RicksStaffApp
             if (shift.Date == shiftDate)
             {
                 shift.EmployeeShifts = shift.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
-
-                foreach (EmployeeShift es in shift.EmployeeShifts)
+                if (FilteredPositionName == "All")
                 {
-                    es.UpdateShiftRating();
-                    FlowLayoutPanel empShiftContainer = UIHelper.CreateFlowPanel(470, 30);
-                    empShiftContainer.Tag = es;
-                    empShiftContainer.MinimumSize = new Size(470, 30);
-                    empShiftContainer.MaximumSize = new Size(470, 1000);
-                    empShiftContainer.Margin = new Padding(0, 0, 0, 5);
-
-                    System.Windows.Forms.Label lblName = UIHelper.CreateLabel(100, 30, es.Employee.FullName);
-                    empShiftContainer.Controls.Add(lblName);
-
-                    //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
-                    //empShiftContainer.Controls.Add(lblPos);
-                    PictureBox pbPosition = UIHelper.CreatePositionPictureBox(30, 30, es.Position);
-                    empShiftContainer.Controls.Add(pbPosition);
-
-                    System.Windows.Forms.Label lblShiftRating = UIHelper.CreateLabel(25, 30, es.ShiftRating.ToString());
-                    empShiftContainer.Controls.Add(lblShiftRating);
-
-                    PictureBox pbRating = UIHelper.CreateRatingPictureBox(90, 30, es.ShiftRating);
-                    empShiftContainer.Controls.Add(pbRating);
-
-                    System.Windows.Forms.Button btnIncidents = UIHelper.CreateButtonTemplate(65, 30, "Incidents");
-                    FlowLayoutPanel incidentContainer = UIHelper.CreateFlowPanel(470, 30);
-                    bool btnClicked = false;
-                    btnIncidents.Click += (sender, e) =>
+                    foreach (EmployeeShift es in shift.EmployeeShifts)
                     {
-                        btnClicked = !btnClicked;
-                        if (btnClicked)
-                        {
-                            UIHelper.CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
-                            empShiftContainer.Controls.Add(incidentContainer);
-                        }
-                        else
-                        {
-                            incidentContainer.Controls.Clear();
-                            empShiftContainer.Controls.Remove(incidentContainer);
-                        }
+                        CreateOneEmployeeShiftPanel(shift, es, flowEmployeeDisplay, shiftDate, secondPanel);
 
-                    };
-                    empShiftContainer.Controls.Add(btnIncidents);
-
-                    System.Windows.Forms.Button btnAddIncidents = UIHelper.CreateButtonTemplate(65, 30, "Add/Edit");
-                    btnAddIncidents.Click += (sender, e) =>
-                    {
-                        secondPanel.Controls.Clear();
-                        frmServerShift frmServerShift = new frmServerShift(es);
-                        frmServerShift.EmployeeShiftUpdated += FrmServerShift_EmployeeShiftUpdated;
-                        //frmServerShift.EmployeeShiftToEdit = es;
-                        frmServerShift.TopLevel = false;
-                        secondPanel.Controls.Add(frmServerShift);
-                        
-                        frmServerShift.Show();
-                    };
-                    empShiftContainer.Controls.Add(btnAddIncidents);
-
-                    flowEmployeeDisplay.Controls.Add(empShiftContainer);
-
+                    }
                 }
+                else
+                {
+                    foreach (EmployeeShift es in shift.EmployeeShifts)
+                    {
+                        if (es.Position.Name == FilteredPositionName)
+                        {
+                            CreateOneEmployeeShiftPanel(shift, es, flowEmployeeDisplay, shiftDate, secondPanel);
+                        }
+                        
+
+                    }
+                }
+                
 
             }
             //}

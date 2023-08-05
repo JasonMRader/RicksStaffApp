@@ -174,7 +174,7 @@
                 RefreshIncidents();
                 //UpdateRatingPicture();
 
-                RefreshListbox();
+                //RefreshListbox();
 
                 //incident.ActivityID = ID;
                 //incident.DateString = 
@@ -219,7 +219,7 @@
         //}
         //private void AddOneIncidentForEmpShift(List<Incident> incidents, FlowLayoutPanel flowDisplay)
         //{
-            
+
         //    for (int i = incidents.Count - 1; i >= 0; i--)
         //    {
         //        var inc = incidents[i];
@@ -338,28 +338,28 @@
         //                EmployeeShiftToEdit.UpdateShiftRating();
         //                UpdateRatingPicture();
         //            //}
-                    
+
 
         //        };
         //        pnlContainer.Controls.Add(btnDelete);
 
         //        flowDisplay.Controls.Add(pnlContainer);
 
-                
+
         //    }
         //    //RefreshIncidents();
         //    //flowDisplay.Controls.Remove(pnlContainer);
         //    RefreshListbox();
 
         //    // Add the delete button to the pnlContainer
-            
+
 
         //}
         private void AddOneIncidentForEmpShift(Incident inc, FlowLayoutPanel flowDisplay)
         {
 
-           
-            
+
+
             int currentIncID = inc.ID;
             int containerWidth = flowDisplay.Width;
             int firstContainer = (int)(containerWidth - 40);
@@ -473,7 +473,7 @@
                 //EmployeeShiftToEdit.Incidents = SqliteDataAccess.LoadIncidentsForEmployeeShift(EmployeeShiftToEdit);
                 //EmployeeShiftToEdit.Incidents.Remove(incidentToRemove);
 
-                
+
                 RefreshIncidents();
                 //}
 
@@ -484,10 +484,10 @@
             flowDisplay.Controls.Add(pnlContainer);
 
 
-            
+
             //RefreshIncidents();
             //flowDisplay.Controls.Remove(pnlContainer);
-            RefreshListbox();
+            //RefreshListbox();
 
             // Add the delete button to the pnlContainer
 
@@ -500,20 +500,20 @@
             UpdateRatingPicture();
             flowIncidentToAdd.Controls.Clear();
             //AddOneIncidentForEmpShift(EmployeeShiftToEdit.Incidents, flowIncidentToAdd);
-            
+
             foreach (Incident i in EmployeeShiftToEdit.Incidents)
             {
                 AddOneIncidentForEmpShift(i, flowIncidentToAdd);
             }
         }
-        private void RefreshListbox()
-        {
-            lbIncidents.Items.Clear();
-            foreach (Incident i in EmployeeShiftToEdit.Incidents)
-            {
-                lbIncidents.Items.Add(i.Name + " ...... " + i.IncidentRatingChange);
-            }
-        }
+        //private void RefreshListbox()
+        //{
+        //    lbIncidents.Items.Clear();
+        //    foreach (Incident i in EmployeeShiftToEdit.Incidents)
+        //    {
+        //        lbIncidents.Items.Add(i.Name + " ...... " + i.IncidentRatingChange);
+        //    }
+        //}
         private void CreateActivityPanelsForEmpShift(EmployeeShift employeeShift, List<Activity> activityList, FlowLayoutPanel flowFormDisplay, FlowLayoutPanel flowToAdd)
         {
             // Clear existing panels

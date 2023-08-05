@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            lbIncidents = new ListBox();
             rdoBad = new RadioButton();
             rdoGood = new RadioButton();
             rdoAll = new RadioButton();
@@ -50,7 +49,6 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.FromArgb(46, 51, 73);
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(lbIncidents);
             panel1.Controls.Add(rdoBad);
             panel1.Controls.Add(rdoGood);
             panel1.Controls.Add(rdoAll);
@@ -69,15 +67,6 @@
             panel1.Size = new Size(769, 624);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
-            // 
-            // lbIncidents
-            // 
-            lbIncidents.FormattingEnabled = true;
-            lbIncidents.ItemHeight = 15;
-            lbIncidents.Location = new Point(579, 3);
-            lbIncidents.Name = "lbIncidents";
-            lbIncidents.Size = new Size(185, 139);
-            lbIncidents.TabIndex = 0;
             // 
             // rdoBad
             // 
@@ -239,6 +228,5 @@
         private RadioButton rdoBad;
         private RadioButton rdoGood;
         private RadioButton rdoAll;
-        private ListBox lbIncidents;
     }
 }
