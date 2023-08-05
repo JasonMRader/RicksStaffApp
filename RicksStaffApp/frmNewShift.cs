@@ -77,30 +77,95 @@ namespace RicksStaffApp
                 btnPM.Text = "Create PM";
 
                 // Find if there's a shift on this date
-                Shift searchShift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
-                
-                if (searchShift != null)
+                List<Shift> searchShifts = shifts.FindAll(s => s.DateAsDateTime.Date == startDate.Date);
+                //Shift searchShift = shifts.FindAll(s => s.DateAsDateTime.Date == startDate.Date);
+                foreach (Shift searchShift in searchShifts)
                 {
-                    if (searchShift.IsAm == true)
+                    if (searchShift != null)
                     {
-                        btnAM.BackColor = UIHelper.DefaultButton;
-                        btnAM.Text = "AM";
-                        btnAM.Click -= btnGetExcelEmployees_Click;
-                        btnAM.Click += (s, e) =>
+                        if (searchShift.IsAm == true)
                         {
-                            ShiftToEdit = searchShift;
-                            var btn = (System.Windows.Forms.Button)s;
-                            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
-                            dtpShiftDate.Value = (DateTime)btn.Tag;
-                            if (currentHighlightedPanel != null)
+                            btnAM.BackColor = UIHelper.DefaultButton;
+                            btnAM.Text = "AM";
+                            btnAM.Click -= btnGetExcelEmployees_Click;
+                            btnAM.Click += (s, e) =>
                             {
-                                currentHighlightedPanel.BackColor = MyColors.LightHighlight;
-                            }
+                                ShiftToEdit = searchShift;
+                                var btn = (System.Windows.Forms.Button)s;
+                                CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                                dtpShiftDate.Value = (DateTime)btn.Tag;
+                                if (currentHighlightedPanel != null)
+                                {
+                                    currentHighlightedPanel.BackColor = MyColors.LightHighlight;
+                                }
 
-                            // Highlight the current panel
-                            panel.BackColor = Color.Yellow; // Set the desired highlight color
-                            currentHighlightedPanel = panel;
-                        };
+                                // Highlight the current panel
+                                panel.BackColor = Color.Yellow; // Set the desired highlight color
+                                currentHighlightedPanel = panel;
+                            };
+                        }
+                        else
+                        {
+                            btnAM.Click += (s, e) =>
+                            {
+                                var btn = (System.Windows.Forms.Button)s;
+                                DateTime shiftDate = (DateTime)btn.Tag;
+                                bool isAm = true; // AM shift
+                                dtpShiftDate.Value = shiftDate;
+                                flowEmployeeShiftDisplay.Controls.Clear();
+                                OpenExcelDownloadForm(shiftDate, isAm);
+                                if (currentHighlightedPanel != null)
+                                {
+                                    currentHighlightedPanel.BackColor = MyColors.LightHighlight;
+                                }
+
+                                // Highlight the current panel
+                                panel.BackColor = Color.Yellow; // Set the desired highlight color
+                                currentHighlightedPanel = panel;
+                            };
+                        }
+                        if (searchShift.IsPm == true)
+                        {
+                            btnPM.BackColor = UIHelper.DefaultButton;
+                            btnPM.Text = "PM";
+                            btnPM.Click -= btnGetExcelEmployees_Click;
+                            btnPM.Click += (s, e) =>
+                            {
+                                ShiftToEdit = searchShift;
+                                var btn = (System.Windows.Forms.Button)s;
+                                CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                                dtpShiftDate.Value = (DateTime)btn.Tag;
+                                if (currentHighlightedPanel != null)
+                                {
+                                    currentHighlightedPanel.BackColor = MyColors.LightHighlight;
+                                }
+
+                                // Highlight the current panel
+                                panel.BackColor = Color.Yellow; // Set the desired highlight color
+                                currentHighlightedPanel = panel;
+                            };
+                        }
+                        else
+                        {
+                            btnPM.Click += (s, e) =>
+                            {
+                                var btn = (System.Windows.Forms.Button)s;
+                                DateTime shiftDate = (DateTime)btn.Tag;
+                                bool isAm = false; // PM shift
+                                dtpShiftDate.Value = shiftDate;
+                                flowEmployeeShiftDisplay.Controls.Clear();
+                                OpenExcelDownloadForm(shiftDate, isAm);
+                                if (currentHighlightedPanel != null)
+                                {
+                                    currentHighlightedPanel.BackColor = MyColors.LightHighlight;
+                                }
+
+                                // Highlight the current panel
+                                panel.BackColor = Color.Yellow; // Set the desired highlight color
+                                currentHighlightedPanel = panel;
+                            };
+                        }
+
                     }
                     else
                     {
@@ -109,9 +174,9 @@ namespace RicksStaffApp
                             var btn = (System.Windows.Forms.Button)s;
                             DateTime shiftDate = (DateTime)btn.Tag;
                             bool isAm = true; // AM shift
-                            dtpShiftDate.Value = shiftDate;
                             flowEmployeeShiftDisplay.Controls.Clear();
                             OpenExcelDownloadForm(shiftDate, isAm);
+                            dtpShiftDate.Value = (DateTime)btn.Tag;
                             if (currentHighlightedPanel != null)
                             {
                                 currentHighlightedPanel.BackColor = MyColors.LightHighlight;
@@ -121,17 +186,13 @@ namespace RicksStaffApp
                             panel.BackColor = Color.Yellow; // Set the desired highlight color
                             currentHighlightedPanel = panel;
                         };
-                    }
-                    if (searchShift.IsPm == true)
-                    {
-                        btnPM.BackColor = UIHelper.DefaultButton;
-                        btnPM.Text = "PM";
-                        btnPM.Click -= btnGetExcelEmployees_Click;
                         btnPM.Click += (s, e) =>
                         {
-                            ShiftToEdit = searchShift;
                             var btn = (System.Windows.Forms.Button)s;
-                            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            DateTime shiftDate = (DateTime)btn.Tag;
+                            flowEmployeeShiftDisplay.Controls.Clear();
+                            bool isAm = false; // PM shift
+                            OpenExcelDownloadForm(shiftDate, isAm);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                             if (currentHighlightedPanel != null)
                             {
@@ -143,65 +204,9 @@ namespace RicksStaffApp
                             currentHighlightedPanel = panel;
                         };
                     }
-                    else
-                    {
-                        btnPM.Click += (s, e) =>
-                        {
-                            var btn = (System.Windows.Forms.Button)s;
-                            DateTime shiftDate = (DateTime)btn.Tag;
-                            bool isAm = false; // PM shift
-                            dtpShiftDate.Value = shiftDate;
-                            flowEmployeeShiftDisplay.Controls.Clear();
-                            OpenExcelDownloadForm(shiftDate, isAm);
-                            if (currentHighlightedPanel != null)
-                            {
-                                currentHighlightedPanel.BackColor = MyColors.LightHighlight;
-                            }
-
-                            // Highlight the current panel
-                            panel.BackColor = Color.Yellow; // Set the desired highlight color
-                            currentHighlightedPanel = panel;
-                        };
-                    }
-
                 }
-                else
-                {
-                    btnAM.Click += (s, e) =>
-                    {
-                        var btn = (System.Windows.Forms.Button)s;
-                        DateTime shiftDate = (DateTime)btn.Tag;
-                        bool isAm = true; // AM shift
-                        flowEmployeeShiftDisplay.Controls.Clear();
-                        OpenExcelDownloadForm(shiftDate, isAm);
-                        dtpShiftDate.Value = (DateTime)btn.Tag;
-                        if (currentHighlightedPanel != null)
-                        {
-                            currentHighlightedPanel.BackColor = MyColors.LightHighlight;
-                        }
-
-                        // Highlight the current panel
-                        panel.BackColor = Color.Yellow; // Set the desired highlight color
-                        currentHighlightedPanel = panel;
-                    };
-                    btnPM.Click += (s, e) =>
-                    {
-                        var btn = (System.Windows.Forms.Button)s;
-                        DateTime shiftDate = (DateTime)btn.Tag;
-                        flowEmployeeShiftDisplay.Controls.Clear();
-                        bool isAm = false; // PM shift
-                        OpenExcelDownloadForm(shiftDate, isAm);
-                        dtpShiftDate.Value = (DateTime)btn.Tag;
-                        if (currentHighlightedPanel != null)
-                        {
-                            currentHighlightedPanel.BackColor = MyColors.LightHighlight;
-                        }
-
-                        // Highlight the current panel
-                        panel.BackColor = Color.Yellow; // Set the desired highlight color
-                        currentHighlightedPanel = panel;
-                    };
-                }
+                
+                
 
 
 

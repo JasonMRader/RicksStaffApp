@@ -179,6 +179,8 @@ namespace RicksStaffApp
         {
             List<Employee> allEmployees = DataSingleton.Instance.Employees;
             dtpShiftDate.Value = shiftDate;
+            if (isAm == true) { lblAmPm.Text = "AM"; }
+            else { lblAmPm.Text = "PM"; }
 
             var filePath = GetFilePathFromUser();
             if (!string.IsNullOrWhiteSpace(filePath))

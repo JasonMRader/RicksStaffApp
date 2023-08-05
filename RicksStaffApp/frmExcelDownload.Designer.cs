@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnTestLoad = new Button();
             dtpShiftDate = new DateTimePicker();
             btnCancelCreateShift = new Button();
             btnCreateShift = new Button();
@@ -36,8 +37,7 @@
             label2 = new Label();
             flowExistingStaff = new FlowLayoutPanel();
             flowNewStaff = new FlowLayoutPanel();
-            label1 = new Label();
-            btnTestLoad = new Button();
+            lblAmPm = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,7 +52,7 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(flowExistingStaff);
             panel1.Controls.Add(flowNewStaff);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblAmPm);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
@@ -60,10 +60,20 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
+            // btnTestLoad
+            // 
+            btnTestLoad.Location = new Point(494, 51);
+            btnTestLoad.Name = "btnTestLoad";
+            btnTestLoad.Size = new Size(121, 23);
+            btnTestLoad.TabIndex = 7;
+            btnTestLoad.Text = "Load";
+            btnTestLoad.UseVisualStyleBackColor = true;
+            btnTestLoad.Click += btnTestLoad_Click;
+            // 
             // dtpShiftDate
             // 
             dtpShiftDate.CalendarMonthBackground = SystemColors.InactiveBorder;
-            dtpShiftDate.Location = new Point(267, 22);
+            dtpShiftDate.Location = new Point(21, 22);
             dtpShiftDate.Name = "dtpShiftDate";
             dtpShiftDate.Size = new Size(200, 23);
             dtpShiftDate.TabIndex = 6;
@@ -132,26 +142,16 @@
             flowNewStaff.Size = new Size(375, 501);
             flowNewStaff.TabIndex = 1;
             // 
-            // label1
+            // lblAmPm
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(16, 8);
-            label1.Name = "label1";
-            label1.Size = new Size(174, 45);
-            label1.TabIndex = 0;
-            label1.Text = "Excel Data";
-            // 
-            // btnTestLoad
-            // 
-            btnTestLoad.Location = new Point(494, 51);
-            btnTestLoad.Name = "btnTestLoad";
-            btnTestLoad.Size = new Size(121, 23);
-            btnTestLoad.TabIndex = 7;
-            btnTestLoad.Text = "Load";
-            btnTestLoad.UseVisualStyleBackColor = true;
-            btnTestLoad.Click += btnTestLoad_Click;
+            lblAmPm.AutoSize = true;
+            lblAmPm.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAmPm.ForeColor = Color.White;
+            lblAmPm.Location = new Point(256, 21);
+            lblAmPm.Name = "lblAmPm";
+            lblAmPm.Size = new Size(54, 32);
+            lblAmPm.TabIndex = 0;
+            lblAmPm.Text = "AM";
             // 
             // frmExcelDownload
             // 
@@ -173,7 +173,7 @@
         #endregion
 
         private Panel panel1;
-        private Label label1;
+        private Label lblAmPm;
         private FlowLayoutPanel flowNewStaff;
         private FlowLayoutPanel flowExistingStaff;
         private Label label3;
