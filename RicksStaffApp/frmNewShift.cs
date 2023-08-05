@@ -21,7 +21,8 @@ namespace RicksStaffApp
         List<EmployeeShift> AllEmployeeshifts = new List<EmployeeShift>();
         //List<EmployeeShift> FilteredEmployeeShifts = new List<EmployeeShift>();
         bool IsFilteredByPosition = false;
-        string FilteredPositionName = "All";
+        string FilteredPositionName = "All Positions";
+        private Shift ShiftToEdit = new Shift();
         public frmNewShift()
         {
             InitializeComponent();
@@ -76,18 +77,20 @@ namespace RicksStaffApp
                 btnPM.Text = "Create PM";
 
                 // Find if there's a shift on this date
-                Shift shift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
-                if (shift != null)
+                Shift searchShift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
+                
+                if (searchShift != null)
                 {
-                    if (shift.IsAm == true)
+                    if (searchShift.IsAm == true)
                     {
                         btnAM.BackColor = UIHelper.DefaultButton;
                         btnAM.Text = "AM";
                         btnAM.Click -= btnGetExcelEmployees_Click;
                         btnAM.Click += (s, e) =>
                         {
+                            ShiftToEdit = searchShift;
                             var btn = (System.Windows.Forms.Button)s;
-                            CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                             if (currentHighlightedPanel != null)
                             {
@@ -119,15 +122,16 @@ namespace RicksStaffApp
                             currentHighlightedPanel = panel;
                         };
                     }
-                    if (shift.IsPm == true)
+                    if (searchShift.IsPm == true)
                     {
                         btnPM.BackColor = UIHelper.DefaultButton;
                         btnPM.Text = "PM";
                         btnPM.Click -= btnGetExcelEmployees_Click;
                         btnPM.Click += (s, e) =>
                         {
+                            ShiftToEdit = searchShift;
                             var btn = (System.Windows.Forms.Button)s;
-                            CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
+                            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
                             dtpShiftDate.Value = (DateTime)btn.Tag;
                             if (currentHighlightedPanel != null)
                             {
@@ -212,16 +216,17 @@ namespace RicksStaffApp
        
         private void frmNewShift_Load(object sender, EventArgs e)
         {
+            ShiftToEdit = new Shift();
             
             shifts = SqliteDataAccess.LoadShifts();
             AllPositions = SqliteDataAccess.LoadPositions();
             //DateTime date = DateTime.Now;
             startDate = DateTime.Now.AddDays(-13);
-            Shift shift = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
+            ShiftToEdit = shifts.Find(s => s.DateAsDateTime.Date == startDate.Date);
             //UIHelper.CreateShiftPanels(shifts, flowEmployeeShiftDisplay);
-            if (shift != null)
+            if (ShiftToEdit != null)
             {
-                CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+                CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
             }
             else
             {
@@ -288,7 +293,7 @@ namespace RicksStaffApp
         {
             RadioButton radioButton = sender as RadioButton;
 
-            if (radioButton != null && radioButton.Checked && radioButton.Text != "All")
+            if (radioButton != null && radioButton.Checked && radioButton.Text != "All Positions")
             {
                 // Assuming PositionList is a List<Employee> 
                 // and Position represents the Employee's position
@@ -301,8 +306,9 @@ namespace RicksStaffApp
             }
             else
             {
-                FilteredPositionName = "All";
+                FilteredPositionName = "All Positions";
             }
+            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
         private static void UpdateEmployeeShiftPanel (EmployeeShift employeeShift, FlowLayoutPanel flowDisplay)
         {
@@ -351,7 +357,7 @@ namespace RicksStaffApp
                 
             }
         }
-        private void CreateOneEmployeeShiftPanel(Shift shift, EmployeeShift es, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        private void CreateOneEmployeeShiftPanel(EmployeeShift es, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
             es.UpdateShiftRating();
             FlowLayoutPanel empShiftContainer = UIHelper.CreateFlowPanel(470, 30);
@@ -382,7 +388,7 @@ namespace RicksStaffApp
                 btnClicked = !btnClicked;
                 if (btnClicked)
                 {
-                    UIHelper.CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, shift);
+                    UIHelper.CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, ShiftToEdit);
                     empShiftContainer.Controls.Add(incidentContainer);
                 }
                 else
@@ -410,37 +416,42 @@ namespace RicksStaffApp
 
             flowEmployeeDisplay.Controls.Add(empShiftContainer);
         }
-        private void CreateEmployeeShiftPanels(Shift shift, FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
+        private void CreateEmployeeShiftPanels(FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
             //TODO pass in one shift, not a list of shifts
             flowEmployeeDisplay.Controls.Clear();
             //foreach (Shift shift in shiftList)
             //{
             //    //MessageBox.Show(shift.Date.ToString());
-            if (shift.Date == shiftDate)
+            if (ShiftToEdit.Date == shiftDate)
             {
-                shift.EmployeeShifts = shift.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
-                if (FilteredPositionName == "All")
+                //ShiftToEdit.EmployeeShifts = ShiftToEdit.EmployeeShifts.OrderBy(es => es.Employee.FullName).ToList();
+                //foreach (EmployeeShift es in ShiftToEdit.EmployeeShifts)
+                //{
+                //    CreateOneEmployeeShiftPanel(es, flowEmployeeDisplay, shiftDate, secondPanel);
+
+                //}
+                if (FilteredPositionName == "All Positions")
                 {
-                    foreach (EmployeeShift es in shift.EmployeeShifts)
+                    foreach (EmployeeShift es in ShiftToEdit.EmployeeShifts)
                     {
-                        CreateOneEmployeeShiftPanel(shift, es, flowEmployeeDisplay, shiftDate, secondPanel);
+                        CreateOneEmployeeShiftPanel(es, flowEmployeeDisplay, shiftDate, secondPanel);
 
                     }
                 }
                 else
                 {
-                    foreach (EmployeeShift es in shift.EmployeeShifts)
+                    foreach (EmployeeShift es in ShiftToEdit.EmployeeShifts)
                     {
                         if (es.Position.Name == FilteredPositionName)
                         {
-                            CreateOneEmployeeShiftPanel(shift, es, flowEmployeeDisplay, shiftDate, secondPanel);
+                            CreateOneEmployeeShiftPanel(es, flowEmployeeDisplay, shiftDate, secondPanel);
                         }
-                        
+
 
                     }
                 }
-                
+
 
             }
             //}
@@ -461,7 +472,7 @@ namespace RicksStaffApp
             DateTime date = dtpShiftDate.Value;
             Shift shift = shifts.Find(s => s.DateAsDateTime.Date == date.Date);
             // Code to execute when the button is clicked
-            CreateEmployeeShiftPanels(shift, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
+            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
 
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)
