@@ -27,6 +27,53 @@ namespace RicksStaffApp
         List<Incident> FilteredIncidentList = new List<Incident>();
         List<EmployeeShift> FilteredEmployeeShiftList = new List<EmployeeShift>();
 
+        private bool _isAM;
+        private bool _isPM;
+        private bool _isAMPM;
+
+        public bool IsAM
+        {
+            get { return _isAM; }
+            set
+            {
+                _isAM = value;
+                if (value)
+                {
+                    IsPM = false;
+                    IsAMPM = false;
+                }
+            }
+        }
+
+        public bool IsPM
+        {
+            get { return _isPM; }
+            set
+            {
+                _isPM = value;
+                if (value)
+                {
+                    IsAM = false;
+                    IsAMPM = false;
+                }
+            }
+        }
+
+        public bool IsAMPM
+        {
+            get { return _isAMPM; }
+            set
+            {
+                _isAMPM = value;
+                if (value)
+                {
+                    IsAM = false;
+                    IsPM = false;
+                }
+            }
+        }
+
+
         DateTime StartDate;
         DateTime EndDate;
 
@@ -672,8 +719,7 @@ namespace RicksStaffApp
 
                 refreshViewFiltered();
             }
-            lblTest1.Text = StartDate.ToString("d");
-            lblTest2.Text = EndDate.ToString("d");
+
 
         }
 
@@ -698,8 +744,7 @@ namespace RicksStaffApp
 
                 refreshViewFiltered();
             }
-            lblTest1.Text = StartDate.ToString("d");
-            lblTest2.Text = EndDate.ToString("d");
+
         }
 
         private void rdoThisMonth_CheckedChanged(object sender, EventArgs e)
@@ -716,8 +761,7 @@ namespace RicksStaffApp
 
                 refreshViewFiltered();
             }
-            lblTest1.Text = StartDate.ToString("d");
-            lblTest2.Text = EndDate.ToString("d");
+
         }
 
         private void rdoLastMonth_CheckedChanged(object sender, EventArgs e)
@@ -734,8 +778,8 @@ namespace RicksStaffApp
 
                 refreshViewFiltered();
             }
-            lblTest1.Text = StartDate.ToString("d");
-            lblTest2.Text = EndDate.ToString("d");
+
+
         }
 
         private void rdoLastThreeMonths_CheckedChanged(object sender, EventArgs e)
@@ -752,8 +796,7 @@ namespace RicksStaffApp
 
                 refreshViewFiltered();
             }
-            lblTest1.Text = StartDate.ToString("d");
-            lblTest2.Text = EndDate.ToString("d");
+
         }
 
         private void rdoCustomTime_CheckedChanged(object sender, EventArgs e)
@@ -873,6 +916,31 @@ namespace RicksStaffApp
 
         private void rdoViewEmployeeShifts_CheckedChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void rdoAMPM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoAMPM.Checked == true)
+            {
+                IsAMPM = true;
+            }
+        }
+
+        private void rdoAM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoAM.Checked == true)
+            {
+                IsAM = true;
+            }
+        }
+
+        private void rdoPM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoPM.Checked == true)
+            {
+                IsPM = true;
+            }
 
         }
 

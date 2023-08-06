@@ -69,14 +69,17 @@
             rdoAllTime = new RadioButton();
             flowPositions = new FlowLayoutPanel();
             btnGoSearch = new Button();
-            lblTest1 = new Label();
-            lblTest2 = new Label();
             pnlEmployeeLoadScreen = new Panel();
+            panel6 = new Panel();
+            rdoPM = new RadioButton();
+            rdoAM = new RadioButton();
+            rdoAMPM = new RadioButton();
             pnlEmployeeStats.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
+            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // flowEmployeeRankings
@@ -369,10 +372,10 @@
             rdoViewEmployees.FlatAppearance.BorderSize = 0;
             rdoViewEmployees.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoViewEmployees.FlatStyle = FlatStyle.Flat;
-            rdoViewEmployees.Location = new Point(15, 15);
+            rdoViewEmployees.Location = new Point(5, 3);
             rdoViewEmployees.Margin = new Padding(0);
             rdoViewEmployees.Name = "rdoViewEmployees";
-            rdoViewEmployees.Size = new Size(204, 24);
+            rdoViewEmployees.Size = new Size(204, 23);
             rdoViewEmployees.TabIndex = 18;
             rdoViewEmployees.TabStop = true;
             rdoViewEmployees.Text = "Employees";
@@ -387,10 +390,10 @@
             rdoViewEmployeeShifts.FlatAppearance.BorderSize = 0;
             rdoViewEmployeeShifts.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoViewEmployeeShifts.FlatStyle = FlatStyle.Flat;
-            rdoViewEmployeeShifts.Location = new Point(221, 15);
+            rdoViewEmployeeShifts.Location = new Point(211, 3);
             rdoViewEmployeeShifts.Margin = new Padding(2, 0, 0, 0);
             rdoViewEmployeeShifts.Name = "rdoViewEmployeeShifts";
-            rdoViewEmployeeShifts.Size = new Size(203, 24);
+            rdoViewEmployeeShifts.Size = new Size(203, 23);
             rdoViewEmployeeShifts.TabIndex = 18;
             rdoViewEmployeeShifts.TabStop = true;
             rdoViewEmployeeShifts.Text = "Employee Shifts";
@@ -403,9 +406,9 @@
             panel2.BackColor = Color.FromArgb(37, 42, 64);
             panel2.Controls.Add(rdoViewEmployees);
             panel2.Controls.Add(rdoViewEmployeeShifts);
-            panel2.Location = new Point(26, 91);
+            panel2.Location = new Point(41, 87);
             panel2.Name = "panel2";
-            panel2.Size = new Size(440, 49);
+            panel2.Size = new Size(409, 28);
             panel2.TabIndex = 19;
             // 
             // panel3
@@ -414,9 +417,9 @@
             panel3.Controls.Add(rdoHighestRated);
             panel3.Controls.Add(rdoAlphabeticalOrChronological);
             panel3.Controls.Add(rdoLowestRated);
-            panel3.Location = new Point(26, 135);
+            panel3.Location = new Point(41, 115);
             panel3.Name = "panel3";
-            panel3.Size = new Size(440, 35);
+            panel3.Size = new Size(414, 22);
             panel3.TabIndex = 20;
             // 
             // rdoHighestRated
@@ -426,7 +429,7 @@
             rdoHighestRated.FlatAppearance.BorderSize = 0;
             rdoHighestRated.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoHighestRated.FlatStyle = FlatStyle.Flat;
-            rdoHighestRated.Location = new Point(15, 0);
+            rdoHighestRated.Location = new Point(5, 0);
             rdoHighestRated.Margin = new Padding(0);
             rdoHighestRated.Name = "rdoHighestRated";
             rdoHighestRated.Size = new Size(135, 24);
@@ -444,10 +447,10 @@
             rdoAlphabeticalOrChronological.FlatAppearance.BorderSize = 0;
             rdoAlphabeticalOrChronological.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoAlphabeticalOrChronological.FlatStyle = FlatStyle.Flat;
-            rdoAlphabeticalOrChronological.Location = new Point(289, 0);
+            rdoAlphabeticalOrChronological.Location = new Point(279, 0);
             rdoAlphabeticalOrChronological.Margin = new Padding(2, 0, 0, 0);
             rdoAlphabeticalOrChronological.Name = "rdoAlphabeticalOrChronological";
-            rdoAlphabeticalOrChronological.Size = new Size(135, 24);
+            rdoAlphabeticalOrChronological.Size = new Size(130, 24);
             rdoAlphabeticalOrChronological.TabIndex = 18;
             rdoAlphabeticalOrChronological.TabStop = true;
             rdoAlphabeticalOrChronological.Text = "Alphabetical";
@@ -462,7 +465,7 @@
             rdoLowestRated.FlatAppearance.BorderSize = 0;
             rdoLowestRated.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLowestRated.FlatStyle = FlatStyle.Flat;
-            rdoLowestRated.Location = new Point(152, 0);
+            rdoLowestRated.Location = new Point(142, 0);
             rdoLowestRated.Margin = new Padding(2, 0, 0, 0);
             rdoLowestRated.Name = "rdoLowestRated";
             rdoLowestRated.Size = new Size(135, 24);
@@ -637,34 +640,70 @@
             btnGoSearch.Text = "Go";
             btnGoSearch.UseVisualStyleBackColor = false;
             // 
-            // lblTest1
-            // 
-            lblTest1.AutoSize = true;
-            lblTest1.ForeColor = Color.White;
-            lblTest1.Location = new Point(138, 69);
-            lblTest1.Name = "lblTest1";
-            lblTest1.Size = new Size(38, 15);
-            lblTest1.TabIndex = 24;
-            lblTest1.Text = "label4";
-            lblTest1.Visible = false;
-            // 
-            // lblTest2
-            // 
-            lblTest2.AutoSize = true;
-            lblTest2.ForeColor = Color.White;
-            lblTest2.Location = new Point(204, 69);
-            lblTest2.Name = "lblTest2";
-            lblTest2.Size = new Size(38, 15);
-            lblTest2.TabIndex = 24;
-            lblTest2.Text = "label4";
-            lblTest2.Visible = false;
-            // 
             // pnlEmployeeLoadScreen
             // 
             pnlEmployeeLoadScreen.Location = new Point(2, 173);
             pnlEmployeeLoadScreen.Name = "pnlEmployeeLoadScreen";
             pnlEmployeeLoadScreen.Size = new Size(18, 44);
             pnlEmployeeLoadScreen.TabIndex = 25;
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(rdoPM);
+            panel6.Controls.Add(rdoAM);
+            panel6.Controls.Add(rdoAMPM);
+            panel6.Location = new Point(41, 139);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(414, 28);
+            panel6.TabIndex = 26;
+            // 
+            // rdoPM
+            // 
+            rdoPM.Appearance = Appearance.Button;
+            rdoPM.BackColor = Color.FromArgb(167, 204, 237);
+            rdoPM.FlatAppearance.BorderSize = 0;
+            rdoPM.FlatStyle = FlatStyle.Flat;
+            rdoPM.Location = new Point(279, 0);
+            rdoPM.Name = "rdoPM";
+            rdoPM.Size = new Size(130, 24);
+            rdoPM.TabIndex = 0;
+            rdoPM.TabStop = true;
+            rdoPM.Text = "PM";
+            rdoPM.TextAlign = ContentAlignment.MiddleCenter;
+            rdoPM.UseVisualStyleBackColor = false;
+            rdoPM.CheckedChanged += rdoPM_CheckedChanged;
+            // 
+            // rdoAM
+            // 
+            rdoAM.Appearance = Appearance.Button;
+            rdoAM.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAM.FlatAppearance.BorderSize = 0;
+            rdoAM.FlatStyle = FlatStyle.Flat;
+            rdoAM.Location = new Point(142, 0);
+            rdoAM.Name = "rdoAM";
+            rdoAM.Size = new Size(135, 24);
+            rdoAM.TabIndex = 0;
+            rdoAM.TabStop = true;
+            rdoAM.Text = "AM ";
+            rdoAM.TextAlign = ContentAlignment.MiddleCenter;
+            rdoAM.UseVisualStyleBackColor = false;
+            rdoAM.CheckedChanged += rdoAM_CheckedChanged;
+            // 
+            // rdoAMPM
+            // 
+            rdoAMPM.Appearance = Appearance.Button;
+            rdoAMPM.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAMPM.FlatAppearance.BorderSize = 0;
+            rdoAMPM.FlatStyle = FlatStyle.Flat;
+            rdoAMPM.Location = new Point(5, 0);
+            rdoAMPM.Name = "rdoAMPM";
+            rdoAMPM.Size = new Size(135, 24);
+            rdoAMPM.TabIndex = 0;
+            rdoAMPM.TabStop = true;
+            rdoAMPM.Text = "AM  /  PM";
+            rdoAMPM.TextAlign = ContentAlignment.MiddleCenter;
+            rdoAMPM.UseVisualStyleBackColor = false;
+            rdoAMPM.CheckedChanged += rdoAMPM_CheckedChanged;
             // 
             // frmOverview
             // 
@@ -674,15 +713,14 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1300, 775);
+            Controls.Add(panel6);
             Controls.Add(pnlEmployeeLoadScreen);
-            Controls.Add(lblTest2);
-            Controls.Add(lblTest1);
             Controls.Add(btnGoSearch);
+            Controls.Add(panel3);
             Controls.Add(flowPositions);
             Controls.Add(panel5);
             Controls.Add(flowEmployeeRankings);
             Controls.Add(panel1);
-            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(txtBxEmployeeSearch);
             Controls.Add(btnReset);
@@ -701,6 +739,7 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel5.ResumeLayout(false);
+            panel6.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -745,11 +784,13 @@
         private FlowLayoutPanel flowPositions;
         private RadioButton rdoCustomTime;
         private Button btnGoSearch;
-        private Label lblTest1;
-        private Label lblTest2;
         private Panel pnlEmployeeLoadScreen;
         private Panel pnlIncidentLoadScreen;
         private Panel pnlShiftLoadScreen;
         private Panel pnlRatioLoadScreen;
+        private Panel panel6;
+        private RadioButton rdoPM;
+        private RadioButton rdoAM;
+        private RadioButton rdoAMPM;
     }
 }
