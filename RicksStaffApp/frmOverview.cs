@@ -297,19 +297,19 @@ namespace RicksStaffApp
         {
             if (rdoViewEmployees.Checked)
             {
-                await GetEmployeeData();
+                await UpdateAndSortAllList();
             }
             if (rdoViewEmployeeShifts.Checked)
             {
                 refreshAllEmployeeShiftList();
-                await GetEmployeeShiftData();
+                await UpdateAndSortAllEmployeeShifts();
             }
 
 
 
 
         }
-        private async Task GetEmployeeData()
+        private async Task UpdateAndSortAllList()
         {
             await UpdateAllLists();
 
@@ -327,7 +327,7 @@ namespace RicksStaffApp
             }
 
         }
-        private async Task GetEmployeeShiftData()
+        private async Task UpdateAndSortAllEmployeeShifts()
         {
             await UpdateAllLists();
 
@@ -409,6 +409,73 @@ namespace RicksStaffApp
 
 
         }
+        private void UpdateFilteredListsForTimeFrame()
+        {
+            
+            if (rdoAllTime.Checked)
+            {
+                FilteredEmployeeList =  new List<Employee>(AllEmployeeList);
+                FilteredEmployeeShiftList = new List<EmployeeShift>(AllEmployeeShiftList);
+                FilteredShiftList = new List<Shift>(AllShiftList);                
+                FilteredPositionList = new List<Position>(AllPositionList);
+                FilteredIncidentList = new List<Incident>(AllIncidentList);
+              
+
+            }
+            else
+            {
+                HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
+                employeesInTimePeriod.Clear();
+
+                foreach (var shift in AllShiftList)
+                {
+                    if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
+                    {
+                        FilteredShiftList.Add(shift);
+                        foreach (var employeeShift in shift.EmployeeShifts)
+                        {
+                            employeesInTimePeriod.Add(employeeShift.Employee);
+                            FilteredEmployeeShiftList.Add(employeeShift);
+                            FilteredIncidentList.AddRange(employeeShift.Incidents);
+                            //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
+
+                        }
+                    }
+                }
+
+                FilteredEmployeeList = employeesInTimePeriod.ToList();
+                foreach (var employeeShift in FilteredEmployeeShiftList)
+                {
+                    // Find the corresponding Employee in FilteredEmployeeList
+                    var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
+                    if (employee != null)
+                    {
+                        // Add the EmployeeShift to the Employee
+                        employee.AddEmployeeShift(employeeShift);
+                        employee.UpdateOverallRating();
+                    }
+                }
+            }
+        }
+        private async void UpdateIncidentPanel()
+        {
+            List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList);
+            foreach (var panel in IncidentPanelsToAdd)
+            {
+                flowMostFrequentIncidents.Controls.Add(panel);
+            }
+        }
+        private void UpdateRatioPanels()
+        {
+            var EmployeesByGoodShiftRatio = FilteredEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
+            UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
+        }    
+        private void UpdateShiftRankPanel()
+        {
+            var rankedShifts = FilteredShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
+            UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
+        }
+            
         private async Task refreshViewFiltered()
         {
             FilteredEmployeeList.Clear();
@@ -416,51 +483,14 @@ namespace RicksStaffApp
             FilteredIncidentList.Clear();
             FilteredShiftList.Clear();
             flowMostFrequentIncidents.Controls.Clear();
+            UpdateFilteredListsForTimeFrame();
+            
+            UpdateIncidentPanel();
+            
+            UpdateRatioPanels();
+            UpdateShiftRankPanel();
 
-            HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
-            employeesInTimePeriod.Clear();
-
-            foreach (var shift in AllShiftList)
-            {
-                if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
-                {
-                    FilteredShiftList.Add(shift);
-                    foreach (var employeeShift in shift.EmployeeShifts)
-                    {
-                        employeesInTimePeriod.Add(employeeShift.Employee);
-                        FilteredEmployeeShiftList.Add(employeeShift);
-                        FilteredIncidentList.AddRange(employeeShift.Incidents);
-                        //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
-
-                    }
-                }
-            }
-
-            FilteredEmployeeList = employeesInTimePeriod.ToList();
-            foreach (var employeeShift in FilteredEmployeeShiftList)
-            {
-                // Find the corresponding Employee in FilteredEmployeeList
-                var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
-                if (employee != null)
-                {
-                    // Add the EmployeeShift to the Employee
-                    employee.AddEmployeeShift(employeeShift);
-                    employee.UpdateOverallRating();
-                }
-            }
-
-
-            List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(FilteredIncidentList);
-            foreach (var panel in IncidentPanelsToAdd)
-            {
-                flowMostFrequentIncidents.Controls.Add(panel);
-            }
-
-            var EmployeesByGoodShiftRatio = FilteredEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
-            UIHelper.CreateEmployeeGoodShiftRatioPanels(EmployeesByGoodShiftRatio, flowGoodShiftRankings);
-
-            var rankedShifts = FilteredShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
-            UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
+            
             if (rdoViewEmployees.Checked == true)
             {
                 if (rdoHighestRated.Checked == true)
@@ -520,10 +550,10 @@ namespace RicksStaffApp
 
         private async void frmOverview_Load(object sender, EventArgs e)
         {
-            CreateLoadingScreen(flowEmployeeRankings, pnlEmployeeLoadScreen);
-            CreateLoadingScreen(flowMostFrequentIncidents, pnlIncidentLoadScreen);
-            CreateLoadingScreen(flowShiftRankings, pnlShiftLoadScreen);
-            CreateLoadingScreen(flowGoodShiftRankings, pnlRatioLoadScreen);
+            //CreateLoadingScreen(flowEmployeeRankings, pnlEmployeeLoadScreen);
+            //CreateLoadingScreen(flowMostFrequentIncidents, pnlIncidentLoadScreen);
+            //CreateLoadingScreen(flowShiftRankings, pnlShiftLoadScreen);
+            //CreateLoadingScreen(flowGoodShiftRankings, pnlRatioLoadScreen);
 
 
             frmViewEmployee = new frmViewEmployee();
@@ -582,7 +612,7 @@ namespace RicksStaffApp
             //    employee.EmployeeShifts = SqliteDataAccess.LoadEmployeeShifts(employee);
             //}
 
-
+            //RemoveLoadScreens(pnlEmployeeLoadScreen, pnlIncidentLoadScreen, pnlRatioLoadScreen, pnlShiftLoadScreen);
         }
 
 
@@ -648,14 +678,16 @@ namespace RicksStaffApp
             rdoHighestRated.Checked = true;
             if (rdoViewEmployees.Checked)
             {
-                if (rdoAllTime.Checked)
-                {
-                    refreshViewAllTime();
-                }
-                else
-                {
-                    refreshViewFiltered();
-                }
+                refreshViewFiltered();
+                //if (rdoAllTime.Checked)
+                //{
+                //    //refreshViewAllTime();
+                //    refreshViewFiltered();
+                //}
+                //else
+                //{
+                //    refreshViewFiltered();
+                //}
 
                 //flowEmployeeRankings.Controls.Clear();
                 //var EmployeesByRating = AllEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
@@ -666,14 +698,15 @@ namespace RicksStaffApp
             {
                 //flowEmployeeRankings.Controls.Clear();
                 refreshAllEmployeeShiftList();
-                if (rdoAllTime.Checked)
-                {
-                    refreshViewAllTime();
-                }
-                else
-                {
-                    refreshViewFiltered();
-                }
+                refreshViewFiltered();
+                //if (rdoAllTime.Checked)
+                //{
+                //    refreshViewAllTime();
+                //}
+                //else
+                //{
+                //    refreshViewFiltered();
+                //}
 
 
                 //var employeeShiftRanking = AllEmployeeShiftList.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
@@ -829,14 +862,15 @@ namespace RicksStaffApp
         {
             if (rdoAllTime.Checked)
             {
-                pnlShiftLoadScreen.Visible = true;
-                pnlEmployeeLoadScreen.Visible = true;
-                pnlIncidentLoadScreen.Visible = true;
-                pnlRatioLoadScreen.Visible = true;
-                FilteredEmployeeList.Clear();
-                FilteredEmployeeList = AllEmployeeList;
-                refreshViewAllTime();
-                RemoveLoadScreens(pnlEmployeeLoadScreen, pnlIncidentLoadScreen, pnlRatioLoadScreen, pnlShiftLoadScreen);
+                //pnlShiftLoadScreen.Visible = true;
+                //pnlEmployeeLoadScreen.Visible = true;
+                //pnlIncidentLoadScreen.Visible = true;
+                //pnlRatioLoadScreen.Visible = true;
+                //FilteredEmployeeList.Clear();
+                //FilteredEmployeeList = AllEmployeeList;
+                //refreshViewAllTime();
+                refreshViewFiltered();
+                //RemoveLoadScreens(pnlEmployeeLoadScreen, pnlIncidentLoadScreen, pnlRatioLoadScreen, pnlShiftLoadScreen);
 
             }
 
@@ -954,5 +988,5 @@ namespace RicksStaffApp
         //    return allData.Where(data => data.Date >= thisWeekStart && data.Date <= today);
         //}
     }
-    
+
 }
