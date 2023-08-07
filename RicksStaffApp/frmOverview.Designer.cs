@@ -369,6 +369,7 @@
             // 
             rdoViewEmployees.Appearance = Appearance.Button;
             rdoViewEmployees.BackColor = Color.FromArgb(167, 204, 237);
+            rdoViewEmployees.Checked = true;
             rdoViewEmployees.FlatAppearance.BorderSize = 0;
             rdoViewEmployees.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoViewEmployees.FlatStyle = FlatStyle.Flat;
@@ -395,7 +396,6 @@
             rdoViewEmployeeShifts.Name = "rdoViewEmployeeShifts";
             rdoViewEmployeeShifts.Size = new Size(203, 23);
             rdoViewEmployeeShifts.TabIndex = 18;
-            rdoViewEmployeeShifts.TabStop = true;
             rdoViewEmployeeShifts.Text = "Employee Shifts";
             rdoViewEmployeeShifts.TextAlign = ContentAlignment.MiddleCenter;
             rdoViewEmployeeShifts.UseVisualStyleBackColor = false;
@@ -406,7 +406,7 @@
             panel2.BackColor = Color.FromArgb(37, 42, 64);
             panel2.Controls.Add(rdoViewEmployees);
             panel2.Controls.Add(rdoViewEmployeeShifts);
-            panel2.Location = new Point(41, 87);
+            panel2.Location = new Point(45, 114);
             panel2.Name = "panel2";
             panel2.Size = new Size(409, 28);
             panel2.TabIndex = 19;
@@ -417,7 +417,7 @@
             panel3.Controls.Add(rdoHighestRated);
             panel3.Controls.Add(rdoAlphabeticalOrChronological);
             panel3.Controls.Add(rdoLowestRated);
-            panel3.Location = new Point(41, 115);
+            panel3.Location = new Point(45, 142);
             panel3.Name = "panel3";
             panel3.Size = new Size(414, 22);
             panel3.TabIndex = 20;
@@ -426,6 +426,7 @@
             // 
             rdoHighestRated.Appearance = Appearance.Button;
             rdoHighestRated.BackColor = Color.FromArgb(167, 204, 237);
+            rdoHighestRated.Checked = true;
             rdoHighestRated.FlatAppearance.BorderSize = 0;
             rdoHighestRated.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoHighestRated.FlatStyle = FlatStyle.Flat;
@@ -452,7 +453,6 @@
             rdoAlphabeticalOrChronological.Name = "rdoAlphabeticalOrChronological";
             rdoAlphabeticalOrChronological.Size = new Size(130, 24);
             rdoAlphabeticalOrChronological.TabIndex = 18;
-            rdoAlphabeticalOrChronological.TabStop = true;
             rdoAlphabeticalOrChronological.Text = "Alphabetical";
             rdoAlphabeticalOrChronological.TextAlign = ContentAlignment.MiddleCenter;
             rdoAlphabeticalOrChronological.UseVisualStyleBackColor = false;
@@ -470,7 +470,6 @@
             rdoLowestRated.Name = "rdoLowestRated";
             rdoLowestRated.Size = new Size(135, 24);
             rdoLowestRated.TabIndex = 18;
-            rdoLowestRated.TabStop = true;
             rdoLowestRated.Text = "Lowest Rated";
             rdoLowestRated.TextAlign = ContentAlignment.MiddleCenter;
             rdoLowestRated.UseVisualStyleBackColor = false;
@@ -486,9 +485,9 @@
             panel5.Controls.Add(rdoLastWeek);
             panel5.Controls.Add(rdoThisWeek);
             panel5.Controls.Add(rdoAllTime);
-            panel5.Location = new Point(2, 25);
+            panel5.Location = new Point(3, 10);
             panel5.Name = "panel5";
-            panel5.Size = new Size(737, 49);
+            panel5.Size = new Size(1302, 37);
             panel5.TabIndex = 21;
             // 
             // rdoCustomTime
@@ -498,13 +497,12 @@
             rdoCustomTime.FlatAppearance.BorderSize = 0;
             rdoCustomTime.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoCustomTime.FlatStyle = FlatStyle.Flat;
-            rdoCustomTime.Location = new Point(568, 10);
+            rdoCustomTime.Location = new Point(1017, 2);
             rdoCustomTime.Margin = new Padding(2, 10, 0, 0);
             rdoCustomTime.Name = "rdoCustomTime";
-            rdoCustomTime.Size = new Size(131, 24);
+            rdoCustomTime.Size = new Size(271, 32);
             rdoCustomTime.TabIndex = 27;
-            rdoCustomTime.TabStop = true;
-            rdoCustomTime.Text = "Custom";
+            rdoCustomTime.Text = "Custom Time Frame";
             rdoCustomTime.TextAlign = ContentAlignment.MiddleCenter;
             rdoCustomTime.UseVisualStyleBackColor = false;
             rdoCustomTime.CheckedChanged += rdoCustomTime_CheckedChanged;
@@ -517,12 +515,11 @@
             rdoLastThreeMonths.FlatAppearance.BorderSize = 0;
             rdoLastThreeMonths.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLastThreeMonths.FlatStyle = FlatStyle.Flat;
-            rdoLastThreeMonths.Location = new Point(476, 10);
+            rdoLastThreeMonths.Location = new Point(850, 2);
             rdoLastThreeMonths.Margin = new Padding(2, 10, 0, 0);
             rdoLastThreeMonths.Name = "rdoLastThreeMonths";
-            rdoLastThreeMonths.Size = new Size(90, 24);
+            rdoLastThreeMonths.Size = new Size(165, 32);
             rdoLastThreeMonths.TabIndex = 27;
-            rdoLastThreeMonths.TabStop = true;
             rdoLastThreeMonths.Text = "Last 90 Days";
             rdoLastThreeMonths.TextAlign = ContentAlignment.MiddleCenter;
             rdoLastThreeMonths.UseVisualStyleBackColor = false;
@@ -535,12 +532,11 @@
             rdoThisMonth.FlatAppearance.BorderSize = 0;
             rdoThisMonth.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoThisMonth.FlatStyle = FlatStyle.Flat;
-            rdoThisMonth.Location = new Point(292, 10);
+            rdoThisMonth.Location = new Point(516, 2);
             rdoThisMonth.Margin = new Padding(2, 5, 0, 0);
             rdoThisMonth.Name = "rdoThisMonth";
-            rdoThisMonth.Size = new Size(90, 24);
+            rdoThisMonth.Size = new Size(165, 32);
             rdoThisMonth.TabIndex = 25;
-            rdoThisMonth.TabStop = true;
             rdoThisMonth.Text = "This Month";
             rdoThisMonth.TextAlign = ContentAlignment.MiddleCenter;
             rdoThisMonth.UseVisualStyleBackColor = false;
@@ -553,12 +549,11 @@
             rdoLastMonth.FlatAppearance.BorderSize = 0;
             rdoLastMonth.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLastMonth.FlatStyle = FlatStyle.Flat;
-            rdoLastMonth.Location = new Point(384, 10);
+            rdoLastMonth.Location = new Point(683, 2);
             rdoLastMonth.Margin = new Padding(2, 5, 0, 0);
             rdoLastMonth.Name = "rdoLastMonth";
-            rdoLastMonth.Size = new Size(90, 24);
+            rdoLastMonth.Size = new Size(165, 32);
             rdoLastMonth.TabIndex = 26;
-            rdoLastMonth.TabStop = true;
             rdoLastMonth.Text = "Last Month";
             rdoLastMonth.TextAlign = ContentAlignment.MiddleCenter;
             rdoLastMonth.UseVisualStyleBackColor = false;
@@ -571,12 +566,11 @@
             rdoLastWeek.FlatAppearance.BorderSize = 0;
             rdoLastWeek.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoLastWeek.FlatStyle = FlatStyle.Flat;
-            rdoLastWeek.Location = new Point(199, 10);
+            rdoLastWeek.Location = new Point(349, 2);
             rdoLastWeek.Margin = new Padding(2, 5, 0, 0);
             rdoLastWeek.Name = "rdoLastWeek";
-            rdoLastWeek.Size = new Size(90, 24);
+            rdoLastWeek.Size = new Size(165, 32);
             rdoLastWeek.TabIndex = 28;
-            rdoLastWeek.TabStop = true;
             rdoLastWeek.Text = "Last Week";
             rdoLastWeek.TextAlign = ContentAlignment.MiddleCenter;
             rdoLastWeek.UseVisualStyleBackColor = false;
@@ -589,12 +583,11 @@
             rdoThisWeek.FlatAppearance.BorderSize = 0;
             rdoThisWeek.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoThisWeek.FlatStyle = FlatStyle.Flat;
-            rdoThisWeek.Location = new Point(107, 10);
+            rdoThisWeek.Location = new Point(182, 2);
             rdoThisWeek.Margin = new Padding(2, 5, 0, 0);
             rdoThisWeek.Name = "rdoThisWeek";
-            rdoThisWeek.Size = new Size(90, 24);
+            rdoThisWeek.Size = new Size(165, 32);
             rdoThisWeek.TabIndex = 23;
-            rdoThisWeek.TabStop = true;
             rdoThisWeek.Text = "This Week";
             rdoThisWeek.TextAlign = ContentAlignment.MiddleCenter;
             rdoThisWeek.UseVisualStyleBackColor = false;
@@ -604,13 +597,14 @@
             // 
             rdoAllTime.Appearance = Appearance.Button;
             rdoAllTime.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAllTime.Checked = true;
             rdoAllTime.FlatAppearance.BorderSize = 0;
             rdoAllTime.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoAllTime.FlatStyle = FlatStyle.Flat;
-            rdoAllTime.Location = new Point(15, 10);
+            rdoAllTime.Location = new Point(15, 2);
             rdoAllTime.Margin = new Padding(0, 5, 0, 0);
             rdoAllTime.Name = "rdoAllTime";
-            rdoAllTime.Size = new Size(90, 24);
+            rdoAllTime.Size = new Size(165, 32);
             rdoAllTime.TabIndex = 22;
             rdoAllTime.TabStop = true;
             rdoAllTime.Text = "All Time";
@@ -621,10 +615,10 @@
             // flowPositions
             // 
             flowPositions.BackColor = Color.FromArgb(84, 84, 120);
-            flowPositions.Location = new Point(739, 25);
+            flowPositions.Location = new Point(469, 50);
             flowPositions.Name = "flowPositions";
             flowPositions.Padding = new Padding(15, 7, 0, 0);
-            flowPositions.Size = new Size(559, 49);
+            flowPositions.Size = new Size(835, 37);
             flowPositions.TabIndex = 22;
             // 
             // btnGoSearch
@@ -649,12 +643,13 @@
             // 
             // panel6
             // 
+            panel6.BackColor = Color.FromArgb(84, 84, 120);
             panel6.Controls.Add(rdoPM);
             panel6.Controls.Add(rdoAM);
             panel6.Controls.Add(rdoAMPM);
-            panel6.Location = new Point(41, 139);
+            panel6.Location = new Point(3, 50);
             panel6.Name = "panel6";
-            panel6.Size = new Size(414, 28);
+            panel6.Size = new Size(463, 37);
             panel6.TabIndex = 26;
             // 
             // rdoPM
@@ -662,12 +657,12 @@
             rdoPM.Appearance = Appearance.Button;
             rdoPM.BackColor = Color.FromArgb(167, 204, 237);
             rdoPM.FlatAppearance.BorderSize = 0;
+            rdoPM.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoPM.FlatStyle = FlatStyle.Flat;
-            rdoPM.Location = new Point(279, 0);
+            rdoPM.Location = new Point(299, 5);
             rdoPM.Name = "rdoPM";
-            rdoPM.Size = new Size(130, 24);
+            rdoPM.Size = new Size(140, 24);
             rdoPM.TabIndex = 0;
-            rdoPM.TabStop = true;
             rdoPM.Text = "PM";
             rdoPM.TextAlign = ContentAlignment.MiddleCenter;
             rdoPM.UseVisualStyleBackColor = false;
@@ -678,12 +673,13 @@
             rdoAM.Appearance = Appearance.Button;
             rdoAM.BackColor = Color.FromArgb(167, 204, 237);
             rdoAM.FlatAppearance.BorderSize = 0;
+            rdoAM.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoAM.FlatStyle = FlatStyle.Flat;
-            rdoAM.Location = new Point(142, 0);
+            rdoAM.Location = new Point(157, 5);
+            rdoAM.Margin = new Padding(3, 3, 2, 3);
             rdoAM.Name = "rdoAM";
-            rdoAM.Size = new Size(135, 24);
+            rdoAM.Size = new Size(140, 24);
             rdoAM.TabIndex = 0;
-            rdoAM.TabStop = true;
             rdoAM.Text = "AM ";
             rdoAM.TextAlign = ContentAlignment.MiddleCenter;
             rdoAM.UseVisualStyleBackColor = false;
@@ -693,11 +689,14 @@
             // 
             rdoAMPM.Appearance = Appearance.Button;
             rdoAMPM.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAMPM.Checked = true;
             rdoAMPM.FlatAppearance.BorderSize = 0;
+            rdoAMPM.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
             rdoAMPM.FlatStyle = FlatStyle.Flat;
-            rdoAMPM.Location = new Point(5, 0);
+            rdoAMPM.Location = new Point(15, 5);
+            rdoAMPM.Margin = new Padding(3, 3, 2, 3);
             rdoAMPM.Name = "rdoAMPM";
-            rdoAMPM.Size = new Size(135, 24);
+            rdoAMPM.Size = new Size(140, 24);
             rdoAMPM.TabIndex = 0;
             rdoAMPM.TabStop = true;
             rdoAMPM.Text = "AM  /  PM";
