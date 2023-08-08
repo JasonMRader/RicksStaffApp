@@ -345,70 +345,7 @@ namespace RicksStaffApp
             }
 
         }
-        private async void refreshViewAllTime()
-        {
-            flowEmployeeRankings.Controls.Clear();
-
-            if (rdoViewEmployees.Checked)
-            {
-
-                flowMostFrequentIncidents.Controls.Clear();
-                flowShiftRankings.Controls.Clear();
-                flowGoodShiftRankings.Controls.Clear();
-
-
-                await RefreshDataAndView();
-
-                List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
-                List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(AllIncidentList);
-                var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
-                var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
-                List<Panel> RatioPanelsToAdd = await UIHelper.CreateEmployeeGoodShiftRatioPanelsAsync(EmployeesByGoodShiftRatio);
-                List<Panel> ShiftRankingPanelsToAdd = await UIHelper.CreateShiftRankingPanelAsync(rankedShifts);
-
-                foreach (var panel in EmployeePanelsToAdd)
-                {
-                    flowEmployeeRankings.Controls.Add(panel);
-                }
-
-                foreach (var panel in IncidentPanelsToAdd)
-                {
-                    flowMostFrequentIncidents.Controls.Add(panel);
-                }
-                foreach (var panel in RatioPanelsToAdd)
-                {
-                    flowGoodShiftRankings.Controls.Add(panel);
-                }
-                foreach (var panel in ShiftRankingPanelsToAdd)
-                {
-                    flowShiftRankings.Controls.Add(panel);
-                }
-
-
-            }
-            if (rdoViewEmployeeShifts.Checked)
-            {
-                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-                await RefreshDataAndView();
-                foreach (Employee employee in AllEmployeeList)
-                {
-                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
-                    {
-                        employeeShift.Employee = employee;
-                        employeeShifts.Add(employeeShift);
-                    }
-                }
-                //var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
-                foreach (EmployeeShift employeeShift in AllEmployeeShiftList)
-                {
-                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
-                }
-                rdoAlphabeticalOrChronological.Text = "Most Recent";
-            }
-
-
-
-        }
+        
         private void UpdateFilteredListsForTimeFrame()
         {
             
@@ -475,6 +412,40 @@ namespace RicksStaffApp
             var rankedShifts = FilteredShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
             UIHelper.CreateShiftRankingPanel(rankedShifts, flowShiftRankings);
         }
+        private void SortFilteredEmployeeList()
+        {
+            if (rdoHighestRated.Checked == true)
+            {
+                FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
+            }
+            if (rdoLowestRated.Checked == true)
+            {
+                FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
+            }
+            if (rdoAlphabeticalOrChronological.Checked == true)
+            {
+                FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
+            }
+            UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+        }
+        private void SortFilteredEmployeeShiftList()
+        {
+            flowEmployeeRankings.Controls.Clear();
+            List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+            foreach (Employee employee in FilteredEmployeeList)
+            {
+                foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+                {
+                    employeeShift.Employee = employee;
+                    employeeShifts.Add(employeeShift);
+                }
+            }
+            var employeeShiftRanking = SortEmployeeShifts(FilteredEmployeeShiftList);
+            foreach (EmployeeShift employeeShift in employeeShiftRanking)
+            {
+                UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+            }
+        }
             
         private async Task refreshViewFiltered()
         {
@@ -493,37 +464,11 @@ namespace RicksStaffApp
             
             if (rdoViewEmployees.Checked == true)
             {
-                if (rdoHighestRated.Checked == true)
-                {
-                    FilteredEmployeeList = FilteredEmployeeList.OrderByDescending(emp => emp.OverallRating).ToList();
-                }
-                if (rdoLowestRated.Checked == true)
-                {
-                    FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.OverallRating).ToList();
-                }
-                if (rdoAlphabeticalOrChronological.Checked == true)
-                {
-                    FilteredEmployeeList = FilteredEmployeeList.OrderBy(emp => emp.FullName).ToList();
-                }
-                UIHelper.CreateEmployeeOverviewPanels(FilteredEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+                SortFilteredEmployeeList();
             }
             if (!rdoViewEmployees.Checked)
             {
-                flowEmployeeRankings.Controls.Clear();
-                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-                foreach (Employee employee in FilteredEmployeeList)
-                {
-                    foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
-                    {
-                        employeeShift.Employee = employee;
-                        employeeShifts.Add(employeeShift);
-                    }
-                }
-                var employeeShiftRanking = SortEmployeeShifts(FilteredEmployeeShiftList);
-                foreach (EmployeeShift employeeShift in employeeShiftRanking)
-                {
-                    UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
-                }
+                SortFilteredEmployeeShiftList();
                 rdoAlphabeticalOrChronological.Text = "Most Recent";
             }
 
@@ -572,9 +517,15 @@ namespace RicksStaffApp
                 lbPositions.Items.Add(position.Name);
             }
             cboPositions.SelectedIndex = 0;
-
-            refreshViewAllTime();
-
+            //***************************THIS ONE CHANGED
+            //refreshViewAllTime();
+            
+            await UpdateAndSortAllList();
+            
+            
+            refreshAllEmployeeShiftList();
+            await UpdateAndSortAllEmployeeShifts();
+            refreshViewFiltered();
             UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositionList);
 
 
@@ -879,34 +830,46 @@ namespace RicksStaffApp
 
         private void rdoHighestRated_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdoHighestRated.Checked)
+            {
+                refreshViewFiltered();
+            }
 
 
         }
 
         private void rdoLowestRated_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoAllTime.Checked == true)
-            {
-                refreshViewAllTime();
-
-            }
-            else
+            if (rdoLowestRated.Checked)
             {
                 refreshViewFiltered();
             }
+            //if (rdoAllTime.Checked == true)
+            //{
+            //    refreshViewAllTime();
+                
+            //}
+            //else
+            //{
+            //    refreshViewFiltered();
+            //}
         }
 
         private void rdoAlphabeticalOrChronological_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoAllTime.Checked == true)
-            {
-                refreshViewAllTime();
-
-            }
-            else
+            if (rdoAlphabeticalOrChronological.Checked)
             {
                 refreshViewFiltered();
             }
+            //if (rdoAllTime.Checked == true)
+            //{
+            //    refreshViewAllTime();
+
+            //}
+            //else
+            //{
+            //    refreshViewFiltered();
+            //}
         }
 
         private void rdoCustomTimeMouseClick(object sender, MouseEventArgs e)
@@ -986,6 +949,70 @@ namespace RicksStaffApp
 
         //    // Filter data between this week's start and today
         //    return allData.Where(data => data.Date >= thisWeekStart && data.Date <= today);
+        //}
+        //private async void refreshViewAllTime()
+        //{
+        //    flowEmployeeRankings.Controls.Clear();
+
+        //    if (rdoViewEmployees.Checked)
+        //    {
+
+        //        flowMostFrequentIncidents.Controls.Clear();
+        //        flowShiftRankings.Controls.Clear();
+        //        flowGoodShiftRankings.Controls.Clear();
+
+
+        //        await RefreshDataAndView();
+
+        //        List<Panel> EmployeePanelsToAdd = await CreateEmployeeOverviewPanelsTest(AllEmployeeList, flowEmployeeRankings, pnlEmployeeStats, lblMainWindowDescription, btnReset);
+        //        List<Panel> IncidentPanelsToAdd = await UIHelper.CreateIncidentFrequencyPanels(AllIncidentList);
+        //        var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
+        //        var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
+        //        List<Panel> RatioPanelsToAdd = await UIHelper.CreateEmployeeGoodShiftRatioPanelsAsync(EmployeesByGoodShiftRatio);
+        //        List<Panel> ShiftRankingPanelsToAdd = await UIHelper.CreateShiftRankingPanelAsync(rankedShifts);
+
+        //        foreach (var panel in EmployeePanelsToAdd)
+        //        {
+        //            flowEmployeeRankings.Controls.Add(panel);
+        //        }
+
+        //        foreach (var panel in IncidentPanelsToAdd)
+        //        {
+        //            flowMostFrequentIncidents.Controls.Add(panel);
+        //        }
+        //        foreach (var panel in RatioPanelsToAdd)
+        //        {
+        //            flowGoodShiftRankings.Controls.Add(panel);
+        //        }
+        //        foreach (var panel in ShiftRankingPanelsToAdd)
+        //        {
+        //            flowShiftRankings.Controls.Add(panel);
+        //        }
+
+
+        //    }
+        //    if (rdoViewEmployeeShifts.Checked)
+        //    {
+        //        List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        //        await RefreshDataAndView();
+        //        foreach (Employee employee in AllEmployeeList)
+        //        {
+        //            foreach (EmployeeShift employeeShift in employee.EmployeeShifts)
+        //            {
+        //                employeeShift.Employee = employee;
+        //                employeeShifts.Add(employeeShift);
+        //            }
+        //        }
+        //        //var employeeShiftRanking = employeeShifts.OrderByDescending(employeeShift => employeeShift.ShiftRating).Take(15).ToList();
+        //        foreach (EmployeeShift employeeShift in AllEmployeeShiftList)
+        //        {
+        //            UIHelper.CreateEmployeeShiftRankingPanel(employeeShift, flowEmployeeRankings);
+        //        }
+        //        rdoAlphabeticalOrChronological.Text = "Most Recent";
+        //    }
+
+
+
         //}
     }
 
