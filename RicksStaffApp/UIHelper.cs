@@ -1676,9 +1676,12 @@ namespace RicksStaffApp
             empShiftContainer.MaximumSize = new Size(470, 1000);
             empShiftContainer.Margin = new Padding(15, 7, 15, 0);
 
-            Label lblWeekday = CreateLabel(75, 30, employeeShift.Shift.DateAsDateTime.ToString("ddd"));
+            Label lblWeekday = CreateLabel(50, 30, employeeShift.Shift.DateAsDateTime.ToString("ddd"));
             lblWeekday.Font = WeekDayDisplay;
             empShiftContainer.Controls.Add(lblWeekday);
+
+            Label lblAmPm = CreateLabel(30, 30, employeeShift.AmPmString);
+            empShiftContainer.Controls.Add((Label)lblAmPm);
 
             Label lblName = CreateLabel(100, 30, employeeShift.Shift.DateAsDateTime.ToOrdinalString());
             lblName.Font = DateDisplay;

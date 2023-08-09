@@ -74,6 +74,16 @@ namespace RicksStaffApp
                 }
             }
         }
+        public string AmPmString 
+        {
+            get
+            {
+                return this.Shift.IsAm ? "AM" : "PM";
+            }
+           
+
+
+        }
         public List<Incident> Incidents { get; set; }
         public Image RatingDisplay { get; set; }
         public void AddIncident(Incident incident)

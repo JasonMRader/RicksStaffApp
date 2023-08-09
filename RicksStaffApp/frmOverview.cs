@@ -94,179 +94,8 @@ namespace RicksStaffApp
                 AllIncidentList.AddRange(employee.Incidents);
             }
         }
-        private static void CreateLoadingScreen(FlowLayoutPanel flowDisplay, Panel LoadScreen)
-        {
+        
 
-            LoadScreen.Size = flowDisplay.Size;
-            LoadScreen.BackColor = flowDisplay.BackColor;
-            LoadScreen.Location = flowDisplay.Location;
-            LoadScreen.Visible = true;
-
-
-        }
-        private static void RemoveLoadScreens(Panel LoadScreen, Panel LoadScreenTwo, Panel LoadScreenThree, Panel LoadScreenFour)
-        {
-            LoadScreen.Visible = false;
-            LoadScreenTwo.Visible = false;
-            LoadScreenThree.Visible = false;
-            LoadScreenFour.Visible = false;
-        }
-        //private async static Task CreateEmployeeOverviewPanelsTest(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, System.Windows.Forms.Button btnReset)
-        //{
-        //    // Clear existing panels
-        //    flowEmployeeDisplay.SuspendLayout();
-        //    flowEmployeeDisplay.Controls.Clear();
-        //    List<Panel> panelsAdded = new List<Panel>();
-
-        //    // Loop through employee list and create a panel for each employee
-        //    foreach (Employee emp in employeeList)
-        //    {
-        //        emp.UpdateOverallRating();
-        //        Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
-        //        empPanelContainer.Visible = false;
-        //        empPanelContainer.Margin = new Padding(15, 7, 15, 0);
-
-
-        //        FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(410, 40);
-        //        empPanel.Margin = new Padding(1, 1, 1, 1);
-
-        //        System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
-        //        btnName.Font = new Font("Arial", 12, FontStyle.Bold);
-        //        btnName.Click += (sender, e) =>
-        //        {
-        //            foreach (Control control in parentPanel.Controls)
-        //            {
-        //                if (control is Form form)
-        //                {
-        //                    parentPanel.Controls.Remove(form);
-        //                    form.Dispose();
-        //                }
-        //                else
-        //                {
-        //                    control.Visible = false;
-        //                }
-
-
-        //            }
-        //            //parentPanel.Controls.Clear();
-        //            lblMain.Text = emp.FullName;
-        //            btnReset.Visible = true;
-        //            frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
-        //            viewEmployeeForm.TopLevel = false;
-        //            viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
-        //            viewEmployeeForm.Dock = DockStyle.Fill;
-        //            parentPanel.Controls.Add(viewEmployeeForm);
-        //            viewEmployeeForm.Show();
-        //        };
-
-        //        empPanel.Controls.Add(btnName);
-        //        // Create panels for employee positions
-
-        //        PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
-        //        //pbRating.BorderStyle = BorderStyle.Fixed3D;
-        //        empPanel.Controls.Add(pbRating);
-
-        //        empPanelContainer.Controls.Add(empPanel);
-
-        //        Label lblRating = new Label();
-        //        //lblRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-        //        lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
-        //        lblRating.Margin = new Padding(0);
-        //        lblRating.Location = new Point(410, 0);
-        //        lblRating.Size = new Size(50, 40);
-        //        lblRating.TextAlign = ContentAlignment.MiddleCenter;
-
-        //        lblRating.Text = emp.OverallRating.ToString("F1");
-
-        //        empPanel.Controls.Add(lblRating);
-
-        //        //flowEmployeeDisplay.Controls.Add(empPanelContainer);
-        //        panelsAdded.Add(empPanelContainer);
-        //    }
-
-        //    foreach (Panel panel in panelsAdded)
-        //    {
-        //        flowEmployeeDisplay.Controls.Add((Panel)panel);
-        //        panel.Visible = true;
-        //    }
-        //    flowEmployeeDisplay.ResumeLayout();
-        //}
-        private async static Task<List<Panel>> CreateEmployeeOverviewPanelsTest(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, System.Windows.Forms.Button btnReset)
-        {
-
-            flowEmployeeDisplay.Controls.Clear();
-            List<Panel> panelsAdded = new List<Panel>();
-
-            // Loop through employee list and create a panel for each employee
-            foreach (Employee emp in employeeList)
-            {
-                emp.UpdateOverallRating();
-                Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
-
-                empPanelContainer.Margin = new Padding(15, 7, 15, 0);
-                empPanelContainer.Location = new Point(15, 7);
-
-
-                FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(410, 40);
-                empPanel.Margin = new Padding(1, 1, 1, 1);
-
-                System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
-                btnName.Font = new Font("Arial", 12, FontStyle.Bold);
-                btnName.Click += (sender, e) =>
-                {
-                    foreach (Control control in parentPanel.Controls)
-                    {
-                        if (control is Form form)
-                        {
-                            parentPanel.Controls.Remove(form);
-                            form.Dispose();
-                        }
-                        else
-                        {
-                            control.Visible = false;
-                        }
-
-
-                    }
-                    //parentPanel.Controls.Clear();
-                    lblMain.Text = emp.FullName;
-                    btnReset.Visible = true;
-                    frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
-                    viewEmployeeForm.TopLevel = false;
-                    viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
-                    viewEmployeeForm.Dock = DockStyle.Fill;
-                    parentPanel.Controls.Add(viewEmployeeForm);
-                    viewEmployeeForm.Show();
-                };
-                empPanel.Controls.Add(btnName);
-
-
-                PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
-
-                empPanel.Controls.Add(pbRating);
-
-                empPanelContainer.Controls.Add(empPanel);
-
-                Label lblRating = new Label();
-
-                lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
-                lblRating.Margin = new Padding(0);
-                lblRating.Location = new Point(410, 0);
-                lblRating.Size = new Size(50, 40);
-                lblRating.TextAlign = ContentAlignment.MiddleCenter;
-
-                lblRating.Text = emp.OverallRating.ToString("F1");
-
-                empPanel.Controls.Add(lblRating);
-
-
-                panelsAdded.Add(empPanelContainer);
-            }
-
-
-
-            return panelsAdded;
-        }
 
         private frmViewEmployee frmViewEmployee;
 
@@ -275,24 +104,7 @@ namespace RicksStaffApp
             InitializeComponent();
 
         }
-        private IEnumerable<EmployeeShift> QueryEmployeeShift(IEnumerable<EmployeeShift> employeeShift, EmployeeShiftQueryParameters parameters)
-        {
-            var query = employeeShift.AsQueryable(); // Convert to IQueryable to enable LINQ-to-Objects
-
-            if (!string.IsNullOrEmpty(parameters.Position))
-            {
-                //query = query.Where(e => e.Position == parameters.Position);
-            }
-
-            if (parameters.StartDate.HasValue)
-            {
-                //query = query.Where(e => e.StartDate >= parameters.StartDate.Value);
-            }
-
-            // ... handle other parameters
-
-            return query; // Return the filtered/sorted data
-        }
+        
         private async Task RefreshDataAndView()
         {
             if (rdoViewEmployees.Checked)
@@ -345,8 +157,84 @@ namespace RicksStaffApp
             }
 
         }
+        private void AddShiftsAndEmployees(Shift shift, HashSet<Employee> employees)
+        {
+            FilteredShiftList.Add(shift);
+            foreach (var employeeShift in shift.EmployeeShifts)
+            {
+                employees.Add(employeeShift.Employee);
+                FilteredEmployeeShiftList.Add(employeeShift);
+                FilteredIncidentList.AddRange(employeeShift.Incidents);
+            }
+        }
+        private void FilterShifts(HashSet<Employee> employees)
+        {
+            foreach (var shift in AllShiftList)
+            {
+                if (IsAMPM ||
+                   (IsAM && shift.IsAm) ||
+                   (IsPM && shift.IsPm))
+                {
+                    if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
+                    {
+                        AddShiftsAndEmployees(shift, employees);
+                    }
+                }
+            }
+            FilteredEmployeeList = employees.ToList();
+            UpdateEmployeesInEmployeeShifts();
+        }
+
+        private void UpdateEmployeesInEmployeeShifts()
+        {
+            foreach (var employeeShift in FilteredEmployeeShiftList)
+            {
+                // Find the corresponding Employee in FilteredEmployeeList
+                var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
+                if (employee != null)
+                {
+                    // Add the EmployeeShift to the Employee
+                    employee.AddEmployeeShift(employeeShift);
+                    employee.UpdateOverallRating();
+                }
+            }
+        }
         
-        private void UpdateFilteredListsForTimeFrame()
+       
+       
+        //private void FilterShiftForTimeFrame(HashSet<Employee> employees)
+        //{
+        //    foreach (var shift in AllShiftList)
+        //    {
+        //        if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
+        //        {
+        //            FilteredShiftList.Add(shift);
+        //            foreach (var employeeShift in shift.EmployeeShifts)
+        //            {
+        //                employees.Add(employeeShift.Employee);
+        //                FilteredEmployeeShiftList.Add(employeeShift);
+        //                FilteredIncidentList.AddRange(employeeShift.Incidents);
+        //                //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
+
+        //            }
+        //        }
+        //    }
+
+        //    FilteredEmployeeList = employees.ToList();
+        //    foreach (var employeeShift in FilteredEmployeeShiftList)
+        //    {
+        //        // Find the corresponding Employee in FilteredEmployeeList
+        //        var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
+        //        if (employee != null)
+        //        {
+        //            // Add the EmployeeShift to the Employee
+        //            employee.AddEmployeeShift(employeeShift);
+        //            employee.UpdateOverallRating();
+        //        }
+        //    }
+
+        //}
+        private void GetAllFilters()
         {
             
             if (rdoAllTime.Checked)
@@ -363,35 +251,9 @@ namespace RicksStaffApp
             {
                 HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
                 employeesInTimePeriod.Clear();
-
-                foreach (var shift in AllShiftList)
-                {
-                    if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
-                    {
-                        FilteredShiftList.Add(shift);
-                        foreach (var employeeShift in shift.EmployeeShifts)
-                        {
-                            employeesInTimePeriod.Add(employeeShift.Employee);
-                            FilteredEmployeeShiftList.Add(employeeShift);
-                            FilteredIncidentList.AddRange(employeeShift.Incidents);
-                            //employeeShift.Employee.EmployeeShifts.Add(employeeShift);                      
-
-                        }
-                    }
-                }
-
-                FilteredEmployeeList = employeesInTimePeriod.ToList();
-                foreach (var employeeShift in FilteredEmployeeShiftList)
-                {
-                    // Find the corresponding Employee in FilteredEmployeeList
-                    var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
-                    if (employee != null)
-                    {
-                        // Add the EmployeeShift to the Employee
-                        employee.AddEmployeeShift(employeeShift);
-                        employee.UpdateOverallRating();
-                    }
-                }
+                FilterShifts(employeesInTimePeriod);
+               
+                
             }
         }
         private async void UpdateIncidentPanel()
@@ -454,7 +316,7 @@ namespace RicksStaffApp
             FilteredIncidentList.Clear();
             FilteredShiftList.Clear();
             flowMostFrequentIncidents.Controls.Clear();
-            UpdateFilteredListsForTimeFrame();
+            GetAllFilters();
             
             UpdateIncidentPanel();
             
@@ -492,7 +354,6 @@ namespace RicksStaffApp
 
         }
 
-
         private async void frmOverview_Load(object sender, EventArgs e)
         {
             //CreateLoadingScreen(flowEmployeeRankings, pnlEmployeeLoadScreen);
@@ -506,9 +367,7 @@ namespace RicksStaffApp
             rdoViewEmployees.Checked = true;
             rdoHighestRated.Checked = true;
             rdoAllTime.Checked = true;
-            //cboViewType.SelectedIndex = 0;
-            //cboSortBy.SelectedIndex = 0;
-            //cboTimeFrame.SelectedIndex = 0;
+            
 
             cboPositions.Items.Add("All Positions");
             foreach (Position position in AllPositionList)
@@ -517,8 +376,7 @@ namespace RicksStaffApp
                 lbPositions.Items.Add(position.Name);
             }
             cboPositions.SelectedIndex = 0;
-            //***************************THIS ONE CHANGED
-            //refreshViewAllTime();
+            
             
             await UpdateAndSortAllList();
             
@@ -566,12 +424,6 @@ namespace RicksStaffApp
             //RemoveLoadScreens(pnlEmployeeLoadScreen, pnlIncidentLoadScreen, pnlRatioLoadScreen, pnlShiftLoadScreen);
         }
 
-
-
-
-
-
-
         private void txtBxEmployeeSearch_TextChanged(object sender, EventArgs e)
         {
 
@@ -611,8 +463,6 @@ namespace RicksStaffApp
             //var sortedEmployees = employeeList.OrderByDescending(emp => emp.OverallRating).Take(10).ToList();
             //UIHelper.CreateEmployeeOverviewPanels(sortedEmployees, flowEmployeeDisplay, pnlEmployeeStats, lblMainWindowDescription, btnReset);
         }
-
-
 
         private void lbTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -812,16 +662,8 @@ namespace RicksStaffApp
         private void rdoAllTime_CheckedChanged(object sender, EventArgs e)
         {
             if (rdoAllTime.Checked)
-            {
-                //pnlShiftLoadScreen.Visible = true;
-                //pnlEmployeeLoadScreen.Visible = true;
-                //pnlIncidentLoadScreen.Visible = true;
-                //pnlRatioLoadScreen.Visible = true;
-                //FilteredEmployeeList.Clear();
-                //FilteredEmployeeList = AllEmployeeList;
-                //refreshViewAllTime();
-                refreshViewFiltered();
-                //RemoveLoadScreens(pnlEmployeeLoadScreen, pnlIncidentLoadScreen, pnlRatioLoadScreen, pnlShiftLoadScreen);
+            {                
+                refreshViewFiltered();              
 
             }
 
@@ -835,7 +677,6 @@ namespace RicksStaffApp
                 refreshViewFiltered();
             }
 
-
         }
 
         private void rdoLowestRated_CheckedChanged(object sender, EventArgs e)
@@ -843,16 +684,7 @@ namespace RicksStaffApp
             if (rdoLowestRated.Checked)
             {
                 refreshViewFiltered();
-            }
-            //if (rdoAllTime.Checked == true)
-            //{
-            //    refreshViewAllTime();
-                
-            //}
-            //else
-            //{
-            //    refreshViewFiltered();
-            //}
+            }            
         }
 
         private void rdoAlphabeticalOrChronological_CheckedChanged(object sender, EventArgs e)
@@ -860,16 +692,7 @@ namespace RicksStaffApp
             if (rdoAlphabeticalOrChronological.Checked)
             {
                 refreshViewFiltered();
-            }
-            //if (rdoAllTime.Checked == true)
-            //{
-            //    refreshViewAllTime();
-
-            //}
-            //else
-            //{
-            //    refreshViewFiltered();
-            //}
+            }            
         }
 
         private void rdoCustomTimeMouseClick(object sender, MouseEventArgs e)
@@ -1013,6 +836,179 @@ namespace RicksStaffApp
 
 
 
+        //}
+        //private static void CreateLoadingScreen(FlowLayoutPanel flowDisplay, Panel LoadScreen)
+        //{
+
+        //    LoadScreen.Size = flowDisplay.Size;
+        //    LoadScreen.BackColor = flowDisplay.BackColor;
+        //    LoadScreen.Location = flowDisplay.Location;
+        //    LoadScreen.Visible = true;
+
+
+        //}
+        //private static void RemoveLoadScreens(Panel LoadScreen, Panel LoadScreenTwo, Panel LoadScreenThree, Panel LoadScreenFour)
+        //{
+        //    LoadScreen.Visible = false;
+        //    LoadScreenTwo.Visible = false;
+        //    LoadScreenThree.Visible = false;
+        //    LoadScreenFour.Visible = false;
+        //}
+        //private async static Task CreateEmployeeOverviewPanelsTest(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, System.Windows.Forms.Button btnReset)
+        //{
+        //    // Clear existing panels
+        //    flowEmployeeDisplay.SuspendLayout();
+        //    flowEmployeeDisplay.Controls.Clear();
+        //    List<Panel> panelsAdded = new List<Panel>();
+
+        //    // Loop through employee list and create a panel for each employee
+        //    foreach (Employee emp in employeeList)
+        //    {
+        //        emp.UpdateOverallRating();
+        //        Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
+        //        empPanelContainer.Visible = false;
+        //        empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+
+
+        //        FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(410, 40);
+        //        empPanel.Margin = new Padding(1, 1, 1, 1);
+
+        //        System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
+        //        btnName.Font = new Font("Arial", 12, FontStyle.Bold);
+        //        btnName.Click += (sender, e) =>
+        //        {
+        //            foreach (Control control in parentPanel.Controls)
+        //            {
+        //                if (control is Form form)
+        //                {
+        //                    parentPanel.Controls.Remove(form);
+        //                    form.Dispose();
+        //                }
+        //                else
+        //                {
+        //                    control.Visible = false;
+        //                }
+
+
+        //            }
+        //            //parentPanel.Controls.Clear();
+        //            lblMain.Text = emp.FullName;
+        //            btnReset.Visible = true;
+        //            frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
+        //            viewEmployeeForm.TopLevel = false;
+        //            viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+        //            viewEmployeeForm.Dock = DockStyle.Fill;
+        //            parentPanel.Controls.Add(viewEmployeeForm);
+        //            viewEmployeeForm.Show();
+        //        };
+
+        //        empPanel.Controls.Add(btnName);
+        //        // Create panels for employee positions
+
+        //        PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
+        //        //pbRating.BorderStyle = BorderStyle.Fixed3D;
+        //        empPanel.Controls.Add(pbRating);
+
+        //        empPanelContainer.Controls.Add(empPanel);
+
+        //        Label lblRating = new Label();
+        //        //lblRating.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+        //        lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
+        //        lblRating.Margin = new Padding(0);
+        //        lblRating.Location = new Point(410, 0);
+        //        lblRating.Size = new Size(50, 40);
+        //        lblRating.TextAlign = ContentAlignment.MiddleCenter;
+
+        //        lblRating.Text = emp.OverallRating.ToString("F1");
+
+        //        empPanel.Controls.Add(lblRating);
+
+        //        //flowEmployeeDisplay.Controls.Add(empPanelContainer);
+        //        panelsAdded.Add(empPanelContainer);
+        //    }
+
+        //    foreach (Panel panel in panelsAdded)
+        //    {
+        //        flowEmployeeDisplay.Controls.Add((Panel)panel);
+        //        panel.Visible = true;
+        //    }
+        //    flowEmployeeDisplay.ResumeLayout();
+        //}
+        //private async static Task<List<Panel>> CreateEmployeeOverviewPanelsTest(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay, Panel parentPanel, Label lblMain, System.Windows.Forms.Button btnReset)
+        //{
+
+        //    flowEmployeeDisplay.Controls.Clear();
+        //    List<Panel> panelsAdded = new List<Panel>();
+
+        //    // Loop through employee list and create a panel for each employee
+        //    foreach (Employee emp in employeeList)
+        //    {
+        //        emp.UpdateOverallRating();
+        //        Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
+
+        //        empPanelContainer.Margin = new Padding(15, 7, 15, 0);
+        //        empPanelContainer.Location = new Point(15, 7);
+
+
+        //        FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(410, 40);
+        //        empPanel.Margin = new Padding(1, 1, 1, 1);
+
+        //        System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
+        //        btnName.Font = new Font("Arial", 12, FontStyle.Bold);
+        //        btnName.Click += (sender, e) =>
+        //        {
+        //            foreach (Control control in parentPanel.Controls)
+        //            {
+        //                if (control is Form form)
+        //                {
+        //                    parentPanel.Controls.Remove(form);
+        //                    form.Dispose();
+        //                }
+        //                else
+        //                {
+        //                    control.Visible = false;
+        //                }
+
+
+        //            }
+        //            //parentPanel.Controls.Clear();
+        //            lblMain.Text = emp.FullName;
+        //            btnReset.Visible = true;
+        //            frmViewEmployee viewEmployeeForm = new frmViewEmployee(emp);
+        //            viewEmployeeForm.TopLevel = false;
+        //            viewEmployeeForm.FormBorderStyle = FormBorderStyle.None;
+        //            viewEmployeeForm.Dock = DockStyle.Fill;
+        //            parentPanel.Controls.Add(viewEmployeeForm);
+        //            viewEmployeeForm.Show();
+        //        };
+        //        empPanel.Controls.Add(btnName);
+
+
+        //        PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
+
+        //        empPanel.Controls.Add(pbRating);
+
+        //        empPanelContainer.Controls.Add(empPanel);
+
+        //        Label lblRating = new Label();
+
+        //        lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
+        //        lblRating.Margin = new Padding(0);
+        //        lblRating.Location = new Point(410, 0);
+        //        lblRating.Size = new Size(50, 40);
+        //        lblRating.TextAlign = ContentAlignment.MiddleCenter;
+
+        //        lblRating.Text = emp.OverallRating.ToString("F1");
+
+        //        empPanel.Controls.Add(lblRating);
+
+
+        //        panelsAdded.Add(empPanelContainer);
+        //    }
+
+
+
+        //    return panelsAdded;
         //}
     }
 

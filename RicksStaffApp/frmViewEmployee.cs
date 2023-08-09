@@ -45,9 +45,7 @@ namespace RicksStaffApp
         {
             AllPositions = SqliteDataAccess.LoadPositions();
 
-            //lbAllPositions.DisplayMember = Name;
-            //lbAllPositions.ValueMember = Name;
-            //lblEmployeeName.Text = ThisEmployee.FullName;
+            
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
             ThisEmployee.AddIncidentsFromShifts();
 
@@ -59,10 +57,7 @@ namespace RicksStaffApp
             loadIncidentPanels();
 
             UIHelper.CreatePositionsForEmployee(flowEmployeePositions, ThisEmployee.Positions);
-            //foreach (Position position in AllPositions)
-            //{
-            //    lbAllPositions.Items.Add(position);
-            //}
+            
             foreach (Position position in AllPositions)
             {
                 if (!ThisEmployee.Positions.Any(p => p.ID == position.ID))
@@ -70,11 +65,7 @@ namespace RicksStaffApp
                     lbAllPositions.Items.Add(position);
                 }
             }
-            //lbAllPositions.SelectedIndexChanged -= lbAllPositions_SelectedIndexChanged;
-            //BindingList<Position> positionList = new BindingList<Position>(AllPositions);
-
-            //lbAllPositions.DataSource = positionList;
-            //lbAllPositions.SelectedIndexChanged += lbAllPositions_SelectedIndexChanged;
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
