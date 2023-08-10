@@ -108,6 +108,23 @@ namespace RicksStaffApp
 
             OverallRating = totalRating / (EmployeeShifts.Count); // divide total rating by number of shifts plus default value to get average
         }
+        public float GetPositionRating(string positionName)
+        {
+            // Get shifts that match the given position name
+            var shiftsForPosition = EmployeeShifts
+                .Where(s => s.Position.Name == positionName)
+                .ToList();
+
+            // If there are no shifts for the given position, return 0 or throw an exception
+            if (!shiftsForPosition.Any())
+            {
+                // Optionally: throw new Exception("No shifts for the given position.");
+                return 0;
+            }
+
+            // Calculate and return the average rating for shifts of the given position
+            return shiftsForPosition.Average(s => s.ShiftRating);
+        }
 
         public float GetRatingForPeriod(DateTime startDate, DateTime endDate)
         {

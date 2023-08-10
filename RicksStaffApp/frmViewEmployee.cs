@@ -25,12 +25,90 @@ namespace RicksStaffApp
         {
             InitializeComponent();
         }
+        private static void CreateEmployeeShiftOverviewPanel(EmployeeShift employeeShift, FlowLayoutPanel flowLayoutPanel)
+        {
+
+
+            employeeShift.UpdateShiftRating();
+            FlowLayoutPanel empShiftContainer = UIHelper.CreateFlowPanel(470, 30);
+
+            empShiftContainer.MinimumSize = new Size(470, 30);
+            empShiftContainer.MaximumSize = new Size(470, 1000);
+            empShiftContainer.Margin = new Padding(15, 7, 15, 0);
+
+            PictureBox pbPosition = UIHelper.CreatePositionPictureBox(30, 30, employeeShift.Position);
+            empShiftContainer.Controls.Add(pbPosition);
+
+            Label lblWeekday = UIHelper.CreateLabel(50, 30, employeeShift.Shift.DateAsDateTime.ToString("ddd"));
+            lblWeekday.Font = UIHelper.WeekDayDisplay;
+            empShiftContainer.Controls.Add(lblWeekday);
+
+            Label lblAmPm = UIHelper.CreateLabel(30, 30, employeeShift.AmPmString);
+            empShiftContainer.Controls.Add((Label)lblAmPm);
+
+            Label lblName = UIHelper.CreateLabel(100, 30, employeeShift.Shift.DateAsDateTime.ToOrdinalString());
+            lblName.Font = UIHelper.DateDisplay;
+            empShiftContainer.Controls.Add(lblName);
+
+            //Label lblPos = CreateLabel(60, 30, employeeShift.Position.Name);
+            //empShiftContainer.Controls.Add(lblPos);
+            FlowLayoutPanel incidentContainer = UIHelper.CreateFlowPanel(470, 30);
+            System.Windows.Forms.Button btnIncidents = UIHelper.CreateButtonTemplate(100, 30, employeeShift.Incidents.Count.ToString() + " Incidents");
+            btnIncidents.Margin = new Padding(10, 0, 0, 0);
+            bool btnClicked = false;
+            btnIncidents.Font = UIHelper.ButtonDisplay;
+            btnIncidents.Click += (sender, e) =>
+            {
+                btnClicked = !btnClicked;
+
+                if (btnClicked == true)
+                {
+                    UIHelper.CreateIncidentPanels(employeeShift.Incidents, incidentContainer);
+                    empShiftContainer.Controls.Add(incidentContainer);
+                }
+                else
+                {
+                    incidentContainer.Controls.Clear();
+                    empShiftContainer.Controls.Remove(incidentContainer);
+                }
+            };
+            empShiftContainer.Controls.Add(btnIncidents);
+
+
+            PictureBox pbRating = UIHelper.CreateRatingPictureBox(90, 30, employeeShift.ShiftRating);
+            pbRating.Margin = new Padding(10, 0, 0, 0);
+            empShiftContainer.Controls.Add(pbRating);
+
+
+
+
+            Label lblShiftRating = UIHelper.CreateLabel(40, 30, employeeShift.ShiftRating.ToString());
+            lblShiftRating.Margin = new Padding(5, 0, 0, 0);
+            lblShiftRating.Font = UIHelper.RatingDisplay;
+            empShiftContainer.Controls.Add(lblShiftRating);
+
+            ////Button btnAddIncidents = CreateButtonTemplate(65, 30, "Add/Edit");
+            ////btnAddIncidents.Click += (sender, e) =>
+            ////{
+            ////    secondPanel.Controls.Clear();
+            ////    frmServerShift frmServerShift = new frmServerShift();
+            ////    frmServerShift.EmployeeShiftToEdit = employeeShift;
+            ////    frmServerShift.TopLevel = false;
+            ////    secondPanel.Controls.Add(frmServerShift);
+            ////    frmServerShift.Show();
+            ////};
+            //empShiftContainer.Controls.Add(btnAddIncidents);
+
+            flowLayoutPanel.Controls.Add(empShiftContainer);
+
+
+        }
         private void GetEmployeeShiftGoodBadDistribution(List<EmployeeShift> employeeShifts)
         {
 
             foreach (EmployeeShift employeeShift in employeeShifts)
             {
-                UIHelper.CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
+                CreateEmployeeShiftOverviewPanel(employeeShift, flowEmployeeShifts);
             }
             lblTotalShifts.Text = employeeShifts.Count.ToString();
 

@@ -26,6 +26,7 @@ namespace RicksStaffApp
         List<Position> FilteredPositionList = new List<Position>();
         List<Incident> FilteredIncidentList = new List<Incident>();
         List<EmployeeShift> FilteredEmployeeShiftList = new List<EmployeeShift>();
+        private string positionNameFilter;
 
         private bool _isAM;
         private bool _isPM;
@@ -156,52 +157,8 @@ namespace RicksStaffApp
                 AllEmployeeShiftList = AllEmployeeShiftList.OrderByDescending(emp => emp.Shift.DateAsDateTime).Take(100).ToList();
             }
 
-        }
-        private void AddShiftsAndEmployees(Shift shift, HashSet<Employee> employees)
-        {
-            FilteredShiftList.Add(shift);
-            foreach (var employeeShift in shift.EmployeeShifts)
-            {
-                employees.Add(employeeShift.Employee);
-                FilteredEmployeeShiftList.Add(employeeShift);
-                FilteredIncidentList.AddRange(employeeShift.Incidents);
-            }
-        }
-        private void FilterShifts(HashSet<Employee> employees)
-        {
-            foreach (var shift in AllShiftList)
-            {
-                if (IsAMPM ||
-                   (IsAM && shift.IsAm) ||
-                   (IsPM && shift.IsPm))
-                {
-                    if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
-                    {
-                        AddShiftsAndEmployees(shift, employees);
-                    }
-                }
-            }
-            FilteredEmployeeList = employees.ToList();
-            UpdateEmployeesInEmployeeShifts();
-        }
-
-        private void UpdateEmployeesInEmployeeShifts()
-        {
-            foreach (var employeeShift in FilteredEmployeeShiftList)
-            {
-                // Find the corresponding Employee in FilteredEmployeeList
-                var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
-                if (employee != null)
-                {
-                    // Add the EmployeeShift to the Employee
-                    employee.AddEmployeeShift(employeeShift);
-                    employee.UpdateOverallRating();
-                }
-            }
-        }
-        
-       
-       
+        }                            
+              
         //private void FilterShiftForTimeFrame(HashSet<Employee> employees)
         //{
         //    foreach (var shift in AllShiftList)
@@ -236,24 +193,81 @@ namespace RicksStaffApp
         //}
         private void GetAllFilters()
         {
-            
-            if (rdoAllTime.Checked)
-            {
-                FilteredEmployeeList =  new List<Employee>(AllEmployeeList);
-                FilteredEmployeeShiftList = new List<EmployeeShift>(AllEmployeeShiftList);
-                FilteredShiftList = new List<Shift>(AllShiftList);                
-                FilteredPositionList = new List<Position>(AllPositionList);
-                FilteredIncidentList = new List<Incident>(AllIncidentList);
-              
+            HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
+            employeesInTimePeriod.Clear();
+            // if ALL time is checked, I still need to check for position and AM / PM
 
-            }
-            else
+            if (positionNameFilter == "All Positions")
             {
-                HashSet<Employee> employeesInTimePeriod = new HashSet<Employee>();
-                employeesInTimePeriod.Clear();
+                if (rdoAllTime.Checked)
+                {
+                    FilteredEmployeeList = new List<Employee>(AllEmployeeList);
+                    FilteredEmployeeShiftList = new List<EmployeeShift>(AllEmployeeShiftList);
+                    FilteredShiftList = new List<Shift>(AllShiftList);
+                    FilteredPositionList = new List<Position>(AllPositionList);
+                    FilteredIncidentList = new List<Incident>(AllIncidentList);
+                    FilterShifts(employeesInTimePeriod);
+
+                }
+                else
+                {
+
+                    FilterShifts(employeesInTimePeriod);
+
+
+                } 
+            }
+            if (positionNameFilter != "All Positions")
+            {
+                FilteredEmployeeList = FilteredEmployeeList
+                    .Where(emp => emp.EmployeeShifts.Any(es => es.Position.Name == positionNameFilter))
+                    .ToList();
                 FilterShifts(employeesInTimePeriod);
-               
-                
+            }
+            //UpdateEmployeesInEmployeeShifts();
+        }
+        private void FilterShifts(HashSet<Employee> employees)
+        {
+            foreach (var shift in AllShiftList)
+            {
+                if (IsAMPM ||
+                   (IsAM && shift.IsAm) ||
+                   (IsPM && shift.IsPm))
+                {
+                    if (shift.DateAsDateTime >= StartDate && shift.DateAsDateTime <= EndDate)
+                    {
+                        AddShiftsAndEmployees(shift, employees);
+                    }
+                }
+            }
+            FilteredEmployeeList = employees.ToList();
+            UpdateEmployeesInEmployeeShifts();
+        }
+        private void AddShiftsAndEmployees(Shift shift, HashSet<Employee> employees)
+        {
+            FilteredShiftList.Add(shift);
+            foreach (var employeeShift in shift.EmployeeShifts)
+            {
+                if (positionNameFilter == "All Positions" || employeeShift.Position.Name == positionNameFilter)
+                {
+                    employees.Add(employeeShift.Employee);
+                    FilteredEmployeeShiftList.Add(employeeShift);
+                    FilteredIncidentList.AddRange(employeeShift.Incidents);
+                }
+            }
+        }
+        private void UpdateEmployeesInEmployeeShifts()
+        {
+            foreach (var employeeShift in FilteredEmployeeShiftList)
+            {
+                // Find the corresponding Employee in FilteredEmployeeList
+                var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
+                if (employee != null)
+                {
+                    // Add the EmployeeShift to the Employee
+                    employee.AddEmployeeShift(employeeShift);
+                    employee.UpdateOverallRating();
+                }
             }
         }
         private async void UpdateIncidentPanel()
@@ -363,6 +377,7 @@ namespace RicksStaffApp
 
 
             frmViewEmployee = new frmViewEmployee();
+            IsAMPM = true;
 
             rdoViewEmployees.Checked = true;
             rdoHighestRated.Checked = true;
@@ -384,7 +399,7 @@ namespace RicksStaffApp
             refreshAllEmployeeShiftList();
             await UpdateAndSortAllEmployeeShifts();
             refreshViewFiltered();
-            UIHelper.CreatePositionOverviewPanels(flowPositions, AllPositionList);
+            CreatePositionOverviewPanels(flowPositions, AllPositionList);
 
 
 
@@ -744,6 +759,7 @@ namespace RicksStaffApp
             if (rdoAMPM.Checked == true)
             {
                 IsAMPM = true;
+                refreshViewFiltered();
             }
         }
 
@@ -752,6 +768,7 @@ namespace RicksStaffApp
             if (rdoAM.Checked == true)
             {
                 IsAM = true;
+                refreshViewFiltered();
             }
         }
 
@@ -760,8 +777,74 @@ namespace RicksStaffApp
             if (rdoPM.Checked == true)
             {
                 IsPM = true;
+                refreshViewFiltered();
             }
 
+        }
+        private void CreatePositionOverviewPanels(FlowLayoutPanel flowDisplay, List<Position> positions)
+        {
+            flowDisplay.Controls.Clear();
+            int buttonWidth = ((flowDisplay.Width - 15) / (positions.Count + 1)) - ((positions.Count + 1) + 2) - (25);
+            RadioButton rdoAllPositions = new RadioButton();
+
+            rdoAllPositions.Appearance = Appearance.Button;
+            rdoAllPositions.FlatStyle = FlatStyle.Flat;
+            rdoAllPositions.Margin = new Padding(0, 0, 5, 0);
+            rdoAllPositions.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+            rdoAllPositions.TextAlign = ContentAlignment.MiddleCenter;
+            rdoAllPositions.BackColor = Color.FromArgb(167, 204, 237);
+            rdoAllPositions.Size = new Size(buttonWidth, 27);
+            rdoAllPositions.Text = "All Positions";
+            rdoAllPositions.Checked = true;
+            flowDisplay.Controls.Add(rdoAllPositions);
+            foreach (Position position in positions)
+            {
+                PictureBox positionPB = UIHelper.CreatePositionPictureBox(25, 25, position);
+                RadioButton radioButton = new RadioButton();
+                //Image positionImage = GetPositionImage(position);
+                //Image resizedPositionImage = ResizeImage(positionImage, 24, radioButton.Height);
+
+                radioButton.Padding = new Padding(0, 0, 0, 0);
+                radioButton.Margin = new Padding(0, 0, 0, 0);
+                radioButton.Appearance = Appearance.Button;
+                //radioButton.ImageAlign = ContentAlignment.M;
+                //radioButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+                radioButton.Margin = new Padding(0, 0, 5, 0);
+                radioButton.BackColor = Color.FromArgb(167, 204, 237);
+
+                radioButton.TextAlign = ContentAlignment.MiddleCenter;
+                radioButton.FlatStyle = FlatStyle.Flat;
+                radioButton.FlatAppearance.CheckedBackColor = Color.FromArgb(15, 217, 252);
+                radioButton.Size = new Size(buttonWidth, 27);
+                radioButton.Text = position.Name;
+                radioButton.CheckedChanged += (rbPositionSelected_CheckedChanged);
+                //radioButton.Image = resizedPositionImage;
+                flowDisplay.Controls.Add(positionPB);
+                flowDisplay.Controls.Add(radioButton);
+            }
+
+        }
+        private void rbPositionSelected_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
+
+            if (radioButton != null && radioButton.Checked && radioButton.Text != "All Positions")
+            {
+                // Assuming PositionList is a List<Employee> 
+                // and Position represents the Employee's position
+                positionNameFilter = radioButton.Text;
+                //var filteredList = PositionList
+                //    .Where(employee => employee.Position.Name == selectedPosition)
+                //    .ToList();
+
+                //// Now do something with the filteredList
+            }
+            else
+            {
+                positionNameFilter = "All Positions";
+            }
+            refreshViewFiltered();
         }
 
 

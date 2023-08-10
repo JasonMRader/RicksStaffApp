@@ -368,6 +368,10 @@ namespace RicksStaffApp
         void HandleExcelDownloadClick(object sender, bool isAm, Panel panel)
         {
             var btn = (System.Windows.Forms.Button)sender;
+            if (btn.Text == "Create AM")
+            {
+                isAm = true;
+            }
             DateTime shiftDate = (DateTime)btn.Tag;
             flowEmployeeShiftDisplay.Controls.Clear();
             OpenExcelDownloadForm(shiftDate, isAm);
@@ -396,24 +400,37 @@ namespace RicksStaffApp
                 Panel panel = CreateShiftPanel(startDate);
                 System.Windows.Forms.Button btnAM = CreateShiftButton(startDate, "Create AM", new System.Drawing.Point(0, 25));
                 System.Windows.Forms.Button btnPM = CreateShiftButton(startDate, "Create PM", new System.Drawing.Point(0, 45));
+                AttachShiftEventHandlers(btnAM, null, panel);
+                AttachShiftEventHandlers(btnPM, null, panel);
 
                 List<Shift> searchShifts = shifts.FindAll(s => s.DateAsDateTime.Date == startDate.Date);
 
-                if (searchShifts.Any())
+                // Override with specific handlers if shifts are found
+                foreach (Shift searchShift in searchShifts)
                 {
-                    foreach (Shift searchShift in searchShifts)
-                    {
-                        if (searchShift.IsAm)
-                            AttachShiftEventHandlers(btnAM, searchShift, panel);
-                        else
-                            AttachShiftEventHandlers(btnPM, searchShift, panel);
-                    }
+                    if (searchShift.IsAm)
+                        AttachShiftEventHandlers(btnAM, searchShift, panel);
+                    else
+                        AttachShiftEventHandlers(btnPM, searchShift, panel);
                 }
-                else
-                {
-                    AttachShiftEventHandlers(btnAM, null, panel);
-                    AttachShiftEventHandlers(btnPM, null, panel);
-                }
+
+                //List<Shift> searchShifts = shifts.FindAll(s => s.DateAsDateTime.Date == startDate.Date);
+
+                //if (searchShifts.Any())
+                //{
+                //    foreach (Shift searchShift in searchShifts)
+                //    {
+                //        if (searchShift.IsAm)
+                //            AttachShiftEventHandlers(btnAM, searchShift, panel);
+                //        else
+                //            AttachShiftEventHandlers(btnPM, searchShift, panel);
+                //    }
+                //}
+                //else
+                //{
+                //    AttachShiftEventHandlers(btnAM, null, panel);
+                //    AttachShiftEventHandlers(btnPM, null, panel);
+                //}
 
                 panel.Controls.Add(btnAM);
                 panel.Controls.Add(btnPM);
