@@ -37,6 +37,23 @@ namespace RicksStaffApp
                 return FirstName + " " + LastName[0] + ".";
             }
         }
+        public void SetNamesFromFullName(string fullName)
+        {
+            if (!string.IsNullOrWhiteSpace(fullName))
+            {
+                string[] nameParts = fullName.Trim().Split(' ');
+
+                if (nameParts.Length >= 1)
+                {
+                    FirstName = nameParts[0];
+
+                    if (nameParts.Length >= 2)
+                    {
+                        LastName = string.Join(" ", nameParts.Skip(1));
+                    }
+                }
+            }
+        }
         //public string fullNameCleaned = Regex.Replace(this.FullName.ToLower().Trim(), @"\s+", " ");
 
         public float OverallRating { get; set; }
@@ -143,23 +160,23 @@ namespace RicksStaffApp
             // Calculate and return the average rating for the given period
             return shiftsForPeriod.Average(s => s.ShiftRating);
         }
-        public void SetNamesFromFullName(string fullName)
-        {
-            if (!string.IsNullOrWhiteSpace(fullName))
-            {
-                string[] nameParts = fullName.Trim().Split(' ');
+        //public void SetNamesFromFullName(string fullName)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(fullName))
+        //    {
+        //        string[] nameParts = fullName.Trim().Split(' ');
 
-                if (nameParts.Length >= 1)
-                {
-                    FirstName = nameParts[0];
+        //        if (nameParts.Length >= 1)
+        //        {
+        //            FirstName = nameParts[0];
 
-                    if (nameParts.Length >= 2)
-                    {
-                        LastName = nameParts[nameParts.Length - 1];
-                    }
-                }
-            }
-        }
+        //            if (nameParts.Length >= 2)
+        //            {
+        //                LastName = nameParts[nameParts.Length - 1];
+        //            }
+        //        }
+        //    }
+        //}
         public float GoodShiftPercentage
         {
             get

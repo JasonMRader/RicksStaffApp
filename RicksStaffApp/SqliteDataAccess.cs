@@ -26,11 +26,13 @@ namespace RicksStaffApp
         }
 
         //Employee Methods
-        public static void AddEmployee(Employee employee)
+        public static int AddEmployee(Employee employee)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Open();
+
+                int employeeId;
 
                 using (var transaction = cnn.BeginTransaction())
                 {
@@ -38,7 +40,7 @@ namespace RicksStaffApp
                     cnn.Execute("insert into Employee (FirstName, LastName) values (@FirstName, @LastName)", employee);
 
                     // Get the ID of the newly inserted employee
-                    int employeeId = cnn.Query<int>("select last_insert_rowid()", new DynamicParameters()).Single();
+                    employeeId = cnn.Query<int>("select last_insert_rowid()", new DynamicParameters()).Single();
 
                     // Insert the employee's positions into the EmployeePosition table
                     foreach (Position position in employee.Positions)
@@ -50,7 +52,9 @@ namespace RicksStaffApp
                     transaction.Commit();
                 }
                 cnn.Close();
+                return employeeId;
             }
+           
         }
         public static void DeleteEmployee(int employeeId)
         {

@@ -199,23 +199,24 @@ namespace RicksStaffApp
 
             if (positionNameFilter == "All Positions")
             {
-                if (rdoAllTime.Checked)
-                {
-                    FilteredEmployeeList = new List<Employee>(AllEmployeeList);
-                    FilteredEmployeeShiftList = new List<EmployeeShift>(AllEmployeeShiftList);
-                    FilteredShiftList = new List<Shift>(AllShiftList);
-                    FilteredPositionList = new List<Position>(AllPositionList);
-                    FilteredIncidentList = new List<Incident>(AllIncidentList);
-                    FilterShifts(employeesInTimePeriod);
+                FilterShifts(employeesInTimePeriod);
+                //if (rdoAllTime.Checked)
+                //{
+                //    FilteredEmployeeList = new List<Employee>(AllEmployeeList);
+                //    FilteredEmployeeShiftList = new List<EmployeeShift>(AllEmployeeShiftList);
+                //    FilteredShiftList = new List<Shift>(AllShiftList);
+                //    FilteredPositionList = new List<Position>(AllPositionList);
+                //    FilteredIncidentList = new List<Incident>(AllIncidentList);
+                //    //FilterShifts(employeesInTimePeriod);
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                    FilterShifts(employeesInTimePeriod);
+                //    FilterShifts(employeesInTimePeriod);
 
 
-                } 
+                //} 
             }
             if (positionNameFilter != "All Positions")
             {
@@ -260,13 +261,16 @@ namespace RicksStaffApp
         {
             foreach (var employeeShift in FilteredEmployeeShiftList)
             {
-                // Find the corresponding Employee in FilteredEmployeeList
-                var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
-                if (employee != null)
+
+                if (positionNameFilter == "All Positions" || employeeShift.Position.Name == positionNameFilter)
                 {
-                    // Add the EmployeeShift to the Employee
-                    employee.AddEmployeeShift(employeeShift);
-                    employee.UpdateOverallRating();
+                    var employee = FilteredEmployeeList.FirstOrDefault(e => e.ID == employeeShift.Employee.ID);
+                    if (employee != null)
+                    {
+                        // Add the EmployeeShift to the Employee
+                        employee.AddEmployeeShift(employeeShift);
+                        employee.UpdateOverallRating();
+                    } 
                 }
             }
         }
@@ -374,7 +378,7 @@ namespace RicksStaffApp
             //CreateLoadingScreen(flowMostFrequentIncidents, pnlIncidentLoadScreen);
             //CreateLoadingScreen(flowShiftRankings, pnlShiftLoadScreen);
             //CreateLoadingScreen(flowGoodShiftRankings, pnlRatioLoadScreen);
-
+            positionNameFilter = "All Positions";
 
             frmViewEmployee = new frmViewEmployee();
             IsAMPM = true;
@@ -398,9 +402,9 @@ namespace RicksStaffApp
             
             refreshAllEmployeeShiftList();
             await UpdateAndSortAllEmployeeShifts();
-            refreshViewFiltered();
+            
             CreatePositionOverviewPanels(flowPositions, AllPositionList);
-
+            refreshViewFiltered();
 
 
 
@@ -677,7 +681,9 @@ namespace RicksStaffApp
         private void rdoAllTime_CheckedChanged(object sender, EventArgs e)
         {
             if (rdoAllTime.Checked)
-            {                
+            {
+                StartDate = new DateTime(1900/1/1);
+                EndDate = DateTime.Today.AddDays(1);
                 refreshViewFiltered();              
 
             }
@@ -796,6 +802,7 @@ namespace RicksStaffApp
             rdoAllPositions.Size = new Size(buttonWidth, 27);
             rdoAllPositions.Text = "All Positions";
             rdoAllPositions.Checked = true;
+            rdoAllPositions.CheckedChanged += (rbPositionSelected_CheckedChanged);
             flowDisplay.Controls.Add(rdoAllPositions);
             foreach (Position position in positions)
             {

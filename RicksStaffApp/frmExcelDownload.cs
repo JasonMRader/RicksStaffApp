@@ -272,7 +272,7 @@ namespace RicksStaffApp
 
         private void UpdateUI()
         {
-            UIHelper.CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
+            CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
             List<Employee> newEmployees = new List<Employee>();
 
             foreach (string fullName in newEmployeeNamesStrings)
@@ -284,7 +284,7 @@ namespace RicksStaffApp
                 }
             }
 
-            UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
+            CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
         }
 
         private void btnCreateShift_Click(object sender, EventArgs e)
@@ -295,7 +295,7 @@ namespace RicksStaffApp
                 {
                     if (SqliteDataAccess.IsDuplicateEmployee(employee.FirstName, employee.LastName) == false)
                     {
-                        SqliteDataAccess.AddEmployee(employee);
+                        employee.ID = SqliteDataAccess.AddEmployee(employee);
                     }
                 }
 
@@ -358,6 +358,124 @@ namespace RicksStaffApp
         private void btnTestLoad_Click(object sender, EventArgs e)
         {
             //UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
+        }
+        private static void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
+        {
+            // Clear existing panels
+            flowNewEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Employee emp in newEmployeeList)
+            {
+                Panel empPanelContainer = new Panel();
+                empPanelContainer.Size = new Size(350, 22);
+                empPanelContainer.BackColor = MyColors.LightHighlight;
+                empPanelContainer.Margin = new Padding(2, 2, 2, 2);
+
+
+                FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 22);
+
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+                // Create label for employee name
+                System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 20, emp.FullName);
+                empPanel.Controls.Add(lblName);
+
+                // Create panels for employee positions
+
+                empPanelContainer.Controls.Add(empPanel);
+                //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
+
+
+                System.Windows.Forms.Button btnAddEmployee = UIHelper.CreateButtonTemplate(160, 22, "Add Employee");
+
+                btnAddEmployee.Location = new System.Drawing.Point(185, 0);
+                //TODO: handle duplicate check some other way
+                btnAddEmployee.Click += (sender, e) =>
+                {
+                    if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
+                    {
+                        existingEmployeeList.Add(emp);
+                        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
+                        newEmployeeList.Remove(emp);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+                    else
+                    {
+                        MessageBox.Show(emp.FullName + "already exists");
+                        newEmployeeList.Remove(emp);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+
+
+                };
+
+                empPanel.Parent.Controls.Add(btnAddEmployee);
+
+
+                flowNewEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
+        private static void CreateOldEmployeePanelsExcel(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay)
+        {
+            // Clear existing panels
+            flowEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (Employee emp in employeeList)
+            {
+                Panel empPanelContainer = new Panel();
+                empPanelContainer.Size = new Size(180, 22);
+                empPanelContainer.BackColor = MyColors.LightHighlight;
+                empPanelContainer.Margin = new Padding(2, 2, 2, 2);
+
+
+                FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 25);
+
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+
+                System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 22, emp.FullName);
+
+                empPanel.Controls.Add(lblName);
+
+                // Create panels for employee positions
+
+
+                // Add the employee panel to the container panel
+                empPanelContainer.Controls.Add(empPanel);
+                //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
+
+                // Add the delete button to the container panel
+                System.Windows.Forms.Button btnDelete = UIHelper.CreateButtonTemplate(16, 16, "X");
+
+                //btnDelete.AutoSize = true;
+                btnDelete.Margin = new Padding(0, 0, 0, 0);
+                btnDelete.Location = new System.Drawing.Point(410, 0);
+                btnDelete.Font = new System.Drawing.Font(btnDelete.Font.FontFamily, 6);
+                btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                btnDelete.Click += (sender, e) =>
+                {
+                    // Prompt user to confirm deletion
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete this employee?", "Delete Employee", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        // Delete employee from database
+                        SqliteDataAccess.DeleteEmployee(emp.ID);
+
+                        // Remove employee from list
+                        employeeList.Remove(emp);
+
+                        // Update UI
+                        //CreateEmployeePanels();
+                    }
+                };
+
+                empPanel.Parent.Controls.Add(btnDelete);
+                //empPanelContainer.Controls.Add(btnDelete);
+
+                flowEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
         }
         /*
 private void frmExcelDownload_Load(object sender, EventArgs e)
