@@ -28,6 +28,9 @@ namespace RicksStaffApp
         //Shift newShift = new Shift();
         //List<Employee> allEmployees = new List<Employee>();
         List<Employee> employeesOnShift = new List<Employee>();
+        List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        List<Position> AllPositionList = new List<Position>();
+        Shift newShift = new Shift();
         string ignoreHost = "Host Card";
         string ignoreBar = "PM BAR PM";
         string ignoreBanquet = "Banquet Bartender 1";
@@ -177,6 +180,9 @@ namespace RicksStaffApp
         //}
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
+            newShift.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
+            newShift.IsAm = isAm;
+            AllPositionList = SqliteDataAccess.LoadPositions();
             List<Employee> allEmployees = DataSingleton.Instance.Employees;
             dtpShiftDate.Value = shiftDate;
             if (isAm == true) { lblAmPm.Text = "AM"; }
@@ -228,22 +234,39 @@ namespace RicksStaffApp
 
         private void GetEmployeeDataFromExcel(List<Employee> allEmployees, Workbook workbook)
         {
-            Worksheet worksheet1 = workbook.Sheets[1];
-            Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+            //Worksheet worksheet1 = workbook.Sheets[1];
+            //Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
             //List<string> newEmployeeNamesStrings = new List<string>();
-
+            Worksheet worksheet1 = (Worksheet)workbook.Sheets[1];
+            Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+            // ... your logic here ...
             for (int i = 1; i <= range1.Rows.Count; i++)
             {
                 string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
-                ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings);
+                ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Server");
             }
-            Worksheet worksheet2 = workbook.Sheets[2];
+
+            // Finally, release the objects in reverse order
+            Marshal.ReleaseComObject(range1);
+            range1 = null;
+
+            Marshal.ReleaseComObject(workbook.Sheets[1]); //release the Sheets object
+            worksheet1 = null;
+
+
+            
+            Worksheet worksheet2 = (Worksheet)workbook.Sheets[2];
             Microsoft.Office.Interop.Excel.Range rangeBusser = worksheet2.Range["A2:A10"];
             Microsoft.Office.Interop.Excel.Range rangeHost = worksheet2.Range["D2:D10"];
             Microsoft.Office.Interop.Excel.Range rangeRunner = worksheet2.Range["G2:G10"];
         }
-
-        private void ProcessSingleEmployee(string fullName, List<Employee> allEmployees, List<string> newEmployeeNamesStrings)
+        public Position GetPositionByName(string name)
+        {
+            return AllPositionList.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            //retur position = AllPositionList.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            //return position?.ID ?? -1; 
+        }
+        private void ProcessSingleEmployee(string fullName, List<Employee> allEmployees, List<string> newEmployeeNamesStrings, string positionName)
         {
             if (!string.IsNullOrWhiteSpace(fullName))
             {
@@ -259,6 +282,7 @@ namespace RicksStaffApp
                 if (matchedEmployee != null)
                 {
                     employeesOnShift.Add(matchedEmployee);
+                    CreateEmployeeShift(positionName, matchedEmployee);
                 }
                 else
                 {
@@ -286,6 +310,18 @@ namespace RicksStaffApp
 
             CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
         }
+        private void CreateEmployeeShift(string positionName, Employee employee)
+        {
+            
+                EmployeeShift employeeShift = new EmployeeShift(employee, newShift)
+                {
+                    Position = GetPositionByName(positionName),
+                    Shift = newShift,
+                    Employee = employee
+                };
+                employeeShifts.Add(employeeShift);
+            
+        }
 
         private void btnCreateShift_Click(object sender, EventArgs e)
         {
@@ -299,13 +335,12 @@ namespace RicksStaffApp
                     }
                 }
 
-                Shift s = new Shift();
-                s.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
-                s.IsAm = isAm;
-
+                
+                
+                Shift s = newShift;
                 int shiftID = SqliteDataAccess.AddShift(s);
 
-                Shift newShift = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
+                Shift shiftToAdd = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
 
                 foreach (Employee emp in employeesOnShift)
                 {
@@ -313,10 +348,10 @@ namespace RicksStaffApp
                     //employeeShift.PositionID = 1;
                     //employeeShift.Shift.ID = s.ID;
                     //employeeShift.Employee.ID = emp.ID;
-                    EmployeeShift employeeShift = new EmployeeShift(emp, s)
+                    EmployeeShift employeeShift = new EmployeeShift(emp, shiftToAdd)
                     {
-                        PositionID = 1,
-                        Shift = newShift,
+                        //PositionID = 1,
+                        Shift = shiftToAdd,
                         Employee = emp
                     };
                     SqliteDataAccess.AddEmployeeShift(employeeShift);
