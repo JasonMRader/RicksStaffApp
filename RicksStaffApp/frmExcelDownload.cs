@@ -180,11 +180,12 @@ namespace RicksStaffApp
         //}
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
+            dtpShiftDate.Value = shiftDate;
             newShift.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
             newShift.IsAm = isAm;
             AllPositionList = SqliteDataAccess.LoadPositions();
             List<Employee> allEmployees = DataSingleton.Instance.Employees;
-            dtpShiftDate.Value = shiftDate;
+            
             if (isAm == true) { lblAmPm.Text = "AM"; }
             else { lblAmPm.Text = "PM"; }
 
@@ -231,35 +232,149 @@ namespace RicksStaffApp
                 Marshal.ReleaseComObject(excelApp);
             }
         }
-
         private void GetEmployeeDataFromExcel(List<Employee> allEmployees, Workbook workbook)
         {
-            //Worksheet worksheet1 = workbook.Sheets[1];
-            //Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
-            //List<string> newEmployeeNamesStrings = new List<string>();
-            Worksheet worksheet1 = (Worksheet)workbook.Sheets[1];
-            Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
-            // ... your logic here ...
-            for (int i = 1; i <= range1.Rows.Count; i++)
+            Worksheet worksheet1 = null;
+            Microsoft.Office.Interop.Excel.Range range1 = null;
+
+            try
             {
-                string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
-                ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Server");
+                worksheet1 = (Worksheet)workbook.Sheets[1];
+                range1 = worksheet1.Range["B2:B100"];
+
+                for (int i = 1; i <= range1.Rows.Count; i++)
+                {
+                    string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+                    ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Server");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while processing the first sheet: " + ex.Message);
+            }
+            finally
+            {
+                if (range1 != null)
+                {
+                    Marshal.ReleaseComObject(range1);
+                    range1 = null;
+                }
+
+                if (worksheet1 != null)
+                {
+                    Marshal.ReleaseComObject(worksheet1);
+                    worksheet1 = null;
+                }
             }
 
-            // Finally, release the objects in reverse order
-            Marshal.ReleaseComObject(range1);
-            range1 = null;
+            Worksheet worksheet2 = null;
+            try
+            {
+                worksheet2 = (Worksheet)workbook.Sheets[2];
 
-            Marshal.ReleaseComObject(workbook.Sheets[1]); //release the Sheets object
-            worksheet1 = null;
+                ProcessRange(worksheet2.Range["A2:A10"], allEmployees, "Busser");
+                ProcessRange(worksheet2.Range["D2:D10"], allEmployees, "Host");
+                ProcessRange(worksheet2.Range["G2:G10"], allEmployees, "Runner");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while processing the second sheet: " + ex.Message);
+            }
+            finally
+            {
+                if (worksheet2 != null)
+                {
+                    Marshal.ReleaseComObject(worksheet2);
+                    worksheet2 = null;
+                }
+            }
+        }
+
+        private void ProcessRange(Microsoft.Office.Interop.Excel.Range range, List<Employee> allEmployees, string role)
+        {
+            Microsoft.Office.Interop.Excel.Range cell = null;
+
+            try
+            {
+                for (int i = 1; i <= range.Rows.Count; i++)
+                {
+                    cell = (Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1];
+                    string fullName = cell.Value2?.ToString();
+                    ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, role);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing the {role} range: " + ex.Message);
+            }
+            finally
+            {
+                if (cell != null)
+                {
+                    Marshal.ReleaseComObject(cell);
+                    cell = null;
+                }
+
+                if (range != null)
+                {
+                    Marshal.ReleaseComObject(range);
+                    range = null;
+                }
+            }
+        }
+
+        //private void GetEmployeeDataFromExcel(List<Employee> allEmployees, Workbook workbook)
+        //{
+        //    //Worksheet worksheet1 = workbook.Sheets[1];
+        //    //Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+        //    //List<string> newEmployeeNamesStrings = new List<string>();
+        //    Worksheet worksheet1 = (Worksheet)workbook.Sheets[1];
+        //    Microsoft.Office.Interop.Excel.Range range1 = worksheet1.Range["B2:B100"];
+        //    // ... your logic here ...
+        //    for (int i = 1; i <= range1.Rows.Count; i++)
+        //    {
+        //        string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+        //        ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Server");
+        //    }
+
+        //    // Finally, release the objects in reverse order
+        //    Marshal.ReleaseComObject(range1);
+        //    range1 = null;
+
+        //    Marshal.ReleaseComObject(workbook.Sheets[1]); //release the Sheets object
+        //    worksheet1 = null;
 
 
             
-            Worksheet worksheet2 = (Worksheet)workbook.Sheets[2];
-            Microsoft.Office.Interop.Excel.Range rangeBusser = worksheet2.Range["A2:A10"];
-            Microsoft.Office.Interop.Excel.Range rangeHost = worksheet2.Range["D2:D10"];
-            Microsoft.Office.Interop.Excel.Range rangeRunner = worksheet2.Range["G2:G10"];
-        }
+        //    Worksheet worksheet2 = (Worksheet)workbook.Sheets[2];
+        //    Microsoft.Office.Interop.Excel.Range rangeBusser = worksheet2.Range["A2:A10"];
+        //    for (int i = 1; i <= rangeBusser.Rows.Count; i++)
+        //    {
+        //        string fullName = (rangeBusser.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+        //        ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Busser");
+        //    }
+        //    Marshal.ReleaseComObject(rangeBusser);
+        //    rangeBusser = null;
+        //    Microsoft.Office.Interop.Excel.Range rangeHost = worksheet2.Range["D2:D10"];
+        //    for (int i = 1; i <= rangeHost.Rows.Count; i++)
+        //    {
+        //        string fullName = (rangeHost.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+        //        ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Host");
+        //    }
+        //    Marshal.ReleaseComObject(rangeHost);
+        //    rangeHost = null;
+        //    Microsoft.Office.Interop.Excel.Range rangeRunner = worksheet2.Range["G2:G10"];
+        //    for (int i = 1; i <= rangeRunner.Rows.Count; i++)
+        //    {
+        //        string fullName = (rangeRunner.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+        //        ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Runner");
+        //    }
+        //    Marshal.ReleaseComObject(rangeRunner);
+        //    rangeRunner = null;
+
+        //    Marshal.ReleaseComObject(workbook.Sheets[2]); //release the Sheets object
+        //    worksheet2 = null;
+        //}
         public Position GetPositionByName(string name)
         {
             return AllPositionList.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
@@ -296,7 +411,8 @@ namespace RicksStaffApp
 
         private void UpdateUI()
         {
-            CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
+            CreateEmployeeShiftPanels(employeeShifts, flowExistingStaff);
+            //CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
             List<Employee> newEmployees = new List<Employee>();
 
             foreach (string fullName in newEmployeeNamesStrings)
@@ -394,7 +510,7 @@ namespace RicksStaffApp
         {
             //UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
         }
-        private static void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
+        private void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
         {
             // Clear existing panels
             flowNewEmployeeDisplay.Controls.Clear();
@@ -431,7 +547,9 @@ namespace RicksStaffApp
                     if (SqliteDataAccess.IsDuplicateEmployee(emp.FirstName, emp.LastName) == false)
                     {
                         existingEmployeeList.Add(emp);
-                        CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
+                        CreateEmployeeShift("Server", emp);
+                        CreateEmployeeShiftPanels(employeeShifts, flowExistingEmployees);
+                        //CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
                         newEmployeeList.Remove(emp);
                         CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
                     }
@@ -449,6 +567,67 @@ namespace RicksStaffApp
 
 
                 flowNewEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
+        private static void CreateEmployeeShiftPanels(List<EmployeeShift> employeeShifts, FlowLayoutPanel flowEmployeeDisplay)
+        {
+            // Clear existing panels
+            flowEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (EmployeeShift emp in employeeShifts)
+            {
+                Panel empPanelContainer = new Panel();
+                empPanelContainer.Size = new Size(180, 22);
+                empPanelContainer.BackColor = MyColors.LightHighlight;
+                empPanelContainer.Margin = new Padding(2, 2, 2, 2);
+
+
+                FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 25);
+
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+
+                System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 22, emp.Employee.FullName);
+
+                empPanel.Controls.Add(lblName);
+
+                // Create panels for employee positions
+
+
+                // Add the employee panel to the container panel
+                empPanelContainer.Controls.Add(empPanel);
+                //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
+
+                // Add the delete button to the container panel
+                System.Windows.Forms.Button btnDelete = UIHelper.CreateButtonTemplate(16, 16, "X");
+
+                //btnDelete.AutoSize = true;
+                btnDelete.Margin = new Padding(0, 0, 0, 0);
+                btnDelete.Location = new System.Drawing.Point(410, 0);
+                btnDelete.Font = new System.Drawing.Font(btnDelete.Font.FontFamily, 6);
+                btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                btnDelete.Click += (sender, e) =>
+                {
+                    // Prompt user to confirm deletion
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete this employee?", "Delete Employee", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        // Delete employee from database
+                        SqliteDataAccess.DeleteEmployee(emp.ID);
+
+                        // Remove employee from list
+                        employeeShifts.Remove(emp);
+
+                        // Update UI
+                        //CreateEmployeePanels();
+                    }
+                };
+
+                empPanel.Parent.Controls.Add(btnDelete);
+                //empPanelContainer.Controls.Add(btnDelete);
+
+                flowEmployeeDisplay.Controls.Add(empPanelContainer);
             }
         }
         private static void CreateOldEmployeePanelsExcel(List<Employee> employeeList, FlowLayoutPanel flowEmployeeDisplay)
