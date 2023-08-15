@@ -27,12 +27,12 @@ namespace RicksStaffApp
         public Position Position { get; set; }
         public string DateString { get; set; }
         public int PositionID
-        {get;set;
-            //get
-            //{
-            //    return Position.ID;
-            //}
-            
+        {//get;set;
+            get
+            {
+                return Position.ID;
+            }
+
         }
         private float _shiftRating;
         public string EmployeeName { get {return this.Employee.FullName; } }

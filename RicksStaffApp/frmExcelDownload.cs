@@ -271,10 +271,38 @@ namespace RicksStaffApp
             try
             {
                 worksheet2 = (Worksheet)workbook.Sheets[2];
+                Microsoft.Office.Interop.Excel.Range rangeBusser = worksheet2.Range["A2:A10"];
+                for (int i = 1; i <= rangeBusser.Rows.Count; i++)
+                {
+                    string fullName = (rangeBusser.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+                    ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Busser");
+                }
+                Marshal.ReleaseComObject(rangeBusser);
+                rangeBusser = null;
+                Microsoft.Office.Interop.Excel.Range rangeHost = worksheet2.Range["D2:D10"];
+                for (int i = 1; i <= rangeHost.Rows.Count; i++)
+                {
+                    string fullName = (rangeHost.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+                    ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Host");
+                }
+                Marshal.ReleaseComObject(rangeHost);
+                rangeHost = null;
+                Microsoft.Office.Interop.Excel.Range rangeRunner = worksheet2.Range["G2:G10"];
+                for (int i = 1; i <= rangeRunner.Rows.Count; i++)
+                {
+                    string fullName = (rangeRunner.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
+                    ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Runner");
+                }
+                Marshal.ReleaseComObject(rangeRunner);
+                rangeRunner = null;
 
-                ProcessRange(worksheet2.Range["A2:A10"], allEmployees, "Busser");
-                ProcessRange(worksheet2.Range["D2:D10"], allEmployees, "Host");
-                ProcessRange(worksheet2.Range["G2:G10"], allEmployees, "Runner");
+                //Marshal.ReleaseComObject(workbook.Sheets[2]); //release the Sheets object
+                //worksheet2 = null;
+                //worksheet2 = (Worksheet)workbook.Sheets[2];
+
+                //ProcessRange(worksheet2.Range["A2:A10"], allEmployees, "Busser");
+                //ProcessRange(worksheet2.Range["D2:D10"], allEmployees, "Host");
+                //ProcessRange(worksheet2.Range["G2:G10"], allEmployees, "Runner");
             }
             catch (Exception ex)
             {
@@ -458,20 +486,26 @@ namespace RicksStaffApp
 
                 Shift shiftToAdd = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
 
-                foreach (Employee emp in employeesOnShift)
+                foreach (EmployeeShift es in employeeShifts)
                 {
-                    //EmployeeShift employeeShift = new EmployeeShift();
-                    //employeeShift.PositionID = 1;
-                    //employeeShift.Shift.ID = s.ID;
-                    //employeeShift.Employee.ID = emp.ID;
-                    EmployeeShift employeeShift = new EmployeeShift(emp, shiftToAdd)
-                    {
-                        //PositionID = 1,
-                        Shift = shiftToAdd,
-                        Employee = emp
-                    };
-                    SqliteDataAccess.AddEmployeeShift(employeeShift);
+                    es.Shift = shiftToAdd;
+                    
+                    SqliteDataAccess.AddEmployeeShift(es);
                 }
+                //foreach (Employee emp in employeesOnShift)
+                //{
+                //    //EmployeeShift employeeShift = new EmployeeShift();
+                //    //employeeShift.PositionID = 1;
+                //    //employeeShift.Shift.ID = s.ID;
+                //    //employeeShift.Employee.ID = emp.ID;
+                //    EmployeeShift employeeShift = new EmployeeShift(emp, shiftToAdd)
+                //    {
+                //        //PositionID = 1,
+                //        Shift = shiftToAdd,
+                //        Employee = emp
+                //    };
+                //    SqliteDataAccess.AddEmployeeShift(employeeShift);
+                //}
 
             }
             catch (Exception ex)
