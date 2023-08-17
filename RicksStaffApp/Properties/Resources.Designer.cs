@@ -183,6 +183,36 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bartender {
+            get {
+                object obj = ResourceManager.GetObject("Bartender", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bartender1 {
+            get {
+                object obj = ResourceManager.GetObject("Bartender1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bartender3 {
+            get {
+                object obj = ResourceManager.GetObject("Bartender3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Blank_Slate_Stars {
             get {
                 object obj = ResourceManager.GetObject("Blank_Slate_Stars", resourceCulture);
@@ -203,9 +233,29 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Busser {
+        internal static System.Drawing.Bitmap Busser1 {
             get {
-                object obj = ResourceManager.GetObject("Busser", resourceCulture);
+                object obj = ResourceManager.GetObject("Busser1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Busser3 {
+            get {
+                object obj = ResourceManager.GetObject("Busser3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BusserPic {
+            get {
+                object obj = ResourceManager.GetObject("BusserPic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,6 +313,26 @@ namespace RicksStaffApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FoodRunner1 {
+            get {
+                object obj = ResourceManager.GetObject("FoodRunner1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FoodRunner2 {
+            get {
+                object obj = ResourceManager.GetObject("FoodRunner2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ForwardArrow {
             get {
                 object obj = ResourceManager.GetObject("ForwardArrow", resourceCulture);
@@ -306,6 +376,16 @@ namespace RicksStaffApp.Properties {
         internal static System.Drawing.Bitmap Host {
             get {
                 object obj = ResourceManager.GetObject("Host", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Host1 {
+            get {
+                object obj = ResourceManager.GetObject("Host1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -396,6 +476,16 @@ namespace RicksStaffApp.Properties {
         internal static System.Drawing.Bitmap Server {
             get {
                 object obj = ResourceManager.GetObject("Server", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Server1 {
+            get {
+                object obj = ResourceManager.GetObject("Server1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

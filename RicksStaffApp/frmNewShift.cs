@@ -572,50 +572,99 @@ namespace RicksStaffApp
             }
             CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
-        private static void UpdateEmployeeShiftPanel (EmployeeShift employeeShift, FlowLayoutPanel flowDisplay)
+        private void UpdateEmployeeShiftPanel (EmployeeShift es, FlowLayoutPanel flowDisplay, Panel secondPanel)
         {
             foreach (Control c in flowDisplay.Controls)
             {
                 
-                    if (c.Tag == employeeShift && c is FlowLayoutPanel empShiftContainer)
+                    if (c.Tag == es && c is FlowLayoutPanel empShiftContainer)
                     {
                         // Update employee shift rating
-                        employeeShift.UpdateShiftRating();
+                        es.UpdateShiftRating();
+                        empShiftContainer.Controls.Clear();
+                        System.Windows.Forms.Label lblName = UIHelper.CreateLabel(100, 30, es.Employee.FullName);
+                        empShiftContainer.Controls.Add(lblName);
 
-                        foreach (Control control in empShiftContainer.Controls)
+                        //Label lblPos = CreateLabel(60, 30, es.Position.Name);                        
+                        //empShiftContainer.Controls.Add(lblPos);
+                        PictureBox pbPosition = UIHelper.CreatePositionPictureBox(30, 30, es.Position);
+                        empShiftContainer.Controls.Add(pbPosition);
+
+                        System.Windows.Forms.Label lblShiftRating = UIHelper.CreateLabel(25, 30, es.ShiftRating.ToString());
+                        empShiftContainer.Controls.Add(lblShiftRating);
+
+                        PictureBox pbRating = UIHelper.CreateRatingPictureBox(90, 30, es.ShiftRating);
+                        empShiftContainer.Controls.Add(pbRating);
+
+                        System.Windows.Forms.Button btnIncidents = UIHelper.CreateButtonTemplate(65, 30, "Incidents");
+                        FlowLayoutPanel incidentContainer = UIHelper.CreateFlowPanel(470, 30);
+                        bool btnClicked = false;
+                        btnIncidents.Click += (sender, e) =>
                         {
-                            // Update rating picture box image
-                            if (control is PictureBox pb)  // assuming the PictureBox's name is pbRating
+                            btnClicked = !btnClicked;
+                            if (btnClicked)
                             {
-                                pb.Image = UIHelper.GetStars(employeeShift.ShiftRating); // GetRatingImage is your own method to get image based on rating
+                                //May need to pass in shift and make it shiftToEdit?
+                                UIHelper.CreateIncidentPanels_REPLACE(es.Incidents, incidentContainer, es.Shift);
+                                empShiftContainer.Controls.Add(incidentContainer);
+                            }
+                            else
+                            {
+                                incidentContainer.Controls.Clear();
+                                empShiftContainer.Controls.Remove(incidentContainer);
                             }
 
-                            // Update incidents button click handler
-                            if (control is System.Windows.Forms.Button btn && btn.Name == "btnIncidents") // assuming the Button's name is btnIncidents
-                            {
-                                control.Dispose();
+                        };
+                        empShiftContainer.Controls.Add(btnIncidents);
 
-                                //// remove all handlers attached to the Click event
-                                //btn.Click -= btn_Click;  // assuming that btn_Click is the current method attached to the Click event
+                        System.Windows.Forms.Button btnAddIncidents = UIHelper.CreateButtonTemplate(65, 30, "Add/Edit");
+                        btnAddIncidents.Click += (sender, e) =>
+                        {
+                            secondPanel.Controls.Clear();
+                            frmServerShift frmServerShift = new frmServerShift(es);
+                            frmServerShift.EmployeeShiftUpdated += FrmServerShift_EmployeeShiftUpdated;
+                            //frmServerShift.EmployeeShiftToEdit = es;
+                            frmServerShift.TopLevel = false;
+                            secondPanel.Controls.Add(frmServerShift);
 
-                                //// add new handler
-                                //bool btnClicked = false;
-                                //btn.Click += (sender, e) =>
-                                //{
-                                //    btnClicked = !btnClicked;
-                                //    if (btnClicked)
-                                //    {
-                                //        // replace the 'shift' variable with the new updated employee shift 
-                                //        UIHelper.CreateIncidentPanels_REPLACE(employeeShift.Incidents, empShiftContainer, employeeShift);
-                                //    }
-                                //    else
-                                //    {
-                                //        empShiftContainer.Controls.Clear();
-                                //    }
-                                //};
-                            }
-                        }
-                    }
+                            frmServerShift.Show();
+                        };
+                        empShiftContainer.Controls.Add(btnAddIncidents);
+
+                    //foreach (Control control in empShiftContainer.Controls)
+                    //{
+                    //    // Update rating picture box image
+                    //    if (control is PictureBox pb)  // assuming the PictureBox's name is pbRating
+                    //    {
+                    //        pb.Image = UIHelper.GetStars(employeeShift.ShiftRating); // GetRatingImage is your own method to get image based on rating
+                    //    }
+
+                    //    // Update incidents button click handler
+                    //    if (control is System.Windows.Forms.Button btn && btn.Name == "btnIncidents") // assuming the Button's name is btnIncidents
+                    //    {
+                    //        control.Dispose();
+
+                    //        //// remove all handlers attached to the Click event
+                    //        //btn.Click -= btn_Click;  // assuming that btn_Click is the current method attached to the Click event
+
+                    //        //// add new handler
+                    //        //bool btnClicked = false;
+                    //        //btn.Click += (sender, e) =>
+                    //        //{
+                    //        //    btnClicked = !btnClicked;
+                    //        //    if (btnClicked)
+                    //        //    {
+                    //        //        // replace the 'shift' variable with the new updated employee shift 
+                    //        //        UIHelper.CreateIncidentPanels_REPLACE(employeeShift.Incidents, empShiftContainer, employeeShift);
+                    //        //    }
+                    //        //    else
+                    //        //    {
+                    //        //        empShiftContainer.Controls.Clear();
+                    //        //    }
+                    //        //};
+                    //    }
+                    //}
+                }
                 
             }
         }
@@ -726,7 +775,7 @@ namespace RicksStaffApp
         }
         private void FrmServerShift_EmployeeShiftUpdated(EmployeeShift employeeShift)
         {
-            UpdateEmployeeShiftPanel(employeeShift, flowEmployeeShiftDisplay);
+            UpdateEmployeeShiftPanel(employeeShift, flowEmployeeShiftDisplay, pnlNewShiftDisplay);
         }
 
         private void CalendarShiftClicked(object sender, EventArgs e)

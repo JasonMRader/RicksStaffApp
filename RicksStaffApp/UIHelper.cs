@@ -226,13 +226,16 @@ namespace RicksStaffApp
                     PositionImage = Properties.Resources.Server;
                     break;
                 case "Runner":
-                    PositionImage = Properties.Resources.FoodRunner; 
+                    PositionImage = Properties.Resources.FoodRunner2; 
                     break;
                 case "Busser":
-                    PositionImage = Properties.Resources.Busser;
+                    PositionImage = Properties.Resources.BusserPic;
                     break;
                 case "Host":
                     PositionImage = Properties.Resources.Host;
+                    break;
+                case "Bartender":
+                    PositionImage = Properties.Resources.Bartender3;
                     break;
             }
             return PositionImage;
