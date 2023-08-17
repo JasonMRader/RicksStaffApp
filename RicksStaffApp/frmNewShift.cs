@@ -729,6 +729,7 @@ namespace RicksStaffApp
         }
         private void CreateEmployeeShiftPanels(FlowLayoutPanel flowEmployeeDisplay, DateOnly shiftDate, Panel secondPanel)
         {
+            ShiftToEdit.EmployeeShifts = ShiftToEdit.EmployeeShifts.OrderBy(emp => emp.Employee.FullName).ToList();
             //TODO pass in one shift, not a list of shifts
             flowEmployeeDisplay.Controls.Clear();
             //foreach (Shift shift in shiftList)
@@ -777,6 +778,14 @@ namespace RicksStaffApp
         {
             UpdateEmployeeShiftPanel(employeeShift, flowEmployeeShiftDisplay, pnlNewShiftDisplay);
         }
+        private void frmExcel_refreshShiftList(object sender, ShiftEventArgs e)
+        {
+            //shifts = SqliteDataAccess.LoadShifts();
+            Shift returnedShift = e.NewShift;
+            shifts.Add(returnedShift);
+            flowShiftDates.Controls.Clear();
+            refreshShiftPanels(startDate);
+        }
 
         private void CalendarShiftClicked(object sender, EventArgs e)
         {
@@ -796,9 +805,11 @@ namespace RicksStaffApp
         private void OpenExcelDownloadForm(DateTime shiftDate, bool isAm)
         {
             frmExcelDownload frmExcelDownload = new frmExcelDownload(shiftDate, isAm);
+            frmExcelDownload.ShiftCreated += frmExcel_refreshShiftList;
             //frmExcelDownload.ShiftCreated += refreshShiftPanels;
             pnlNewShiftDisplay.Controls.Clear();
             frmExcelDownload.TopLevel = false;
+            
             pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
             frmExcelDownload.Show();
             //frmExcelDownload.ShiftCreated -= refreshShiftPanels;

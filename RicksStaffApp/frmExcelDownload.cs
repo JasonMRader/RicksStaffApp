@@ -466,7 +466,12 @@ namespace RicksStaffApp
                 employeeShifts.Add(employeeShift);
             
         }
-        //public delegate void ShiftCreatedEventHandler
+        public delegate void ShiftCreatedEventHandler(Object sender, EventArgs e);
+        public event EventHandler<ShiftEventArgs> ShiftCreated;
+        protected virtual void OnShiftCreation(Shift newShift)
+        {
+            ShiftCreated?.Invoke(this, new ShiftEventArgs(newShift));
+        }
         private void btnCreateShift_Click(object sender, EventArgs e)
         {
             try
@@ -482,16 +487,31 @@ namespace RicksStaffApp
                 
                 
                 Shift s = newShift;
-                int shiftID = SqliteDataAccess.AddShift(s);
+                s.ID = SqliteDataAccess.AddShift(s);
 
-                Shift shiftToAdd = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
+                //Shift shiftToAdd = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
+
+                //foreach (EmployeeShift es in employeeShifts)
+                //{
+                //    es.Shift = shiftToAdd;
+
+
+                //    es.ID = SqliteDataAccess.AddEmployeeShift(es);
+                //    shiftToAdd.EmployeeShifts.Add(es);
+                //}
+                
 
                 foreach (EmployeeShift es in employeeShifts)
                 {
-                    es.Shift = shiftToAdd;
-                    
-                    SqliteDataAccess.AddEmployeeShift(es);
+                    es.Shift = s;
+
+
+                    es.ID = SqliteDataAccess.AddEmployeeShift(es);
+                    //shiftToAdd.EmployeeShifts.Add(es);
                 }
+                Shift shiftToAdd = SqliteDataAccess.LoadShiftAndAllChildren(s.IsAm, s.DateString);
+
+                OnShiftCreation(shiftToAdd);
                 //foreach (Employee emp in employeesOnShift)
                 //{
                 //    //EmployeeShift employeeShift = new EmployeeShift();

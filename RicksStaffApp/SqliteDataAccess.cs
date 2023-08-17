@@ -365,7 +365,58 @@ namespace RicksStaffApp
 
                 return shift;
             }
-        }             
+        }
+        public static Shift LoadShiftAndAllChildren(bool isAm, string dateString)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = "SELECT * FROM Shift WHERE IsAm = @IsAm AND DateString = @DateString";
+                Shift shift = cnn.QueryFirstOrDefault<Shift>(query, new { IsAm = isAm, DateString = dateString });
+                string employeeShiftQuery = @"
+                    SELECT es.*, e.*, p.*, i.*
+                    FROM EmployeeShift es
+                    INNER JOIN Employee e ON es.EmployeeID = e.ID
+                    INNER JOIN Position p ON es.PositionID = p.ID
+                    LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
+                    WHERE es.ShiftID = @ShiftID";
+                var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
+
+                var employeeShifts = cnn.Query<EmployeeShift, Employee, Position, Incident, EmployeeShift>(employeeShiftQuery,
+                    (employeeShift, employee, position, incident) =>
+                    {
+                        // Check if the employee shift is already added to the dictionary
+                        if (!employeeShiftsDictionary.TryGetValue(employeeShift.ID, out var currentEmployeeShift))
+                        {
+                            currentEmployeeShift = employeeShift;
+                            currentEmployeeShift.Employee = employee;
+                            currentEmployeeShift.Position = position;
+                            currentEmployeeShift.Incidents = new List<Incident>();
+                            currentEmployeeShift.Shift = shift;
+                            employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
+                        }
+
+                        // Add the incident to the employee shift if it exists
+                        if (incident != null && incident.ID != default)
+                        {
+                            currentEmployeeShift.Incidents.Add(incident);
+                        }
+
+                        return currentEmployeeShift;
+                    },
+                    new { ShiftID = shift.ID },
+                    splitOn: "ID,ID,ID").Distinct().AsList();
+
+                shift.EmployeeShifts = employeeShifts;
+
+                if (shift == null)
+                {
+                    throw new InvalidOperationException("No shift with the specified Date and Am / Pm values was found.");
+                }
+
+                return shift;
+            }
+        }
+
         public static List<Shift> LoadShifts()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -697,7 +748,7 @@ namespace RicksStaffApp
         //{
 
         //}
-        public static void AddEmployeeShift(EmployeeShift employeeShift)
+        public static int AddEmployeeShift(EmployeeShift employeeShift)
         {
 
             try
@@ -709,12 +760,14 @@ namespace RicksStaffApp
                     //new { EmployeeId = employeeShift.Employee.ID, PositionId = employeeShift.Position.ID, ShiftRating = employeeShift.ShiftRating });
                     employeeShift.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
                 }
+                return employeeShift.ID;
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show("Error adding employee shift: " + ex.Message);
             }
+            return 0;
         }
         public static void UpdateEmployeeShift(EmployeeShift shift)
         {
