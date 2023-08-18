@@ -434,10 +434,29 @@ namespace RicksStaffApp
                     if (fullName != ignoreBanquet)
                     {
                         newEmployeeNamesStrings.Add(fullName);
+                        CreateNewEmployeeAndEmployeeShift(fullName, positionName);
 
                     }
                 }
             }
+        }
+        private void CreateNewEmployeeAndEmployeeShift(string fullName, string positionName)
+        {
+            Employee newEmp = new Employee();
+            if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
+            {
+                newEmp = new Employee(fullName);
+                newEmp.Positions.Add(GetPositionByName(positionName));
+                newEmployees.Add(newEmp);
+            }
+            EmployeeShift employeeShift = new EmployeeShift(newEmp, newShift)
+            {
+                Position = GetPositionByName(positionName),
+                Shift = newShift,
+                Employee = newEmp
+            };
+            //employeeShift.Employee.Positions.Add(employeeShift.Position);
+            newEmployeeShifts.Add(employeeShift);
         }
 
         private void UpdateUI()
@@ -446,17 +465,18 @@ namespace RicksStaffApp
             //CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
             List<Employee> newEmployees = new List<Employee>();
 
-            foreach (string fullName in newEmployeeNamesStrings)
-            {
-                if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
-                {
-                    Employee newEmp = new Employee(fullName);
-                    newEmployees.Add(newEmp);
-                }
-            }
+            //foreach (string fullName in newEmployeeNamesStrings)
+            //{
+            //    if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
+            //    {
+            //        Employee newEmp = new Employee(fullName);
+            //        newEmployees.Add(newEmp);
+            //    }
+            //}
 
-            CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff, GetPositionByName("Server"));
+            CreateNewEmployeePanelsExcel(flowNewStaff, flowExistingStaff);
         }
+        
         private void CreateEmployeeShift(string positionName, Employee employee)
         {
             
@@ -466,8 +486,13 @@ namespace RicksStaffApp
                     Shift = newShift,
                     Employee = employee
                 };
-                employeeShifts.Add(employeeShift);
+            employeeShift.Employee.Positions.Add(employeeShift.Position);
+            employeeShifts.Add(employeeShift);
             
+        }
+        private void AddEmployeePositionFromEmployeeShift(EmployeeShift employeeShift)
+        {
+            employeeShift.Employee.Positions.Add(employeeShift.Position);
         }
         public delegate void ShiftCreatedEventHandler(Object sender, EventArgs e);
         public event EventHandler<ShiftEventArgs> ShiftCreated;
@@ -567,7 +592,70 @@ namespace RicksStaffApp
         {
             //UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
         }
-        private void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees, Position position)
+        private void CreateNewEmployeePanelsExcel( FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
+        {
+            // Clear existing panels
+            flowNewEmployeeDisplay.Controls.Clear();
+
+            // Loop through employee list and create a panel for each employee
+            foreach (EmployeeShift es in newEmployeeShifts)
+            {
+                Panel empPanelContainer = new Panel();
+                empPanelContainer.Size = new Size(350, 22);
+                empPanelContainer.BackColor = MyColors.LightHighlight;
+                empPanelContainer.Margin = new Padding(2, 2, 2, 2);
+
+                PictureBox positionPB = UIHelper.CreatePositionPictureBox(22, 22, es.Position);
+                empPanelContainer.Controls.Add(positionPB);
+
+
+                FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 22);
+
+                empPanel.Margin = new Padding(1, 1, 1, 1);
+
+                // Create label for employee name
+                System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 20, es.Employee.FullName);
+                empPanel.Controls.Add(lblName);
+
+                // Create panels for employee positions
+
+                empPanelContainer.Controls.Add(empPanel);
+                //int remainingWidth = empPanel.Parent.ClientSize.Width - lblName.Width - emp.Positions.Count * pnlPos.Width;
+
+
+                System.Windows.Forms.Button btnAddEmployee = UIHelper.CreateButtonTemplate(160, 22, "Add Employee");
+
+                btnAddEmployee.Location = new System.Drawing.Point(185, 0);
+                //TODO: handle duplicate check some other way
+                btnAddEmployee.Click += (sender, e) =>
+                {
+                    if (SqliteDataAccess.IsDuplicateEmployee(es.Employee.FirstName, es.Employee.LastName) == false)
+                    {
+                        employeesOnShift.Add(es.Employee);
+                        employeeShifts.Add(es);
+                        //CreateEmployeeShift("Server", es);
+                        CreateEmployeeShiftPanels(employeeShifts, flowExistingEmployees);
+                        //CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
+                        newEmployeeShifts.Remove(es);
+                        CreateNewEmployeePanelsExcel(flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+                    else
+                    {
+                        MessageBox.Show(es.Employee.FullName + "already exists");
+                        newEmployeeShifts.Remove(es);
+                        CreateNewEmployeePanelsExcel(flowNewEmployeeDisplay, flowExistingEmployees);
+                    }
+
+
+                };
+
+                empPanel.Parent.Controls.Add(btnAddEmployee);
+
+
+                flowNewEmployeeDisplay.Controls.Add(empPanelContainer);
+            }
+        }
+        private void OLDCreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees, Position position)
         {
             // Clear existing panels
             flowNewEmployeeDisplay.Controls.Clear();
@@ -608,13 +696,13 @@ namespace RicksStaffApp
                         CreateEmployeeShiftPanels(employeeShifts, flowExistingEmployees);
                         //CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
                         newEmployeeList.Remove(emp);
-                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees, position);
+                        CreateNewEmployeePanelsExcel(flowNewEmployeeDisplay, flowExistingEmployees);
                     }
                     else
                     {
                         MessageBox.Show(emp.FullName + "already exists");
                         newEmployeeList.Remove(emp);
-                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees, position);
+                        CreateNewEmployeePanelsExcel(flowNewEmployeeDisplay, flowExistingEmployees);
                     }
 
 
