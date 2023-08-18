@@ -53,10 +53,15 @@
             lblExcelRange = new Label();
             label4 = new Label();
             label3 = new Label();
+            numericUpDown1 = new NumericUpDown();
+            listBox1 = new ListBox();
+            label8 = new Label();
+            textBox1 = new TextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudEndingNumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudStartingNumber).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // btnNewAction
@@ -221,6 +226,10 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(label8);
+            panel2.Controls.Add(listBox1);
+            panel2.Controls.Add(numericUpDown1);
             panel2.Controls.Add(nudEndingNumber);
             panel2.Controls.Add(nudStartingNumber);
             panel2.Controls.Add(cboEndingLetter);
@@ -359,6 +368,40 @@
             label3.TabIndex = 0;
             label3.Text = "Position:";
             // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(140, 348);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(43, 23);
+            numericUpDown1.TabIndex = 4;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(140, 461);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(224, 139);
+            listBox1.TabIndex = 5;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(8, 420);
+            label8.Name = "label8";
+            label8.Size = new Size(119, 25);
+            label8.TabIndex = 6;
+            label8.Text = "Excel Ignore:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(140, 422);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(224, 23);
+            textBox1.TabIndex = 7;
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -382,6 +425,7 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudEndingNumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudStartingNumber).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
         }
 
@@ -412,5 +456,9 @@
         private Label label4;
         private Label label3;
         private Label label7;
+        private TextBox textBox1;
+        private Label label8;
+        private ListBox listBox1;
+        private NumericUpDown numericUpDown1;
     }
 }

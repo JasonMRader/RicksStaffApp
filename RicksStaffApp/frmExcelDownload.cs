@@ -29,6 +29,8 @@ namespace RicksStaffApp
         //List<Employee> allEmployees = new List<Employee>();
         List<Employee> employeesOnShift = new List<Employee>();
         List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+        List<Employee> newEmployees = new List<Employee>();
+        List<EmployeeShift> newEmployeeShifts = new List<EmployeeShift>();
         List<Position> AllPositionList = new List<Position>();
         Shift newShift = new Shift();
         string ignoreHost = "Host Card";
@@ -432,6 +434,7 @@ namespace RicksStaffApp
                     if (fullName != ignoreBanquet)
                     {
                         newEmployeeNamesStrings.Add(fullName);
+
                     }
                 }
             }
@@ -452,7 +455,7 @@ namespace RicksStaffApp
                 }
             }
 
-            CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
+            CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff, GetPositionByName("Server"));
         }
         private void CreateEmployeeShift(string positionName, Employee employee)
         {
@@ -564,7 +567,7 @@ namespace RicksStaffApp
         {
             //UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
         }
-        private void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
+        private void CreateNewEmployeePanelsExcel(List<Employee> newEmployeeList, List<Employee> existingEmployeeList, FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees, Position position)
         {
             // Clear existing panels
             flowNewEmployeeDisplay.Controls.Clear();
@@ -605,13 +608,13 @@ namespace RicksStaffApp
                         CreateEmployeeShiftPanels(employeeShifts, flowExistingEmployees);
                         //CreateOldEmployeePanelsExcel(existingEmployeeList, flowExistingEmployees);
                         newEmployeeList.Remove(emp);
-                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees, position);
                     }
                     else
                     {
                         MessageBox.Show(emp.FullName + "already exists");
                         newEmployeeList.Remove(emp);
-                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees);
+                        CreateNewEmployeePanelsExcel(newEmployeeList, existingEmployeeList, flowNewEmployeeDisplay, flowExistingEmployees, position);
                     }
 
 
