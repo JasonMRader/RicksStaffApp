@@ -41,11 +41,15 @@
             label1 = new Label();
             lblCreateNew = new Label();
             panel2 = new Panel();
+            textBox1 = new TextBox();
+            label8 = new Label();
+            listBox1 = new ListBox();
+            numericUpDown1 = new NumericUpDown();
             nudEndingNumber = new NumericUpDown();
             nudStartingNumber = new NumericUpDown();
             cboEndingLetter = new ComboBox();
             cboStartingLetter = new ComboBox();
-            comboBox1 = new ComboBox();
+            cboExcelPosition = new ComboBox();
             label2 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -53,15 +57,11 @@
             lblExcelRange = new Label();
             label4 = new Label();
             label3 = new Label();
-            numericUpDown1 = new NumericUpDown();
-            listBox1 = new ListBox();
-            label8 = new Label();
-            textBox1 = new TextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudEndingNumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudStartingNumber).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // btnNewAction
@@ -234,7 +234,7 @@
             panel2.Controls.Add(nudStartingNumber);
             panel2.Controls.Add(cboEndingLetter);
             panel2.Controls.Add(cboStartingLetter);
-            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(cboExcelPosition);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label6);
@@ -246,6 +246,40 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(448, 674);
             panel2.TabIndex = 12;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(140, 422);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(224, 23);
+            textBox1.TabIndex = 7;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(8, 420);
+            label8.Name = "label8";
+            label8.Size = new Size(119, 25);
+            label8.TabIndex = 6;
+            label8.Text = "Excel Ignore:";
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(140, 461);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(224, 139);
+            listBox1.TabIndex = 5;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(140, 348);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(43, 23);
+            numericUpDown1.TabIndex = 4;
             // 
             // nudEndingNumber
             // 
@@ -283,13 +317,14 @@
             cboStartingLetter.TabIndex = 2;
             cboStartingLetter.SelectedIndexChanged += SetExcelRangeText;
             // 
-            // comboBox1
+            // cboExcelPosition
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(140, 81);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(192, 23);
-            comboBox1.TabIndex = 1;
+            cboExcelPosition.FormattingEnabled = true;
+            cboExcelPosition.Location = new Point(140, 81);
+            cboExcelPosition.Name = "cboExcelPosition";
+            cboExcelPosition.Size = new Size(192, 23);
+            cboExcelPosition.TabIndex = 1;
+            cboExcelPosition.SelectedIndexChanged += cboExcelPosition_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -368,40 +403,6 @@
             label3.TabIndex = 0;
             label3.Text = "Position:";
             // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(140, 348);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(43, 23);
-            numericUpDown1.TabIndex = 4;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(140, 461);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(224, 139);
-            listBox1.TabIndex = 5;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(8, 420);
-            label8.Name = "label8";
-            label8.Size = new Size(119, 25);
-            label8.TabIndex = 6;
-            label8.Text = "Excel Ignore:";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(140, 422);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(224, 23);
-            textBox1.TabIndex = 7;
-            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -423,9 +424,9 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudEndingNumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudStartingNumber).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
         }
 
@@ -448,7 +449,7 @@
         private NumericUpDown nudStartingNumber;
         private ComboBox cboEndingLetter;
         private ComboBox cboStartingLetter;
-        private ComboBox comboBox1;
+        private ComboBox cboExcelPosition;
         private Label label2;
         private Label label6;
         private Label label5;

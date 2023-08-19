@@ -14,6 +14,41 @@ namespace RicksStaffApp
         {
             return Name;
         }
+        private string excelRange;
+        public string ExcelRange
+        {
+            get
+            {
+                return excelRange;
+            }
+            set
+            {
+                excelRange = value;
+                var cells = value.Split(':');
+                if (cells.Length == 2)
+                {
+                    ExcelStartCell = cells[0];
+                    ExcelEndCell = cells[1];
+                }
+            }
+        }
+
+        public string ExcelStartCell { get; private set; }
+        public string ExcelEndCell { get; private set; }
+
         
+
+        public string GetExcelRange()
+        {
+            return $"{ExcelStartCell}:{ExcelEndCell}";
+        }
+
+        public void SetExcelRange(string startCell, string endCell)
+        {
+            ExcelStartCell = startCell;
+            ExcelEndCell = endCell;
+            excelRange = GetExcelRange();
+        }
+
     }
 }

@@ -22,6 +22,7 @@ namespace RicksStaffApp
         List<Activity> activityList = new List<Activity>();
         List<Position> positionList = new List<Position>();
         List<Shift> shiftList = new List<Shift>();
+        Position excelPosition = new Position();
 
 
 
@@ -34,6 +35,12 @@ namespace RicksStaffApp
         private void frmSettings_Load(object sender, EventArgs e)
         {
             rdoActivitiesView.Checked = true;
+            positionList.Clear();
+            positionList = SqliteDataAccess.LoadPositions();
+            foreach (Position position in positionList)
+            {
+                cboExcelPosition.Items.Add(position);
+            }
         }
 
         private void btnNewAction_Click(object sender, EventArgs e)
@@ -127,8 +134,8 @@ namespace RicksStaffApp
         {
             if (rdoPositions.Checked == true)
             {
-                List<Position> positions = SqliteDataAccess.LoadPositions();
-                UIHelper.CreatePositionPanels(flowSettingDisplay, positions);
+                //List<Position> positions = SqliteDataAccess.LoadPositions();
+                UIHelper.CreatePositionPanels(flowSettingDisplay, positionList);
                 lblCreateNew.Text = "Create New Position";
                 txtNewRating.Visible = false;
                 lblNewBaseRating.Visible = false;
@@ -137,12 +144,19 @@ namespace RicksStaffApp
         }
         private void SetExcelRangeText(object sender, EventArgs e)
         {
-            lblExcelRange.Text = cboStartingLetter.Text + nudStartingNumber.Value.ToString() + ":" + cboEndingLetter.Text + nudEndingNumber.Value.ToString();
+            //lblExcelRange.Text = cboStartingLetter.Text + nudStartingNumber.Value.ToString() + ":" + cboEndingLetter.Text + nudEndingNumber.Value.ToString();
+            excelPosition.SetExcelRange(cboStartingLetter.Text + nudStartingNumber.Value.ToString(), cboEndingLetter.Text + nudEndingNumber.Value.ToString());
+            lblExcelRange.Text = excelPosition.ExcelRange.ToString();
         }
 
         private void cboStartingLetter_SelectedIndexChanged(object sender, EventArgs e)
         {
             //SetExcelRangeText();
+        }
+
+        private void cboExcelPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            excelPosition = cboExcelPosition.SelectedItem as Position;
         }
     }
 }
