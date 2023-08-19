@@ -34,6 +34,30 @@ namespace RicksStaffApp
             frmServerShift.ShowDialog();
         }
 
+        private void ResetAllButtonColors(FlowLayoutPanel flowLayoutPanel)
+        {
+            foreach (Control control in flowLayoutPanel.Controls)
+            {
+                if (control is Panel panel)
+                {
+                    foreach (Control btn in panel.Controls)
+                    {
+                        if (btn is System.Windows.Forms.Button)
+                        {
+                            if (btn.Text == "PM" || btn.Text == "AM")
+                            {
+                                btn.BackColor = UIHelper.DefaultButton;
+                            }
+                            else
+                            {
+                                btn.BackColor = Color.LightGray; 
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
 
         private Panel currentHighlightedPanel = null;
 
@@ -362,6 +386,8 @@ namespace RicksStaffApp
         void HandleShiftButtonClick(object sender, Shift shift, Panel panel)
         {
             var btn = (System.Windows.Forms.Button)sender;
+            ResetAllButtonColors(flowShiftDates); 
+            btn.BackColor = Color.Yellow;  
             ShiftToEdit = shift;
             CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime((DateTime)btn.Tag), pnlNewShiftDisplay);
             dtpShiftDate.Value = (DateTime)btn.Tag;
@@ -371,6 +397,8 @@ namespace RicksStaffApp
         void HandleExcelDownloadClick(object sender, bool isAm, Panel panel)
         {
             var btn = (System.Windows.Forms.Button)sender;
+            ResetAllButtonColors(flowShiftDates); 
+            btn.BackColor = Color.Yellow;  
             if (btn.Text == "Create AM")
             {
                 isAm = true;
