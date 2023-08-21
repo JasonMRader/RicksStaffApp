@@ -515,17 +515,7 @@ namespace RicksStaffApp
                 
                 newShift.ID = SqliteDataAccess.AddShift(newShift);
 
-                //Shift shiftToAdd = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
-
-                //foreach (EmployeeShift es in employeeShifts)
-                //{
-                //    es.Shift = shiftToAdd;
-
-
-                //    es.ID = SqliteDataAccess.AddEmployeeShift(es);
-                //    shiftToAdd.EmployeeShifts.Add(es);
-                //}
-                
+                               
 
                 foreach (EmployeeShift es in employeeShifts)
                 {
@@ -538,20 +528,7 @@ namespace RicksStaffApp
                 Shift shiftToAdd = SqliteDataAccess.LoadShiftAndAllChildren(newShift.IsAm, newShift.DateString);
 
                 OnShiftCreation(shiftToAdd);
-                //foreach (Employee emp in employeesOnShift)
-                //{
-                //    //EmployeeShift employeeShift = new EmployeeShift();
-                //    //employeeShift.PositionID = 1;
-                //    //employeeShift.Shift.ID = s.ID;
-                //    //employeeShift.Employee.ID = emp.ID;
-                //    EmployeeShift employeeShift = new EmployeeShift(emp, shiftToAdd)
-                //    {
-                //        //PositionID = 1,
-                //        Shift = shiftToAdd,
-                //        Employee = emp
-                //    };
-                //    SqliteDataAccess.AddEmployeeShift(employeeShift);
-                //}
+                
 
             }
             catch (Exception ex)
