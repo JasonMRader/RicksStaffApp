@@ -318,39 +318,76 @@ namespace RicksStaffApp
                 return output.ToList();
             }
         }
-
-        //Shift Methods
         public static int AddShift(Shift shift)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-               
-                // Check if a record with the same DateString and IsAm already exists
-                string checkExistingShiftQuery = "SELECT COUNT(*) FROM Shift WHERE DateString = @DateString AND IsAm = @IsAm";
-                int count = cnn.ExecuteScalar<int>(checkExistingShiftQuery, new { shift.DateString, shift.IsAm });
+                cnn.Open();
 
-                // If no such record exists, insert the new shift
-                if (count == 0)
+                int shiftId;
+
+                using (var transaction = cnn.BeginTransaction())
                 {
-                    cnn.Execute("INSERT INTO Shift (DateString, IsAm) VALUES (@DateString, @IsAm)", new { shift.DateString, shift.IsAm });
-                    shift.ID = cnn.ExecuteScalar<int>("SELECT last_insert_rowid()");
+                    // Check if a record with the same DateString and IsAm already exists
+                    string checkExistingShiftQuery = "SELECT COUNT(*) FROM Shift WHERE DateString = @DateString AND IsAm = @IsAm";
+                    int count = cnn.ExecuteScalar<int>(checkExistingShiftQuery, new { shift.DateString, shift.IsAm });
+
+                    // If no such record exists, insert the new shift
+                    if (count == 0)
+                    {
+                        cnn.Execute("INSERT INTO Shift (DateString, IsAm) VALUES (@DateString, @IsAm)", new { shift.DateString, shift.IsAm });
+
+                        // Get the ID of the newly inserted shift
+                        shiftId = cnn.Query<int>("select last_insert_rowid()", new DynamicParameters()).Single();
+                    }
+                    else
+                    {
+                        // Optional: You can throw an exception or return a boolean value to indicate that the shift was not added.
+                        throw new InvalidOperationException("A shift with the same Date and Am / Pm values already exists.");
+                    }
+
+                    transaction.Commit();
                 }
-                else
-                {
-                    // Optional: You can throw an exception or return a boolean value to indicate that the shift was not added.
-                    throw new InvalidOperationException("A shift with the same Date and Am / Pm values already exists.");
-                }
-                
-                return shift.ID;
-                
+                cnn.Close();
+
+                return shiftId;
             }
-
-            //foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
-            //{
-            //    employeeShift.Shift = shift; // Associate the shift with the employee shift
-            //    SaveEmployeeShift(employeeShift);
-            //}
         }
+
+
+
+        //Shift Methods
+        //public static int AddShift(Shift shift)
+        //{
+        //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+
+        //        // Check if a record with the same DateString and IsAm already exists
+        //        string checkExistingShiftQuery = "SELECT COUNT(*) FROM Shift WHERE DateString = @DateString AND IsAm = @IsAm";
+        //        int count = cnn.ExecuteScalar<int>(checkExistingShiftQuery, new { shift.DateString, shift.IsAm });
+
+        //        // If no such record exists, insert the new shift
+        //        if (count == 0)
+        //        {
+        //            cnn.Execute("INSERT INTO Shift (DateString, IsAm) VALUES (@DateString, @IsAm)", new { shift.DateString, shift.IsAm });
+        //            shift.ID = cnn.ExecuteScalar<int>("SELECT last_insert_rowid()");
+        //        }
+        //        else
+        //        {
+        //            // Optional: You can throw an exception or return a boolean value to indicate that the shift was not added.
+        //            throw new InvalidOperationException("A shift with the same Date and Am / Pm values already exists.");
+        //        }
+
+        //        return shift.ID;
+
+        //    }
+
+        //    //foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
+        //    //{
+        //    //    employeeShift.Shift = shift; // Associate the shift with the employee shift
+        //    //    SaveEmployeeShift(employeeShift);
+        //    //}
+        //}
         public static Shift LoadShift(bool isAm, string dateString)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))

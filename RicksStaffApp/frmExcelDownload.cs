@@ -23,6 +23,7 @@ namespace RicksStaffApp
             this.shiftDate = shiftDate;
             this.isAm = isAm;
             InitializeComponent();
+            this.Shown += frmExcelDownload_Shown;
 
         }
         //Shift newShift = new Shift();
@@ -195,8 +196,12 @@ namespace RicksStaffApp
             if (!string.IsNullOrWhiteSpace(filePath))
             {
                 ProcessExcelFile(allEmployees, filePath);
-                UpdateUI();
+               
             }
+        }
+        private void frmExcelDownload_Shown(object sender, EventArgs e)
+        {
+            UpdateUI();
         }
 
         private string GetFilePathFromUser()
@@ -462,17 +467,10 @@ namespace RicksStaffApp
         private void UpdateUI()
         {
             CreateEmployeeShiftPanels(employeeShifts, flowExistingStaff);
-            //CreateOldEmployeePanelsExcel(employeesOnShift, flowExistingStaff);
+            
             List<Employee> newEmployees = new List<Employee>();
 
-            //foreach (string fullName in newEmployeeNamesStrings)
-            //{
-            //    if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
-            //    {
-            //        Employee newEmp = new Employee(fullName);
-            //        newEmployees.Add(newEmp);
-            //    }
-            //}
+            
 
             CreateNewEmployeePanelsExcel(flowNewStaff, flowExistingStaff);
         }
@@ -514,8 +512,8 @@ namespace RicksStaffApp
 
                 
                 
-                Shift s = newShift;
-                s.ID = SqliteDataAccess.AddShift(s);
+                
+                newShift.ID = SqliteDataAccess.AddShift(newShift);
 
                 //Shift shiftToAdd = SqliteDataAccess.LoadShift(s.IsAm, s.DateString);
 
@@ -531,13 +529,13 @@ namespace RicksStaffApp
 
                 foreach (EmployeeShift es in employeeShifts)
                 {
-                    es.Shift = s;
+                    es.Shift = newShift;
 
 
                     es.ID = SqliteDataAccess.AddEmployeeShift(es);
                     //shiftToAdd.EmployeeShifts.Add(es);
                 }
-                Shift shiftToAdd = SqliteDataAccess.LoadShiftAndAllChildren(s.IsAm, s.DateString);
+                Shift shiftToAdd = SqliteDataAccess.LoadShiftAndAllChildren(newShift.IsAm, newShift.DateString);
 
                 OnShiftCreation(shiftToAdd);
                 //foreach (Employee emp in employeesOnShift)
@@ -590,7 +588,7 @@ namespace RicksStaffApp
 
         private void btnTestLoad_Click(object sender, EventArgs e)
         {
-            //UIHelper.CreateNewEmployeePanelsExcel(newEmployees, employeesOnShift, flowNewStaff, flowExistingStaff);
+            UpdateUI();
         }
         private void CreateNewEmployeePanelsExcel( FlowLayoutPanel flowNewEmployeeDisplay, FlowLayoutPanel flowExistingEmployees)
         {
