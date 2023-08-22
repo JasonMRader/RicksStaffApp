@@ -813,6 +813,8 @@ namespace RicksStaffApp
             shifts.Add(returnedShift);
             flowShiftDates.Controls.Clear();
             refreshShiftPanels(startDate);
+            ShiftToEdit = returnedShift;
+            CreateEmployeeShiftPanels(flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
         }
 
         private void CalendarShiftClicked(object sender, EventArgs e)

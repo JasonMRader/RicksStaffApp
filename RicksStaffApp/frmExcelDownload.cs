@@ -187,20 +187,22 @@ namespace RicksStaffApp
             newShift.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
             newShift.IsAm = isAm;
             AllPositionList = SqliteDataAccess.LoadPositions();
-            List<Employee> allEmployees = DataSingleton.Instance.Employees;
+            
             
             if (isAm == true) { lblAmPm.Text = "AM"; }
             else { lblAmPm.Text = "PM"; }
 
+            
+        }
+        private void frmExcelDownload_Shown(object sender, EventArgs e)
+        {
+            List<Employee> allEmployees = DataSingleton.Instance.Employees;
             var filePath = GetFilePathFromUser();
             if (!string.IsNullOrWhiteSpace(filePath))
             {
                 ProcessExcelFile(allEmployees, filePath);
-               
+
             }
-        }
-        private void frmExcelDownload_Shown(object sender, EventArgs e)
-        {
             UpdateUI();
         }
 
