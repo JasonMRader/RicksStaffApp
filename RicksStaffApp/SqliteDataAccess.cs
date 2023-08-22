@@ -113,7 +113,26 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Position (Name) values (@Name)", position);
+                cnn.Execute("insert into Position (Name, ExcelRange) values (@Name, @ExcelRange)", position);
+            }
+        }
+        public static void UpdatePosition(Position position)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Open();
+
+                using (var transaction = cnn.BeginTransaction())
+                {
+                    // Update the employee in the Employee table
+                    cnn.Execute("update Position set Name = @Name, ExcelRange = @ExcelRange where Id = @Id",
+                        new { Name = position.Name, ExcelRange = position.ExcelRange, Id = position.ID });
+
+                   
+
+                    transaction.Commit();
+                }
+                cnn.Close();
             }
         }
         public static void UpdatePositionFromEmployeeShift(EmployeeShift employeeShift)

@@ -140,6 +140,7 @@ namespace RicksStaffApp
                 txtNewRating.Visible = false;
                 lblNewBaseRating.Visible = false;
                 btnAddItem.Text = "Create Position";
+                UpdateExcelControlsForPosition(excelPosition);
             }
         }
         private void SetExcelRangeText(object sender, EventArgs e)
@@ -157,6 +158,34 @@ namespace RicksStaffApp
         private void cboExcelPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             excelPosition = cboExcelPosition.SelectedItem as Position;
+            UpdateExcelControlsForPosition(excelPosition);
+        }
+
+        private void btnSavePosition_Click(object sender, EventArgs e)
+        {
+            SqliteDataAccess.UpdatePosition(excelPosition);
+        }
+        private string GetExcelCellLetter(string cellAddress)
+        {
+            return new string(cellAddress.TakeWhile(char.IsLetter).ToArray());
+        }
+
+        private int GetExcelCellNumber(string cellAddress)
+        {
+            return int.Parse(new string(cellAddress.SkipWhile(char.IsLetter).ToArray()));
+        }
+        private void UpdateExcelControlsForPosition(Position position)
+        {
+            if (position == null || position.ExcelRange == null)
+                return;
+
+            // Set starting cell controls
+            cboStartingLetter.Text = GetExcelCellLetter(position.ExcelStartCell);
+            nudStartingNumber.Value = GetExcelCellNumber(position.ExcelStartCell);
+
+            // Set ending cell controls
+            cboEndingLetter.Text = GetExcelCellLetter(position.ExcelEndCell);
+            nudEndingNumber.Value = GetExcelCellNumber(position.ExcelEndCell);
         }
     }
 }

@@ -57,6 +57,7 @@
             lblExcelRange = new Label();
             label4 = new Label();
             label3 = new Label();
+            btnSavePosition = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -226,6 +227,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnSavePosition);
             panel2.Controls.Add(textBox1);
             panel2.Controls.Add(label8);
             panel2.Controls.Add(listBox1);
@@ -403,6 +405,19 @@
             label3.TabIndex = 0;
             label3.Text = "Position:";
             // 
+            // btnSavePosition
+            // 
+            btnSavePosition.BackColor = Color.FromArgb(167, 204, 237);
+            btnSavePosition.FlatAppearance.BorderSize = 0;
+            btnSavePosition.FlatStyle = FlatStyle.Flat;
+            btnSavePosition.Location = new Point(312, 211);
+            btnSavePosition.Name = "btnSavePosition";
+            btnSavePosition.Size = new Size(107, 27);
+            btnSavePosition.TabIndex = 8;
+            btnSavePosition.Text = "Save Changes";
+            btnSavePosition.UseVisualStyleBackColor = false;
+            btnSavePosition.Click += btnSavePosition_Click;
+            // 
             // frmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -461,5 +476,6 @@
         private Label label8;
         private ListBox listBox1;
         private NumericUpDown numericUpDown1;
+        private Button btnSavePosition;
     }
 }
