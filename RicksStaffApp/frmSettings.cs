@@ -23,6 +23,8 @@ namespace RicksStaffApp
         List<Position> positionList = new List<Position>();
         List<Shift> shiftList = new List<Shift>();
         Position excelPosition = new Position();
+        List<string> excelIgnore = new List<string>();
+        private bool isUpdatingControls = false;
 
 
 
@@ -41,6 +43,7 @@ namespace RicksStaffApp
             {
                 cboExcelPosition.Items.Add(position);
             }
+            RefreshExcelIgnoreLbx();
         }
 
         private void btnNewAction_Click(object sender, EventArgs e)
@@ -145,6 +148,11 @@ namespace RicksStaffApp
         }
         private void SetExcelRangeText(object sender, EventArgs e)
         {
+            if (isUpdatingControls)
+                return;
+
+
+
             //lblExcelRange.Text = cboStartingLetter.Text + nudStartingNumber.Value.ToString() + ":" + cboEndingLetter.Text + nudEndingNumber.Value.ToString();
             excelPosition.SetExcelRange(cboStartingLetter.Text + nudStartingNumber.Value.ToString(), cboEndingLetter.Text + nudEndingNumber.Value.ToString());
             lblExcelRange.Text = excelPosition.ExcelRange.ToString();
@@ -178,6 +186,7 @@ namespace RicksStaffApp
         {
             if (position == null || position.ExcelRange == null)
                 return;
+            isUpdatingControls = true;
 
             // Set starting cell controls
             cboStartingLetter.Text = GetExcelCellLetter(position.ExcelStartCell);
@@ -186,6 +195,39 @@ namespace RicksStaffApp
             // Set ending cell controls
             cboEndingLetter.Text = GetExcelCellLetter(position.ExcelEndCell);
             nudEndingNumber.Value = GetExcelCellNumber(position.ExcelEndCell);
+
+            isUpdatingControls = false;
+        }
+
+        private void btnAddIgnore_Click(object sender, EventArgs e)
+        {
+            SqliteDataAccess.AddExcelIgnore(txtIgnoreName.Text);
+            RefreshExcelIgnoreLbx();
+            txtIgnoreName.Clear();
+            
+        }
+
+        private void btnDeleteIgnore_Click(object sender, EventArgs e)
+        {
+            //string ignoreName = lbIgnore.SelectedItem.ToString();
+            SqliteDataAccess.DeleteExcelIgnoreByName(lbIgnore.SelectedItem.ToString());
+            RefreshExcelIgnoreLbx();
+
+        }
+
+        private void lbIgnore_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void RefreshExcelIgnoreLbx()
+        {
+            excelIgnore.Clear();
+            lbIgnore.Items.Clear();
+            excelIgnore = SqliteDataAccess.LoadExcelIgnore();
+            foreach (var item in excelIgnore)
+            {
+                lbIgnore.Items.Add(item);
+            }
         }
     }
 }

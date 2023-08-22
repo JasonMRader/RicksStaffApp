@@ -41,9 +41,13 @@
             label1 = new Label();
             lblCreateNew = new Label();
             panel2 = new Panel();
-            textBox1 = new TextBox();
+            btnDeleteIgnore = new Button();
+            btnAddIgnore = new Button();
+            btnSaveIgnoreList = new Button();
+            btnSavePosition = new Button();
+            txtIgnoreName = new TextBox();
             label8 = new Label();
-            listBox1 = new ListBox();
+            lbIgnore = new ListBox();
             numericUpDown1 = new NumericUpDown();
             nudEndingNumber = new NumericUpDown();
             nudStartingNumber = new NumericUpDown();
@@ -57,7 +61,6 @@
             lblExcelRange = new Label();
             label4 = new Label();
             label3 = new Label();
-            btnSavePosition = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -227,10 +230,13 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnDeleteIgnore);
+            panel2.Controls.Add(btnAddIgnore);
+            panel2.Controls.Add(btnSaveIgnoreList);
             panel2.Controls.Add(btnSavePosition);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(txtIgnoreName);
             panel2.Controls.Add(label8);
-            panel2.Controls.Add(listBox1);
+            panel2.Controls.Add(lbIgnore);
             panel2.Controls.Add(numericUpDown1);
             panel2.Controls.Add(nudEndingNumber);
             panel2.Controls.Add(nudStartingNumber);
@@ -249,12 +255,63 @@
             panel2.Size = new Size(448, 674);
             panel2.TabIndex = 12;
             // 
-            // textBox1
+            // btnDeleteIgnore
             // 
-            textBox1.Location = new Point(140, 422);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(224, 23);
-            textBox1.TabIndex = 7;
+            btnDeleteIgnore.BackColor = Color.FromArgb(167, 204, 237);
+            btnDeleteIgnore.FlatAppearance.BorderSize = 0;
+            btnDeleteIgnore.FlatStyle = FlatStyle.Flat;
+            btnDeleteIgnore.Location = new Point(373, 461);
+            btnDeleteIgnore.Name = "btnDeleteIgnore";
+            btnDeleteIgnore.Size = new Size(72, 24);
+            btnDeleteIgnore.TabIndex = 9;
+            btnDeleteIgnore.Text = "Delete";
+            btnDeleteIgnore.UseVisualStyleBackColor = false;
+            btnDeleteIgnore.Click += btnDeleteIgnore_Click;
+            // 
+            // btnAddIgnore
+            // 
+            btnAddIgnore.BackColor = Color.FromArgb(167, 204, 237);
+            btnAddIgnore.FlatAppearance.BorderSize = 0;
+            btnAddIgnore.FlatStyle = FlatStyle.Flat;
+            btnAddIgnore.Location = new Point(373, 420);
+            btnAddIgnore.Name = "btnAddIgnore";
+            btnAddIgnore.Size = new Size(72, 24);
+            btnAddIgnore.TabIndex = 9;
+            btnAddIgnore.Text = "Add";
+            btnAddIgnore.UseVisualStyleBackColor = false;
+            btnAddIgnore.Click += btnAddIgnore_Click;
+            // 
+            // btnSaveIgnoreList
+            // 
+            btnSaveIgnoreList.BackColor = Color.FromArgb(167, 204, 237);
+            btnSaveIgnoreList.FlatAppearance.BorderSize = 0;
+            btnSaveIgnoreList.FlatStyle = FlatStyle.Flat;
+            btnSaveIgnoreList.Location = new Point(22, 613);
+            btnSaveIgnoreList.Name = "btnSaveIgnoreList";
+            btnSaveIgnoreList.Size = new Size(404, 36);
+            btnSaveIgnoreList.TabIndex = 9;
+            btnSaveIgnoreList.Text = "Save Ignore List";
+            btnSaveIgnoreList.UseVisualStyleBackColor = false;
+            // 
+            // btnSavePosition
+            // 
+            btnSavePosition.BackColor = Color.FromArgb(167, 204, 237);
+            btnSavePosition.FlatAppearance.BorderSize = 0;
+            btnSavePosition.FlatStyle = FlatStyle.Flat;
+            btnSavePosition.Location = new Point(22, 330);
+            btnSavePosition.Name = "btnSavePosition";
+            btnSavePosition.Size = new Size(404, 40);
+            btnSavePosition.TabIndex = 8;
+            btnSavePosition.Text = "Save Changes";
+            btnSavePosition.UseVisualStyleBackColor = false;
+            btnSavePosition.Click += btnSavePosition_Click;
+            // 
+            // txtIgnoreName
+            // 
+            txtIgnoreName.Location = new Point(140, 422);
+            txtIgnoreName.Name = "txtIgnoreName";
+            txtIgnoreName.Size = new Size(224, 23);
+            txtIgnoreName.TabIndex = 7;
             // 
             // label8
             // 
@@ -267,35 +324,36 @@
             label8.TabIndex = 6;
             label8.Text = "Excel Ignore:";
             // 
-            // listBox1
+            // lbIgnore
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(140, 461);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(224, 139);
-            listBox1.TabIndex = 5;
+            lbIgnore.FormattingEnabled = true;
+            lbIgnore.ItemHeight = 15;
+            lbIgnore.Location = new Point(140, 461);
+            lbIgnore.Name = "lbIgnore";
+            lbIgnore.Size = new Size(224, 139);
+            lbIgnore.TabIndex = 5;
+            lbIgnore.SelectedIndexChanged += lbIgnore_SelectedIndexChanged;
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(140, 348);
+            numericUpDown1.Location = new Point(140, 286);
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(43, 23);
+            numericUpDown1.Size = new Size(224, 23);
             numericUpDown1.TabIndex = 4;
             // 
             // nudEndingNumber
             // 
-            nudEndingNumber.Location = new Point(210, 276);
+            nudEndingNumber.Location = new Point(257, 243);
             nudEndingNumber.Name = "nudEndingNumber";
-            nudEndingNumber.Size = new Size(49, 23);
+            nudEndingNumber.Size = new Size(107, 23);
             nudEndingNumber.TabIndex = 3;
             nudEndingNumber.ValueChanged += SetExcelRangeText;
             // 
             // nudStartingNumber
             // 
-            nudStartingNumber.Location = new Point(210, 214);
+            nudStartingNumber.Location = new Point(257, 192);
             nudStartingNumber.Name = "nudStartingNumber";
-            nudStartingNumber.Size = new Size(49, 23);
+            nudStartingNumber.Size = new Size(107, 23);
             nudStartingNumber.TabIndex = 3;
             nudStartingNumber.ValueChanged += SetExcelRangeText;
             // 
@@ -303,9 +361,9 @@
             // 
             cboEndingLetter.FormattingEnabled = true;
             cboEndingLetter.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
-            cboEndingLetter.Location = new Point(140, 276);
+            cboEndingLetter.Location = new Point(140, 243);
             cboEndingLetter.Name = "cboEndingLetter";
-            cboEndingLetter.Size = new Size(64, 23);
+            cboEndingLetter.Size = new Size(95, 23);
             cboEndingLetter.TabIndex = 2;
             cboEndingLetter.SelectedIndexChanged += SetExcelRangeText;
             // 
@@ -313,9 +371,9 @@
             // 
             cboStartingLetter.FormattingEnabled = true;
             cboStartingLetter.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
-            cboStartingLetter.Location = new Point(140, 214);
+            cboStartingLetter.Location = new Point(140, 192);
             cboStartingLetter.Name = "cboStartingLetter";
-            cboStartingLetter.Size = new Size(64, 23);
+            cboStartingLetter.Size = new Size(95, 23);
             cboStartingLetter.TabIndex = 2;
             cboStartingLetter.SelectedIndexChanged += SetExcelRangeText;
             // 
@@ -324,7 +382,7 @@
             cboExcelPosition.FormattingEnabled = true;
             cboExcelPosition.Location = new Point(140, 81);
             cboExcelPosition.Name = "cboExcelPosition";
-            cboExcelPosition.Size = new Size(192, 23);
+            cboExcelPosition.Size = new Size(224, 23);
             cboExcelPosition.TabIndex = 1;
             cboExcelPosition.SelectedIndexChanged += cboExcelPosition_SelectedIndexChanged;
             // 
@@ -344,7 +402,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(22, 348);
+            label7.Location = new Point(22, 286);
             label7.Name = "label7";
             label7.Size = new Size(105, 25);
             label7.TabIndex = 0;
@@ -355,7 +413,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(93, 276);
+            label6.Location = new Point(93, 243);
             label6.Name = "label6";
             label6.Size = new Size(35, 25);
             label6.TabIndex = 0;
@@ -366,7 +424,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(69, 209);
+            label5.Location = new Point(69, 187);
             label5.Name = "label5";
             label5.Size = new Size(59, 25);
             label5.TabIndex = 0;
@@ -404,19 +462,6 @@
             label3.Size = new Size(83, 25);
             label3.TabIndex = 0;
             label3.Text = "Position:";
-            // 
-            // btnSavePosition
-            // 
-            btnSavePosition.BackColor = Color.FromArgb(167, 204, 237);
-            btnSavePosition.FlatAppearance.BorderSize = 0;
-            btnSavePosition.FlatStyle = FlatStyle.Flat;
-            btnSavePosition.Location = new Point(312, 211);
-            btnSavePosition.Name = "btnSavePosition";
-            btnSavePosition.Size = new Size(107, 27);
-            btnSavePosition.TabIndex = 8;
-            btnSavePosition.Text = "Save Changes";
-            btnSavePosition.UseVisualStyleBackColor = false;
-            btnSavePosition.Click += btnSavePosition_Click;
             // 
             // frmSettings
             // 
@@ -472,10 +517,13 @@
         private Label label4;
         private Label label3;
         private Label label7;
-        private TextBox textBox1;
+        private TextBox txtIgnoreName;
         private Label label8;
-        private ListBox listBox1;
+        private ListBox lbIgnore;
         private NumericUpDown numericUpDown1;
         private Button btnSavePosition;
+        private Button btnDeleteIgnore;
+        private Button btnAddIgnore;
+        private Button btnSaveIgnoreList;
     }
 }

@@ -144,6 +144,32 @@ namespace RicksStaffApp
                     new {EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, PositionID = employeeShift.Position.ID, ID = employeeShift.ID});
             }
         }
+        //ExcelIgnoreMethods
+        public static void AddExcelIgnore(string name)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var query = "INSERT INTO ExcelIgnore (name) VALUES (@Name)";
+                cnn.Execute(query, new { Name = name });
+            }
+        }
+        public static List<string> LoadExcelIgnore()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var query = "SELECT name FROM ExcelIgnore";
+                List<string> names = cnn.Query<string>(query).ToList();
+                return names;
+            }
+        }
+        public static void DeleteExcelIgnoreByName(string name)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var query = "DELETE FROM ExcelIgnore WHERE name = @Name";
+                cnn.Execute(query, new { Name = name });
+            }
+        }
 
         //Incident Methods
         public static List<Incident> LoadIncidentsForEmployeeShift(EmployeeShift employeeShift)
