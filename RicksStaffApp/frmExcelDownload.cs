@@ -594,9 +594,10 @@ namespace RicksStaffApp
                 FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 22);
 
                 empPanel.Margin = new Padding(1, 1, 1, 1);
-
+                //empPanel.Padding = new Padding(10, 1, 1, 1);
                 // Create label for employee name
-                System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 20, es.Employee.FullName);
+                System.Windows.Forms.Label lblName = UIHelper.CreateLabel(160, 20, es.Employee.FullName);
+                lblName.Margin = new Padding(20, 0, 0, 0);
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions
@@ -653,10 +654,12 @@ namespace RicksStaffApp
 
                 FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 22);
 
-                empPanel.Margin = new Padding(1, 1, 1, 1);
+                empPanel.Margin = new Padding(10, 1, 1, 1);
+                empPanel.Padding = new Padding (10, 1, 1, 1);
 
                 // Create label for employee name
                 System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 20, emp.FullName);
+                lblName.Margin = new Padding(20, 0, 0, 0);
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions
@@ -712,12 +715,13 @@ namespace RicksStaffApp
 
                 FlowLayoutPanel empPanel = UIHelper.CreateFlowPanel(180, 25);
 
-                empPanel.Margin = new Padding(1, 1, 1, 1);
+                empPanel.Margin = new Padding(10, 1, 1, 1);
+                empPanel.Padding = new Padding(10, 1, 1, 1);
                 PictureBox pbPosition = UIHelper.CreatePositionPictureBox(25,25, emp.Position);
                 empPanelContainer.Controls.Add(pbPosition);
 
                 System.Windows.Forms.Label lblName = UIHelper.CreateLabel(150, 25, emp.Employee.FullName);
-
+                //lblName.Margin = new Padding(20,0,0,0);
                 empPanel.Controls.Add(lblName);
 
                 // Create panels for employee positions
