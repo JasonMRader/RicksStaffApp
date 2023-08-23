@@ -34,6 +34,7 @@ namespace RicksStaffApp
         List<EmployeeShift> newEmployeeShifts = new List<EmployeeShift>();
         List<Position> AllPositionList = new List<Position>();
         Shift newShift = new Shift();
+        List<string> ignoredCells = new List<string>();
         string ignoreHost = "Host Card";
         string ignoreBar = "PM BAR PM";
         string ignoreBanquet = "Banquet Bartender 1";
@@ -183,6 +184,7 @@ namespace RicksStaffApp
         //}
         private void frmExcelDownload_Load(object sender, EventArgs e)
         {
+            ignoredCells = SqliteDataAccess.LoadExcelIgnore();
             dtpShiftDate.Value = shiftDate;
             newShift.Date = DateOnly.FromDateTime(dtpShiftDate.Value);
             newShift.IsAm = isAm;
@@ -254,7 +256,10 @@ namespace RicksStaffApp
                 for (int i = 1; i <= range1.Rows.Count; i++)
                 {
                     string fullName = (range1.Cells[i, 1] as Microsoft.Office.Interop.Excel.Range).Value2?.ToString();
-                    ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Server");
+                    if (!ignoredCells.Contains(fullName))
+                    {
+                        ProcessSingleEmployee(fullName, allEmployees, newEmployeeNamesStrings, "Server");
+                    }
                 }
             }
             catch (Exception ex)
