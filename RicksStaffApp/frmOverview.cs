@@ -75,8 +75,10 @@ namespace RicksStaffApp
         }
 
 
-        DateTime StartDate;
+        DateTime StartDate = new DateTime(1900/1/1);
+        
         DateTime EndDate;
+        
 
         bool isLoadScreen = true;
 
@@ -383,10 +385,8 @@ namespace RicksStaffApp
             frmViewEmployee = new frmViewEmployee();
             IsAMPM = true;
 
-            rdoViewEmployees.Checked = true;
-            rdoHighestRated.Checked = true;
-            rdoAllTime.Checked = true;
-            
+            EndDate = DateTime.Today.AddDays(1);
+
 
             cboPositions.Items.Add("All Positions");
             foreach (Position position in AllPositionList)
@@ -406,7 +406,9 @@ namespace RicksStaffApp
             CreatePositionOverviewPanels(flowPositions, AllPositionList);
             refreshViewFiltered();
 
-
+            rdoViewEmployees.Checked = true;
+            rdoHighestRated.Checked = true;
+            rdoAllTime.Checked = true;
 
 
             //AUTO COMPLETE MAKING IT CRASH? Got stack overflow error when adding a shift
