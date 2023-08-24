@@ -123,9 +123,10 @@ namespace RicksStaffApp
         {
             AllPositions = SqliteDataAccess.LoadPositions();
 
-            
+
             SqliteDataAccess.LoadEmployeeShifts(ThisEmployee);
             ThisEmployee.AddIncidentsFromShifts();
+            ThisEmployee.EmployeeShifts = ThisEmployee.EmployeeShifts.OrderByDescending(x => x.Shift.Date).ToList();
 
             GetEmployeeShiftGoodBadDistribution(ThisEmployee.EmployeeShifts);
 
@@ -135,7 +136,7 @@ namespace RicksStaffApp
             loadIncidentPanels();
 
             UIHelper.CreatePositionsForEmployee(flowEmployeePositions, ThisEmployee.Positions);
-            
+
             foreach (Position position in AllPositions)
             {
                 if (!ThisEmployee.Positions.Any(p => p.ID == position.ID))
@@ -143,7 +144,7 @@ namespace RicksStaffApp
                     lbAllPositions.Items.Add(position);
                 }
             }
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)

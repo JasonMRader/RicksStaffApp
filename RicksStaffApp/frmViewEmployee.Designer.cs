@@ -61,7 +61,7 @@
             flowFrequentIncidents.BackColor = Color.FromArgb(37, 42, 64);
             flowFrequentIncidents.Location = new Point(23, 289);
             flowFrequentIncidents.Name = "flowFrequentIncidents";
-            flowFrequentIncidents.Size = new Size(210, 307);
+            flowFrequentIncidents.Size = new Size(226, 307);
             flowFrequentIncidents.TabIndex = 3;
             // 
             // panel5
