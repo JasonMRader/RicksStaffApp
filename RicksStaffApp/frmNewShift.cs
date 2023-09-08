@@ -23,6 +23,7 @@ namespace RicksStaffApp
         bool IsFilteredByPosition = false;
         string FilteredPositionName = "All Positions";
         private Shift ShiftToEdit = new Shift();
+        List<Employee> allEmployees = new List<Employee>();
         public frmNewShift()
         {
             InitializeComponent();
@@ -507,7 +508,7 @@ namespace RicksStaffApp
         private void frmNewShift_Load(object sender, EventArgs e)
         {
             ShiftToEdit = new Shift();
-            
+           
             shifts = SqliteDataAccess.LoadShifts();
             AllPositions = SqliteDataAccess.LoadPositions();
             //DateTime date = DateTime.Now;
@@ -827,10 +828,50 @@ namespace RicksStaffApp
 
         private void dtpShiftDate_ValueChanged(object sender, EventArgs e)
         {
-            //List <EmployeeShift> employeeShifts = new List <EmployeeShift>();
-            //UIHelper.CreateEmployeeShiftPanels(shifts, flowEmployeeShiftDisplay, DateOnly.FromDateTime(dtpShiftDate.Value), pnlNewShiftDisplay);
-            shifts = SqliteDataAccess.LoadShifts();
+            
+            //DateTime shiftDate = dtpShiftDate.Value.Date;
+            //string excelFilePath = SelectExcelFile();
+            //flowEmployeeShiftDisplay.Controls.Clear();
+            //if (!string.IsNullOrEmpty(excelFilePath))
+            //{
+               
+            //    ShiftToEdit.DateAsDateTime = shiftDate;
+                
 
+            //    ExcelShift excelShift = new ExcelShift(ShiftToEdit);
+            //    excelShift.ProcessExcelFile(excelFilePath);
+            //    OpenExcelFormWithExcelShift(excelShift);
+               
+            //}
+
+            
+           
+
+        }
+        private string SelectExcelFile()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    return openFileDialog.FileName;
+                }
+            }
+            return null;
+        }
+        private void OpenExcelFormWithExcelShift(ExcelShift excelShift)
+        {
+            frmExcelDownload frmExcelDownload = new frmExcelDownload(excelShift);
+            frmExcelDownload.ShiftCreated += frmExcel_refreshShiftList;
+            //frmExcelDownload.ShiftCreated += refreshShiftPanels;
+            pnlNewShiftDisplay.Controls.Clear();
+            frmExcelDownload.TopLevel = false;
+
+            pnlNewShiftDisplay.Controls.Add(frmExcelDownload);
+            frmExcelDownload.Show();
         }
         private void OpenExcelDownloadForm(DateTime shiftDate, bool isAm)
         {

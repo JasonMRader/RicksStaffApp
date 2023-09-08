@@ -17,6 +17,7 @@ namespace RicksStaffApp
     {
         private DateTime shiftDate;
         private bool isAm;
+        ExcelShift ExcelShift = new ExcelShift();
         //public event System.Action ShiftCreated;
         public frmExcelDownload(DateTime shiftDate, bool isAm)
         {
@@ -24,6 +25,16 @@ namespace RicksStaffApp
             this.isAm = isAm;
             InitializeComponent();
             this.Shown += frmExcelDownload_Shown;
+
+        }
+        public frmExcelDownload(ExcelShift excelShift)
+        {
+
+            //this.shiftDate = excelShift.newShift.DateAsDateTime;
+            //this.isAm = excelShift.;
+            this.ExcelShift = excelShift;
+            InitializeComponent();
+            //this.Shown += frmExcelDownload_Shown;
 
         }
         //Shift newShift = new Shift();
@@ -443,24 +454,20 @@ namespace RicksStaffApp
                 }
                 else
                 {
-                    if (fullName != ignoreBanquet)
-                    {
-                        newEmployeeNamesStrings.Add(fullName);
-                        CreateNewEmployeeAndEmployeeShift(fullName, positionName);
+                    
+                    newEmployeeNamesStrings.Add(fullName);
+                    CreateNewEmployeeAndEmployeeShift(fullName, positionName);
 
-                    }
+                    
                 }
             }
         }
         private void CreateNewEmployeeAndEmployeeShift(string fullName, string positionName)
         {
             Employee newEmp = new Employee();
-            if (fullName != ignoreHost & fullName != ignoreBar & fullName != ignoreBanquet & fullName != ignoreBanquetBar)
-            {
-                newEmp = new Employee(fullName);
-                newEmp.Positions.Add(GetPositionByName(positionName));
-                newEmployees.Add(newEmp);
-            }
+            newEmp = new Employee(fullName);
+            newEmp.Positions.Add(GetPositionByName(positionName));
+            newEmployees.Add(newEmp);
             EmployeeShift employeeShift = new EmployeeShift(newEmp, newShift)
             {
                 Position = GetPositionByName(positionName),
@@ -515,14 +522,9 @@ namespace RicksStaffApp
                     {
                         employee.ID = SqliteDataAccess.AddEmployee(employee);
                     }
-                }
-
-                
-                
-                
-                newShift.ID = SqliteDataAccess.AddShift(newShift);
-
-                               
+                }              
+                                
+                newShift.ID = SqliteDataAccess.AddShift(newShift);                                              
 
                 foreach (EmployeeShift es in employeeShifts)
                 {
@@ -533,9 +535,7 @@ namespace RicksStaffApp
                     //shiftToAdd.EmployeeShifts.Add(es);
                 }
                 Shift shiftToAdd = SqliteDataAccess.LoadShiftAndAllChildren(newShift.IsAm, newShift.DateString);
-
-                OnShiftCreation(shiftToAdd);
-                
+                OnShiftCreation(shiftToAdd);                
 
             }
             catch (Exception ex)
@@ -547,11 +547,7 @@ namespace RicksStaffApp
                 this.Close();
                 this.Dispose(true);
             }
-
-            //ShiftCreated?.Invoke();
-
-
-
+            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

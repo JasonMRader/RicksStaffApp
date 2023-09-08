@@ -12,6 +12,7 @@ namespace RicksStaffApp
         public List<Employee> Employees { get; private set; }
         public List<Shift> Shifts { get; private set; }
         public List<Incident> Incidents { get; private set; }
+        public List<string> ignoredExcelCells { get; private set; }
         // ... other lists
 
         private DataSingleton()
@@ -36,6 +37,7 @@ namespace RicksStaffApp
         private void LoadDataFromDatabase()
         {
             Employees = SqliteDataAccess.LoadEmployees();
+            ignoredExcelCells = SqliteDataAccess.LoadExcelIgnore();
         }
 
         public void SaveDataToDatabase()
