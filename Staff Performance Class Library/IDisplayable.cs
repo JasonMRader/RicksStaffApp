@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public interface IDisplayable
     {

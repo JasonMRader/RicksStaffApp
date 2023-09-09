@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Staff_Performance_Class_Library;
+
 namespace RicksStaffApp
 {
     public partial class frmSettings : Form

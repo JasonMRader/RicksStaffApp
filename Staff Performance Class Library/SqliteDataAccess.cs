@@ -1,6 +1,5 @@
 ﻿using Dapper;
-using Microsoft.Office.Interop.Excel;
-using RicksStaffApp;
+//using Microsoft.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,11 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public class SqliteDataAccess
     {
-       
+
 
         //TODO: do i need to close these connections?
         //TODO: connect to the DB less often, use lists I already have loaded
@@ -54,7 +53,7 @@ namespace RicksStaffApp
                 cnn.Close();
                 return employeeId;
             }
-           
+
         }
         public static void DeleteEmployee(int employeeId)
         {
@@ -63,7 +62,7 @@ namespace RicksStaffApp
                 cnn.Execute("DELETE FROM Employee WHERE ID = @EmployeeId", new { EmployeeId = employeeId });
                 cnn.Execute("DELETE FROM EmployeePositions WHERE EmployeeID = @EmployeeId", new { EmployeeId = employeeId });
             }
-        }      
+        }
         public static void UpdateEmployee(Employee employee)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -74,7 +73,7 @@ namespace RicksStaffApp
                 {
                     // Update the employee in the Employee table
                     cnn.Execute("update Employee set FirstName = @FirstName, LastName = @LastName where Id = @Id",
-                        new { FirstName = employee.FirstName, LastName = employee.LastName, Id = employee.ID });
+                        new { employee.FirstName, employee.LastName, Id = employee.ID });
 
                     // Delete all existing entries in the EmployeePosition table for this employee
                     cnn.Execute("delete from EmployeePosition where EmployeeId = @EmployeeId", new { EmployeeId = employee.ID });
@@ -126,9 +125,9 @@ namespace RicksStaffApp
                 {
                     // Update the employee in the Employee table
                     cnn.Execute("update Position set Name = @Name, ExcelRange = @ExcelRange where Id = @Id",
-                        new { Name = position.Name, ExcelRange = position.ExcelRange, Id = position.ID });
+                        new { position.Name, position.ExcelRange, Id = position.ID });
 
-                   
+
 
                     transaction.Commit();
                 }
@@ -137,11 +136,11 @@ namespace RicksStaffApp
         }
         public static void UpdatePositionFromEmployeeShift(EmployeeShift employeeShift)
         {
-            
+
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("update EmployeeShift set EmployeeID = @EmployeeID, ShiftID = @ShiftID, PositionID = @PositionID where ID = @ID",
-                    new {EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, PositionID = employeeShift.Position.ID, ID = employeeShift.ID});
+                    new { EmployeeID = employeeShift.Employee.ID, ShiftID = employeeShift.Shift.ID, PositionID = employeeShift.Position.ID, employeeShift.ID });
             }
         }
         //ExcelIgnoreMethods
@@ -201,7 +200,7 @@ namespace RicksStaffApp
                 cnn.Execute("insert into Incident (ActivityID, Note, DateString, EmployeeShiftID) values (@ActivityID, @Note, @DateString, @EmployeeShiftID)", incident);
                 incident.ID = cnn.ExecuteScalar<int>("select last_insert_rowid()");
             }
-        }       
+        }
         public static void DeleteIncident(int incidentId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -251,15 +250,15 @@ namespace RicksStaffApp
                     AddIncident(incident);
                 }
             }
-        }                     
+        }
         public static void UpdateIncident(Incident incident)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("update Incident set ActivityID = @ActivityID, Note = @Note, DateString = @DateString where Id = @IncidentId",
-            new { ActivityID = incident.ID, Note = incident.Note, DateString = incident.DateString, Id = incident.ID });
+            new { ActivityID = incident.ID, incident.Note, incident.DateString, Id = incident.ID });
 
-                
+
             }
         }
 
@@ -285,7 +284,7 @@ namespace RicksStaffApp
                                 new { ActivityId = activityId, ModifierId = modifier.ID });
                         }
                     }
-                    
+
 
 
                     transaction.Commit();
@@ -300,7 +299,7 @@ namespace RicksStaffApp
                 cnn.Execute("DELETE FROM Activity WHERE ID = @ActivityId", new { ActivityId = activityId });
                 cnn.Execute("DELETE FROM ActivityModifier WHERE ActivityID = @ActivityId", new { ActivityId = activityId });
             }
-        }               
+        }
         public static List<Activity> LoadActivities()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -336,7 +335,7 @@ namespace RicksStaffApp
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into ActivityModifier (ActivityId, Name, RatingAdjustment) values (@ActivityId, @Name, @RatingAdjustment)",
-                    new { ActivityId = modifier.ActivityID, Name = modifier.Name, RatingAdjustment = modifier.RatingAdjustment });
+                    new { ActivityId = modifier.ActivityID, modifier.Name, modifier.RatingAdjustment });
             }
         }
         public static void DeleteActivityModifier(int modifierId)
@@ -402,7 +401,7 @@ namespace RicksStaffApp
 
 
         //Shift Methods
-        
+
         public static Shift LoadShift(bool isAm, string dateString)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -484,7 +483,7 @@ namespace RicksStaffApp
                     LEFT JOIN Incident i ON es.ID = i.EmployeeShiftID   
                     WHERE es.ShiftID = @ShiftID";
 
-                
+
                 foreach (var shift in shifts)
                 {
                     var employeeShiftsDictionary = new Dictionary<int, EmployeeShift>();
@@ -549,12 +548,12 @@ namespace RicksStaffApp
             List<Position> positions = new List<Position>();
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                
+
                 string positionQuery = "SELECT p.* FROM Position p INNER JOIN EmployeePosition ep ON p.ID = ep.PositionID WHERE ep.EmployeeID = @EmployeeID";
                 positions = cnn.Query<Position>(positionQuery, new { EmployeeID = employee.ID }).ToList();
             }
             return positions;
-                
+
         }
 
         public static List<Employee> TestLoadEmployees()
@@ -593,7 +592,7 @@ namespace RicksStaffApp
                             {
                                 currentEmployeeShift = employeeShift;
                                 currentEmployeeShift.Employee = employee;
-                                
+
                                 currentEmployeeShift.Position = position;
                                 currentEmployeeShift.Incidents = new List<Incident>();
                                 employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
@@ -612,7 +611,7 @@ namespace RicksStaffApp
                     foreach (var employeeShift in employeeShifts)
                     {
                         // Retrieve the shift object
-                        var shift = cnn.QueryFirstOrDefault<Shift>(shiftQuery, new { ShiftID = employeeShift.ShiftID });
+                        var shift = cnn.QueryFirstOrDefault<Shift>(shiftQuery, new { employeeShift.ShiftID });
 
                         // Assign the shift to the employeeShift
                         employeeShift.Shift = shift;
@@ -623,16 +622,16 @@ namespace RicksStaffApp
                     employee.EmployeeShifts = employeeShifts;
                     employee.Positions = cnn.Query<Position>(positionQuery, new { EmployeeID = employee.ID }).ToList();
 
-                    
+
                 }
                 //TODO: remove LoadActivities() from here
                 List<Activity> activities = LoadActivities();
-                
+
 
                 Incident.AssignActivitiesToEmployeeIncidents(employees, activities);
                 return employees;
 
-                
+
             }
         }
         //TODO -Fix this
@@ -691,10 +690,10 @@ namespace RicksStaffApp
                             {
                                 currentEmployeeShift = employeeShift;
                                 currentEmployeeShift.Employee = employee;
-                                currentEmployeeShift.Shift = shift;      
+                                currentEmployeeShift.Shift = shift;
                                 currentEmployeeShift.Position = position;
                                 currentEmployeeShift.Incidents = new List<Incident>();
-                                
+
                                 employeeShiftsDictionary.Add(currentEmployeeShift.ID, currentEmployeeShift);
                             }
                             //if (incident != null && incident.ID != default)
@@ -734,7 +733,7 @@ namespace RicksStaffApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("DELETE from Shift WHERE ID = @ShiftID", new { ShiftId = shiftID});
+                cnn.Execute("DELETE from Shift WHERE ID = @ShiftID", new { ShiftId = shiftID });
                 //cnn.Execute("delete from Shift where ShiftID = @ShiftID", shift);
             }
         }
@@ -826,7 +825,7 @@ namespace RicksStaffApp
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("update EmployeeShift set EmployeeId = @EmployeeId, PositionId = @PositionId, where ID = @ID",
-                    new { EmployeeId = shift.Employee.ID, ID = shift.ID });
+                    new { EmployeeId = shift.Employee.ID, shift.ID });
                 //PositionId = shift.Position.ID, 
             }
         }
@@ -845,9 +844,9 @@ namespace RicksStaffApp
             }
 
         }
-        
-    //write a method to load the employee shifts
-    
+
+        //write a method to load the employee shifts
+
     }
 
 }

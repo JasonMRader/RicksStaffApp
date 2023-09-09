@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public class Activity //: IDisplayable
     {
@@ -14,7 +14,7 @@ namespace RicksStaffApp
             //AdjustedRatingChange = 0;
             List<ActivityModifier> list = new List<ActivityModifier>();
         }
-        public int ID {  get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         //public int AdjustedRatingChange { get; set; }
         public int BaseRatingImpact { get; set; }
@@ -30,11 +30,11 @@ namespace RicksStaffApp
                 {
                     return BaseRatingImpact.ToString();
                 }
-                
+
             }
         }
-        
-        public List<ActivityModifier>? ActivityModifiers { get; set;}
+
+        public List<ActivityModifier>? ActivityModifiers { get; set; }
 
         public List<Control> CreateControls()
         {
@@ -95,9 +95,9 @@ namespace RicksStaffApp
 
         //    activityPanelContainer.Controls.Add(activityPanel);
 
-            
+
         //    activityPanelContainer.Controls.Add(activityPanel);
-           
+
         //    Button btnAddToEmpShift = new Button();
         //    btnAddToEmpShift.Text = "+";
         //    btnAddToEmpShift.Margin = new Padding(2, 2, 0, 0);

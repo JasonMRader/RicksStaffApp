@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public class Employee
     {
@@ -73,7 +73,7 @@ namespace RicksStaffApp
         {
             return string.Equals(FirstName, name, StringComparison.OrdinalIgnoreCase);
         }
-        
+
 
         public override string ToString()
         {
@@ -112,7 +112,7 @@ namespace RicksStaffApp
             }
         }
 
-        
+
         public void UpdateOverallRating()
         {
             float totalRating = 0; // initialize total rating to default value
@@ -123,7 +123,7 @@ namespace RicksStaffApp
                 totalRating += employeeShift.ShiftRating; // add shift rating to total rating
             }
 
-            OverallRating = totalRating / (EmployeeShifts.Count); // divide total rating by number of shifts plus default value to get average
+            OverallRating = totalRating / EmployeeShifts.Count; // divide total rating by number of shifts plus default value to get average
         }
         public float GetPositionRating(string positionName)
         {

@@ -1,6 +1,6 @@
 ﻿//using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public class EmployeeShift
     {
@@ -9,7 +9,7 @@ namespace RicksStaffApp
             Incidents = new List<Incident>();
             //Start at 6?
             //ShiftRating = 6;
-// THIS MAY NEED UNCOMMENTED!!!!!!!!!!!!!!!*****************
+            // THIS MAY NEED UNCOMMENTED!!!!!!!!!!!!!!!*****************
             //Shift = new Shift();
             //Employee = new Employee();
             ShiftRating = _shiftRating;
@@ -23,7 +23,7 @@ namespace RicksStaffApp
         public int ID { get; set; }
         public Employee Employee { get; set; }
         public Shift Shift { get; set; }
-        public int ShiftID { get; set; }    
+        public int ShiftID { get; set; }
         public Position Position { get; set; }
         public string DateString { get; set; }
         public int PositionID
@@ -35,7 +35,7 @@ namespace RicksStaffApp
 
         }
         private float _shiftRating;
-        public string EmployeeName { get {return this.Employee.FullName; } }
+        public string EmployeeName { get { return Employee.FullName; } }
         //public float ShiftRating
         //{
         //    get { return _shiftRating; }
@@ -81,13 +81,13 @@ namespace RicksStaffApp
                 }
             }
         }
-        public string AmPmString 
+        public string AmPmString
         {
             get
             {
-                return this.Shift.IsAm ? "AM" : "PM";
+                return Shift.IsAm ? "AM" : "PM";
             }
-           
+
 
 
         }
@@ -95,14 +95,14 @@ namespace RicksStaffApp
         public Image RatingDisplay { get; set; }
         public void AddIncident(Incident incident)
         {
-            incident.EmployeeShiftID = this.ID;
+            incident.EmployeeShiftID = ID;
             Incidents.Add(incident);
             UpdateShiftRating();
             //ShiftRating = _shiftRating;
         }
         public void RemoveIncident(Incident incident)
         {
-            incident.EmployeeShiftID = this.ID;
+            incident.EmployeeShiftID = ID;
             Incidents.Remove(incident);
             UpdateShiftRating();
             //ShiftRating = _shiftRating;
@@ -140,7 +140,7 @@ namespace RicksStaffApp
     //    // Iterate over the employee shifts
     //    foreach (EmployeeShift employeeShift in employeeShifts)
     //    {
-            
+
     //    }
     //}
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public class ExcelShift
     {
-        public ExcelShift(Shift shift) 
-        { 
-            this.newShift = shift;
+        public ExcelShift(Shift shift)
+        {
+            newShift = shift;
         }
         public ExcelShift() { }
 
@@ -25,9 +26,9 @@ namespace RicksStaffApp
         public Shift newShift { get; set; }
         //public List<string> ignoredCells { get; set; }
         List<string> newEmployeeNamesStrings { get; set; }
-        
-       
-       
+
+
+
         //*******  1
         public void ProcessExcelFile(string filePath)
         {
@@ -160,12 +161,12 @@ namespace RicksStaffApp
 
                 if (matchedEmployee != null)
                 {
-                    this.employeesOnShift.Add(matchedEmployee);
+                    employeesOnShift.Add(matchedEmployee);
                     CreateEmployeeShift(positionName, matchedEmployee);
                 }
                 else
                 {
-                    this.newEmployeeNamesStrings.Add(fullName);
+                    newEmployeeNamesStrings.Add(fullName);
                     CreateNewEmployeeAndEmployeeShift(fullName, positionName);
                 }
             }
@@ -181,7 +182,7 @@ namespace RicksStaffApp
                 Employee = employee
             };
             employeeShift.Employee.Positions.Add(employeeShift.Position);
-            this.newShift.EmployeeShifts.Add(employeeShift);
+            newShift.EmployeeShifts.Add(employeeShift);
 
         }
         // ********** 5
@@ -217,7 +218,7 @@ namespace RicksStaffApp
 
                 for (int j = 0; j < t.Length; j++)
                 {
-                    int cost = (s[i] == t[j]) ? 0 : 1;
+                    int cost = s[i] == t[j] ? 0 : 1;
                     v1[j + 1] = Math.Min(v1[j] + 1, Math.Min(v0[j + 1] + 1, v0[j] + cost));
                 }
 

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
-    public class Shift 
+    public class Shift
     {
         public Shift() { }
         public int ID { get; set; }
@@ -60,7 +60,7 @@ namespace RicksStaffApp
                     var avgRating = totalRating / EmployeeShifts.Count;
                     return avgRating;
                 }
-                
+
             }
         }
         //public DateTime DateTime
@@ -70,7 +70,7 @@ namespace RicksStaffApp
         //}
         public string DateString
         {
-            get { return Date.ToString("MM/dd/yyyy");}
+            get { return Date.ToString("MM/dd/yyyy"); }
             set
             {
                 var dateTime = DateTime.Parse(value);
@@ -81,12 +81,12 @@ namespace RicksStaffApp
         }
         public DateTime DateAsDateTime
         {
-            get { return new DateTime (Date.Year, Date.Month, Date.Day, 0,0,0); }
+            get { return new DateTime(Date.Year, Date.Month, Date.Day, 0, 0, 0); }
             set
             {
-                Date  = DateOnly.FromDateTime(value);
+                Date = DateOnly.FromDateTime(value);
             }
-            
+
         }
     }
 }

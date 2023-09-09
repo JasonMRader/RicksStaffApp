@@ -1,4 +1,7 @@
-﻿namespace RicksStaffApp
+﻿
+using Staff_Performance_Class_Library;
+
+namespace RicksStaffApp
 {
     public partial class frmServerShift : Form
     {

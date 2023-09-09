@@ -1,4 +1,4 @@
-﻿namespace RicksStaffApp
+﻿namespace Staff_Performance_Class_Library
 {
     public class ActivityModifier
     {

@@ -1,11 +1,11 @@
-﻿using RicksStaffApp.Properties;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RicksStaffApp
+namespace Staff_Performance_Class_Library
 {
     public class Incident : Activity//, IDisplayable
     {
@@ -16,7 +16,7 @@ namespace RicksStaffApp
             //ID = activity.ID;
             Name = activity.Name;
             ActivityID = activity.ID;
-            
+
             BaseRatingImpact = activity.BaseRatingImpact;
             ActivityModifiers = activity.ActivityModifiers;
             ActiveActivityModifiers = new List<ActivityModifier>();
@@ -167,31 +167,31 @@ namespace RicksStaffApp
             // Create a dictionary to efficiently lookup activities by their ID
             Dictionary<int, Activity> activityLookup = activities.ToDictionary(activity => activity.ID);
 
-            
-                // Iterate over the employee shifts in the current shift
-                foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
+
+            // Iterate over the employee shifts in the current shift
+            foreach (EmployeeShift employeeShift in shift.EmployeeShifts)
+            {
+                // Iterate over the incidents in the current employee shift
+                foreach (Incident incident in employeeShift.Incidents)
                 {
-                    // Iterate over the incidents in the current employee shift
-                    foreach (Incident incident in employeeShift.Incidents)
+                    // Check if the incident's ActivityID is in the activityLookup dictionary
+                    if (activityLookup.TryGetValue(incident.ActivityID, out Activity activity))
                     {
-                        // Check if the incident's ActivityID is in the activityLookup dictionary
-                        if (activityLookup.TryGetValue(incident.ActivityID, out Activity activity))
-                        {
-                            // Assign the activity properties to the incident
-                            incident.Name = activity.Name;
-                            //incident.AdjustedRatingChange = activity.AdjustedRatingChange;
-                            incident.BaseRatingImpact = activity.BaseRatingImpact;
-                            incident.ActivityModifiers = activity.ActivityModifiers;
-                        }
+                        // Assign the activity properties to the incident
+                        incident.Name = activity.Name;
+                        //incident.AdjustedRatingChange = activity.AdjustedRatingChange;
+                        incident.BaseRatingImpact = activity.BaseRatingImpact;
+                        incident.ActivityModifiers = activity.ActivityModifiers;
                     }
                 }
-            
+            }
+
         }
         public static void AssignActivitiesToIncidents(List<Incident> incidents, List<Activity> activities)
         {
             // Create a dictionary to efficiently lookup activities by their ID
-            Dictionary<int, Activity> activityLookup = activities.ToDictionary(activity => activity.ID);                
-                
+            Dictionary<int, Activity> activityLookup = activities.ToDictionary(activity => activity.ID);
+
             // Iterate over the incidents in the current employee shift
             foreach (Incident incident in incidents)
             {
@@ -205,8 +205,8 @@ namespace RicksStaffApp
                     incident.ActivityModifiers = activity.ActivityModifiers;
                 }
             }
-                
-            
+
+
         }
         public static void AssignActivitiesToEmployeeIncidents(List<Employee> employees, List<Activity> activities)
         {
@@ -236,54 +236,7 @@ namespace RicksStaffApp
             }
         }
 
-        public List<Control> CreateControls()
-        {
-            List<Control> controls = new List<Control>();
-            Label lblIncidentName = UIHelper.CreateNameLable(Name);
-            //lblIncidentName.Text = Name;
-            //lblIncidentName.Size = new Size(70, 30);
-            //lblIncidentName.ForeColor = Color.Black;
-            //lblIncidentName.TextAlign = ContentAlignment.MiddleCenter;
-            controls.Add(lblIncidentName);
-
-            PictureBox picUpDown = new PictureBox();
-            picUpDown.Size = new Size(30, 30);
-            picUpDown.Margin = new Padding(15, 3, 0, 0);
-            picUpDown.Image = UIHelper.GetArrowImage(IncidentRatingChange);
-            controls.Add(picUpDown);
-
-            Label lblIncidentRating = new Label();
-            lblIncidentRating.Size = new Size(30, 30);
-            lblIncidentRating.TextAlign = ContentAlignment.MiddleCenter;
-            lblIncidentRating.Text = BaseRatingImpact.ToString();
-            controls.Add(lblIncidentRating);
-
-            
-            if (Note != null)
-            {
-                Label note = new Label();
-                note.Text = Note.ToString();
-                note.Size = new Size(250, 30);
-                controls.Add(note);
-            }
-            return controls;
-        }
-
-        public FlowLayoutPanel CreateFlowLayoutPanel()
-        {
-            FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
-            
-            incidentPanel.AutoSize = true;
-            incidentPanel.BackColor = UIHelper.GetBackColor(IncidentRatingChange);
-            
-            List<Control> controls = CreateControls();
-            foreach (Control control in controls)
-            {
-                incidentPanel.Controls.Add(control);
-            }
-            return incidentPanel;
-            
-        }
+        
         //public Label CreateLable()
         //{
         //    Label lblLable = new Label();

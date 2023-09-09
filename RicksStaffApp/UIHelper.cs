@@ -5,6 +5,9 @@ using System.Data;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using Staff_Performance_Class_Library;
+//using Microsoft.Office.Interop.Excel;
+
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Excel;
 
@@ -452,7 +455,7 @@ namespace RicksStaffApp
                 return null;
             }
         }
-        public static Label CreateNameLable(string display)
+        public static System.Windows.Forms.Label CreateNameLable(string display)
         {
             Label lblLable = new Label();
             lblLable.Text = display;
@@ -577,13 +580,61 @@ namespace RicksStaffApp
 
             foreach (Incident incident in incidentList)
             {
-                FlowLayoutPanel incidentPanel = incident.CreateFlowLayoutPanel();
+                FlowLayoutPanel incidentPanel = CreateFlowLayoutPanel(incident);
 
 
                 flowDisplay.Controls.Add(incidentPanel);
 
 
             }
+        }
+        public static List<Control> CreateControls(Incident incident)
+        {
+            List<Control> controls = new List<Control>();
+            System.Windows.Forms.Label lblIncidentName = UIHelper.CreateNameLable(incident.Name);
+            //lblIncidentName.Text = Name;
+            //lblIncidentName.Size = new Size(70, 30);
+            //lblIncidentName.ForeColor = Color.Black;
+            //lblIncidentName.TextAlign = ContentAlignment.MiddleCenter;
+            controls.Add(lblIncidentName);
+
+            PictureBox picUpDown = new PictureBox();
+            picUpDown.Size = new Size(30, 30);
+            picUpDown.Margin = new Padding(15, 3, 0, 0);
+            picUpDown.Image = UIHelper.GetArrowImage(incident.IncidentRatingChange);
+            controls.Add(picUpDown);
+
+            System.Windows.Forms.Label lblIncidentRating = new System.Windows.Forms.Label();
+            lblIncidentRating.Size = new Size(30, 30);
+            lblIncidentRating.TextAlign = ContentAlignment.MiddleCenter;
+            lblIncidentRating.Text = incident.BaseRatingImpact.ToString();
+            controls.Add(lblIncidentRating);
+
+
+            if (incident.Note != null)
+            {
+                System.Windows.Forms.Label note = new System.Windows.Forms.Label();
+                note.Text = incident.Note.ToString();
+                note.Size = new Size(250, 30);
+                controls.Add(note);
+            }
+            return controls;
+        }
+
+        public static FlowLayoutPanel CreateFlowLayoutPanel(Incident incident)
+        {
+            FlowLayoutPanel incidentPanel = new FlowLayoutPanel();
+
+            incidentPanel.AutoSize = true;
+            incidentPanel.BackColor = GetBackColor(incident.IncidentRatingChange);
+
+            List<Control> controls = CreateControls(incident);
+            foreach (Control control in controls)
+            {
+                incidentPanel.Controls.Add(control);
+            }
+            return incidentPanel;
+
         }
         public static void CreateIncidentPanels(List<Incident> incidentList, FlowLayoutPanel flowDisplay)
         {
@@ -595,7 +646,7 @@ namespace RicksStaffApp
 
             foreach (Incident incident in incidentList)
             {
-                FlowLayoutPanel incidentPanel = incident.CreateFlowLayoutPanel();
+                FlowLayoutPanel incidentPanel = CreateFlowLayoutPanel(incident);
                 incidentPanel.AutoSize = false;
                 incidentPanel.Width = 425;
                 incidentPanel.Height = 30;
