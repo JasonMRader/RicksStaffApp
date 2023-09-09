@@ -13,6 +13,7 @@ namespace RicksStaffApp
 {
     public partial class frmTest : Form
     {
+        FilteredDataManager? dataManager;// = new FilteredDataManager();
         public frmTest()
         {
             InitializeComponent();
@@ -137,7 +138,7 @@ namespace RicksStaffApp
         private async static Task<List<Panel>> CreateEmployeeOverviewPanelsTest(List<Employee> employeeList)
         {
             // Clear existing panels
-            
+
             List<Panel> panelsAdded = new List<Panel>();
 
             // Loop through employee list and create a panel for each employee
@@ -145,7 +146,7 @@ namespace RicksStaffApp
             {
                 emp.UpdateOverallRating();
                 Panel empPanelContainer = UIHelper.CreatePanel(410, 40);
-                
+
                 empPanelContainer.Margin = new Padding(15, 7, 15, 0);
                 empPanelContainer.Location = new Point(15, 7);
 
@@ -155,19 +156,19 @@ namespace RicksStaffApp
 
                 System.Windows.Forms.Button btnName = UIHelper.CreateButtonTemplate(170, 40, emp.FullName);
                 btnName.Font = new Font("Arial", 12, FontStyle.Bold);
-               
+
 
                 empPanel.Controls.Add(btnName);
-               
+
 
                 PictureBox pbRating = UIHelper.CreateRatingPictureBox(160, 40, emp.OverallRating);
-               
+
                 empPanel.Controls.Add(pbRating);
 
                 empPanelContainer.Controls.Add(empPanel);
 
                 Label lblRating = new Label();
-                
+
                 lblRating.Font = new Font("Arial", 12, FontStyle.Bold);
                 lblRating.Margin = new Padding(0);
                 lblRating.Location = new Point(410, 0);
@@ -178,12 +179,12 @@ namespace RicksStaffApp
 
                 empPanel.Controls.Add(lblRating);
 
-                
+
                 panelsAdded.Add(empPanelContainer);
             }
 
-            
-            
+
+
             return panelsAdded;
         }
         private async Task RefreshDataAndView()
@@ -195,9 +196,9 @@ namespace RicksStaffApp
             foreach (Panel panel in panelsAdded)
             {
                 flowEmployeeRankingsTest.Controls.Add(panel);
-                
+
             }
-            
+
             var EmployeesByGoodShiftRatio = AllEmployeeList.OrderByDescending(emp => emp.GoodShiftPercentage).Take(100).ToList();
             var rankedShifts = AllShiftList.OrderByDescending(shift => shift.AverageRating).Take(100).ToList();
 
@@ -234,6 +235,15 @@ namespace RicksStaffApp
             //await CreateEmployeeOverviewPanelsTest(AllEmployeeList, flowEmployeeRankingsTest, pnlEmployeeStatsTest, lblMainWindowDescriptionTest, btnResetTest);
 
 
+        }
+
+        private void frmTest_Load(object sender, EventArgs e)
+        {
+            clbPositions.Items.Clear();
+            foreach(Position p in DataSingleton.Instance.Positions)
+            {
+                clbPositions.Items.Add(p);
+            }
         }
     }
 

@@ -43,6 +43,11 @@
             flowEmployeeRankingsTest = new FlowLayoutPanel();
             lblMainWindowDescriptionTest = new Label();
             btnResetTest = new Button();
+            startDatePicker = new DateTimePicker();
+            endDatePicker = new DateTimePicker();
+            isAMCheckBox = new CheckBox();
+            isPMCheckBox = new CheckBox();
+            clbPositions = new CheckedListBox();
             pnlEmployeeStatsTest.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -50,7 +55,7 @@
             // 
             // btnLoadEmployees
             // 
-            btnLoadEmployees.Location = new Point(49, 59);
+            btnLoadEmployees.Location = new Point(53, 135);
             btnLoadEmployees.Name = "btnLoadEmployees";
             btnLoadEmployees.Size = new Size(117, 23);
             btnLoadEmployees.TabIndex = 0;
@@ -60,7 +65,7 @@
             // 
             // btnLoadShifts
             // 
-            btnLoadShifts.Location = new Point(193, 59);
+            btnLoadShifts.Location = new Point(197, 135);
             btnLoadShifts.Name = "btnLoadShifts";
             btnLoadShifts.Size = new Size(75, 23);
             btnLoadShifts.TabIndex = 0;
@@ -70,7 +75,7 @@
             // 
             // btnLoadEmployeeShifts
             // 
-            btnLoadEmployeeShifts.Location = new Point(288, 59);
+            btnLoadEmployeeShifts.Location = new Point(292, 135);
             btnLoadEmployeeShifts.Name = "btnLoadEmployeeShifts";
             btnLoadEmployeeShifts.Size = new Size(141, 23);
             btnLoadEmployeeShifts.TabIndex = 0;
@@ -80,7 +85,7 @@
             // 
             // btnLoadIncidents
             // 
-            btnLoadIncidents.Location = new Point(476, 59);
+            btnLoadIncidents.Location = new Point(480, 135);
             btnLoadIncidents.Name = "btnLoadIncidents";
             btnLoadIncidents.Size = new Size(146, 23);
             btnLoadIncidents.TabIndex = 0;
@@ -90,7 +95,7 @@
             // 
             // btnLoadActivities
             // 
-            btnLoadActivities.Location = new Point(699, 59);
+            btnLoadActivities.Location = new Point(703, 135);
             btnLoadActivities.Name = "btnLoadActivities";
             btnLoadActivities.Size = new Size(126, 23);
             btnLoadActivities.TabIndex = 1;
@@ -102,9 +107,9 @@
             // 
             pnlEmployeeStatsTest.BackColor = Color.FromArgb(37, 42, 64);
             pnlEmployeeStatsTest.Controls.Add(panel2);
-            pnlEmployeeStatsTest.Location = new Point(29, 145);
+            pnlEmployeeStatsTest.Location = new Point(29, 243);
             pnlEmployeeStatsTest.Name = "pnlEmployeeStatsTest";
-            pnlEmployeeStatsTest.Size = new Size(475, 507);
+            pnlEmployeeStatsTest.Size = new Size(475, 409);
             pnlEmployeeStatsTest.TabIndex = 2;
             // 
             // panel2
@@ -179,16 +184,16 @@
             // flowEmployeeRankingsTest
             // 
             flowEmployeeRankingsTest.BackColor = Color.FromArgb(37, 42, 64);
-            flowEmployeeRankingsTest.Location = new Point(545, 132);
+            flowEmployeeRankingsTest.Location = new Point(545, 243);
             flowEmployeeRankingsTest.Name = "flowEmployeeRankingsTest";
-            flowEmployeeRankingsTest.Size = new Size(440, 574);
+            flowEmployeeRankingsTest.Size = new Size(440, 463);
             flowEmployeeRankingsTest.TabIndex = 3;
             // 
             // lblMainWindowDescriptionTest
             // 
             lblMainWindowDescriptionTest.AutoSize = true;
             lblMainWindowDescriptionTest.ForeColor = Color.White;
-            lblMainWindowDescriptionTest.Location = new Point(678, 99);
+            lblMainWindowDescriptionTest.Location = new Point(682, 175);
             lblMainWindowDescriptionTest.Name = "lblMainWindowDescriptionTest";
             lblMainWindowDescriptionTest.Size = new Size(38, 15);
             lblMainWindowDescriptionTest.TabIndex = 4;
@@ -196,12 +201,54 @@
             // 
             // btnResetTest
             // 
-            btnResetTest.Location = new Point(910, 91);
+            btnResetTest.Location = new Point(914, 167);
             btnResetTest.Name = "btnResetTest";
             btnResetTest.Size = new Size(75, 23);
             btnResetTest.TabIndex = 5;
             btnResetTest.Text = "Reset";
             btnResetTest.UseVisualStyleBackColor = true;
+            // 
+            // startDatePicker
+            // 
+            startDatePicker.Location = new Point(504, 20);
+            startDatePicker.Name = "startDatePicker";
+            startDatePicker.Size = new Size(200, 23);
+            startDatePicker.TabIndex = 6;
+            // 
+            // endDatePicker
+            // 
+            endDatePicker.Location = new Point(726, 20);
+            endDatePicker.Name = "endDatePicker";
+            endDatePicker.Size = new Size(200, 23);
+            endDatePicker.TabIndex = 6;
+            // 
+            // isAMCheckBox
+            // 
+            isAMCheckBox.AutoSize = true;
+            isAMCheckBox.Location = new Point(296, 15);
+            isAMCheckBox.Name = "isAMCheckBox";
+            isAMCheckBox.Size = new Size(45, 19);
+            isAMCheckBox.TabIndex = 7;
+            isAMCheckBox.Text = "AM";
+            isAMCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // isPMCheckBox
+            // 
+            isPMCheckBox.AutoSize = true;
+            isPMCheckBox.Location = new Point(385, 15);
+            isPMCheckBox.Name = "isPMCheckBox";
+            isPMCheckBox.Size = new Size(44, 19);
+            isPMCheckBox.TabIndex = 7;
+            isPMCheckBox.Text = "PM";
+            isPMCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // clbPositions
+            // 
+            clbPositions.FormattingEnabled = true;
+            clbPositions.Location = new Point(74, 15);
+            clbPositions.Name = "clbPositions";
+            clbPositions.Size = new Size(120, 112);
+            clbPositions.TabIndex = 8;
             // 
             // frmTest
             // 
@@ -209,6 +256,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1110, 740);
+            Controls.Add(clbPositions);
+            Controls.Add(isPMCheckBox);
+            Controls.Add(isAMCheckBox);
+            Controls.Add(endDatePicker);
+            Controls.Add(startDatePicker);
             Controls.Add(btnResetTest);
             Controls.Add(lblMainWindowDescriptionTest);
             Controls.Add(flowEmployeeRankingsTest);
@@ -220,6 +272,7 @@
             Controls.Add(btnLoadEmployees);
             Name = "frmTest";
             Text = "frmTest";
+            Load += frmTest_Load;
             pnlEmployeeStatsTest.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -244,5 +297,10 @@
         private FlowLayoutPanel flowEmployeeRankingsTest;
         private Label lblMainWindowDescriptionTest;
         private Button btnResetTest;
+        private DateTimePicker startDatePicker;
+        private DateTimePicker endDatePicker;
+        private CheckBox isAMCheckBox;
+        private CheckBox isPMCheckBox;
+        private CheckedListBox clbPositions;
     }
 }
