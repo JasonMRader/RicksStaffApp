@@ -48,6 +48,7 @@
             isAMCheckBox = new CheckBox();
             isPMCheckBox = new CheckBox();
             clbPositions = new CheckedListBox();
+            btnfilterList = new Button();
             pnlEmployeeStatsTest.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -55,7 +56,7 @@
             // 
             // btnLoadEmployees
             // 
-            btnLoadEmployees.Location = new Point(53, 135);
+            btnLoadEmployees.Location = new Point(56, 166);
             btnLoadEmployees.Name = "btnLoadEmployees";
             btnLoadEmployees.Size = new Size(117, 23);
             btnLoadEmployees.TabIndex = 0;
@@ -65,7 +66,7 @@
             // 
             // btnLoadShifts
             // 
-            btnLoadShifts.Location = new Point(197, 135);
+            btnLoadShifts.Location = new Point(200, 166);
             btnLoadShifts.Name = "btnLoadShifts";
             btnLoadShifts.Size = new Size(75, 23);
             btnLoadShifts.TabIndex = 0;
@@ -75,7 +76,7 @@
             // 
             // btnLoadEmployeeShifts
             // 
-            btnLoadEmployeeShifts.Location = new Point(292, 135);
+            btnLoadEmployeeShifts.Location = new Point(295, 166);
             btnLoadEmployeeShifts.Name = "btnLoadEmployeeShifts";
             btnLoadEmployeeShifts.Size = new Size(141, 23);
             btnLoadEmployeeShifts.TabIndex = 0;
@@ -85,7 +86,7 @@
             // 
             // btnLoadIncidents
             // 
-            btnLoadIncidents.Location = new Point(480, 135);
+            btnLoadIncidents.Location = new Point(483, 166);
             btnLoadIncidents.Name = "btnLoadIncidents";
             btnLoadIncidents.Size = new Size(146, 23);
             btnLoadIncidents.TabIndex = 0;
@@ -95,7 +96,7 @@
             // 
             // btnLoadActivities
             // 
-            btnLoadActivities.Location = new Point(703, 135);
+            btnLoadActivities.Location = new Point(706, 166);
             btnLoadActivities.Name = "btnLoadActivities";
             btnLoadActivities.Size = new Size(126, 23);
             btnLoadActivities.TabIndex = 1;
@@ -193,7 +194,7 @@
             // 
             lblMainWindowDescriptionTest.AutoSize = true;
             lblMainWindowDescriptionTest.ForeColor = Color.White;
-            lblMainWindowDescriptionTest.Location = new Point(682, 175);
+            lblMainWindowDescriptionTest.Location = new Point(685, 206);
             lblMainWindowDescriptionTest.Name = "lblMainWindowDescriptionTest";
             lblMainWindowDescriptionTest.Size = new Size(38, 15);
             lblMainWindowDescriptionTest.TabIndex = 4;
@@ -201,7 +202,7 @@
             // 
             // btnResetTest
             // 
-            btnResetTest.Location = new Point(914, 167);
+            btnResetTest.Location = new Point(917, 198);
             btnResetTest.Name = "btnResetTest";
             btnResetTest.Size = new Size(75, 23);
             btnResetTest.TabIndex = 5;
@@ -225,6 +226,7 @@
             // isAMCheckBox
             // 
             isAMCheckBox.AutoSize = true;
+            isAMCheckBox.ForeColor = Color.White;
             isAMCheckBox.Location = new Point(296, 15);
             isAMCheckBox.Name = "isAMCheckBox";
             isAMCheckBox.Size = new Size(45, 19);
@@ -235,6 +237,7 @@
             // isPMCheckBox
             // 
             isPMCheckBox.AutoSize = true;
+            isPMCheckBox.ForeColor = Color.White;
             isPMCheckBox.Location = new Point(385, 15);
             isPMCheckBox.Name = "isPMCheckBox";
             isPMCheckBox.Size = new Size(44, 19);
@@ -244,11 +247,22 @@
             // 
             // clbPositions
             // 
+            clbPositions.CheckOnClick = true;
             clbPositions.FormattingEnabled = true;
             clbPositions.Location = new Point(74, 15);
             clbPositions.Name = "clbPositions";
             clbPositions.Size = new Size(120, 112);
             clbPositions.TabIndex = 8;
+            // 
+            // btnfilterList
+            // 
+            btnfilterList.Location = new Point(460, 84);
+            btnfilterList.Name = "btnfilterList";
+            btnfilterList.Size = new Size(192, 23);
+            btnfilterList.TabIndex = 9;
+            btnfilterList.Text = "Filter";
+            btnfilterList.UseVisualStyleBackColor = true;
+            btnfilterList.Click += btnfilterList_Click;
             // 
             // frmTest
             // 
@@ -256,6 +270,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1110, 740);
+            Controls.Add(btnfilterList);
             Controls.Add(clbPositions);
             Controls.Add(isPMCheckBox);
             Controls.Add(isAMCheckBox);
@@ -302,5 +317,6 @@
         private CheckBox isAMCheckBox;
         private CheckBox isPMCheckBox;
         private CheckedListBox clbPositions;
+        private Button btnfilterList;
     }
 }

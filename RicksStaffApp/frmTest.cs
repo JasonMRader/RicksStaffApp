@@ -13,7 +13,7 @@ namespace RicksStaffApp
 {
     public partial class frmTest : Form
     {
-        FilteredDataManager? dataManager;// = new FilteredDataManager();
+        DataManager? dataManager;// = new FilteredDataManager();
         public frmTest()
         {
             InitializeComponent();
@@ -240,10 +240,21 @@ namespace RicksStaffApp
         private void frmTest_Load(object sender, EventArgs e)
         {
             clbPositions.Items.Clear();
-            foreach(Position p in DataSingleton.Instance.Positions)
+            foreach (Position p in DataSingleton.Instance.Positions)
             {
                 clbPositions.Items.Add(p);
+                clbPositions.SetItemChecked(clbPositions.Items.Count - 1, true);
+
             }
+        }
+
+        private void btnfilterList_Click(object sender, EventArgs e)
+        {
+            //DataManager dataManager = new DataManager();
+            DataManager dataManager = new DataManager(startDatePicker.Value, endDatePicker.Value, false, true, DataSingleton.Instance.Positions);
+            List<EmployeeShift> employeeShifts = dataManager.GetEmployeeShifts();
+            List<Shift> shifts = dataManager.GetShifts();
+            List<Employee> employees = dataManager.GetEmployees();
         }
     }
 
