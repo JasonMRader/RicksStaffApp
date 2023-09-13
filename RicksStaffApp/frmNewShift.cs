@@ -333,6 +333,7 @@ namespace RicksStaffApp
         //}
         private Panel CreateShiftPanel(DateTime date)
         {
+            string customFormat = "ddd, MMM d";
             Panel panel = new Panel
             {
                 Size = new Size(74, 65),
@@ -343,7 +344,9 @@ namespace RicksStaffApp
 
             System.Windows.Forms.Label lbl = new System.Windows.Forms.Label
             {
-                Text = date.ToString("ddd") + ", " + date.ToString("M"),
+
+                //Text = date.ToString("ddd") + ", " + date.ToString("MMM") + date.ToString("d"),
+                Text = date.ToString(customFormat),
                 Size = new Size(74, 25),
                 Location = new System.Drawing.Point(0, 0),
                 TextAlign = ContentAlignment.MiddleCenter,
